@@ -2037,17 +2037,3 @@ function showFirebaseError(error) {
 </body>
 </html>
 
-ఇప్పుడు ఏమి మారింది
-
-- 🇮🇳 India (+91) defaultగా ఉంటుంది.
-- India mobile → 10 digits మాత్రమే.
-- 10 digits దాటితే automatically తీసివేస్తుంది.
-- Letters/symbols mobile fieldలో తీసుకోదు.
-- Country మార్చితే digit limit కూడా మారుతుంది.
-- Firebaseలో India number ఉదాహరణకు "+919876543210"లా save అవుతుంది.
-- Login → Show Password checkbox.
-- Register → Show Password checkbox.
-- నీ existing MN100001, MN100002, MN100003... ID system కూడా కొనసాగుతుంది.
-- నీ Firebase configలో ఉన్న correct appIdనే ఉంచాను.
-
-ఒక ముఖ్యమైన విషయం: country-wise phone-number lengths ఇక్కడ practical validation కోసం ఉన్నాయి; production-level phone validationకి తర్వాత Google/libphonenumber లాంటి proper international validation ఉపయోగించడం మంచిది.

@@ -56,19 +56,24 @@
       cursor: pointer;
     }
 
-    .register {
-      background: #2196f3;
+    .login {
+      background: #4caf50;
       color: white;
     }
 
-    .login {
-      background: #4caf50;
+    .register {
+      background: #2196f3;
       color: white;
     }
 
     .google {
       background: white;
       border: 1px solid #aaa;
+    }
+
+    .logout {
+      background: #e53935;
+      color: white;
     }
 
     .game {
@@ -81,12 +86,14 @@
       font-weight: bold;
     }
 
-    .game:hover {
-      opacity: 0.85;
+    .rules {
+      text-align: left;
+      line-height: 1.6;
     }
 
-    #gameMenu,
-    #loggedIn {
+    #authArea,
+    #loggedIn,
+    #gameMenu {
       display: none;
     }
 
@@ -95,57 +102,59 @@
       font-weight: bold;
     }
 
-    .logout {
-      background: #e53935;
+    /* USER ID - TOP LEFT */
+    #userIdBar {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      background: #111;
       color: white;
+      padding: 10px 14px;
+      border-radius: 0 0 10px 0;
+      font-weight: bold;
+      font-size: 15px;
     }
 
-    .rules {
-      text-align: left;
-      line-height: 1.6;
+    .profileButton {
+      background: #673ab7;
+      color: white;
     }
   </style>
 </head>
 
 <body>
 
+<!-- USER ID -->
+<div id="userIdBar">
+  ID: <span id="displayUserId">---</span>
+</div>
+
+
 <div class="container">
 
   <h1>MAGIKNUMBER</h1>
 
-  <!-- RULES -->
-  <div class="card rules">
-    <h2>RULES</h2>
-    <p>• Select the game you want to play.</p>
-    <p>• Enter numbers in the 3 × 3 boxes.</p>
-    <p>• Complete the game within the given time.</p>
-    <p>• Press DONE before the timer ends.</p>
-    <p>• Successful games will add points to your Score Card.</p>
-  </div>
 
-
-  <!-- REGISTER / LOGIN -->
+  <!-- LOGIN / REGISTER / RULES -->
   <div id="authArea">
 
-    <div class="card">
-      <h2>REGISTER</h2>
-
-      <input type="text" id="name" placeholder="Name">
-      <input type="tel" id="mobile" placeholder="Mobile Number">
-      <input type="email" id="email" placeholder="Email">
-      <input type="password" id="password" placeholder="Password">
-
-      <button class="register" onclick="registerUser()">
-        REGISTER
-      </button>
-    </div>
-
-
+    <!-- LOGIN FIRST -->
     <div class="card">
       <h2>LOGIN</h2>
 
-      <input type="email" id="loginEmail" placeholder="Email">
-      <input type="password" id="loginPassword" placeholder="Password">
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+      >
 
       <button class="login" onclick="loginUser()">
         LOGIN
@@ -158,6 +167,58 @@
       <div id="message"></div>
     </div>
 
+
+    <!-- REGISTER BELOW LOGIN -->
+    <div class="card">
+      <h2>REGISTER</h2>
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Name"
+      >
+
+      <input
+        type="tel"
+        id="mobile"
+        placeholder="Mobile Number"
+      >
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Password"
+      >
+
+      <button class="register" onclick="registerUser()">
+        REGISTER
+      </button>
+    </div>
+
+
+    <!-- RULES LAST -->
+    <div class="card rules">
+
+      <h2>RULES</h2>
+
+      <p>• Select the game you want to play.</p>
+
+      <p>• Enter numbers in the 3 × 3 boxes.</p>
+
+      <p>• Complete the game within the given time.</p>
+
+      <p>• Press DONE before the timer ends.</p>
+
+      <p>• Successful games will add points to your Score Card.</p>
+
+    </div>
+
   </div>
 
 
@@ -167,7 +228,12 @@
     <h2>Welcome!</h2>
 
     <p id="userName"></p>
+
     <p id="userEmail"></p>
+
+    <button class="profileButton" onclick="showProfile()">
+      MY PROFILE
+    </button>
 
     <button class="logout" onclick="logoutUser()">
       LOGOUT
@@ -199,10 +265,45 @@
 
   </div>
 
+
+  <!-- PROFILE -->
+  <div id="profile" class="card" style="display:none;">
+
+    <h2>MY PROFILE</h2>
+
+    <p>
+      <b>MAGIKNUMBER ID</b><br>
+      <span id="profileId"></span>
+    </p>
+
+    <p>
+      <b>NAME</b><br>
+      <span id="profileName"></span>
+    </p>
+
+    <p>
+      <b>EMAIL</b><br>
+      <span id="profileEmail"></span>
+    </p>
+
+    <p>
+      <b>MOBILE</b><br>
+      <span id="profileMobile"></span>
+    </p>
+
+    <p>
+      <b>POINTS</b><br>
+      <span id="profilePoints">0</span>
+    </p>
+
+    <button onclick="closeProfile()">
+      BACK
+    </button>
+
+  </div>
+
 </div>
 
-
-<!-- FIREBASE -->
 
 <script type="module">
 
@@ -220,8 +321,18 @@
   }
   from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDoc,
+    collection,
+    getDocs
+  }
+  from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-  // YOUR FIREBASE CONFIG
+
+  // FIREBASE CONFIG
 
   const firebaseConfig = {
     apiKey: "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
@@ -234,9 +345,44 @@
 
 
   const app = initializeApp(firebaseConfig);
+
   const auth = getAuth(app);
 
+  const db = getFirestore(app);
+
   const provider = new GoogleAuthProvider();
+
+
+  // GENERATE MAGIKNUMBER ID
+
+  async function generateMagikNumberId() {
+
+    const usersRef = collection(db, "users");
+
+    const snapshot = await getDocs(usersRef);
+
+    let highestNumber = 100000;
+
+    snapshot.forEach((item) => {
+
+      const data = item.data();
+
+      if (data.magikNumberId) {
+
+        const number =
+          parseInt(
+            data.magikNumberId.replace("MN", "")
+          );
+
+        if (number > highestNumber) {
+          highestNumber = number;
+        }
+      }
+
+    });
+
+    return "MN" + (highestNumber + 1);
+  }
 
 
   // REGISTER
@@ -259,28 +405,56 @@
     if (!name || !mobile || !email || !password) {
 
       showMessage("Please fill all details.");
+
       return;
     }
 
 
     try {
 
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
+      const result =
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+      const user = result.user;
+
+
+      const magikNumberId =
+        await generateMagikNumberId();
+
+
+      // SAVE USER DATA
+
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          magikNumberId: magikNumberId,
+          name: name,
+          email: email,
+          mobile: mobile,
+          points: 0
+        }
       );
 
-      showMessage("Registration successful!");
+
+      alert(
+        "Registration successful!\n\nYour MagikNumber ID is:\n"
+        + magikNumberId
+      );
 
     } catch (error) {
 
       showMessage(error.message);
     }
+
   };
 
 
-  // EMAIL LOGIN
+  // LOGIN
 
   window.loginUser = async function() {
 
@@ -294,6 +468,7 @@
     if (!email || !password) {
 
       showMessage("Enter email and password.");
+
       return;
     }
 
@@ -310,6 +485,7 @@
 
       showMessage(error.message);
     }
+
   };
 
 
@@ -319,26 +495,61 @@
 
     try {
 
-      await signInWithPopup(auth, provider);
+      const result =
+        await signInWithPopup(
+          auth,
+          provider
+        );
+
+
+      const user = result.user;
+
+
+      const userRef =
+        doc(db, "users", user.uid);
+
+
+      const existing =
+        await getDoc(userRef);
+
+
+      // CREATE PROFILE FOR FIRST GOOGLE LOGIN
+
+      if (!existing.exists()) {
+
+        const magikNumberId =
+          await generateMagikNumberId();
+
+
+        await setDoc(
+          userRef,
+          {
+            magikNumberId: magikNumberId,
+            name: user.displayName || "User",
+            email: user.email || "",
+            mobile: "",
+            points: 0
+          }
+        );
+
+
+        alert(
+          "Welcome to MAGIKNUMBER!\n\nYour ID is:\n"
+          + magikNumberId
+        );
+      }
 
     } catch (error) {
 
       showMessage(error.message);
     }
-  };
 
-
-  // LOGOUT
-
-  window.logoutUser = async function() {
-
-    await signOut(auth);
   };
 
 
   // LOGIN STATUS
 
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
 
     if (user) {
 
@@ -351,15 +562,62 @@
       document.getElementById("gameMenu")
         .style.display = "block";
 
+      document.getElementById("userIdBar")
+        .style.display = "block";
+
 
       document.getElementById("userName")
         .innerText =
-        user.displayName ||
-        "User";
+        user.displayName || "User";
+
 
       document.getElementById("userEmail")
         .innerText =
         user.email || "";
+
+
+      // GET USER PROFILE
+
+      const userDoc =
+        await getDoc(
+          doc(db, "users", user.uid)
+        );
+
+
+      if (userDoc.exists()) {
+
+        const data = userDoc.data();
+
+
+        document.getElementById("displayUserId")
+          .innerText =
+          data.magikNumberId || "---";
+
+
+        document.getElementById("profileId")
+          .innerText =
+          data.magikNumberId || "---";
+
+
+        document.getElementById("profileName")
+          .innerText =
+          data.name || "";
+
+
+        document.getElementById("profileEmail")
+          .innerText =
+          data.email || "";
+
+
+        document.getElementById("profileMobile")
+          .innerText =
+          data.mobile || "";
+
+
+        document.getElementById("profilePoints")
+          .innerText =
+          data.points || 0;
+      }
 
     } else {
 
@@ -371,9 +629,51 @@
 
       document.getElementById("gameMenu")
         .style.display = "none";
+
+      document.getElementById("profile")
+        .style.display = "none";
+
+      document.getElementById("userIdBar")
+        .style.display = "none";
     }
 
   });
+
+
+  // PROFILE
+
+  window.showProfile = function() {
+
+    document.getElementById("profile")
+      .style.display = "block";
+
+    document.getElementById("loggedIn")
+      .style.display = "none";
+
+    document.getElementById("gameMenu")
+      .style.display = "none";
+  };
+
+
+  window.closeProfile = function() {
+
+    document.getElementById("profile")
+      .style.display = "none";
+
+    document.getElementById("loggedIn")
+      .style.display = "block";
+
+    document.getElementById("gameMenu")
+      .style.display = "block";
+  };
+
+
+  // LOGOUT
+
+  window.logoutUser = async function() {
+
+    await signOut(auth);
+  };
 
 
   function showMessage(text) {
@@ -383,7 +683,7 @@
   }
 
 
-  // GAME BUTTON
+  // GAME BUTTONS
 
   window.openGame = function(game) {
 

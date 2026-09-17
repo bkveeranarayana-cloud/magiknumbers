@@ -1,425 +1,2226 @@
-<!-- =========================
-     GAME PAGE
-========================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAGIKNUMBER</title>
 
-<div id="gamePage" class="hidden">
+<style>
+*{
+  box-sizing:border-box;
+}
 
-  <h2 id="gameTitle">DIAMOND</h2>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f6f8;
+  color:#111;
+}
 
-  <div id="gameHint">
-    Hint: each row is <span id="rowTarget">60</span>
+.hidden{
+  display:none !important;
+}
+
+.container{
+  max-width:500px;
+  margin:auto;
+  padding:20px;
+}
+
+h1,h2,h3{
+  text-align:center;
+}
+
+.card{
+  background:white;
+  padding:18px;
+  margin:15px 0;
+  border-radius:14px;
+  box-shadow:0 3px 12px rgba(0,0,0,.12);
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border:1px solid #aaa;
+  border-radius:8px;
+  font-size:16px;
+}
+
+button{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:0;
+  border-radius:8px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.menu-btn{
+  margin:10px 0;
+}
+
+.back-btn{
+  margin-top:20px;
+}
+
+.small-btn{
+  width:auto;
+  padding:8px 15px;
+}
+
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  background:#111;
+  color:white;
+  padding:10px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:1000;
+}
+
+.logo-area{
+  font-size:25px;
+}
+
+.id-area{
+  font-size:13px;
+}
+
+.main-content{
+  padding-top:65px;
+}
+
+.logo-choice{
+  display:inline-block;
+  width:50px;
+  padding:10px;
+  margin:5px;
+  font-size:25px;
+  border:1px solid #aaa;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* GAME */
+
+.game-page{
+  text-align:center;
+}
+
+.game-hint{
+  font-size:18px;
+  font-weight:bold;
+  margin:6px;
+}
+
+.timer{
+  font-size:32px;
+  font-weight:bold;
+  margin:15px;
+}
+
+.game-board{
+  overflow-x:auto;
+  padding:5px;
+}
+
+.user-board{
+  display:inline-block;
+  min-width:max-content;
+}
+
+.diagonal-label{
+  font-weight:bold;
+  margin:7px;
+}
+
+.column-head{
+  display:grid;
+  gap:4px;
+  margin-left:0;
+}
+
+.board-row{
+  display:flex;
+  gap:4px;
+  margin:4px 0;
+  align-items:center;
+}
+
+.row-label{
+  width:30px;
+  font-weight:bold;
+}
+
+.game-box{
+  width:52px;
+  height:52px;
+  text-align:center;
+  font-size:20px;
+  font-weight:bold;
+  border:2px solid #333;
+  border-radius:6px;
+}
+
+.game-box:disabled{
+  background:#ddd;
+  color:#555;
+}
+
+.total-box{
+  width:65px;
+  font-weight:bold;
+  text-align:center;
+  padding:7px 2px;
+}
+
+.column-totals{
+  display:flex;
+  gap:4px;
+  margin-left:34px;
+  margin-top:5px;
+}
+
+.column-total{
+  width:52px;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.answer-button{
+  margin-top:20px;
+  font-size:20px;
+}
+
+/* RESULT */
+
+.result-board{
+  overflow-x:auto;
+  margin:10px 0 20px;
+}
+
+.result-grid{
+  display:grid;
+  gap:4px;
+  width:max-content;
+  margin:auto;
+}
+
+.result-box{
+  width:52px;
+  height:52px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border:2px solid #333;
+  border-radius:6px;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.result-title{
+  margin-top:25px;
+}
+
+.points-box{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  margin-top:15px;
+  line-height:1.8;
+}
+
+.total-points{
+  font-size:25px;
+  font-weight:bold;
+  text-align:center;
+  margin-top:15px;
+}
+
+.popup-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:3000;
+}
+
+.popup{
+  width:90%;
+  max-width:380px;
+  background:white;
+  padding:22px;
+  border-radius:15px;
+  text-align:center;
+}
+
+.rules{
+  line-height:1.6;
+  font-size:14px;
+}
+
+.profile-row{
+  padding:10px 0;
+  border-bottom:1px solid #ddd;
+}
+
+.profile-label{
+  font-weight:bold;
+}
+
+.success{
+  font-size:20px;
+  font-weight:bold;
+}
+
+@media(max-width:420px){
+  .game-box,
+  .result-box{
+    width:45px;
+    height:45px;
+  }
+
+  .total-box{
+    width:58px;
+  }
+
+  .column-total{
+    width:45px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================
+     TOP BAR
+========================================= -->
+
+<div id="topBar" class="topbar hidden">
+  <div class="logo-area">
+    <span id="userLogo">⚡</span>
   </div>
 
-  <div id="gameTableHint">
-    Total table is <span id="tableTarget">300</span>
+  <div class="id-area">
+    ID: <span id="topMagikId"></span>
+  </div>
+</div>
+
+
+<div class="main-content">
+<div class="container">
+
+
+<!-- =========================================
+     WELCOME / AUTH PAGE
+========================================= -->
+
+<div id="authPage">
+
+  <div class="card">
+
+    <h1>MAGIKNUMBER</h1>
+
+    <h2>LOGIN</h2>
+
+    <input
+      type="email"
+      id="loginEmail"
+      placeholder="Email"
+    >
+
+    <input
+      type="password"
+      id="loginPassword"
+      placeholder="Password"
+    >
+
+    <label>
+      <input
+        type="checkbox"
+        id="loginShowPassword"
+        style="width:auto"
+      >
+      Show Password
+    </label>
+
+    <button onclick="loginUser()">
+      LOGIN
+    </button>
+
+    <button onclick="googleLogin()">
+      Continue with Google
+    </button>
+
   </div>
 
-  <div id="timer">05:00</div>
 
-  <!-- USER ANSWER SHEET -->
-  <div class="answer-sheet">
+  <div class="card">
 
-    <!-- L1 label at top -->
-    <div class="diagonal-top">
-      L1
-    </div>
+    <h2>REGISTER</h2>
 
-    <!-- Column headings -->
-    <div class="column-headings">
-      <span>C1</span>
-      <span>C2</span>
-      <span>C3</span>
-      <span>C4</span>
-      <span>C5</span>
-    </div>
+    <input
+      type="text"
+      id="registerName"
+      placeholder="Name"
+    >
 
-    <div id="userGrid"></div>
+    <select id="registerCountry"></select>
 
-    <!-- Column totals -->
-    <div id="columnTotals" class="column-totals"></div>
+    <input
+      type="tel"
+      id="registerMobile"
+      placeholder="Mobile Number"
+    >
 
-    <!-- L2 -->
-    <div class="diagonal-bottom">
-      L2: <span id="l2Total">0</span>
-    </div>
+    <input
+      type="email"
+      id="registerEmail"
+      placeholder="Email"
+    >
+
+    <input
+      type="password"
+      id="registerPassword"
+      placeholder="Password"
+    >
+
+    <label>
+      <input
+        type="checkbox"
+        id="registerShowPassword"
+        style="width:auto"
+      >
+      Show Password
+    </label>
+
+    <button onclick="registerUser()">
+      REGISTER
+    </button>
 
   </div>
 
-  <button id="answerBtn" onclick="submitAnswer()">
-    ANSWER
-  </button>
+
+  <div class="card">
+
+    <h2>RULES</h2>
+
+    <div class="rules">
+
+      1. One account per user.<br>
+      2. Game starts automatically when the game is opened.<br>
+      3. User cannot manually START or STOP the game.<br>
+      4. User can enter numbers only while the timer is running.<br>
+      5. When timer reaches 00:00, all boxes are automatically locked.<br>
+      6. ANSWER can be submitted only after the timer reaches zero.<br>
+      7. Results are shown on a separate Result Page.<br>
+      8. Points are awarded according to the game rules.<br>
+      9. Numbers must be between 0 and 25.<br>
+
+    </div>
+
+  </div>
 
 </div>
 
 
-<!-- =========================
+<!-- =========================================
+     MAIN MENU
+========================================= -->
+
+<div id="menuPage" class="hidden">
+
+  <div class="card">
+
+    <h2>MAGIKNUMBER</h2>
+
+    <button
+      class="menu-btn"
+      onclick="openScoreboard()"
+    >
+      SCOREBOARD
+    </button>
+
+    <button
+      class="menu-btn"
+      onclick="openGame('DIAMOND')"
+    >
+      💎 DIAMOND – 5 MINUTES
+    </button>
+
+    <button
+      class="menu-btn"
+      onclick="openGame('GOLD')"
+    >
+      🥇 GOLD – 1 MINUTE
+    </button>
+
+    <button
+      class="menu-btn"
+      onclick="openGame('SILVER')"
+    >
+      🥈 SILVER – 1 MINUTE
+    </button>
+
+    <button
+      class="menu-btn"
+      onclick="openLogoPopup()"
+    >
+      CHANGE LOGO
+    </button>
+
+    <button
+      class="menu-btn"
+      onclick="logoutUser()"
+    >
+      LOGOUT
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
+     SCOREBOARD
+========================================= -->
+
+<div id="scoreboardPage" class="hidden">
+
+  <div class="card">
+
+    <h2>SCOREBOARD</h2>
+
+    <div class="profile-row">
+      <span class="profile-label">
+        MAGIKNUMBER ID:
+      </span>
+      <span id="scoreId"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="profile-label">
+        Date of Joining:
+      </span>
+      <span id="scoreJoiningDate"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="profile-label">
+        Name:
+      </span>
+      <span id="scoreName"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="profile-label">
+        Email:
+      </span>
+      <span id="scoreEmail"></span>
+    </div>
+
+    <button onclick="openEmailPopup()">
+      UPDATE EMAIL
+    </button>
+
+    <div class="profile-row">
+      <span class="profile-label">
+        Mobile Number:
+      </span>
+      <span id="scoreMobile"></span>
+    </div>
+
+    <button onclick="openMobilePopup()">
+      UPDATE MOBILE
+    </button>
+
+    <div class="profile-row">
+      <span class="profile-label">
+        Total Games Played:
+      </span>
+      <span id="scoreGames"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="profile-label">
+        Earned Points:
+      </span>
+      <span id="scorePoints"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="profile-label">
+        Cash Balance:
+      </span>
+      ₹<span id="scoreCash"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="profile-label">
+        Conversion History:
+      </span>
+
+      <div id="conversionHistory">
+        No conversion history
+      </div>
+    </div>
+
+    <button onclick="closeAccount()">
+      CLOSE ACCOUNT
+    </button>
+
+    <button
+      class="back-btn"
+      onclick="backToMenu()"
+    >
+      BACK
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
+     GAME PAGE
+========================================= -->
+
+<div id="gamePage" class="hidden game-page">
+
+  <div class="card">
+
+    <h2 id="gameTitle"></h2>
+
+    <div class="game-hint">
+      Hint: each row is
+      <span id="rowTarget"></span>
+    </div>
+
+    <div class="game-hint">
+      Total table is
+      <span id="tableTarget"></span>
+    </div>
+
+    <div class="timer" id="gameTimer">
+      00:00
+    </div>
+
+    <div class="game-board">
+
+      <div class="user-board">
+
+        <div class="diagonal-label">
+          L1
+        </div>
+
+        <div
+          id="userGameBoard"
+        ></div>
+
+        <div class="diagonal-label">
+          L2:
+          <span id="liveL2">0</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <button
+      id="answerButton"
+      class="answer-button"
+      onclick="submitAnswer()"
+    >
+      ANSWER
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
      RESULT PAGE
-========================= -->
+========================================= -->
 
 <div id="resultPage" class="hidden">
 
-  <h2>GAME RESULT</h2>
+  <div class="card">
 
-  <div id="resultMessage"></div>
+    <h2>GAME RESULT</h2>
 
-  <h3>YOUR ANSWER</h3>
+    <div id="resultMessage"
+         class="success">
+    </div>
 
-  <div id="yourResultGrid"></div>
 
-  <div id="yourTotals"></div>
+    <h3 class="result-title">
+      YOUR ANSWER
+    </h3>
 
-  <h3>OUR ANSWER</h3>
+    <div class="result-board">
+      <div
+        id="yourResultGrid"
+        class="result-grid"
+      ></div>
+    </div>
 
-  <!-- Only boxes.
-       NO totals here. -->
-  <div id="ourAnswerGrid"></div>
+    <div id="yourTotals"
+         class="points-box">
+    </div>
 
-  <h3>POINTS</h3>
 
-  <div id="pointsBreakdown"></div>
+    <h3 class="result-title">
+      OUR ANSWER
+    </h3>
 
-  <div id="earnedPoints"></div>
+    <div class="result-board">
 
-  <button onclick="backToMenu()">
-    BACK TO MENU
-  </button>
+      <!-- ONLY BOXES -->
+      <div
+        id="ourResultGrid"
+        class="result-grid"
+      ></div>
+
+    </div>
+
+
+    <div
+      id="pointsBreakdown"
+      class="points-box"
+    ></div>
+
+    <div
+      id="earnedPoints"
+      class="total-points"
+    ></div>
+
+
+    <button onclick="backToMenu()">
+      BACK TO MENU
+    </button>
+
+  </div>
 
 </div>
 
 
-<!-- =========================
-     GAME CSS
-========================= -->
+</div>
+</div>
 
-<style>
 
-#gamePage,
-#resultPage {
-  text-align: center;
-  padding: 15px;
+<!-- =========================================
+     POPUP
+========================================= -->
+
+<div
+  id="popupBackground"
+  class="popup-bg hidden"
+>
+
+  <div class="popup">
+
+    <h3 id="popupTitle">
+      MAGIKNUMBER
+    </h3>
+
+    <div id="popupMessage"></div>
+
+    <button onclick="closePopup()">
+      OK
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
+     EMAIL POPUP
+========================================= -->
+
+<div
+  id="emailPopup"
+  class="popup-bg hidden"
+>
+
+  <div class="popup">
+
+    <h3>UPDATE EMAIL</h3>
+
+    <input
+      type="email"
+      id="newEmail"
+      placeholder="New Email"
+    >
+
+    <button onclick="confirmEmailUpdate()">
+      CONFIRM
+    </button>
+
+    <button onclick="closeEmailPopup()">
+      CANCEL
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
+     MOBILE POPUP
+========================================= -->
+
+<div
+  id="mobilePopup"
+  class="popup-bg hidden"
+>
+
+  <div class="popup">
+
+    <h3>UPDATE MOBILE</h3>
+
+    <select id="updateCountry"></select>
+
+    <input
+      type="tel"
+      id="newMobile"
+      placeholder="Mobile Number"
+    >
+
+    <button onclick="confirmMobileUpdate()">
+      CONFIRM
+    </button>
+
+    <button onclick="closeMobilePopup()">
+      CANCEL
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
+     LOGO POPUP
+========================================= -->
+
+<div
+  id="logoPopup"
+  class="popup-bg hidden"
+>
+
+  <div class="popup">
+
+    <h3>SELECT LOGO</h3>
+
+    <div id="logoChoices"></div>
+
+    <button onclick="closeLogoPopup()">
+      CANCEL
+    </button>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+/* =========================================
+   FIREBASE IMPORTS
+========================================= */
+
+import {
+  initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  updateEmail,
+  signOut
+} from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  runTransaction
+} from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+/* =========================================
+   FIREBASE CONFIG
+========================================= */
+
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+
+  authDomain:
+  "magiknumbers-d42c0.firebaseapp.com",
+
+  projectId:
+  "magiknumbers-d42c0",
+
+  storageBucket:
+  "magiknumbers-d42c0.firebasestorage.app",
+
+  messagingSenderId:
+  "977553928698",
+
+  appId:
+  "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
+
+
+/* =========================================
+   GLOBAL VARIABLES
+========================================= */
+
+let currentUser = null;
+let currentUserData = null;
+
+let currentGame = null;
+
+let gameTimer = null;
+let remainingSeconds = 0;
+
+let gameStopped = false;
+
+
+/* =========================================
+   COUNTRY LIST
+========================================= */
+
+const countries = [
+
+  ["India","+91",10],
+  ["USA","+1",10],
+  ["Canada","+1",10],
+  ["UK","+44",10],
+  ["Australia","+61",9],
+  ["New Zealand","+64",9],
+  ["UAE","+971",9],
+  ["Saudi Arabia","+966",9],
+  ["Qatar","+974",8],
+  ["Kuwait","+965",8],
+  ["Oman","+968",8],
+  ["Bahrain","+973",8],
+  ["Singapore","+65",8],
+  ["Malaysia","+60",9],
+  ["Sri Lanka","+94",9],
+  ["Bangladesh","+880",10],
+  ["Pakistan","+92",10],
+  ["Nepal","+977",10],
+  ["Japan","+81",10],
+  ["Germany","+49",11],
+  ["France","+33",9],
+  ["Italy","+39",10],
+  ["Spain","+34",9],
+  ["Russia","+7",10],
+  ["Brazil","+55",11],
+  ["South Africa","+27",9]
+
+];
+
+
+function fillCountrySelect(id){
+
+  const select =
+    document.getElementById(id);
+
+  select.innerHTML = "";
+
+  countries.forEach(function(country){
+
+    const option =
+      document.createElement("option");
+
+    option.value = country[1];
+
+    option.textContent =
+      country[0] + " " + country[1];
+
+    option.dataset.length =
+      country[2];
+
+    select.appendChild(option);
+
+  });
+
 }
 
-#gameTitle {
-  margin-bottom: 8px;
+
+fillCountrySelect("registerCountry");
+fillCountrySelect("updateCountry");
+
+
+/* =========================================
+   MOBILE LENGTH
+========================================= */
+
+function getSelectedCountryLength(id){
+
+  const select =
+    document.getElementById(id);
+
+  const option =
+    select.options[select.selectedIndex];
+
+  return Number(option.dataset.length);
+
 }
 
-#gameHint,
-#gameTableHint {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 6px;
+
+document
+  .getElementById("registerCountry")
+  .addEventListener("change",function(){
+
+    document
+      .getElementById("registerMobile")
+      .value = "";
+
+  });
+
+
+document
+  .getElementById("updateCountry")
+  .addEventListener("change",function(){
+
+    document
+      .getElementById("newMobile")
+      .value = "";
+
+  });
+
+
+/* =========================================
+   SHOW PASSWORD
+========================================= */
+
+document
+  .getElementById("loginShowPassword")
+  .addEventListener("change",function(){
+
+    document
+      .getElementById("loginPassword")
+      .type =
+        this.checked
+          ? "text"
+          : "password";
+
+  });
+
+
+document
+  .getElementById("registerShowPassword")
+  .addEventListener("change",function(){
+
+    document
+      .getElementById("registerPassword")
+      .type =
+        this.checked
+          ? "text"
+          : "password";
+
+  });
+
+
+/* =========================================
+   MAGIKNUMBER ID
+========================================= */
+
+async function generateMagikNumberId(){
+
+  const counterRef =
+    doc(db,"system","counter");
+
+  const newId =
+    await runTransaction(
+      db,
+      async function(transaction){
+
+        const snapshot =
+          await transaction.get(counterRef);
+
+        let nextNumber = 100001;
+
+        if(snapshot.exists()){
+
+          const data =
+            snapshot.data();
+
+          nextNumber =
+            Number(
+              data.nextNumber || 100001
+            );
+
+        }
+
+        transaction.set(
+          counterRef,
+          {
+            nextNumber:
+              nextNumber + 1
+          },
+          {
+            merge:true
+          }
+        );
+
+        return "MN" + nextNumber;
+
+      }
+    );
+
+  return newId;
 }
 
-#timer {
-  font-size: 32px;
-  font-weight: bold;
-  margin: 15px 0;
-}
 
-.answer-sheet {
-  width: fit-content;
-  max-width: 100%;
-  margin: auto;
-}
+/* =========================================
+   CREATE USER PROFILE
+========================================= */
 
-.diagonal-top,
-.diagonal-bottom {
-  font-weight: bold;
-  margin: 8px;
-}
+async function createUserProfile(
+  user,
+  name,
+  mobile
+){
 
-.column-headings,
-.column-totals {
-  display: grid;
-  grid-template-columns: repeat(5, 55px);
-  gap: 4px;
-  justify-content: center;
-}
+  const userRef =
+    doc(db,"users",user.uid);
 
-.column-headings span,
-.column-totals span {
-  font-weight: bold;
-  padding: 5px;
-}
+  const existing =
+    await getDoc(userRef);
 
-#userGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 55px);
-  gap: 4px;
-  justify-content: center;
-}
+  if(existing.exists()){
 
-.user-box {
-  width: 55px;
-  height: 55px;
-  box-sizing: border-box;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  border: 2px solid #333;
-  border-radius: 6px;
-}
+    return existing.data();
 
-.user-box:disabled {
-  background: #ddd;
-  color: #555;
-}
-
-.row-total {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-#yourResultGrid,
-#ourAnswerGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 55px);
-  gap: 4px;
-  justify-content: center;
-  margin: 10px auto 20px;
-}
-
-.result-box,
-.our-box {
-  width: 55px;
-  height: 55px;
-  border: 2px solid #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
-  border-radius: 6px;
-}
-
-#answerBtn,
-#resultPage button {
-  margin-top: 20px;
-  padding: 12px 30px;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-#earnedPoints {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 20px;
-}
-
-@media(max-width:420px) {
-
-  .column-headings,
-  .column-totals,
-  #userGrid {
-    grid-template-columns: repeat(5, 48px);
   }
 
-  .user-box {
-    width: 48px;
-    height: 48px;
-  }
 
-  #yourResultGrid,
-  #ourAnswerGrid {
-    grid-template-columns: repeat(5, 48px);
-  }
+  const magikNumberId =
+    await generateMagikNumberId();
 
-  .result-box,
-  .our-box {
-    width: 48px;
-    height: 48px;
-  }
+
+  const profile = {
+
+    magikNumberId:
+      magikNumberId,
+
+    name:
+      name,
+
+    email:
+      user.email || "",
+
+    mobile:
+      mobile,
+
+    logo:
+      "⚡",
+
+    points:
+      0,
+
+    cashBalance:
+      0,
+
+    gamesPlayed:
+      0,
+
+    conversionHistory:
+      [],
+
+    joiningDate:
+      new Date().toISOString()
+
+  };
+
+
+  await setDoc(
+    userRef,
+    profile
+  );
+
+
+  return profile;
+
 }
 
-</style>
+
+/* =========================================
+   REGISTER
+========================================= */
+
+window.registerUser =
+async function(){
+
+  const name =
+    document
+      .getElementById("registerName")
+      .value.trim();
+
+  const country =
+    document
+      .getElementById("registerCountry")
+      .value;
+
+  const mobile =
+    document
+      .getElementById("registerMobile")
+      .value.trim();
+
+  const email =
+    document
+      .getElementById("registerEmail")
+      .value.trim();
+
+  const password =
+    document
+      .getElementById("registerPassword")
+      .value;
 
 
-<script>
+  if(!name){
 
-/* ==========================================
-   CREATOR / BACKGROUND SETTINGS
-========================================== */
+    showPopup(
+      "Error",
+      "Please enter your name."
+    );
+
+    return;
+
+  }
+
+
+  const expectedLength =
+    getSelectedCountryLength(
+      "registerCountry"
+    );
+
+
+  if(!/^\d+$/.test(mobile) ||
+     mobile.length !== expectedLength){
+
+    showPopup(
+      "Error",
+      "Please enter a valid mobile number."
+    );
+
+    return;
+
+  }
+
+
+  if(!email){
+
+    showPopup(
+      "Error",
+      "Please enter your email."
+    );
+
+    return;
+
+  }
+
+
+  if(password.length < 6){
+
+    showPopup(
+      "Error",
+      "Password must contain at least 6 characters."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const result =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    const fullMobile =
+      country + mobile;
+
+
+    await createUserProfile(
+      result.user,
+      name,
+      fullMobile
+    );
+
+
+    await updateDoc(
+      doc(db,"users",result.user.uid),
+      {
+        name:name,
+        mobile:fullMobile
+      }
+    );
+
+
+    showPopup(
+      "Registration Success",
+      "Your MAGIKNUMBER account has been created."
+    );
+
+
+  }catch(error){
+
+    showPopup(
+      "Registration Error",
+      error.message
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+window.loginUser =
+async function(){
+
+  const email =
+    document
+      .getElementById("loginEmail")
+      .value.trim();
+
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
+
+
+  if(!email || !password){
+
+    showPopup(
+      "Error",
+      "Enter email and password."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }catch(error){
+
+    showPopup(
+      "Login Error",
+      error.message
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   GOOGLE LOGIN
+========================================= */
+
+window.googleLogin =
+async function(){
+
+  try{
+
+    const provider =
+      new GoogleAuthProvider();
+
+    const result =
+      await signInWithPopup(
+        auth,
+        provider
+      );
+
+
+    const userRef =
+      doc(db,"users",result.user.uid);
+
+    const snapshot =
+      await getDoc(userRef);
+
+
+    if(!snapshot.exists()){
+
+      await createUserProfile(
+        result.user,
+        result.user.displayName || "Google User",
+        ""
+      );
+
+    }
+
+
+  }catch(error){
+
+    showPopup(
+      "Google Login Error",
+      error.message
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+onAuthStateChanged(
+  auth,
+  async function(user){
+
+    if(user){
+
+      currentUser = user;
+
+
+      const userRef =
+        doc(db,"users",user.uid);
+
+      const snapshot =
+        await getDoc(userRef);
+
+
+      if(snapshot.exists()){
+
+        currentUserData =
+          snapshot.data();
+
+      }else{
+
+        currentUserData =
+          await createUserProfile(
+            user,
+            user.displayName || "User",
+            ""
+          );
+
+      }
+
+
+      document
+        .getElementById("authPage")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("menuPage")
+        .classList.remove("hidden");
+
+
+      document
+        .getElementById("topBar")
+        .classList.remove("hidden");
+
+
+      document
+        .getElementById("topMagikId")
+        .textContent =
+          currentUserData.magikNumberId;
+
+
+      document
+        .getElementById("userLogo")
+        .textContent =
+          currentUserData.logo || "⚡";
+
+
+    }else{
+
+      currentUser = null;
+      currentUserData = null;
+
+
+      document
+        .getElementById("authPage")
+        .classList.remove("hidden");
+
+
+      document
+        .getElementById("menuPage")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("scoreboardPage")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("gamePage")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("resultPage")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("topBar")
+        .classList.add("hidden");
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+window.logoutUser =
+async function(){
+
+  clearInterval(gameTimer);
+
+  await signOut(auth);
+
+};
+
+
+/* =========================================
+   SCOREBOARD
+========================================= */
+
+window.openScoreboard =
+async function(){
+
+  if(!currentUser) return;
+
+
+  const snapshot =
+    await getDoc(
+      doc(db,"users",currentUser.uid)
+    );
+
+
+  if(snapshot.exists()){
+
+    currentUserData =
+      snapshot.data();
+
+  }
+
+
+  document
+    .getElementById("menuPage")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("scoreboardPage")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("scoreId")
+    .textContent =
+      currentUserData.magikNumberId;
+
+
+  document
+    .getElementById("scoreJoiningDate")
+    .textContent =
+      new Date(
+        currentUserData.joiningDate
+      ).toLocaleDateString();
+
+
+  document
+    .getElementById("scoreName")
+    .textContent =
+      currentUserData.name || "";
+
+
+  document
+    .getElementById("scoreEmail")
+    .textContent =
+      currentUserData.email || "";
+
+
+  document
+    .getElementById("scoreMobile")
+    .textContent =
+      currentUserData.mobile || "";
+
+
+  document
+    .getElementById("scoreGames")
+    .textContent =
+      currentUserData.gamesPlayed || 0;
+
+
+  document
+    .getElementById("scorePoints")
+    .textContent =
+      currentUserData.points || 0;
+
+
+  document
+    .getElementById("scoreCash")
+    .textContent =
+      currentUserData.cashBalance || 0;
+
+
+  const history =
+    currentUserData.conversionHistory || [];
+
+
+  document
+    .getElementById("conversionHistory")
+    .innerHTML =
+      history.length
+        ? history.join("<br>")
+        : "No conversion history";
+
+};
+
+
+/* =========================================
+   BACK TO MENU
+========================================= */
+
+window.backToMenu =
+function(){
+
+  clearInterval(gameTimer);
+
+
+  document
+    .getElementById("scoreboardPage")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("gamePage")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("resultPage")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("menuPage")
+    .classList.remove("hidden");
+
+};
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+const logos = [
+  "⚡",
+  "🎯",
+  "🚀",
+  "🔥",
+  "👑",
+  "💎",
+  "🌀",
+  "🌟"
+];
+
+
+window.openLogoPopup =
+function(){
+
+  const container =
+    document.getElementById(
+      "logoChoices"
+    );
+
+  container.innerHTML = "";
+
+
+  logos.forEach(function(logo){
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "logo-choice";
+
+    div.textContent =
+      logo;
+
+    div.onclick =
+      function(){
+
+        changeLogo(logo);
+
+      };
+
+    container.appendChild(div);
+
+  });
+
+
+  document
+    .getElementById("logoPopup")
+    .classList.remove("hidden");
+
+};
+
+
+window.closeLogoPopup =
+function(){
+
+  document
+    .getElementById("logoPopup")
+    .classList.add("hidden");
+
+};
+
+
+async function changeLogo(logo){
+
+  if(!currentUser) return;
+
+
+  try{
+
+    await updateDoc(
+      doc(db,"users",currentUser.uid),
+      {
+        logo:logo
+      }
+    );
+
+
+    currentUserData.logo =
+      logo;
+
+
+    document
+      .getElementById("userLogo")
+      .textContent =
+        logo;
+
+
+    closeLogoPopup();
+
+
+    showPopup(
+      "Success",
+      "Logo updated successfully."
+    );
+
+
+  }catch(error){
+
+    showPopup(
+      "Error",
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   EMAIL UPDATE
+========================================= */
+
+window.openEmailPopup =
+function(){
+
+  document
+    .getElementById("emailPopup")
+    .classList.remove("hidden");
+
+};
+
+
+window.closeEmailPopup =
+function(){
+
+  document
+    .getElementById("emailPopup")
+    .classList.add("hidden");
+
+};
+
+
+window.confirmEmailUpdate =
+async function(){
+
+  const newEmail =
+    document
+      .getElementById("newEmail")
+      .value.trim();
+
+
+  if(!newEmail){
+
+    showPopup(
+      "Error",
+      "Enter a new email."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await updateEmail(
+      currentUser,
+      newEmail
+    );
+
+
+    await updateDoc(
+      doc(db,"users",currentUser.uid),
+      {
+        email:newEmail
+      }
+    );
+
+
+    currentUserData.email =
+      newEmail;
+
+
+    closeEmailPopup();
+
+
+    showPopup(
+      "Success",
+      "Email updated successfully."
+    );
+
+
+    openScoreboard();
+
+
+  }catch(error){
+
+    showPopup(
+      "Email Update",
+      error.message
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   MOBILE UPDATE
+========================================= */
+
+window.openMobilePopup =
+function(){
+
+  document
+    .getElementById("mobilePopup")
+    .classList.remove("hidden");
+
+};
+
+
+window.closeMobilePopup =
+function(){
+
+  document
+    .getElementById("mobilePopup")
+    .classList.add("hidden");
+
+};
+
+
+window.confirmMobileUpdate =
+async function(){
+
+  const country =
+    document
+      .getElementById("updateCountry")
+      .value;
+
+  const mobile =
+    document
+      .getElementById("newMobile")
+      .value.trim();
+
+
+  const expectedLength =
+    getSelectedCountryLength(
+      "updateCountry"
+    );
+
+
+  if(!/^\d+$/.test(mobile) ||
+     mobile.length !== expectedLength){
+
+    showPopup(
+      "Error",
+      "Please enter a valid mobile number."
+    );
+
+    return;
+
+  }
+
+
+  const fullMobile =
+    country + mobile;
+
+
+  try{
+
+    await updateDoc(
+      doc(db,"users",currentUser.uid),
+      {
+        mobile:fullMobile
+      }
+    );
+
+
+    currentUserData.mobile =
+      fullMobile;
+
+
+    closeMobilePopup();
+
+
+    showPopup(
+      "Success",
+      "Mobile number updated successfully."
+    );
+
+
+    openScoreboard();
+
+
+  }catch(error){
+
+    showPopup(
+      "Error",
+      error.message
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   GAME CONFIGURATION
+   CREATOR SETTINGS
+========================================= */
 
 const GAME_CONFIG = {
 
   DIAMOND: {
-    name: "DIAMOND",
-    size: 5,
 
-    /* 5 minutes */
-    duration: 300,
+    name:"DIAMOND",
 
-    /* Creator can change these */
-    rowTotal: 60,
-    tableTotal: 300,
+    size:5,
 
-    /* Points */
-    rowPoints: 10,
-    columnPoints: 10,
-    diagonalPoints: 10,
-    tablePoints: 50,
+    duration:300,
 
-    /*
-      Correct answer.
+    rowTotal:60,
 
-      Every row = 60
-      Every column = 60
-      L1 = 60
-      L2 = 60
-      Total table = 300
-    */
-    answer: [
+    tableTotal:300,
+
+    rowPoints:10,
+
+    columnPoints:10,
+
+    diagonalPoints:10,
+
+    tablePoints:50,
+
+    answer:[
       [16,23,0,7,14],
       [22,4,6,13,15],
       [3,5,12,19,21],
       [9,11,18,20,2],
       [10,17,24,1,8]
     ]
+
   },
 
+
   GOLD: {
-    name: "GOLD",
-    size: 3,
 
-    duration: 60,
+    name:"GOLD",
 
-    rowTotal: 15,
-    tableTotal: 45,
+    size:3,
 
-    rowPoints: 5,
-    columnPoints: 5,
-    diagonalPoints: 5,
-    tablePoints: 25,
+    duration:60,
 
-    answer: [
+    rowTotal:15,
+
+    tableTotal:45,
+
+    rowPoints:5,
+
+    columnPoints:5,
+
+    diagonalPoints:5,
+
+    tablePoints:25,
+
+    answer:[
       [8,1,6],
       [3,5,7],
       [4,9,2]
     ]
+
   },
 
+
   SILVER: {
-    name: "SILVER",
-    size: 3,
 
-    duration: 60,
+    name:"SILVER",
 
-    rowTotal: 15,
-    tableTotal: 45,
+    size:3,
 
-    rowPoints: 0,
-    columnPoints: 0,
-    diagonalPoints: 0,
-    tablePoints: 25,
+    duration:60,
 
-    answer: [
+    rowTotal:15,
+
+    tableTotal:45,
+
+    rowPoints:0,
+
+    columnPoints:0,
+
+    diagonalPoints:0,
+
+    tablePoints:25,
+
+    answer:[
       [6,1,8],
       [7,5,3],
       [2,9,4]
     ]
+
   }
 
 };
 
 
-/* ==========================================
-   GAME VARIABLES
-========================================== */
+/* =========================================
+   OPEN GAME
+========================================= */
 
-let currentGame = null;
-let gameTimer = null;
-let remainingSeconds = 0;
-let gameStopped = false;
+window.openGame =
+function(gameName){
 
+  if(!currentUser){
 
-/* ==========================================
-   START GAME
-   IMPORTANT:
-   This is called by your menu button,
-   NOT shown as a START button to user.
-========================================== */
+    showPopup(
+      "Login Required",
+      "Please login first."
+    );
 
-function openGame(gameName) {
-
-  currentGame = GAME_CONFIG[gameName];
-
-  if (!currentGame) {
-    alert("Game configuration not found.");
     return;
+
   }
 
-  document.getElementById("gamePage")
-    .classList.remove("hidden");
 
-  document.getElementById("resultPage")
+  currentGame =
+    GAME_CONFIG[gameName];
+
+
+  document
+    .getElementById("menuPage")
     .classList.add("hidden");
 
-  document.getElementById("gameTitle")
-    .textContent = currentGame.name;
 
-  document.getElementById("rowTarget")
-    .textContent = currentGame.rowTotal;
+  document
+    .getElementById("scoreboardPage")
+    .classList.add("hidden");
 
-  document.getElementById("tableTarget")
-    .textContent = currentGame.tableTotal;
 
-  createUserGrid();
+  document
+    .getElementById("resultPage")
+    .classList.add("hidden");
 
-  remainingSeconds = currentGame.duration;
+
+  document
+    .getElementById("gamePage")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("gameTitle")
+    .textContent =
+      currentGame.name;
+
+
+  document
+    .getElementById("rowTarget")
+    .textContent =
+      currentGame.rowTotal;
+
+
+  document
+    .getElementById("tableTarget")
+    .textContent =
+      currentGame.tableTotal;
+
+
+  createGameBoard();
+
+
+  remainingSeconds =
+    currentGame.duration;
+
   gameStopped = false;
 
-  document.getElementById("answerBtn").disabled = false;
 
-  updateTimerDisplay();
+  updateTimer();
+
 
   clearInterval(gameTimer);
 
-  gameTimer = setInterval(function() {
 
-    remainingSeconds--;
+  /*
+    Game starts automatically.
+    No START button for user.
+  */
 
-    updateTimerDisplay();
+  gameTimer =
+    setInterval(function(){
 
-    if (remainingSeconds <= 0) {
+      remainingSeconds--;
 
-      remainingSeconds = 0;
-
-      updateTimerDisplay();
-
-      stopGameAutomatically();
-
-    }
-
-  }, 1000);
-}
+      updateTimer();
 
 
-/* ==========================================
-   CREATE USER BOXES
-========================================== */
+      if(remainingSeconds <= 0){
 
-function createUserGrid() {
+        remainingSeconds = 0;
 
-  const grid = document.getElementById("userGrid");
+        updateTimer();
 
-  grid.innerHTML = "";
+        stopGame();
 
-  const size = currentGame.size;
+      }
 
-  for (let r = 0; r < size; r++) {
+    },1000);
 
-    for (let c = 0; c < size; c++) {
+};
 
-      const input = document.createElement("input");
 
-      input.type = "number";
+/* =========================================
+   CREATE GAME BOARD
+========================================= */
 
-      input.className = "user-box";
+function createGameBoard(){
+
+  const container =
+    document.getElementById(
+      "userGameBoard"
+    );
+
+  container.innerHTML = "";
+
+
+  const size =
+    currentGame.size;
+
+
+  for(let r=0;r<size;r++){
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "board-row";
+
+
+    const label =
+      document.createElement("div");
+
+    label.className =
+      "row-label";
+
+    label.textContent =
+      "R" + (r+1);
+
+    row.appendChild(label);
+
+
+    for(let c=0;c<size;c++){
+
+      const input =
+        document.createElement("input");
+
+      input.type =
+        "number";
+
+      input.className =
+        "game-box";
 
       input.min = "0";
       input.max = "25";
@@ -427,189 +2228,216 @@ function createUserGrid() {
       input.dataset.row = r;
       input.dataset.col = c;
 
-      input.addEventListener("input", function() {
 
-        if (this.value !== "") {
+      input.addEventListener(
+        "input",
+        function(){
 
-          let value = Number(this.value);
+          if(this.value !== ""){
 
-          if (value < 0) this.value = 0;
-          if (value > 25) this.value = 25;
+            let value =
+              Number(this.value);
+
+            if(value < 0)
+              this.value = 0;
+
+            if(value > 25)
+              this.value = 25;
+
+          }
+
+          updateLiveTotals();
 
         }
+      );
 
-        updateLiveTotals();
 
-      });
+      row.appendChild(input);
 
-      grid.appendChild(input);
     }
+
+
+    const total =
+      document.createElement("div");
+
+    total.className =
+      "total-box";
+
+    total.id =
+      "rowLive" + r;
+
+    total.textContent =
+      "0";
+
+    row.appendChild(total);
+
+
+    container.appendChild(row);
+
   }
 
-  createRowTotals();
-  createColumnTotals();
+
+  const columnTotals =
+    document.createElement("div");
+
+  columnTotals.className =
+    "column-totals";
+
+
+  for(let c=0;c<size;c++){
+
+    const total =
+      document.createElement("div");
+
+    total.className =
+      "column-total";
+
+    total.id =
+      "columnLive" + c;
+
+    total.textContent =
+      "0";
+
+    columnTotals.appendChild(total);
+
+  }
+
+
+  container.appendChild(
+    columnTotals
+  );
+
 
   updateLiveTotals();
+
 }
 
 
-/* ==========================================
-   ROW TOTAL AREAS
-========================================== */
+/* =========================================
+   GET USER NUMBERS
+========================================= */
 
-function createRowTotals() {
+function getUserNumbers(){
 
-  const grid = document.getElementById("userGrid");
-
-  /*
-    CSS grid is kept simple here.
-    Row totals are displayed separately
-    in the live totals section.
-  */
-
-  let existing = document.getElementById("rowTotals");
-
-  if (!existing) {
-
-    existing = document.createElement("div");
-
-    existing.id = "rowTotals";
-
-    existing.style.marginTop = "10px";
-
-    document
-      .querySelector(".answer-sheet")
-      .appendChild(existing);
-  }
-
-  existing.innerHTML = "<b>ROW TOTALS</b><br>";
-
-  for (let i = 0; i < currentGame.size; i++) {
-
-    const span = document.createElement("span");
-
-    span.id = "rowTotal" + i;
-
-    span.style.margin = "8px";
-
-    span.textContent = "0";
-
-    existing.appendChild(span);
-  }
-}
-
-
-/* ==========================================
-   COLUMN TOTAL AREAS
-========================================== */
-
-function createColumnTotals() {
-
-  const container =
-    document.getElementById("columnTotals");
-
-  container.innerHTML = "";
-
-  for (let i = 0; i < currentGame.size; i++) {
-
-    const span = document.createElement("span");
-
-    span.id = "colTotal" + i;
-
-    span.textContent = "0";
-
-    container.appendChild(span);
-  }
-}
-
-
-/* ==========================================
-   READ USER NUMBERS
-========================================== */
-
-function getUserNumbers() {
+  const size =
+    currentGame.size;
 
   const inputs =
-    document.querySelectorAll(".user-box");
+    document.querySelectorAll(
+      ".game-box"
+    );
 
-  const size = currentGame.size;
 
   const numbers = [];
 
   let index = 0;
 
-  for (let r = 0; r < size; r++) {
+
+  for(let r=0;r<size;r++){
 
     numbers[r] = [];
 
-    for (let c = 0; c < size; c++) {
 
-      const value = inputs[index].value;
+    for(let c=0;c<size;c++){
+
+      const value =
+        inputs[index].value;
+
 
       numbers[r][c] =
-        value === "" ? null : Number(value);
+        value === ""
+          ? null
+          : Number(value);
+
 
       index++;
+
     }
+
   }
 
+
   return numbers;
+
 }
 
 
-/* ==========================================
+/* =========================================
    LIVE TOTALS
-========================================== */
+========================================= */
 
-function updateLiveTotals() {
+function updateLiveTotals(){
 
-  if (!currentGame) return;
+  if(!currentGame)
+    return;
 
-  const numbers = getUserNumbers();
 
-  const size = currentGame.size;
+  const numbers =
+    getUserNumbers();
 
-  /* Rows */
+  const size =
+    currentGame.size;
 
-  for (let r = 0; r < size; r++) {
+
+  /* ROW TOTALS */
+
+  for(let r=0;r<size;r++){
 
     let total = 0;
 
-    for (let c = 0; c < size; c++) {
 
-      if (numbers[r][c] !== null) {
+    for(let c=0;c<size;c++){
+
+      if(numbers[r][c] !== null){
+
         total += numbers[r][c];
+
       }
+
     }
+
 
     const element =
-      document.getElementById("rowTotal" + r);
+      document.getElementById(
+        "rowLive" + r
+      );
 
-    if (element) {
-      element.textContent = total;
-    }
+
+    if(element)
+      element.textContent =
+        total;
+
   }
 
 
-  /* Columns */
+  /* COLUMN TOTALS */
 
-  for (let c = 0; c < size; c++) {
+  for(let c=0;c<size;c++){
 
     let total = 0;
 
-    for (let r = 0; r < size; r++) {
 
-      if (numbers[r][c] !== null) {
+    for(let r=0;r<size;r++){
+
+      if(numbers[r][c] !== null){
+
         total += numbers[r][c];
+
       }
+
     }
+
 
     const element =
-      document.getElementById("colTotal" + c);
+      document.getElementById(
+        "columnLive" + c
+      );
 
-    if (element) {
-      element.textContent = total;
-    }
+
+    if(element)
+      element.textContent =
+        total;
+
   }
 
 
@@ -617,11 +2445,15 @@ function updateLiveTotals() {
 
   let l1 = 0;
 
-  for (let i = 0; i < size; i++) {
 
-    if (numbers[i][i] !== null) {
+  for(let i=0;i<size;i++){
+
+    if(numbers[i][i] !== null){
+
       l1 += numbers[i][i];
+
     }
+
   }
 
 
@@ -629,482 +2461,768 @@ function updateLiveTotals() {
 
   let l2 = 0;
 
-  for (let i = 0; i < size; i++) {
+
+  for(let i=0;i<size;i++){
 
     const value =
-      numbers[i][size - 1 - i];
+      numbers[i][size-1-i];
 
-    if (value !== null) {
+
+    if(value !== null){
+
       l2 += value;
+
     }
+
   }
 
-  document.getElementById("l2Total")
-    .textContent = l2;
 
   /*
-    L1 can be displayed separately later
-    beside the top of the answer sheet.
+    L1 is shown at top.
+    L2 is shown at bottom.
   */
+
+  document
+    .querySelector(".diagonal-label")
+    .textContent =
+      "L1: " + l1;
+
+
+  document
+    .getElementById("liveL2")
+    .textContent =
+      l2;
+
 }
 
 
-/* ==========================================
+/* =========================================
    TIMER
-========================================== */
+========================================= */
 
-function updateTimerDisplay() {
+function updateTimer(){
 
   const minutes =
-    Math.floor(remainingSeconds / 60);
+    Math.floor(
+      remainingSeconds / 60
+    );
 
   const seconds =
     remainingSeconds % 60;
 
-  document.getElementById("timer")
+
+  document
+    .getElementById("gameTimer")
     .textContent =
-      String(minutes).padStart(2, "0")
+      String(minutes)
+        .padStart(2,"0")
       + ":"
-      + String(seconds).padStart(2, "0");
+      + String(seconds)
+        .padStart(2,"0");
+
 }
 
 
-/* ==========================================
-   AUTOMATIC STOP
-========================================== */
+/* =========================================
+   STOP GAME AUTOMATICALLY
+========================================= */
 
-function stopGameAutomatically() {
+function stopGame(){
 
-  if (gameStopped) return;
+  if(gameStopped)
+    return;
+
 
   gameStopped = true;
 
+
   clearInterval(gameTimer);
+
 
   /*
     LOCK ALL BOXES
   */
 
   document
-    .querySelectorAll(".user-box")
-    .forEach(function(box) {
+    .querySelectorAll(".game-box")
+    .forEach(function(box){
 
       box.disabled = true;
 
     });
 
+
+  /*
+    ANSWER remains available.
+  */
+
 }
 
 
-/* ==========================================
-   ANSWER BUTTON
-========================================== */
+/* =========================================
+   ANSWER
+========================================= */
 
-function submitAnswer() {
+window.submitAnswer =
+function(){
 
   /*
-    User tries before zero
+    BEFORE ZERO
   */
 
-  if (!gameStopped) {
+  if(!gameStopped){
 
-    alert("Game is still running");
+    showPopup(
+      "Game Running",
+      "Game is still running"
+    );
 
     return;
+
   }
 
 
-  const numbers = getUserNumbers();
+  const numbers =
+    getUserNumbers();
 
-  const size = currentGame.size;
+
+  const size =
+    currentGame.size;
+
 
   /*
-    Make sure every box has a number
+    ALL BOXES MUST BE FILLED
   */
 
-  for (let r = 0; r < size; r++) {
+  for(let r=0;r<size;r++){
 
-    for (let c = 0; c < size; c++) {
+    for(let c=0;c<size;c++){
 
-      if (numbers[r][c] === null) {
+      if(numbers[r][c] === null){
 
-        alert(
-          "Please fill all boxes before submitting."
+        showPopup(
+          "Incomplete",
+          "Please fill all boxes."
         );
 
         return;
+
       }
+
     }
+
   }
 
 
   /*
-    Open separate Result Page
+    CHECK DUPLICATES
+  */
+
+  const flat =
+    numbers.flat();
+
+
+  const unique =
+    new Set(flat);
+
+
+  if(unique.size !== flat.length){
+
+    showPopup(
+      "Invalid Answer",
+      "Numbers must not repeat."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    GO TO SEPARATE RESULT PAGE
   */
 
   showResultPage(numbers);
-}
+
+};
 
 
-/* ==========================================
+/* =========================================
    RESULT PAGE
-========================================== */
+========================================= */
 
-function showResultPage(userNumbers) {
+function showResultPage(numbers){
 
   document
     .getElementById("gamePage")
     .classList.add("hidden");
+
 
   document
     .getElementById("resultPage")
     .classList.remove("hidden");
 
 
-  const size = currentGame.size;
-
-  const answer = currentGame.answer;
-
-
-  /* ======================================
-     USER ANSWER BOXES
-  ====================================== */
-
-  const userGrid =
-    document.getElementById("yourResultGrid");
-
-  userGrid.innerHTML = "";
-
-  for (let r = 0; r < size; r++) {
-
-    for (let c = 0; c < size; c++) {
-
-      const box =
-        document.createElement("div");
-
-      box.className = "result-box";
-
-      box.textContent =
-        userNumbers[r][c];
-
-      userGrid.appendChild(box);
-    }
-  }
+  createResultGrid(
+    "yourResultGrid",
+    numbers
+  );
 
 
-  /* ======================================
-     OUR ANSWER BOXES
-     NO TOTALS HERE
-  ====================================== */
-
-  const ourGrid =
-    document.getElementById("ourAnswerGrid");
-
-  ourGrid.innerHTML = "";
-
-  for (let r = 0; r < size; r++) {
-
-    for (let c = 0; c < size; c++) {
-
-      const box =
-        document.createElement("div");
-
-      box.className = "our-box";
-
-      box.textContent =
-        answer[r][c];
-
-      ourGrid.appendChild(box);
-    }
-  }
+  createResultGrid(
+    "ourResultGrid",
+    currentGame.answer
+  );
 
 
-  calculateScore(userNumbers);
+  calculateResult(numbers);
+
 }
 
 
-/* ==========================================
-   SCORE CALCULATION
-========================================== */
+/* =========================================
+   CREATE RESULT GRID
+========================================= */
 
-function calculateScore(numbers) {
+function createResultGrid(
+  elementId,
+  numbers
+){
 
-  const size = currentGame.size;
+  const container =
+    document.getElementById(
+      elementId
+    );
 
-  const target = currentGame.rowTotal;
+
+  container.innerHTML = "";
+
+
+  numbers.forEach(function(row){
+
+    row.forEach(function(value){
+
+      const box =
+        document.createElement("div");
+
+      box.className =
+        "result-box";
+
+      box.textContent =
+        value;
+
+      container.appendChild(box);
+
+    });
+
+  });
+
+}
+
+
+/* =========================================
+   CALCULATE RESULT
+========================================= */
+
+function calculateResult(numbers){
+
+  const size =
+    currentGame.size;
+
+  const target =
+    currentGame.rowTotal;
 
   const tableTarget =
     currentGame.tableTotal;
 
-  const answer =
-    currentGame.answer;
+
+  let earned = 0;
+
+  let details = "";
 
 
-  let totalPoints = 0;
+  /*
+    ROWS
+  */
 
-  let html = "";
-
-
-  /* ======================================
-     ROWS
-  ====================================== */
-
-  for (let r = 0; r < size; r++) {
+  for(let r=0;r<size;r++){
 
     let total = 0;
 
-    for (let c = 0; c < size; c++) {
+
+    for(let c=0;c<size;c++){
 
       total += numbers[r][c];
 
     }
 
+
     const correct =
       total === target;
 
-    if (correct) {
 
-      totalPoints += currentGame.rowPoints;
+    if(correct)
+      earned += currentGame.rowPoints;
 
-    }
 
-    html +=
-      "Row " + (r + 1)
+    details +=
+      "Row " + (r+1)
       + ": "
       + total
       + " / "
       + target
       + " → "
-      + (correct
-          ? currentGame.rowPoints + " points"
-          : "0 points")
-      + "<br>";
+      + (
+        correct
+          ? currentGame.rowPoints
+          : 0
+      )
+      + " points<br>";
+
   }
 
 
-  /* ======================================
-     COLUMNS
-  ====================================== */
+  /*
+    COLUMNS
+  */
 
-  for (let c = 0; c < size; c++) {
+  for(let c=0;c<size;c++){
 
     let total = 0;
 
-    for (let r = 0; r < size; r++) {
+
+    for(let r=0;r<size;r++){
 
       total += numbers[r][c];
 
     }
 
+
     const correct =
       total === target;
 
-    if (correct) {
 
-      totalPoints += currentGame.columnPoints;
+    if(correct)
+      earned +=
+        currentGame.columnPoints;
 
-    }
 
-    html +=
-      "Column " + (c + 1)
+    details +=
+      "Column " + (c+1)
       + ": "
       + total
       + " / "
       + target
       + " → "
-      + (correct
-          ? currentGame.columnPoints + " points"
-          : "0 points")
-      + "<br>";
+      + (
+        correct
+          ? currentGame.columnPoints
+          : 0
+      )
+      + " points<br>";
+
   }
 
 
-  /* ======================================
-     L1
-  ====================================== */
+  /*
+    L1
+  */
 
   let l1 = 0;
 
-  for (let i = 0; i < size; i++) {
+
+  for(let i=0;i<size;i++){
 
     l1 += numbers[i][i];
 
   }
 
+
   const l1Correct =
     l1 === target;
 
-  if (l1Correct) {
 
-    totalPoints +=
+  if(l1Correct)
+    earned +=
       currentGame.diagonalPoints;
 
-  }
 
-  html +=
+  details +=
     "L1: "
     + l1
     + " / "
     + target
     + " → "
-    + (l1Correct
+    + (
+      l1Correct
         ? currentGame.diagonalPoints
-          + " points"
-        : "0 points")
-    + "<br>";
+        : 0
+    )
+    + " points<br>";
 
 
-  /* ======================================
-     L2
-  ====================================== */
+  /*
+    L2
+  */
 
   let l2 = 0;
 
-  for (let i = 0; i < size; i++) {
+
+  for(let i=0;i<size;i++){
 
     l2 +=
-      numbers[i][size - 1 - i];
+      numbers[i][size-1-i];
 
   }
+
 
   const l2Correct =
     l2 === target;
 
-  if (l2Correct) {
 
-    totalPoints +=
+  if(l2Correct)
+    earned +=
       currentGame.diagonalPoints;
 
-  }
 
-  html +=
+  details +=
     "L2: "
     + l2
     + " / "
     + target
     + " → "
-    + (l2Correct
+    + (
+      l2Correct
         ? currentGame.diagonalPoints
-          + " points"
-        : "0 points")
-    + "<br>";
+        : 0
+    )
+    + " points<br>";
 
 
-  /* ======================================
-     TOTAL TABLE
-  ====================================== */
+  /*
+    TOTAL TABLE
+  */
 
   let tableTotal = 0;
 
-  for (let r = 0; r < size; r++) {
 
-    for (let c = 0; c < size; c++) {
+  numbers.forEach(function(row){
 
-      tableTotal += numbers[r][c];
+    row.forEach(function(value){
 
-    }
-  }
+      tableTotal += value;
+
+    });
+
+  });
+
 
   const tableCorrect =
     tableTotal === tableTarget;
 
-  if (tableCorrect) {
 
-    totalPoints += currentGame.tablePoints;
+  if(tableCorrect)
+    earned +=
+      currentGame.tablePoints;
 
-  }
 
-  html +=
+  details +=
     "<br><b>Total Table: "
     + tableTotal
     + " / "
     + tableTarget
     + " → "
-    + (tableCorrect
+    + (
+      tableCorrect
         ? currentGame.tablePoints
-          + " points"
-        : "0 points")
-    + "</b>";
+        : 0
+    )
+    + " points</b>";
 
 
-  /* ======================================
-     RESULT MESSAGE
-  ====================================== */
+  /*
+    MAX POINTS
+  */
 
   const maxPoints =
-    (size * currentGame.rowPoints)
+    (
+      size *
+      currentGame.rowPoints
+    )
     +
-    (size * currentGame.columnPoints)
+    (
+      size *
+      currentGame.columnPoints
+    )
     +
-    (2 * currentGame.diagonalPoints)
+    (
+      2 *
+      currentGame.diagonalPoints
+    )
     +
     currentGame.tablePoints;
 
 
-  document.getElementById("pointsBreakdown")
-    .innerHTML = html;
+  /*
+    USER TOTALS
+  */
+
+  let userTotals = "";
 
 
-  document.getElementById("earnedPoints")
+  userTotals +=
+    "<b>Row Totals</b><br>";
+
+
+  for(let r=0;r<size;r++){
+
+    let total = 0;
+
+    for(let c=0;c<size;c++){
+
+      total += numbers[r][c];
+
+    }
+
+    userTotals +=
+      "R" + (r+1)
+      + " = "
+      + total
+      + "<br>";
+
+  }
+
+
+  userTotals +=
+    "<br><b>Column Totals</b><br>";
+
+
+  for(let c=0;c<size;c++){
+
+    let total = 0;
+
+    for(let r=0;r<size;r++){
+
+      total += numbers[r][c];
+
+    }
+
+    userTotals +=
+      "C" + (c+1)
+      + " = "
+      + total
+      + "<br>";
+
+  }
+
+
+  userTotals +=
+    "<br>L1 = "
+    + l1
+    + "<br>"
+    + "L2 = "
+    + l2;
+
+
+  document
+    .getElementById("yourTotals")
+    .innerHTML =
+      userTotals;
+
+
+  document
+    .getElementById("pointsBreakdown")
+    .innerHTML =
+      details;
+
+
+  document
+    .getElementById("earnedPoints")
     .textContent =
       "EARNED: "
-      + totalPoints
+      + earned
       + " / "
       + maxPoints
       + " POINTS";
 
 
-  document.getElementById("resultMessage")
+  document
+    .getElementById("resultMessage")
     .textContent =
-      totalPoints > 0
-        ? "GAME RESULT"
+      earned > 0
+        ? "GAME COMPLETED"
         : "BETTER LUCK NEXT TIME";
 
 
   /*
-    Save score to Firebase later
-    after connecting this function to
-    your existing currentUserData.
+    SAVE GAME SCORE
   */
+
+  saveGameScore(earned);
 
 }
 
 
-/* ==========================================
-   BACK TO MENU
-========================================== */
+/* =========================================
+   SAVE GAME SCORE
+========================================= */
 
-function backToMenu() {
+async function saveGameScore(pointsEarned){
 
-  clearInterval(gameTimer);
+  if(!currentUser)
+    return;
+
+
+  try{
+
+    const userRef =
+      doc(db,"users",currentUser.uid);
+
+
+    const snapshot =
+      await getDoc(userRef);
+
+
+    if(!snapshot.exists())
+      return;
+
+
+    const data =
+      snapshot.data();
+
+
+    const oldPoints =
+      Number(data.points || 0);
+
+
+    const oldGames =
+      Number(data.gamesPlayed || 0);
+
+
+    await updateDoc(
+      userRef,
+      {
+
+        points:
+          oldPoints + pointsEarned,
+
+        gamesPlayed:
+          oldGames + 1
+
+      }
+    );
+
+
+    currentUserData.points =
+      oldPoints + pointsEarned;
+
+
+    currentUserData.gamesPlayed =
+      oldGames + 1;
+
+
+  }catch(error){
+
+    console.error(
+      "Score save error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   CLOSE ACCOUNT
+========================================= */
+
+window.closeAccount =
+function(){
+
+  showPopup(
+    "Close Account",
+    "Account closing will be connected after the main game system is completed."
+  );
+
+};
+
+
+/* =========================================
+   POPUP
+========================================= */
+
+function showPopup(
+  title,
+  message
+){
 
   document
-    .getElementById("resultPage")
-    .classList.add("hidden");
+    .getElementById("popupTitle")
+    .textContent =
+      title;
 
-  /*
-    Replace this with your existing
-    menu/showMenu() function.
-  */
 
   document
-    .getElementById("gamePage")
+    .getElementById("popupMessage")
+    .textContent =
+      message;
+
+
+  document
+    .getElementById("popupBackground")
+    .classList.remove("hidden");
+
+}
+
+
+function closePopup(){
+
+  document
+    .getElementById("popupBackground")
     .classList.add("hidden");
 
 }
 
 
-/* ==========================================
-   EXAMPLE MENU CONNECTION
-==========================================
+window.closePopup =
+  closePopup;
 
-   Your existing buttons should call:
 
-   openGame("DIAMOND");
-   openGame("GOLD");
-   openGame("SILVER");
+/* =========================================
+   PREVENT MOBILE INPUT MORE THAN 25
+========================================= */
 
-   There is NO START button for the user.
-========================================== */
+document.addEventListener(
+  "input",
+  function(event){
+
+    if(
+      event.target.classList
+        .contains("game-box")
+    ){
+
+      if(event.target.value !== ""){
+
+        let value =
+          Number(event.target.value);
+
+
+        if(value > 25)
+          event.target.value = 25;
+
+
+        if(value < 0)
+          event.target.value = 0;
+
+      }
+
+    }
+
+  }
+);
 
 </script>
+
+</body>
+</html>

@@ -240,7 +240,6 @@ button {
 
   </div>
 
-
   <div class="card">
 
     <h2>REGISTER</h2>
@@ -272,7 +271,6 @@ button {
     </button>
 
   </div>
-
 
   <div class="card rules">
 
@@ -376,29 +374,17 @@ button {
 
   <div class="scoreRow">
     <b>TOTAL GAMES PLAYED</b>
-    <div
-      class="scoreValue"
-      id="scoreGames">
-      0
-    </div>
+    <div class="scoreValue" id="scoreGames">0</div>
   </div>
 
   <div class="scoreRow">
     <b>EARNED POINTS</b>
-    <div
-      class="scoreValue"
-      id="scorePoints">
-      0
-    </div>
+    <div class="scoreValue" id="scorePoints">0</div>
   </div>
 
   <div class="scoreRow">
     <b>CASH BALANCE</b>
-    <div
-      class="cashValue"
-      id="scoreCash">
-      ₹0
-    </div>
+    <div class="cashValue" id="scoreCash">₹0</div>
   </div>
 
   <p>
@@ -496,7 +482,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -509,13 +494,13 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-
 import {
   getFirestore,
   doc,
   getDoc,
   setDoc,
-  updateDoc
+  updateDoc,
+  runTransaction
 }
 from
 "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -543,7 +528,7 @@ const firebaseConfig = {
     "977553928698",
 
   appId:
-    "1:977553928698:web:0c9c5c59fe5b443"
+    "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
 
 };
 
@@ -566,6 +551,65 @@ const googleProvider =
 
 
 /* =====================================================
+   AUTOMATIC MAGIKNUMBER ID
+   ===================================================== */
+
+async function generateMagikNumberId() {
+
+  const counterRef =
+    doc(
+      db,
+      "system",
+      "counter"
+    );
+
+  const newId =
+    await runTransaction(
+      db,
+      async (transaction) => {
+
+        const counterSnapshot =
+          await transaction.get(
+            counterRef
+          );
+
+        let nextNumber = 100001;
+
+        if (counterSnapshot.exists()) {
+
+          const counterData =
+            counterSnapshot.data();
+
+          nextNumber =
+            Number(
+              counterData.nextNumber ||
+              100001
+            );
+
+        }
+
+        transaction.set(
+          counterRef,
+          {
+            nextNumber:
+              nextNumber + 1
+          },
+          {
+            merge: true
+          }
+        );
+
+        return "MN" + nextNumber;
+
+      }
+    );
+
+  return newId;
+
+}
+
+
+/* =====================================================
    PROFILE CREATION
    ===================================================== */
 
@@ -581,7 +625,6 @@ async function createUserProfile(
       "users",
       user.uid
     );
-
 
   const existing =
     await getDoc(userRef);
@@ -654,11 +697,7 @@ async function createUserProfile(
     }
 
 
-    /*
-      If old account has "User" as name,
-      and a real registration name exists,
-      save the real name.
-    */
+    /* OLD USER NAME FIX */
 
     if (
       registerName &&
@@ -687,8 +726,6 @@ async function createUserProfile(
 
     }
 
-
-    /* SAVE CHANGES */
 
     if (
       Object.keys(updates).length > 0
@@ -723,11 +760,6 @@ async function createUserProfile(
     );
 
 
-  /*
-    Registration form name has
-    highest priority.
-  */
-
   const finalName =
     registerName.trim();
 
@@ -736,10 +768,22 @@ async function createUserProfile(
     registerMobile.trim();
 
 
+  /*
+    Generate a NEW automatic ID.
+    Example:
+    MN100001
+    MN100002
+    MN100003
+  */
+
+  const automaticId =
+    await generateMagikNumberId();
+
+
   const userData = {
 
     magikNumberId:
-      "MN100001",
+      automaticId,
 
     name:
       finalName,
@@ -810,8 +854,6 @@ async function() {
       .value;
 
 
-  /* VALIDATION */
-
   if (!name) {
 
     showMessage(
@@ -863,12 +905,6 @@ async function() {
     );
 
 
-    /*
-      IMPORTANT:
-      Save registration details BEFORE
-      Firebase creates the account.
-    */
-
     sessionStorage.setItem(
       "pendingRegistration",
       JSON.stringify({
@@ -892,11 +928,6 @@ async function() {
       );
 
 
-    /*
-      Create profile immediately.
-      This prevents Auth State timing problems.
-    */
-
     const data =
       await createUserProfile(
         result.user,
@@ -915,7 +946,6 @@ async function() {
       "Your MAGIKNUMBER ID:\n" +
       data.magikNumberId
     );
-
 
   }
 
@@ -1042,10 +1072,6 @@ onAuthStateChanged(
         let registerMobile = "";
 
 
-        /*
-          Check pending registration information.
-        */
-
         const savedRegistration =
           sessionStorage.getItem(
             "pendingRegistration"
@@ -1083,10 +1109,6 @@ onAuthStateChanged(
         }
 
 
-        /*
-          Load/create profile.
-        */
-
         const data =
           await createUserProfile(
             user,
@@ -1100,15 +1122,11 @@ onAuthStateChanged(
         );
 
 
-        /* AUTH AREA */
-
         document
           .getElementById("authArea")
           .style.display =
           "none";
 
-
-        /* WELCOME */
 
         document
           .getElementById("loggedIn")
@@ -1116,15 +1134,11 @@ onAuthStateChanged(
           "block";
 
 
-        /* GAME MENU */
-
         document
           .getElementById("gameMenu")
           .style.display =
           "block";
 
-
-        /* USER ID */
 
         document
           .getElementById("userIdBar")
@@ -1138,8 +1152,6 @@ onAuthStateChanged(
           data.magikNumberId || "---";
 
 
-        /* WELCOME NAME */
-
         document
           .getElementById("userName")
           .innerText =
@@ -1147,16 +1159,12 @@ onAuthStateChanged(
           (data.name || "---");
 
 
-        /* EMAIL */
-
         document
           .getElementById("userEmail")
           .innerText =
           "Email: " +
           (data.email || "---");
 
-
-        /* PROFILE */
 
         document
           .getElementById("profileId")
@@ -1188,8 +1196,6 @@ onAuthStateChanged(
           .innerText =
           data.points || 0;
 
-
-        /* SCORE CARD */
 
         updateScoreCard(data);
 

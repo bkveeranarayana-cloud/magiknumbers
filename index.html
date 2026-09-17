@@ -1,477 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAGIKNUMBER</title>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
-  text-align: center;
-}
-
-.container {
-  width: 94%;
-  max-width: 500px;
-  margin: auto;
-  padding: 20px 10px;
-}
-
-h1 {
-  margin: 10px 0 20px;
-  font-size: 32px;
-}
-
-.card {
-  background: white;
-  padding: 20px;
-  margin: 15px 0;
-  border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-input {
-  width: 100%;
-  padding: 13px;
-  margin: 7px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
-}
-
-button {
-  width: 100%;
-  padding: 13px;
-  margin: 7px 0;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.login {
-  background: #4caf50;
-  color: white;
-}
-
-.register {
-  background: #2196f3;
-  color: white;
-}
-
-.google {
-  background: white;
-  border: 1px solid #999;
-}
-
-.logout {
-  background: #e53935;
-  color: white;
-}
-
-.profileButton {
-  background: #673ab7;
-  color: white;
-}
-
-.scoreButton {
-  background: #ff9800;
-  color: white;
-}
-
-.convertButton {
-  background: #00897b;
-  color: white;
-  font-weight: bold;
-}
-
-.closeAccountButton {
-  background: #b71c1c;
-  color: white;
-  margin-top: 20px;
-}
-
-.backButton {
-  background: #555;
-  color: white;
-}
-
-.game {
-  background: #222;
-  color: white;
-  margin: 12px 0;
-  padding: 18px;
-  border-radius: 12px;
-  font-size: 19px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.rules {
-  text-align: left;
-  line-height: 1.6;
-}
-
-#authArea,
-#loggedIn,
-#gameMenu,
-#profile,
-#scoreCard {
-  display: none;
-}
-
-#message {
-  margin-top: 10px;
-  font-weight: bold;
-  color: #d32f2f;
-}
-
-#userIdBar {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  background: #111;
-  color: white;
-  padding: 10px 14px;
-  border-radius: 0 0 10px 0;
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.profileRow {
-  padding: 12px;
-  margin: 8px 0;
-  background: #f5f5f5;
-  border-radius: 8px;
-}
-
-.scoreRow {
-  padding: 15px;
-  margin: 10px 0;
-  background: #f5f5f5;
-  border-radius: 10px;
-  font-size: 17px;
-}
-
-.scoreValue {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.cashValue {
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.history {
-  text-align: left;
-  background: #fafafa;
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 10px;
-}
-
-#firebaseError {
-  display: none;
-  background: #ffebee;
-  color: #b71c1c;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 8px;
-  text-align: left;
-  word-break: break-word;
-}
-</style>
-</head>
-
-<body>
-
-<div id="userIdBar">
-  ID: <span id="displayUserId">---</span>
-</div>
-
-<div class="container">
-
-<h1>MAGIKNUMBER</h1>
-
-<div id="authArea">
-
-  <div class="card">
-
-    <h2>LOGIN</h2>
-
-    <input
-      type="email"
-      id="loginEmail"
-      placeholder="Email">
-
-    <input
-      type="password"
-      id="loginPassword"
-      placeholder="Password">
-
-    <button
-      class="login"
-      onclick="loginUser()">
-      LOGIN
-    </button>
-
-    <button
-      class="google"
-      onclick="googleLogin()">
-      🔵 Continue with Google
-    </button>
-
-    <div id="message"></div>
-
-    <div id="firebaseError"></div>
-
-  </div>
-
-  <div class="card">
-
-    <h2>REGISTER</h2>
-
-    <input
-      type="text"
-      id="name"
-      placeholder="Name">
-
-    <input
-      type="tel"
-      id="mobile"
-      placeholder="Mobile Number">
-
-    <input
-      type="email"
-      id="email"
-      placeholder="Email">
-
-    <input
-      type="password"
-      id="password"
-      placeholder="Password">
-
-    <button
-      class="register"
-      onclick="registerUser()">
-      REGISTER
-    </button>
-
-  </div>
-
-  <div class="card rules">
-
-    <h2>RULES</h2>
-
-    <p>• Select the game you want to play.</p>
-    <p>• Enter numbers in the 3 × 3 boxes.</p>
-    <p>• Complete the game within the given time.</p>
-    <p>• Press DONE before the timer ends.</p>
-    <p>• Successful games will add points to your Score Card.</p>
-    <p>• Each user has a unique MAGIKNUMBER ID.</p>
-
-  </div>
-
-</div>
-
-
-<div id="loggedIn" class="card">
-
-  <h2>Welcome!</h2>
-
-  <p id="userName"></p>
-  <p id="userEmail"></p>
-
-  <button
-    class="scoreButton"
-    onclick="showScoreCard()">
-    🏆 SCORE CARD
-  </button>
-
-  <button
-    class="profileButton"
-    onclick="showProfile()">
-    MY PROFILE
-  </button>
-
-  <button
-    class="logout"
-    onclick="logoutUser()">
-    LOGOUT
-  </button>
-
-</div>
-
-
-<div id="gameMenu" class="card">
-
-  <h2>GAME MENU</h2>
-
-  <div
-    class="game"
-    onclick="openGame('score')">
-    🏆 SCORE CARD
-  </div>
-
-  <div
-    class="game"
-    onclick="openGame('diamond')">
-    💎 DIAMOND – 5 MINUTES
-  </div>
-
-  <div
-    class="game"
-    onclick="openGame('gold')">
-    🥇 GOLD – 1 MINUTE
-  </div>
-
-  <div
-    class="game"
-    onclick="openGame('silver')">
-    🥈 SILVER – 1 MINUTE
-  </div>
-
-</div>
-
-
-<div id="scoreCard" class="card">
-
-  <h2>🏆 SCORE CARD</h2>
-
-  <div class="scoreRow">
-    <b>MAGIKNUMBER ID</b>
-    <div id="scoreId">---</div>
-  </div>
-
-  <div class="scoreRow">
-    <b>DATE OF JOINING</b>
-    <div id="scoreJoiningDate">---</div>
-  </div>
-
-  <div class="scoreRow">
-    <b>NAME</b>
-    <div id="scoreName">---</div>
-  </div>
-
-  <div class="scoreRow">
-    <b>TOTAL GAMES PLAYED</b>
-    <div
-      class="scoreValue"
-      id="scoreGames">
-      0
-    </div>
-  </div>
-
-  <div class="scoreRow">
-    <b>EARNED POINTS</b>
-    <div
-      class="scoreValue"
-      id="scorePoints">
-      0
-    </div>
-  </div>
-
-  <div class="scoreRow">
-    <b>CASH BALANCE</b>
-    <div
-      class="cashValue"
-      id="scoreCash">
-      ₹0
-    </div>
-  </div>
-
-  <p>
-    Conversion Rate:
-    <b>100 Points = ₹10</b>
-  </p>
-
-  <button
-    class="convertButton"
-    onclick="convertPointsToCash()">
-    💰 CONVERT POINTS TO CASH
-  </button>
-
-  <div class="history">
-
-    <h3>CONVERSION HISTORY</h3>
-
-    <p id="historyText">
-      No conversions yet.
-    </p>
-
-  </div>
-
-  <button
-    class="closeAccountButton"
-    onclick="closeAccount()">
-    CLOSE ACCOUNT
-  </button>
-
-  <button
-    class="backButton"
-    onclick="closeScoreCard()">
-    BACK
-  </button>
-
-</div>
-
-
-<div id="profile" class="card">
-
-  <h2>MY PROFILE</h2>
-
-  <div class="profileRow">
-    <b>MAGIKNUMBER ID</b>
-    <br>
-    <span id="profileId">---</span>
-  </div>
-
-  <div class="profileRow">
-    <b>NAME</b>
-    <br>
-    <span id="profileName">---</span>
-  </div>
-
-  <div class="profileRow">
-    <b>EMAIL</b>
-    <br>
-    <span id="profileEmail">---</span>
-  </div>
-
-  <div class="profileRow">
-    <b>MOBILE</b>
-    <br>
-    <span id="profileMobile">---</span>
-  </div>
-
-  <div class="profileRow">
-    <b>OVERALL POINTS</b>
-    <br>
-    <span id="profilePoints">0</span>
-  </div>
-
-  <button
-    class="backButton"
-    onclick="closeProfile()">
-    BACK
-  </button>
-
-</div>
-
-</div>
-
-
 <script type="module">
 
 import {
@@ -525,22 +51,25 @@ const firebaseConfig = {
 };
 
 
-const app =
-  initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const auth =
-  getAuth(app);
+const auth = getAuth(app);
 
-const db =
-  getFirestore(app);
+const db = getFirestore(app);
 
-const googleProvider =
-  new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
 
-/* ============================= */
-/* CREATE / UPDATE PROFILE */
-/* ============================= */
+/* =========================================
+   TEMPORARY REGISTRATION DETAILS
+   ========================================= */
+
+let pendingRegistration = null;
+
+
+/* =========================================
+   CREATE / UPDATE PROFILE
+   ========================================= */
 
 async function createUserProfile(
   user,
@@ -555,12 +84,13 @@ async function createUserProfile(
     await getDoc(userRef);
 
 
-  /* EXISTING USER */
+  /* =========================================
+     EXISTING USER
+     ========================================= */
 
   if (existing.exists()) {
 
-    const data =
-      existing.data();
+    const data = existing.data();
 
     const updates = {};
 
@@ -579,17 +109,13 @@ async function createUserProfile(
         joiningDate =
           new Date(
             user.metadata.creationTime
-          ).toLocaleDateString(
-            "en-IN"
-          );
+          ).toLocaleDateString("en-IN");
 
       } else {
 
         joiningDate =
           new Date()
-          .toLocaleDateString(
-            "en-IN"
-          );
+          .toLocaleDateString("en-IN");
 
       }
 
@@ -600,9 +126,7 @@ async function createUserProfile(
 
     /* GAMES PLAYED */
 
-    if (
-      data.gamesPlayed === undefined
-    ) {
+    if (data.gamesPlayed === undefined) {
 
       updates.gamesPlayed = 0;
 
@@ -611,16 +135,47 @@ async function createUserProfile(
 
     /* CASH BALANCE */
 
-    if (
-      data.cashBalance === undefined
-    ) {
+    if (data.cashBalance === undefined) {
 
       updates.cashBalance = 0;
 
     }
 
 
-    /* SAVE MISSING FIELDS */
+    /*
+      IMPORTANT:
+      If existing name is "User" and we have
+      a real registration name, replace it.
+    */
+
+    if (
+      (data.name === "User" ||
+       data.name === "user" ||
+       !data.name) &&
+      registerName
+    ) {
+
+      updates.name =
+        registerName;
+
+    }
+
+
+    /* MOBILE */
+
+    if (
+      (!data.mobile ||
+       data.mobile === "") &&
+      registerMobile
+    ) {
+
+      updates.mobile =
+        registerMobile;
+
+    }
+
+
+    /* SAVE */
 
     if (
       Object.keys(updates).length > 0
@@ -631,11 +186,6 @@ async function createUserProfile(
         updates
       );
 
-      console.log(
-        "Profile fields added:",
-        updates
-      );
-
       const updated =
         await getDoc(userRef);
 
@@ -643,21 +193,31 @@ async function createUserProfile(
 
     }
 
-
     return data;
 
   }
 
 
-  /* ============================= */
-  /* NEW USER */
-  /* ============================= */
+  /* =========================================
+     NEW USER
+     ========================================= */
 
   const joiningDate =
     new Date()
-      .toLocaleDateString(
-        "en-IN"
-      );
+    .toLocaleDateString("en-IN");
+
+
+  /*
+    IMPORTANT:
+    Registration name has priority.
+  */
+
+  const finalName =
+    registerName.trim();
+
+
+  const finalMobile =
+    registerMobile.trim();
 
 
   const userData = {
@@ -666,15 +226,13 @@ async function createUserProfile(
       "MN100001",
 
     name:
-      registerName ||
-      user.displayName ||
-      "User",
+      finalName,
 
     email:
       user.email || "",
 
     mobile:
-      registerMobile || "",
+      finalMobile,
 
     joiningDate:
       joiningDate,
@@ -701,9 +259,9 @@ async function createUserProfile(
 }
 
 
-/* ============================= */
-/* REGISTER */
-/* ============================= */
+/* =========================================
+   REGISTER
+   ========================================= */
 
 window.registerUser =
 async function() {
@@ -732,15 +290,43 @@ async function() {
     .value;
 
 
-  if (
-    !name ||
-    !mobile ||
-    !email ||
-    !password
-  ) {
+  if (!name) {
 
     showMessage(
-      "Please fill all details."
+      "Please enter your name."
+    );
+
+    return;
+
+  }
+
+
+  if (!mobile) {
+
+    showMessage(
+      "Please enter your mobile number."
+    );
+
+    return;
+
+  }
+
+
+  if (!email) {
+
+    showMessage(
+      "Please enter your email."
+    );
+
+    return;
+
+  }
+
+
+  if (!password) {
+
+    showMessage(
+      "Please enter your password."
     );
 
     return;
@@ -755,32 +341,39 @@ async function() {
     );
 
 
-    const result =
-      await
-      createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+    /*
+      IMPORTANT:
+      Save registration details BEFORE
+      creating Firebase account.
+    */
+
+    pendingRegistration = {
+
+      name: name,
+
+      mobile: mobile
+
+    };
 
 
-    const data =
-      await createUserProfile(
-        result.user,
-        name,
-        mobile
-      );
-
-
-    alert(
-      "Registration successful!\n\n" +
-      "Your MAGIKNUMBER ID:\n" +
-      data.magikNumberId
+    await
+    createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
     );
+
+
+    /*
+      Profile will be created by
+      onAuthStateChanged.
+    */
 
   }
 
   catch (error) {
+
+    pendingRegistration = null;
 
     showFirebaseError(error);
 
@@ -789,9 +382,9 @@ async function() {
 };
 
 
-/* ============================= */
-/* LOGIN */
-/* ============================= */
+/* =========================================
+   LOGIN
+   ========================================= */
 
 window.loginUser =
 async function() {
@@ -847,9 +440,9 @@ async function() {
 };
 
 
-/* ============================= */
-/* GOOGLE LOGIN */
-/* ============================= */
+/* =========================================
+   GOOGLE LOGIN
+   ========================================= */
 
 window.googleLogin =
 async function() {
@@ -881,9 +474,9 @@ async function() {
 };
 
 
-/* ============================= */
-/* AUTH STATE */
-/* ============================= */
+/* =========================================
+   AUTH STATE
+   ========================================= */
 
 onAuthStateChanged(
   auth,
@@ -893,26 +486,68 @@ onAuthStateChanged(
 
       try {
 
+        /*
+          For a new registration use the
+          Name + Mobile entered in the form.
+        */
+
+        let registerName = "";
+
+        let registerMobile = "";
+
+
+        if (pendingRegistration) {
+
+          registerName =
+            pendingRegistration.name;
+
+          registerMobile =
+            pendingRegistration.mobile;
+
+        }
+
+
         const data =
           await createUserProfile(
-            user
+            user,
+            registerName,
+            registerMobile
           );
 
+
+        /*
+          Clear temporary registration data
+          AFTER profile is successfully created.
+        */
+
+        pendingRegistration = null;
+
+
+        /* AUTH AREA */
 
         document
           .getElementById("authArea")
           .style.display =
           "none";
 
+
+        /* LOGIN AREA */
+
         document
           .getElementById("loggedIn")
           .style.display =
           "block";
 
+
+        /* GAME MENU */
+
         document
           .getElementById("gameMenu")
           .style.display =
           "block";
+
+
+        /* USER ID */
 
         document
           .getElementById("userIdBar")
@@ -923,19 +558,25 @@ onAuthStateChanged(
         document
           .getElementById("displayUserId")
           .innerText =
-          data.magikNumberId;
+          data.magikNumberId || "---";
 
+
+        /* WELCOME NAME */
 
         document
           .getElementById("userName")
           .innerText =
-          "Name: " + data.name;
+          "Name: " +
+          (data.name || "---");
 
+
+        /* EMAIL */
 
         document
           .getElementById("userEmail")
           .innerText =
-          "Email: " + data.email;
+          "Email: " +
+          (data.email || "---");
 
 
         /* PROFILE */
@@ -943,19 +584,19 @@ onAuthStateChanged(
         document
           .getElementById("profileId")
           .innerText =
-          data.magikNumberId;
+          data.magikNumberId || "---";
 
 
         document
           .getElementById("profileName")
           .innerText =
-          data.name;
+          data.name || "---";
 
 
         document
           .getElementById("profileEmail")
           .innerText =
-          data.email;
+          data.email || "---";
 
 
         document
@@ -974,6 +615,7 @@ onAuthStateChanged(
         /* SCORE CARD */
 
         updateScoreCard(data);
+
 
         showMessage("");
 
@@ -1027,9 +669,9 @@ onAuthStateChanged(
 );
 
 
-/* ============================= */
-/* SCORE CARD */
-/* ============================= */
+/* =========================================
+   SCORE CARD
+   ========================================= */
 
 function updateScoreCard(data) {
 
@@ -1072,9 +714,9 @@ function updateScoreCard(data) {
 }
 
 
-/* ============================= */
-/* SHOW SCORE CARD */
-/* ============================= */
+/* =========================================
+   SHOW SCORE CARD
+   ========================================= */
 
 window.showScoreCard =
 function() {
@@ -1102,9 +744,9 @@ function() {
 };
 
 
-/* ============================= */
-/* CLOSE SCORE CARD */
-/* ============================= */
+/* =========================================
+   CLOSE SCORE CARD
+   ========================================= */
 
 window.closeScoreCard =
 function() {
@@ -1127,9 +769,9 @@ function() {
 };
 
 
-/* ============================= */
-/* CONVERT POINTS */
-/* ============================= */
+/* =========================================
+   CONVERT POINTS
+   ========================================= */
 
 window.convertPointsToCash =
 async function() {
@@ -1282,9 +924,9 @@ async function() {
 };
 
 
-/* ============================= */
-/* PROFILE */
-/* ============================= */
+/* =========================================
+   PROFILE
+   ========================================= */
 
 window.showProfile =
 function() {
@@ -1333,9 +975,9 @@ function() {
 };
 
 
-/* ============================= */
-/* CLOSE ACCOUNT */
-/* ============================= */
+/* =========================================
+   CLOSE ACCOUNT
+   ========================================= */
 
 window.closeAccount =
 async function() {
@@ -1391,9 +1033,9 @@ async function() {
 };
 
 
-/* ============================= */
-/* LOGOUT */
-/* ============================= */
+/* =========================================
+   LOGOUT
+   ========================================= */
 
 window.logoutUser =
 async function() {
@@ -1413,9 +1055,9 @@ async function() {
 };
 
 
-/* ============================= */
-/* GAME MENU */
-/* ============================= */
+/* =========================================
+   GAME MENU
+   ========================================= */
 
 window.openGame =
 function(game) {
@@ -1456,9 +1098,9 @@ function(game) {
 };
 
 
-/* ============================= */
-/* MESSAGE */
-/* ============================= */
+/* =========================================
+   MESSAGE
+   ========================================= */
 
 function showMessage(text) {
 
@@ -1470,9 +1112,9 @@ function showMessage(text) {
 }
 
 
-/* ============================= */
-/* FIREBASE ERROR */
-/* ============================= */
+/* =========================================
+   FIREBASE ERROR
+   ========================================= */
 
 function showFirebaseError(error) {
 
@@ -1505,6 +1147,3 @@ function showFirebaseError(error) {
 }
 
 </script>
-
-</body>
-</html>

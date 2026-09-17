@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -81,6 +81,23 @@ button {
   color: white;
 }
 
+.scoreButton {
+  background: #ff9800;
+  color: white;
+}
+
+.convertButton {
+  background: #00897b;
+  color: white;
+  font-weight: bold;
+}
+
+.closeAccountButton {
+  background: #b71c1c;
+  color: white;
+  margin-top: 20px;
+}
+
 .backButton {
   background: #555;
   color: white;
@@ -105,7 +122,8 @@ button {
 #authArea,
 #loggedIn,
 #gameMenu,
-#profile {
+#profile,
+#scoreCard {
   display: none;
 }
 
@@ -130,10 +148,37 @@ button {
 }
 
 .profileRow {
-  padding: 10px;
+  padding: 12px;
   margin: 8px 0;
   background: #f5f5f5;
   border-radius: 8px;
+}
+
+.scoreRow {
+  padding: 15px;
+  margin: 10px 0;
+  background: #f5f5f5;
+  border-radius: 10px;
+  font-size: 17px;
+}
+
+.scoreValue {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.cashValue {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.history {
+  text-align: left;
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 
 #firebaseError {
@@ -163,8 +208,6 @@ button {
 
 <div id="authArea">
 
-  <!-- LOGIN -->
-
   <div class="card">
 
     <h2>LOGIN</h2>
@@ -172,14 +215,12 @@ button {
     <input
       type="email"
       id="loginEmail"
-      placeholder="Email"
-    >
+      placeholder="Email">
 
     <input
       type="password"
       id="loginPassword"
-      placeholder="Password"
-    >
+      placeholder="Password">
 
     <button
       class="login"
@@ -199,8 +240,6 @@ button {
 
   </div>
 
-  <!-- REGISTER -->
-
   <div class="card">
 
     <h2>REGISTER</h2>
@@ -208,26 +247,22 @@ button {
     <input
       type="text"
       id="name"
-      placeholder="Name"
-    >
+      placeholder="Name">
 
     <input
       type="tel"
       id="mobile"
-      placeholder="Mobile Number"
-    >
+      placeholder="Mobile Number">
 
     <input
       type="email"
       id="email"
-      placeholder="Email"
-    >
+      placeholder="Email">
 
     <input
       type="password"
       id="password"
-      placeholder="Password"
-    >
+      placeholder="Password">
 
     <button
       class="register"
@@ -236,8 +271,6 @@ button {
     </button>
 
   </div>
-
-  <!-- RULES -->
 
   <div class="card rules">
 
@@ -254,6 +287,7 @@ button {
 
 </div>
 
+
 <!-- LOGGED IN -->
 
 <div id="loggedIn" class="card">
@@ -261,8 +295,13 @@ button {
   <h2>Welcome!</h2>
 
   <p id="userName"></p>
-
   <p id="userEmail"></p>
+
+  <button
+    class="scoreButton"
+    onclick="showScoreCard()">
+    🏆 SCORE CARD
+  </button>
 
   <button
     class="profileButton"
@@ -278,6 +317,7 @@ button {
 
 </div>
 
+
 <!-- GAME MENU -->
 
 <div id="gameMenu" class="card">
@@ -287,7 +327,7 @@ button {
   <div
     class="game"
     onclick="openGame('score')">
-    SCORE CARD
+    🏆 SCORE CARD
   </div>
 
   <div
@@ -309,6 +349,91 @@ button {
   </div>
 
 </div>
+
+
+<!-- SCORE CARD -->
+
+<div id="scoreCard" class="card">
+
+  <h2>🏆 SCORE CARD</h2>
+
+  <div class="scoreRow">
+    <b>MAGIKNUMBER ID</b>
+    <div id="scoreId">---</div>
+  </div>
+
+  <div class="scoreRow">
+    <b>NAME</b>
+    <div id="scoreName">---</div>
+  </div>
+
+  <div class="scoreRow">
+    <b>DATE OF JOINING</b>
+    <div id="scoreJoiningDate">---</div>
+  </div>
+
+  <div class="scoreRow">
+    <b>TOTAL GAMES PLAYED</b>
+    <div
+      class="scoreValue"
+      id="scoreGames">
+      0
+    </div>
+  </div>
+
+  <div class="scoreRow">
+    <b>EARNED POINTS</b>
+    <div
+      class="scoreValue"
+      id="scorePoints">
+      0
+    </div>
+  </div>
+
+  <div class="scoreRow">
+    <b>CASH BALANCE</b>
+    <div
+      class="cashValue"
+      id="scoreCash">
+      ₹0
+    </div>
+  </div>
+
+  <p>
+    Conversion Rate:
+    <b>100 Points = ₹10</b>
+  </p>
+
+  <button
+    class="convertButton"
+    onclick="convertPointsToCash()">
+    💰 CONVERT POINTS TO CASH
+  </button>
+
+  <div class="history">
+
+    <h3>CONVERSION HISTORY</h3>
+
+    <p id="historyText">
+      No conversions yet.
+    </p>
+
+  </div>
+
+  <button
+    class="closeAccountButton"
+    onclick="closeAccount()">
+    CLOSE ACCOUNT
+  </button>
+
+  <button
+    class="backButton"
+    onclick="closeScoreCard()">
+    BACK
+  </button>
+
+</div>
+
 
 <!-- PROFILE -->
 
@@ -356,6 +481,7 @@ button {
 
 </div>
 
+
 <script type="module">
 
 /* FIREBASE */
@@ -382,7 +508,8 @@ import {
   getFirestore,
   doc,
   getDoc,
-  setDoc
+  setDoc,
+  updateDoc
 }
 from
 "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -414,11 +541,14 @@ const firebaseConfig = {
 
 /* INITIALIZE */
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+  getAuth(app);
 
-const db = getFirestore(app);
+const db =
+  getFirestore(app);
 
 const googleProvider =
   new GoogleAuthProvider();
@@ -428,10 +558,11 @@ const googleProvider =
 /* CREATE / GET USER PROFILE */
 /* ============================= */
 
-async function createUserProfile(user, registerName = "", registerMobile = "") {
-
-  console.log("Creating/loading profile...");
-  console.log("Firebase UID:", user.uid);
+async function createUserProfile(
+  user,
+  registerName = "",
+  registerMobile = ""
+) {
 
   const userRef =
     doc(db, "users", user.uid);
@@ -439,19 +570,22 @@ async function createUserProfile(user, registerName = "", registerMobile = "") {
   const existing =
     await getDoc(userRef);
 
-  /* PROFILE ALREADY EXISTS */
 
   if (existing.exists()) {
 
-    console.log(
-      "Existing profile:",
-      existing.data()
-    );
-
     return existing.data();
+
   }
 
-  /* NEW PROFILE */
+
+  const now =
+    new Date();
+
+  const joiningDate =
+    now.toLocaleDateString(
+      "en-IN"
+    );
+
 
   const userData = {
 
@@ -469,25 +603,29 @@ async function createUserProfile(user, registerName = "", registerMobile = "") {
     mobile:
       registerMobile || "",
 
+    joiningDate:
+      joiningDate,
+
+    gamesPlayed:
+      0,
+
     points:
+      0,
+
+    cashBalance:
       0
+
   };
 
-  console.log(
-    "Creating new profile:",
-    userData
-  );
 
   await setDoc(
     userRef,
     userData
   );
 
-  console.log(
-    "Profile successfully created."
-  );
 
   return userData;
+
 }
 
 
@@ -521,6 +659,7 @@ async function() {
     .getElementById("password")
     .value;
 
+
   if (
     !name ||
     !mobile ||
@@ -533,13 +672,16 @@ async function() {
     );
 
     return;
+
   }
+
 
   try {
 
     showMessage(
       "Creating account..."
     );
+
 
     const result =
       await
@@ -549,8 +691,10 @@ async function() {
         password
       );
 
+
     const user =
       result.user;
+
 
     const data =
       await createUserProfile(
@@ -558,6 +702,7 @@ async function() {
         name,
         mobile
       );
+
 
     alert(
       "Registration successful!\n\n" +
@@ -594,6 +739,7 @@ async function() {
     .getElementById("loginPassword")
     .value;
 
+
   if (!email || !password) {
 
     showMessage(
@@ -601,7 +747,9 @@ async function() {
     );
 
     return;
+
   }
+
 
   try {
 
@@ -609,12 +757,14 @@ async function() {
       "Logging in..."
     );
 
+
     await
     signInWithEmailAndPassword(
       auth,
       email,
       password
     );
+
 
     showMessage("");
 
@@ -642,11 +792,13 @@ async function() {
       "Opening Google login..."
     );
 
+
     await
     signInWithPopup(
       auth,
       googleProvider
     );
+
 
     showMessage("");
 
@@ -671,35 +823,13 @@ onAuthStateChanged(
 
     if (user) {
 
-      console.log(
-        "User logged in:",
-        user.uid
-      );
-
       try {
-
-        showMessage(
-          "Loading your profile..."
-        );
-
-        /*
-          IMPORTANT:
-          Existing Firebase Auth user
-          gets Firestore profile here.
-        */
 
         const data =
           await createUserProfile(
             user
           );
 
-        console.log(
-          "Profile data:",
-          data
-        );
-
-
-        /* HIDE AUTH */
 
         document
           .getElementById("authArea")
@@ -707,23 +837,17 @@ onAuthStateChanged(
           "none";
 
 
-        /* SHOW LOGIN AREA */
-
         document
           .getElementById("loggedIn")
           .style.display =
           "block";
 
 
-        /* SHOW GAME MENU */
-
         document
           .getElementById("gameMenu")
           .style.display =
           "block";
 
-
-        /* SHOW USER ID */
 
         document
           .getElementById("userIdBar")
@@ -737,15 +861,11 @@ onAuthStateChanged(
           data.magikNumberId;
 
 
-        /* NAME */
-
         document
           .getElementById("userName")
           .innerText =
           "Name: " + data.name;
 
-
-        /* EMAIL */
 
         document
           .getElementById("userEmail")
@@ -786,22 +906,18 @@ onAuthStateChanged(
           data.points || 0;
 
 
+        /* SCORE CARD */
+
+        updateScoreCard(data);
+
+
         showMessage("");
 
       }
 
       catch (error) {
 
-        console.error(
-          "PROFILE ERROR:",
-          error
-        );
-
-        /*
-          IMPORTANT:
-          Show exact error
-          instead of hiding it.
-        */
+        console.error(error);
 
         showFirebaseError(error);
 
@@ -810,10 +926,6 @@ onAuthStateChanged(
     }
 
     else {
-
-      console.log(
-        "User is logged out."
-      );
 
       document
         .getElementById("authArea")
@@ -836,6 +948,11 @@ onAuthStateChanged(
         "none";
 
       document
+        .getElementById("scoreCard")
+        .style.display =
+        "none";
+
+      document
         .getElementById("userIdBar")
         .style.display =
         "none";
@@ -844,6 +961,259 @@ onAuthStateChanged(
 
   }
 );
+
+
+/* ============================= */
+/* UPDATE SCORE CARD */
+/* ============================= */
+
+function updateScoreCard(data) {
+
+  document
+    .getElementById("scoreId")
+    .innerText =
+    data.magikNumberId || "---";
+
+
+  document
+    .getElementById("scoreName")
+    .innerText =
+    data.name || "---";
+
+
+  document
+    .getElementById("scoreJoiningDate")
+    .innerText =
+    data.joiningDate || "---";
+
+
+  document
+    .getElementById("scoreGames")
+    .innerText =
+    data.gamesPlayed || 0;
+
+
+  document
+    .getElementById("scorePoints")
+    .innerText =
+    data.points || 0;
+
+
+  document
+    .getElementById("scoreCash")
+    .innerText =
+    "₹" +
+    (data.cashBalance || 0);
+
+}
+
+
+/* ============================= */
+/* SHOW SCORE CARD */
+/* ============================= */
+
+window.showScoreCard =
+function() {
+
+  document
+    .getElementById("loggedIn")
+    .style.display =
+    "none";
+
+  document
+    .getElementById("gameMenu")
+    .style.display =
+    "none";
+
+  document
+    .getElementById("profile")
+    .style.display =
+    "none";
+
+  document
+    .getElementById("scoreCard")
+    .style.display =
+    "block";
+
+};
+
+
+/* ============================= */
+/* CLOSE SCORE CARD */
+/* ============================= */
+
+window.closeScoreCard =
+function() {
+
+  document
+    .getElementById("scoreCard")
+    .style.display =
+    "none";
+
+  document
+    .getElementById("loggedIn")
+    .style.display =
+    "block";
+
+  document
+    .getElementById("gameMenu")
+    .style.display =
+    "block";
+
+};
+
+
+/* ============================= */
+/* CONVERT POINTS TO CASH */
+/* ============================= */
+
+window.convertPointsToCash =
+async function() {
+
+  const user =
+    auth.currentUser;
+
+
+  if (!user) {
+
+    alert(
+      "Please login first."
+    );
+
+    return;
+
+  }
+
+
+  const userRef =
+    doc(db, "users", user.uid);
+
+
+  try {
+
+    const snapshot =
+      await getDoc(userRef);
+
+
+    if (!snapshot.exists()) {
+
+      alert(
+        "User profile not found."
+      );
+
+      return;
+
+    }
+
+
+    const data =
+      snapshot.data();
+
+
+    const points =
+      Number(data.points || 0);
+
+
+    if (points < 100) {
+
+      alert(
+        "Minimum 100 points required."
+      );
+
+      return;
+
+    }
+
+
+    /*
+      TEST RATE:
+      100 POINTS = ₹10
+    */
+
+    const cash =
+      Math.floor(points / 100) * 10;
+
+    const usedPoints =
+      Math.floor(points / 100) * 100;
+
+
+    const remainingPoints =
+      points - usedPoints;
+
+
+    const oldCash =
+      Number(
+        data.cashBalance || 0
+      );
+
+
+    const newCash =
+      oldCash + cash;
+
+
+    const confirmConvert =
+      confirm(
+        "Convert " +
+        usedPoints +
+        " points into ₹" +
+        cash +
+        "?"
+      );
+
+
+    if (!confirmConvert) {
+
+      return;
+
+    }
+
+
+    await updateDoc(
+      userRef,
+      {
+
+        points:
+          remainingPoints,
+
+        cashBalance:
+          newCash
+
+      }
+    );
+
+
+    alert(
+      "Conversion successful!\n\n" +
+      "Points converted: " +
+      usedPoints +
+      "\nCash added: ₹" +
+      cash
+    );
+
+
+    const updated =
+      await getDoc(userRef);
+
+
+    updateScoreCard(
+      updated.data()
+    );
+
+
+    document
+      .getElementById("profilePoints")
+      .innerText =
+      updated.data().points || 0;
+
+  }
+
+  catch (error) {
+
+    showFirebaseError(error);
+
+  }
+
+};
 
 
 /* ============================= */
@@ -865,6 +1235,11 @@ function() {
 
   document
     .getElementById("gameMenu")
+    .style.display =
+    "none";
+
+  document
+    .getElementById("scoreCard")
     .style.display =
     "none";
 
@@ -893,6 +1268,73 @@ function() {
 
 
 /* ============================= */
+/* CLOSE ACCOUNT */
+/* ============================= */
+
+window.closeAccount =
+async function() {
+
+  const user =
+    auth.currentUser;
+
+
+  if (!user) {
+
+    alert(
+      "Please login first."
+    );
+
+    return;
+
+  }
+
+
+  const firstConfirm =
+    confirm(
+      "Are you sure you want to close your MAGIKNUMBER account?"
+    );
+
+
+  if (!firstConfirm) {
+
+    return;
+
+  }
+
+
+  const secondConfirm =
+    confirm(
+      "This will close your account. Continue?"
+    );
+
+
+  if (!secondConfirm) {
+
+    return;
+
+  }
+
+
+  /*
+    IMPORTANT:
+    For now we only sign the user out.
+
+    Permanent Firebase account deletion
+    will be added later with secure
+    re-authentication and proper handling.
+  */
+
+  await signOut(auth);
+
+
+  alert(
+    "Your account has been closed from this session."
+  );
+
+};
+
+
+/* ============================= */
 /* LOGOUT */
 /* ============================= */
 
@@ -908,6 +1350,49 @@ async function() {
   catch (error) {
 
     showFirebaseError(error);
+
+  }
+
+};
+
+
+/* ============================= */
+/* GAME MENU */
+/* ============================= */
+
+window.openGame =
+function(game) {
+
+  if (game === "score") {
+
+    showScoreCard();
+
+  }
+
+
+  if (game === "diamond") {
+
+    alert(
+      "DIAMOND GAME – 5 MINUTES\nComing next."
+    );
+
+  }
+
+
+  if (game === "gold") {
+
+    alert(
+      "GOLD GAME – 1 MINUTE\nComing next."
+    );
+
+  }
+
+
+  if (game === "silver") {
+
+    alert(
+      "SILVER GAME – 1 MINUTE\nComing next."
+    );
 
   }
 
@@ -936,14 +1421,17 @@ function showFirebaseError(error) {
 
   console.error(error);
 
+
   const message =
     error?.message ||
     String(error);
+
 
   document
     .getElementById("firebaseError")
     .style.display =
     "block";
+
 
   document
     .getElementById("firebaseError")
@@ -951,54 +1439,13 @@ function showFirebaseError(error) {
     "Firebase Error:\n" +
     message;
 
+
   document
     .getElementById("message")
     .innerText =
     "There is a Firebase problem.";
 
 }
-
-
-/* ============================= */
-/* GAME MENU */
-/* ============================= */
-
-window.openGame =
-function(game) {
-
-  if (game === "score") {
-
-    alert(
-      "SCORE CARD will be added next."
-    );
-
-  }
-
-  if (game === "diamond") {
-
-    alert(
-      "DIAMOND GAME – 5 MINUTES"
-    );
-
-  }
-
-  if (game === "gold") {
-
-    alert(
-      "GOLD GAME – 1 MINUTE"
-    );
-
-  }
-
-  if (game === "silver") {
-
-    alert(
-      "SILVER GAME – 1 MINUTE"
-    );
-
-  }
-
-};
 
 </script>
 

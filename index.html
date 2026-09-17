@@ -7,1544 +7,1863 @@
 <title>MAGIKNUMBER</title>
 
 <style>
-body{
-    font-family:Arial,sans-serif;
-    background:#f2f2f2;
-    margin:0;
-    padding:20px;
+* {
+  box-sizing: border-box;
 }
 
-.container{
-    max-width:500px;
-    margin:auto;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f4f7;
+  color: #222;
 }
 
-h1{
-    text-align:center;
-    color:#222;
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  padding: 20px;
 }
 
-.card{
-    background:white;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,.15);
+h1 {
+  text-align: center;
+  color: #111;
+  margin-bottom: 25px;
 }
 
-input,select,button{
-    width:100%;
-    padding:12px;
-    margin:7px 0;
-    box-sizing:border-box;
-    border-radius:6px;
-    border:1px solid #ccc;
-    font-size:16px;
+/* LOGIN / REGISTER */
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
 }
 
-button{
-    border:none;
-    cursor:pointer;
-    font-weight:bold;
+h2 {
+  text-align: center;
+  margin-top: 0;
 }
 
-.loginBtn{
-    background:green;
-    color:white;
+input,
+select {
+  width: 100%;
+  padding: 13px;
+  margin: 7px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
 }
 
-.registerBtn{
-    background:#1976d2;
-    color:white;
+button {
+  width: 100%;
+  padding: 13px;
+  margin: 7px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.googleBtn{
-    background:white;
-    border:1px solid #777;
+.login-btn {
+  background: #28a745;
+  color: white;
 }
 
-.logoutBtn{
-    background:red;
-    color:white;
+.register-btn {
+  background: #007bff;
+  color: white;
 }
 
-.profileBtn{
-    background:purple;
-    color:white;
+.google-btn {
+  background: white;
+  border: 1px solid #777;
+  color: #333;
 }
 
-.backBtn{
-    background:#777;
-    color:white;
+.logout-btn {
+  background: #dc3545;
+  color: white;
 }
 
-.gameBtn{
-    background:#222;
-    color:white;
-    margin:6px 0;
+.back-btn {
+  background: #6c757d;
+  color: white;
 }
 
-.showPassword{
-    width:auto;
-    margin-right:5px;
+.update-btn {
+  background: #6f42c1;
+  color: white;
 }
 
-.countryRow{
-    display:flex;
-    gap:8px;
+.game-btn {
+  color: white;
+  font-size: 17px;
+  padding: 16px;
 }
 
-.countryRow select{
-    width:42%;
+.score-btn {
+  background: #f0ad00;
 }
 
-.countryRow input{
-    width:58%;
+.diamond-btn {
+  background: #007bff;
 }
 
-#userIdBar{
-    position:fixed;
-    top:10px;
-    left:10px;
-    background:#222;
-    color:white;
-    padding:8px 12px;
-    border-radius:6px;
-    font-weight:bold;
-    z-index:9999;
+.gold-btn {
+  background: #d49a00;
 }
 
-#loggedIn,
-#gameMenu,
-#scoreCard,
-#profile{
-    display:none;
+.silver-btn {
+  background: #777;
 }
 
-.error{
-    color:red;
-    font-weight:bold;
+.show-password {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 5px 0 10px;
+  font-size: 14px;
 }
 
-.success{
-    color:green;
-    font-weight:bold;
+.show-password input {
+  width: auto;
+  margin: 0;
 }
 
-.info{
-    color:#555;
-    font-size:14px;
+/* USER ID + LOGO */
+
+#userIdBar {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+
+  display: none;
+  align-items: center;
+  gap: 8px;
+
+  background: white;
+  padding: 6px 10px;
+  border-radius: 25px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.20);
+
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.pointsBox{
-    background:#eee;
-    padding:12px;
-    border-radius:8px;
-    margin:10px 0;
+#userLogo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(135deg,#ff00cc,#3333ff);
+  color: white;
+  font-size: 19px;
 }
 
-.rules{
-    line-height:1.6;
+/* MENU */
+
+#welcome {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.menu-title {
+  text-align: center;
+  margin: 20px 0 15px;
+}
+
+/* SCOREBOARD */
+
+.score-row {
+  margin-bottom: 15px;
+}
+
+.score-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.immutable {
+  background: #eee;
+}
+
+.info-box {
+  background: #f7f7f7;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.small-text {
+  font-size: 13px;
+  color: #666;
+}
+
+.success {
+  color: green;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+/* HIDDEN */
+
+.hidden {
+  display: none !important;
 }
 </style>
 </head>
 
 <body>
 
-<div id="userIdBar">ID: ---</div>
+<!-- FIXED LOGO + ID -->
+<div id="userIdBar">
+  <div id="userLogo">⚡</div>
+  <div id="displayUserId">ID: --</div>
+</div>
+
 
 <div class="container">
 
 <h1>MAGIKNUMBER</h1>
 
-<!-- LOGIN / REGISTER -->
+
+<!-- ================= AUTH AREA ================= -->
+
 <div id="authArea">
 
-    <!-- LOGIN -->
-    <div class="card">
+  <!-- LOGIN -->
 
-        <h2>LOGIN</h2>
+  <div class="card">
 
-        <input
-            type="email"
-            id="loginEmail"
-            placeholder="Email"
-        >
+    <h2>LOGIN</h2>
 
-        <input
-            type="password"
-            id="loginPassword"
-            placeholder="Password"
-        >
+    <input
+      type="email"
+      id="loginEmail"
+      placeholder="Email"
+      autocomplete="email"
+    >
 
-        <label>
-            <input
-                type="checkbox"
-                class="showPassword"
-                onclick="toggleLoginPassword()"
-            >
-            Show Password
-        </label>
+    <input
+      type="password"
+      id="loginPassword"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
 
-        <button
-            class="loginBtn"
-            onclick="loginUser()"
-        >
-            LOGIN
-        </button>
+    <label class="show-password">
+      <input
+        type="checkbox"
+        onclick="togglePassword('loginPassword')"
+      >
+      Show Password
+    </label>
 
-        <button
-            class="googleBtn"
-            onclick="googleLogin()"
-        >
-            Continue with Google
-        </button>
+    <button
+      class="login-btn"
+      onclick="loginUser()"
+    >
+      LOGIN
+    </button>
 
-        <p id="loginMessage"></p>
+    <button
+      class="google-btn"
+      onclick="googleLogin()"
+    >
+      Continue with Google
+    </button>
 
-    </div>
+    <p id="loginMessage"></p>
 
-
-    <!-- REGISTER -->
-    <div class="card">
-
-        <h2>REGISTER</h2>
-
-        <input
-            type="text"
-            id="registerName"
-            placeholder="Full Name"
-        >
-
-        <div class="countryRow">
-
-            <select id="countryCode">
-                <option value="+91" data-length="10">
-                    India (+91)
-                </option>
-
-                <option value="+1" data-length="10">
-                    USA / Canada (+1)
-                </option>
-
-                <option value="+44" data-length="10">
-                    United Kingdom (+44)
-                </option>
-
-                <option value="+61" data-length="9">
-                    Australia (+61)
-                </option>
-
-                <option value="+64" data-length="9">
-                    New Zealand (+64)
-                </option>
-
-                <option value="+971" data-length="9">
-                    UAE (+971)
-                </option>
-
-                <option value="+966" data-length="9">
-                    Saudi Arabia (+966)
-                </option>
-
-                <option value="+974" data-length="8">
-                    Qatar (+974)
-                </option>
-
-                <option value="+965" data-length="8">
-                    Kuwait (+965)
-                </option>
-
-                <option value="+968" data-length="8">
-                    Oman (+968)
-                </option>
-
-                <option value="+973" data-length="8">
-                    Bahrain (+973)
-                </option>
-
-                <option value="+65" data-length="8">
-                    Singapore (+65)
-                </option>
-
-                <option value="+60" data-length="9">
-                    Malaysia (+60)
-                </option>
-
-                <option value="+94" data-length="9">
-                    Sri Lanka (+94)
-                </option>
-
-                <option value="+880" data-length="10">
-                    Bangladesh (+880)
-                </option>
-
-                <option value="+92" data-length="10">
-                    Pakistan (+92)
-                </option>
-
-                <option value="+977" data-length="10">
-                    Nepal (+977)
-                </option>
-
-                <option value="+81" data-length="10">
-                    Japan (+81)
-                </option>
-
-                <option value="+49" data-length="11">
-                    Germany (+49)
-                </option>
-
-                <option value="+33" data-length="9">
-                    France (+33)
-                </option>
-
-                <option value="+39" data-length="10">
-                    Italy (+39)
-                </option>
-
-                <option value="+34" data-length="9">
-                    Spain (+34)
-                </option>
-
-                <option value="+7" data-length="10">
-                    Russia (+7)
-                </option>
-
-                <option value="+55" data-length="11">
-                    Brazil (+55)
-                </option>
-
-                <option value="+27" data-length="9">
-                    South Africa (+27)
-                </option>
-
-            </select>
-
-            <input
-                type="tel"
-                id="mobile"
-                placeholder="Mobile Number"
-                inputmode="numeric"
-                maxlength="10"
-                oninput="limitMobileNumber()"
-            >
-
-        </div>
-
-        <p
-            id="phoneHint"
-            class="info"
-        >
-            India: Enter exactly 10 digits
-        </p>
-
-        <input
-            type="email"
-            id="registerEmail"
-            placeholder="Email"
-        >
-
-        <input
-            type="password"
-            id="registerPassword"
-            placeholder="Password"
-        >
-
-        <label>
-            <input
-                type="checkbox"
-                class="showPassword"
-                onclick="toggleRegisterPassword()"
-            >
-            Show Password
-        </label>
-
-        <button
-            class="registerBtn"
-            onclick="registerUser()"
-        >
-            REGISTER
-        </button>
-
-        <p id="registerMessage"></p>
-
-    </div>
+  </div>
 
 
-    <!-- RULES -->
-    <div class="card rules">
+  <!-- REGISTER -->
 
-        <h2>RULES</h2>
+  <div class="card">
 
-        <p>
-            1. Register with correct details.
-        </p>
+    <h2>REGISTER</h2>
 
-        <p>
-            2. Each user receives a unique MAGIKNUMBER ID.
-        </p>
+    <input
+      type="text"
+      id="regName"
+      placeholder="Name"
+    >
 
-        <p>
-            3. Points are added according to game results.
-        </p>
 
-        <p>
-            4. User cannot manually change ID, Name or Points.
-        </p>
+    <!-- COUNTRY -->
 
-        <p>
-            5. Follow the rules of each game.
-        </p>
+    <select
+      id="regCountry"
+      onchange="updateCountryLength('regCountry','regMobile')"
+    >
 
-    </div>
+      <option value="+91" data-length="10">
+        India (+91)
+      </option>
+
+      <option value="+1" data-length="10">
+        USA / Canada (+1)
+      </option>
+
+      <option value="+44" data-length="10">
+        United Kingdom (+44)
+      </option>
+
+      <option value="+61" data-length="9">
+        Australia (+61)
+      </option>
+
+      <option value="+64" data-length="9">
+        New Zealand (+64)
+      </option>
+
+      <option value="+971" data-length="9">
+        UAE (+971)
+      </option>
+
+      <option value="+966" data-length="9">
+        Saudi Arabia (+966)
+      </option>
+
+      <option value="+974" data-length="8">
+        Qatar (+974)
+      </option>
+
+      <option value="+965" data-length="8">
+        Kuwait (+965)
+      </option>
+
+      <option value="+968" data-length="8">
+        Oman (+968)
+      </option>
+
+      <option value="+973" data-length="8">
+        Bahrain (+973)
+      </option>
+
+      <option value="+65" data-length="8">
+        Singapore (+65)
+      </option>
+
+      <option value="+60" data-length="9">
+        Malaysia (+60)
+      </option>
+
+      <option value="+94" data-length="9">
+        Sri Lanka (+94)
+      </option>
+
+      <option value="+880" data-length="10">
+        Bangladesh (+880)
+      </option>
+
+      <option value="+92" data-length="10">
+        Pakistan (+92)
+      </option>
+
+      <option value="+977" data-length="10">
+        Nepal (+977)
+      </option>
+
+      <option value="+81" data-length="10">
+        Japan (+81)
+      </option>
+
+      <option value="+49" data-length="11">
+        Germany (+49)
+      </option>
+
+      <option value="+33" data-length="9">
+        France (+33)
+      </option>
+
+      <option value="+39" data-length="10">
+        Italy (+39)
+      </option>
+
+      <option value="+34" data-length="9">
+        Spain (+34)
+      </option>
+
+      <option value="+7" data-length="10">
+        Russia (+7)
+      </option>
+
+      <option value="+55" data-length="11">
+        Brazil (+55)
+      </option>
+
+      <option value="+27" data-length="9">
+        South Africa (+27)
+      </option>
+
+    </select>
+
+
+    <input
+      type="tel"
+      id="regMobile"
+      placeholder="Mobile Number"
+      inputmode="numeric"
+      maxlength="10"
+      oninput="limitMobile('regCountry','regMobile')"
+    >
+
+
+    <input
+      type="email"
+      id="regEmail"
+      placeholder="Email"
+      autocomplete="email"
+    >
+
+
+    <input
+      type="password"
+      id="regPassword"
+      placeholder="Password"
+      autocomplete="new-password"
+    >
+
+    <label class="show-password">
+      <input
+        type="checkbox"
+        onclick="togglePassword('regPassword')"
+      >
+      Show Password
+    </label>
+
+
+    <button
+      class="register-btn"
+      onclick="registerUser()"
+    >
+      REGISTER
+    </button>
+
+    <p id="registerMessage"></p>
+
+  </div>
+
+
+  <!-- RULES -->
+
+  <div class="card">
+
+    <h2>RULES</h2>
+
+    <p>
+      Please play each game according to the instructions
+      shown inside the game.
+    </p>
+
+    <p>
+      Game points are added to your MAGIKNUMBER account
+      after successful completion.
+    </p>
+
+  </div>
 
 </div>
 
 
-<!-- LOGGED IN -->
-<div id="loggedIn" class="card">
+<!-- ================= LOGGED IN ================= -->
 
-    <h2>Welcome to MAGIKNUMBER</h2>
+<div id="loggedIn" class="hidden">
 
-    <p id="welcomeText"></p>
+  <div id="welcome">
+    Welcome to MAGIKNUMBER
+  </div>
+
+  <!-- GAME MENU -->
+
+  <div id="gameMenu">
+
+    <h2 class="menu-title">
+      GAME MENU
+    </h2>
 
     <button
-        class="profileBtn"
-        onclick="showProfile()"
+      class="game-btn score-btn"
+      onclick="showScoreboard()"
     >
-        MY PROFILE
+      🏆 SCOREBOARD
     </button>
 
     <button
-        class="logoutBtn"
-        onclick="logoutUser()"
+      class="game-btn diamond-btn"
+      onclick="openGame('DIAMOND')"
     >
-        LOGOUT
-    </button>
-
-</div>
-
-
-<!-- GAME MENU -->
-<div id="gameMenu" class="card">
-
-    <h2>GAME MENU</h2>
-
-    <button
-        class="gameBtn"
-        onclick="openGame('score')"
-    >
-        SCORE CARD
+      💎 DIAMOND – 5 MINUTES
     </button>
 
     <button
-        class="gameBtn"
-        onclick="openGame('diamond')"
+      class="game-btn gold-btn"
+      onclick="openGame('GOLD')"
     >
-        DIAMOND – 5 MINUTES
+      🥇 GOLD – 1 MINUTE
     </button>
 
     <button
-        class="gameBtn"
-        onclick="openGame('gold')"
+      class="game-btn silver-btn"
+      onclick="openGame('SILVER')"
     >
-        GOLD – 1 MINUTE
+      🥈 SILVER – 1 MINUTE
     </button>
 
     <button
-        class="gameBtn"
-        onclick="openGame('silver')"
+      class="logout-btn"
+      onclick="logoutUser()"
     >
-        SILVER – 1 MINUTE
+      LOGOUT
     </button>
 
-</div>
+  </div>
 
 
-<!-- SCORE CARD -->
-<div id="scoreCard" class="card">
+  <!-- ================= SCOREBOARD ================= -->
 
-    <h2>SCORE CARD</h2>
+  <div
+    id="scoreboard"
+    class="card hidden"
+  >
 
-    <p>
-        <b>MAGIKNUMBER ID:</b>
-        <span id="scoreId">---</span>
-    </p>
+    <h2>🏆 SCOREBOARD</h2>
 
-    <p>
-        <b>Date of Joining:</b>
-        <span id="joiningDate">---</span>
-    </p>
 
-    <p>
-        <b>Name:</b>
-        <span id="scoreName">---</span>
-    </p>
+    <div class="score-row">
+      <div class="score-label">
+        MAGIKNUMBER ID
+      </div>
 
-    <p>
-        <b>Total Games Played:</b>
-        <span id="gamesPlayed">0</span>
-    </p>
+      <input
+        id="scoreId"
+        class="immutable"
+        readonly
+      >
+    </div>
 
-    <p>
-        <b>Earned Points:</b>
-        <span id="earnedPoints">0</span>
-    </p>
 
-    <div class="pointsBox">
+    <div class="score-row">
+      <div class="score-label">
+        DATE OF JOINING
+      </div>
 
-        <b>Cash Balance:</b>
-        ₹<span id="cashBalance">0</span>
+      <input
+        id="scoreJoining"
+        class="immutable"
+        readonly
+      >
+    </div>
+
+
+    <div class="score-row">
+      <div class="score-label">
+        NAME
+      </div>
+
+      <input
+        id="scoreName"
+        class="immutable"
+        readonly
+      >
+    </div>
+
+
+    <!-- EMAIL -->
+
+    <div class="score-row">
+
+      <div class="score-label">
+        EMAIL
+      </div>
+
+      <input
+        type="email"
+        id="scoreEmail"
+      >
+
+      <button
+        class="update-btn"
+        onclick="updateUserEmail()"
+      >
+        UPDATE EMAIL
+      </button>
 
     </div>
 
-    <p>
-        Conversion Rate:
-        <b>100 Points = ₹10</b>
-    </p>
 
-    <button
+    <!-- MOBILE -->
+
+    <div class="score-row">
+
+      <div class="score-label">
+        MOBILE NUMBER
+      </div>
+
+      <select
+        id="scoreCountry"
+        onchange="updateCountryLength('scoreCountry','scoreMobile')"
+      >
+
+        <option value="+91" data-length="10">
+          India (+91)
+        </option>
+
+        <option value="+1" data-length="10">
+          USA / Canada (+1)
+        </option>
+
+        <option value="+44" data-length="10">
+          United Kingdom (+44)
+        </option>
+
+        <option value="+61" data-length="9">
+          Australia (+61)
+        </option>
+
+        <option value="+64" data-length="9">
+          New Zealand (+64)
+        </option>
+
+        <option value="+971" data-length="9">
+          UAE (+971)
+        </option>
+
+        <option value="+966" data-length="9">
+          Saudi Arabia (+966)
+        </option>
+
+        <option value="+974" data-length="8">
+          Qatar (+974)
+        </option>
+
+        <option value="+965" data-length="8">
+          Kuwait (+965)
+        </option>
+
+        <option value="+968" data-length="8">
+          Oman (+968)
+        </option>
+
+        <option value="+973" data-length="8">
+          Bahrain (+973)
+        </option>
+
+        <option value="+65" data-length="8">
+          Singapore (+65)
+        </option>
+
+        <option value="+60" data-length="9">
+          Malaysia (+60)
+        </option>
+
+        <option value="+94" data-length="9">
+          Sri Lanka (+94)
+        </option>
+
+        <option value="+880" data-length="10">
+          Bangladesh (+880)
+        </option>
+
+        <option value="+92" data-length="10">
+          Pakistan (+92)
+        </option>
+
+        <option value="+977" data-length="10">
+          Nepal (+977)
+        </option>
+
+        <option value="+81" data-length="10">
+          Japan (+81)
+        </option>
+
+        <option value="+49" data-length="11">
+          Germany (+49)
+        </option>
+
+        <option value="+33" data-length="9">
+          France (+33)
+        </option>
+
+        <option value="+39" data-length="10">
+          Italy (+39)
+        </option>
+
+        <option value="+34" data-length="9">
+          Spain (+34)
+        </option>
+
+        <option value="+7" data-length="10">
+          Russia (+7)
+        </option>
+
+        <option value="+55" data-length="11">
+          Brazil (+55)
+        </option>
+
+        <option value="+27" data-length="9">
+          South Africa (+27)
+        </option>
+
+      </select>
+
+
+      <input
+        type="tel"
+        id="scoreMobile"
+        placeholder="Mobile Number"
+        inputmode="numeric"
+        maxlength="10"
+        oninput="limitMobile('scoreCountry','scoreMobile')"
+      >
+
+
+      <button
+        class="update-btn"
+        onclick="updateUserMobile()"
+      >
+        UPDATE MOBILE
+      </button>
+
+    </div>
+
+
+    <div class="info-box">
+      <b>TOTAL GAMES PLAYED</b>
+      <div id="scoreGames">0</div>
+    </div>
+
+
+    <div class="info-box">
+      <b>EARNED POINTS</b>
+      <div id="scorePoints">0</div>
+    </div>
+
+
+    <div class="info-box">
+      <b>CASH BALANCE</b>
+      <div id="scoreCash">₹0</div>
+    </div>
+
+
+    <div class="info-box">
+
+      <b>CONVERSION</b>
+
+      <p class="small-text">
+        Test conversion:
+        100 points = ₹10
+      </p>
+
+      <button
+        class="update-btn"
         onclick="convertPointsToCash()"
-    >
-        Convert Points to Cash
-    </button>
+      >
+        CONVERT POINTS
+      </button>
 
-    <p id="conversionMessage"></p>
+    </div>
 
-    <h3>Conversion History</h3>
 
-    <p class="info">
-        No conversion history yet.
-    </p>
+    <div class="info-box">
 
-    <button
-        class="logoutBtn"
+      <b>CONVERSION HISTORY</b>
+
+      <p class="small-text">
+        No conversion history available.
+      </p>
+
+    </div>
+
+
+    <div class="info-box">
+
+      <b>CLOSE ACCOUNT</b>
+
+      <p class="small-text">
+        Account closing feature will be connected later.
+      </p>
+
+      <button
+        class="logout-btn"
         onclick="closeAccount()"
-    >
+      >
         CLOSE ACCOUNT
-    </button>
+      </button>
+
+    </div>
+
 
     <button
-        class="backBtn"
-        onclick="backToMenu()"
+      class="back-btn"
+      onclick="backToMenu()"
     >
-        BACK
+      BACK
     </button>
+
+  </div>
+
+
+  <!-- ================= GAME AREA ================= -->
+
+  <div
+    id="gameArea"
+    class="card hidden"
+  >
+
+    <h2 id="gameTitle"></h2>
+
+    <p id="gameMessage"></p>
+
+    <button
+      class="back-btn"
+      onclick="backToMenu()"
+    >
+      BACK
+    </button>
+
+  </div>
+
+</div>
 
 </div>
 
 
-<!-- PROFILE -->
-<div id="profile" class="card">
-
-    <h2>MY PROFILE</h2>
-
-    <p>
-        <b>MAGIKNUMBER ID:</b>
-        <span id="profileId">---</span>
-    </p>
-
-    <p>
-        <b>Name:</b>
-        <span id="profileName">---</span>
-    </p>
-
-    <p>
-        <b>Email:</b>
-        <span id="profileEmail">---</span>
-    </p>
-
-    <p>
-        <b>Mobile:</b>
-        <span id="profileMobile">---</span>
-    </p>
-
-    <p>
-        <b>Overall Points:</b>
-        <span id="profilePoints">0</span>
-    </p>
-
-    <button
-        class="backBtn"
-        onclick="backToMenu()"
-    >
-        BACK
-    </button>
-
-</div>
-
+<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
 import {
-    initializeApp
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    GoogleAuthProvider,
-    signInWithPopup,
-    onAuthStateChanged,
-    signOut
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  updateEmail,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    runTransaction,
-    updateDoc
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  runTransaction,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
+/* ================= FIREBASE CONFIG ================= */
 
 const firebaseConfig = {
 
-    apiKey:
+  apiKey:
     "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
 
-    authDomain:
+  authDomain:
     "magiknumbers-d42c0.firebaseapp.com",
 
-    projectId:
+  projectId:
     "magiknumbers-d42c0",
 
-    storageBucket:
+  storageBucket:
     "magiknumbers-d42c0.firebasestorage.app",
 
-    messagingSenderId:
+  messagingSenderId:
     "977553928698",
 
-    appId:
+  appId:
     "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
 
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+  getAuth(app);
 
-const db = getFirestore(app);
-
-const googleProvider =
-    new GoogleAuthProvider();
-
-
-/* =========================
-   COUNTRY MOBILE LIMIT
-========================= */
-
-const countryCode =
-    document.getElementById("countryCode");
-
-const mobileInput =
-    document.getElementById("mobile");
-
-const phoneHint =
-    document.getElementById("phoneHint");
+const db =
+  getFirestore(app);
 
 
-function getSelectedCountryLength(){
+/* ================= CURRENT USER ================= */
 
-    const selected =
-        countryCode.options[
-            countryCode.selectedIndex
-        ];
+let currentUser = null;
+let currentUserData = null;
 
-    return Number(
-        selected.dataset.length
+
+/* ================= PASSWORD ================= */
+
+window.togglePassword = function(id) {
+
+  const input =
+    document.getElementById(id);
+
+  input.type =
+    input.type === "password"
+      ? "text"
+      : "password";
+};
+
+
+/* ================= MOBILE ================= */
+
+window.updateCountryLength = function(
+  countryId,
+  mobileId
+) {
+
+  const country =
+    document.getElementById(countryId);
+
+  const mobile =
+    document.getElementById(mobileId);
+
+  const option =
+    country.options[country.selectedIndex];
+
+  const length =
+    Number(option.dataset.length || 10);
+
+  mobile.maxLength = length;
+
+  mobile.value =
+    mobile.value.replace(/\D/g,"")
+      .slice(0,length);
+};
+
+
+window.limitMobile = function(
+  countryId,
+  mobileId
+) {
+
+  const country =
+    document.getElementById(countryId);
+
+  const mobile =
+    document.getElementById(mobileId);
+
+  const option =
+    country.options[country.selectedIndex];
+
+  const length =
+    Number(option.dataset.length || 10);
+
+  mobile.value =
+    mobile.value
+      .replace(/\D/g,"")
+      .slice(0,length);
+};
+
+
+/* ================= MAGIK NUMBER ID ================= */
+
+async function generateMagikNumberId() {
+
+  const counterRef =
+    doc(db,"system","counter");
+
+  const newId =
+    await runTransaction(
+      db,
+      async(transaction) => {
+
+        const snapshot =
+          await transaction.get(counterRef);
+
+        let nextNumber = 100002;
+
+        if(snapshot.exists()) {
+
+          const data =
+            snapshot.data();
+
+          nextNumber =
+            Number(
+              data.nextNumber ||
+              100002
+            );
+
+        }
+
+        transaction.set(
+          counterRef,
+          {
+            nextNumber:
+              nextNumber + 1
+          },
+          {
+            merge:true
+          }
+        );
+
+        return "MN" + nextNumber;
+      }
     );
 
+  return newId;
 }
 
 
-window.limitMobileNumber = function(){
+/* ================= CREATE USER PROFILE ================= */
 
-    const maxLength =
-        getSelectedCountryLength();
+async function createUserProfile(user) {
 
-    mobileInput.value =
-        mobileInput.value
-        .replace(/\D/g,"")
-        .slice(0,maxLength);
+  const userRef =
+    doc(db,"users",user.uid);
 
-};
+  const snapshot =
+    await getDoc(userRef);
 
 
-countryCode.addEventListener(
-    "change",
-    function(){
-
-        const maxLength =
-            getSelectedCountryLength();
-
-        mobileInput.value =
-            mobileInput.value
-            .replace(/\D/g,"")
-            .slice(0,maxLength);
-
-        mobileInput.maxLength =
-            maxLength;
-
-        phoneHint.textContent =
-            countryCode.options[
-                countryCode.selectedIndex
-            ].text +
-            ": Enter exactly " +
-            maxLength +
-            " digits";
-
-    }
-);
-
-
-/* =========================
-   PASSWORD SHOW / HIDE
-========================= */
-
-window.toggleLoginPassword =
-function(){
-
-    const password =
-        document.getElementById(
-            "loginPassword"
-        );
-
-    password.type =
-        password.type === "password"
-        ? "text"
-        : "password";
-
-};
-
-
-window.toggleRegisterPassword =
-function(){
-
-    const password =
-        document.getElementById(
-            "registerPassword"
-        );
-
-    password.type =
-        password.type === "password"
-        ? "text"
-        : "password";
-
-};
-
-
-/* =========================
-   GENERATE MAGIKNUMBER ID
-========================= */
-
-async function generateMagikNumberId(){
-
-    const counterRef =
-        doc(
-            db,
-            "system",
-            "counter"
-        );
-
-    const newId =
-        await runTransaction(
-            db,
-            async (transaction)=>{
-
-                const snapshot =
-                    await transaction.get(
-                        counterRef
-                    );
-
-                let nextNumber =
-                    100002;
-
-                if(snapshot.exists()){
-
-                    const data =
-                        snapshot.data();
-
-                    nextNumber =
-                        Number(
-                            data.nextNumber ||
-                            100002
-                        );
-
-                }
-
-                transaction.set(
-                    counterRef,
-                    {
-                        nextNumber:
-                            nextNumber + 1
-                    },
-                    {
-                        merge:true
-                    }
-                );
-
-                return "MN" + nextNumber;
-
-            }
-        );
-
-    return newId;
-
-}
-
-
-/* =========================
-   CREATE USER PROFILE
-========================= */
-
-async function createUserProfile(
-    user,
-    name="",
-    mobile=""
-){
-
-    const userRef =
-        doc(
-            db,
-            "users",
-            user.uid
-        );
-
-    const existing =
-        await getDoc(userRef);
-
-
-    if(existing.exists()){
-
-        const data =
-            existing.data();
-
-        return data;
-
-    }
-
+  if(!snapshot.exists()) {
 
     const magikNumberId =
-        await generateMagikNumberId();
+      await generateMagikNumberId();
 
+    const name =
+      document.getElementById("regName")
+        ?.value
+        ?.trim() || "User";
 
-    const profile = {
+    const country =
+      document.getElementById("regCountry")
+        ?.value || "+91";
 
-        magikNumberId:
-            magikNumberId,
+    const mobile =
+      document.getElementById("regMobile")
+        ?.value
+        ?.trim() || "";
 
-        name:
-            name || "User",
-
-        email:
-            user.email || "",
-
-        mobile:
-            mobile || "",
-
-        points:
-            0,
-
-        joiningDate:
-            user.metadata.creationTime
-            ? user.metadata.creationTime
-            : new Date().toISOString(),
-
-        gamesPlayed:
-            0,
-
-        cashBalance:
-            0
-
-    };
+    const fullMobile =
+      mobile
+        ? country + mobile
+        : "";
 
 
     await setDoc(
-        userRef,
-        profile
+      userRef,
+      {
+
+        magikNumberId:
+
+          magikNumberId,
+
+        name:
+
+          name,
+
+        email:
+
+          user.email || "",
+
+        mobile:
+
+          fullMobile,
+
+        dateOfJoining:
+
+          serverTimestamp(),
+
+        totalGamesPlayed:
+
+          0,
+
+        points:
+
+          0,
+
+        cashBalance:
+
+          0,
+
+        avatar:
+
+          "logo1",
+
+      }
     );
 
-
-    return profile;
+  }
 
 }
 
 
-/* =========================
-   REGISTER
-========================= */
+/* ================= REGISTER ================= */
 
-window.registerUser =
-async function(){
+window.registerUser = async function() {
 
-    const name =
-        document.getElementById(
-            "registerName"
-        ).value.trim();
+  const name =
+    document.getElementById("regName")
+      .value.trim();
 
-    const country =
-        document.getElementById(
-            "countryCode"
-        ).value;
+  const country =
+    document.getElementById("regCountry")
+      .value;
 
-    const mobile =
-        document.getElementById(
-            "mobile"
-        ).value.trim();
+  const mobile =
+    document.getElementById("regMobile")
+      .value.trim();
 
-    const email =
-        document.getElementById(
-            "registerEmail"
-        ).value.trim();
+  const email =
+    document.getElementById("regEmail")
+      .value.trim();
 
-    const password =
-        document.getElementById(
-            "registerPassword"
-        ).value;
+  const password =
+    document.getElementById("regPassword")
+      .value;
 
 
-    const message =
-        document.getElementById(
-            "registerMessage"
-        );
+  const message =
+    document.getElementById(
+      "registerMessage"
+    );
 
 
-    const requiredLength =
-        getSelectedCountryLength();
+  message.className = "";
+  message.textContent = "";
 
 
-    if(!name){
+  if(!name) {
 
-        message.innerHTML =
-            '<span class="error">Please enter your name.</span>';
+    message.className = "error";
+    message.textContent =
+      "Please enter your name.";
 
-        return;
-
-    }
-
-
-    if(mobile.length !== requiredLength){
-
-        message.innerHTML =
-            '<span class="error">Mobile number must contain exactly '
-            + requiredLength +
-            ' digits.</span>';
-
-        return;
-
-    }
+    return;
+  }
 
 
-    if(!email){
+  const countryOption =
+    document.getElementById("regCountry")
+      .selectedOptions[0];
 
-        message.innerHTML =
-            '<span class="error">Please enter your email.</span>';
-
-        return;
-
-    }
-
-
-    if(password.length < 6){
-
-        message.innerHTML =
-            '<span class="error">Password must be at least 6 characters.</span>';
-
-        return;
-
-    }
+  const requiredLength =
+    Number(
+      countryOption.dataset.length
+    );
 
 
-    try{
+  if(mobile.length !== requiredLength) {
 
-        sessionStorage.setItem(
-            "pendingName",
-            name
-        );
+    message.className = "error";
 
-        sessionStorage.setItem(
-            "pendingMobile",
-            country + mobile
-        );
+    message.textContent =
+      "Please enter a valid mobile number.";
+
+    return;
+  }
 
 
-        const result =
-            await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+  if(!email || !password) {
+
+    message.className = "error";
+
+    message.textContent =
+      "Please enter email and password.";
+
+    return;
+  }
 
 
-        const profile =
-            await createUserProfile(
-                result.user,
-                name,
-                country + mobile
-            );
+  try {
+
+    const result =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
 
-        message.innerHTML =
-            '<span class="success">Registration successful.</span>';
+    await createUserProfile(
+      result.user
+    );
 
 
-        alert(
-            "Registration successful!\n\nYour MAGIKNUMBER ID is "
-            + profile.magikNumberId
-        );
+    message.className =
+      "success";
+
+    message.textContent =
+      "Registration successful.";
 
 
-        sessionStorage.removeItem(
-            "pendingName"
-        );
+  } catch(error) {
 
-        sessionStorage.removeItem(
-            "pendingMobile"
-        );
+    message.className =
+      "error";
 
+    message.textContent =
+      error.message;
 
-    }
-    catch(error){
-
-        message.innerHTML =
-            '<span class="error">'
-            + error.message +
-            '</span>';
-
-    }
+  }
 
 };
 
 
-/* =========================
-   LOGIN
-========================= */
+/* ================= LOGIN ================= */
 
-window.loginUser =
-async function(){
+window.loginUser = async function() {
 
-    const email =
-        document.getElementById(
-            "loginEmail"
-        ).value.trim();
+  const email =
+    document.getElementById("loginEmail")
+      .value.trim();
 
-    const password =
-        document.getElementById(
-            "loginPassword"
-        ).value;
+  const password =
+    document.getElementById("loginPassword")
+      .value;
 
-    const message =
-        document.getElementById(
-            "loginMessage"
-        );
+  const message =
+    document.getElementById(
+      "loginMessage"
+    );
 
 
-    try{
+  message.className = "";
+  message.textContent = "";
 
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
 
-        message.innerHTML =
-            '<span class="success">Login successful.</span>';
+  try {
 
-    }
-    catch(error){
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-        message.innerHTML =
-            '<span class="error">'
-            + error.message +
-            '</span>';
+  } catch(error) {
 
-    }
+    message.className =
+      "error";
+
+    message.textContent =
+      error.message;
+
+  }
 
 };
 
 
-/* =========================
-   GOOGLE LOGIN
-========================= */
+/* ================= GOOGLE LOGIN ================= */
 
-window.googleLogin =
-async function(){
+window.googleLogin = async function() {
 
-    try{
+  const provider =
+    new GoogleAuthProvider();
 
-        const result =
-            await signInWithPopup(
-                auth,
-                googleProvider
-            );
+  try {
 
-        await createUserProfile(
-            result.user,
-            result.user.displayName || "User",
-            ""
-        );
+    const result =
+      await signInWithPopup(
+        auth,
+        provider
+      );
 
-    }
-    catch(error){
 
-        document.getElementById(
-            "loginMessage"
-        ).innerHTML =
-            '<span class="error">'
-            + error.message +
-            '</span>';
+    await createUserProfile(
+      result.user
+    );
 
-    }
+
+  } catch(error) {
+
+    document.getElementById(
+      "loginMessage"
+    ).textContent =
+      error.message;
+
+  }
 
 };
 
 
-/* =========================
-   AUTH STATE
-========================= */
+/* ================= AUTH STATE ================= */
 
 onAuthStateChanged(
-    auth,
-    async(user)=>{
+  auth,
+  async(user) => {
 
-        if(user){
-
-            let name =
-                sessionStorage.getItem(
-                    "pendingName"
-                ) || "";
-
-            let mobile =
-                sessionStorage.getItem(
-                    "pendingMobile"
-                ) || "";
+    currentUser = user;
 
 
-            const profile =
-                await createUserProfile(
-                    user,
-                    name,
-                    mobile
-                );
+    if(user) {
+
+      try {
+
+        await createUserProfile(
+          user
+        );
+
+        await loadUserData();
+
+      } catch(error) {
+
+        console.error(error);
+
+      }
 
 
-            document.getElementById(
-                "authArea"
-            ).style.display =
-                "none";
+      document
+        .getElementById("authArea")
+        .classList.add("hidden");
 
 
-            document.getElementById(
-                "loggedIn"
-            ).style.display =
-                "block";
+      document
+        .getElementById("loggedIn")
+        .classList.remove("hidden");
 
 
-            document.getElementById(
-                "gameMenu"
-            ).style.display =
-                "block";
+      document
+        .getElementById("userIdBar")
+        .style.display = "flex";
 
 
-            document.getElementById(
-                "userIdBar"
-            ).textContent =
-                "ID: " +
-                profile.magikNumberId;
+      showGameMenu();
 
 
-            document.getElementById(
-                "welcomeText"
-            ).textContent =
-                "Welcome " +
-                profile.name;
+    } else {
+
+      currentUser = null;
+      currentUserData = null;
 
 
-            sessionStorage.removeItem(
-                "pendingName"
-            );
-
-            sessionStorage.removeItem(
-                "pendingMobile"
-            );
-
-        }
-        else{
-
-            document.getElementById(
-                "authArea"
-            ).style.display =
-                "block";
+      document
+        .getElementById("authArea")
+        .classList.remove("hidden");
 
 
-            document.getElementById(
-                "loggedIn"
-            ).style.display =
-                "none";
+      document
+        .getElementById("loggedIn")
+        .classList.add("hidden");
 
 
-            document.getElementById(
-                "gameMenu"
-            ).style.display =
-                "none";
-
-
-            document.getElementById(
-                "scoreCard"
-            ).style.display =
-                "none";
-
-
-            document.getElementById(
-                "profile"
-            ).style.display =
-                "none";
-
-
-            document.getElementById(
-                "userIdBar"
-            ).textContent =
-                "ID: ---";
-
-        }
+      document
+        .getElementById("userIdBar")
+        .style.display = "none";
 
     }
+
+  }
 );
 
 
-/* =========================
-   SCORE CARD
-========================= */
+/* ================= LOAD USER DATA ================= */
 
-window.openGame =
-function(game){
+async function loadUserData() {
 
-    if(game === "score"){
+  if(!currentUser) return;
 
-        showScoreCard();
 
-    }
-    else{
+  const userRef =
+    doc(
+      db,
+      "users",
+      currentUser.uid
+    );
 
-        alert(
-            game.toUpperCase() +
-            " game will be added next."
+
+  const snapshot =
+    await getDoc(userRef);
+
+
+  if(!snapshot.exists()) return;
+
+
+  currentUserData =
+    snapshot.data();
+
+
+  const id =
+    currentUserData.magikNumberId ||
+    "MN100001";
+
+
+  document.getElementById(
+    "displayUserId"
+  ).textContent =
+    "ID: " + id;
+
+
+  document.getElementById(
+    "scoreId"
+  ).value =
+    id;
+
+
+  document.getElementById(
+    "scoreName"
+  ).value =
+    currentUserData.name || "";
+
+
+  document.getElementById(
+    "scoreEmail"
+  ).value =
+    currentUserData.email ||
+    currentUser.email ||
+    "";
+
+
+  document.getElementById(
+    "scoreGames"
+  ).textContent =
+    currentUserData.totalGamesPlayed ||
+    0;
+
+
+  document.getElementById(
+    "scorePoints"
+  ).textContent =
+    currentUserData.points ||
+    0;
+
+
+  document.getElementById(
+    "scoreCash"
+  ).textContent =
+    "₹" +
+    (
+      currentUserData.cashBalance ||
+      0
+    );
+
+
+  /* DATE */
+
+  if(currentUserData.dateOfJoining) {
+
+    let date;
+
+    if(
+      currentUserData.dateOfJoining
+        .toDate
+    ) {
+
+      date =
+        currentUserData.dateOfJoining
+          .toDate();
+
+    } else {
+
+      date =
+        new Date(
+          currentUserData.dateOfJoining
         );
 
     }
 
-};
+    document.getElementById(
+      "scoreJoining"
+    ).value =
+      date.toLocaleDateString(
+        "en-IN"
+      );
 
-
-async function showScoreCard(){
-
-    const user =
-        auth.currentUser;
-
-    if(!user) return;
-
-
-    const userRef =
-        doc(
-            db,
-            "users",
-            user.uid
-        );
-
-    const snapshot =
-        await getDoc(userRef);
-
-
-    if(!snapshot.exists()) return;
-
-
-    const data =
-        snapshot.data();
-
+  } else {
 
     document.getElementById(
-        "gameMenu"
-    ).style.display =
-        "none";
+      "scoreJoining"
+    ).value =
+      "Not available";
+
+  }
 
 
-    document.getElementById(
-        "loggedIn"
-    ).style.display =
-        "none";
+  /* MOBILE */
+
+  const storedMobile =
+    currentUserData.mobile || "";
 
 
-    document.getElementById(
-        "profile"
-    ).style.display =
-        "none";
+  const countryCodes = [
+    "+971",
+    "+966",
+    "+880",
+    "+977",
+    "+968",
+    "+973",
+    "+965",
+    "+974",
+    "+44",
+    "+91",
+    "+61",
+    "+64",
+    "+65",
+    "+60",
+    "+94",
+    "+92",
+    "+81",
+    "+49",
+    "+33",
+    "+39",
+    "+34",
+    "+7",
+    "+55",
+    "+27",
+    "+1"
+  ];
 
 
-    document.getElementById(
-        "scoreCard"
-    ).style.display =
-        "block";
+  let foundCode = "+91";
 
 
-    document.getElementById(
-        "scoreId"
-    ).textContent =
-        data.magikNumberId || "---";
+  for(
+    const code of countryCodes
+  ) {
 
+    if(
+      storedMobile.startsWith(code)
+    ) {
 
-    document.getElementById(
-        "scoreName"
-    ).textContent =
-        data.name || "---";
-
-
-    document.getElementById(
-        "gamesPlayed"
-    ).textContent =
-        data.gamesPlayed || 0;
-
-
-    document.getElementById(
-        "earnedPoints"
-    ).textContent =
-        data.points || 0;
-
-
-    document.getElementById(
-        "cashBalance"
-    ).textContent =
-        data.cashBalance || 0;
-
-
-    if(data.joiningDate){
-
-        const date =
-            new Date(
-                data.joiningDate
-            );
-
-        document.getElementById(
-            "joiningDate"
-        ).textContent =
-            date.toLocaleDateString();
+      foundCode = code;
+      break;
 
     }
+
+  }
+
+
+  document.getElementById(
+    "scoreCountry"
+  ).value =
+    foundCode;
+
+
+  document.getElementById(
+    "scoreMobile"
+  ).value =
+    storedMobile
+      .replace(foundCode,"");
+
+
+  updateCountryLength(
+    "scoreCountry",
+    "scoreMobile"
+  );
 
 }
 
 
-window.showProfile =
-async function(){
+/* ================= SCOREBOARD ================= */
 
-    const user =
-        auth.currentUser;
+window.showScoreboard = async function() {
 
-    if(!user) return;
+  await loadUserData();
 
 
-    const userRef =
-        doc(
-            db,
-            "users",
-            user.uid
-        );
-
-    const snapshot =
-        await getDoc(userRef);
+  document
+    .getElementById("gameMenu")
+    .classList.add("hidden");
 
 
-    if(!snapshot.exists()) return;
+  document
+    .getElementById("gameArea")
+    .classList.add("hidden");
 
 
-    const data =
-        snapshot.data();
-
-
-    document.getElementById(
-        "loggedIn"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "gameMenu"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "scoreCard"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "profile"
-    ).style.display =
-        "block";
-
-
-    document.getElementById(
-        "profileId"
-    ).textContent =
-        data.magikNumberId || "---";
-
-
-    document.getElementById(
-        "profileName"
-    ).textContent =
-        data.name || "---";
-
-
-    document.getElementById(
-        "profileEmail"
-    ).textContent =
-        data.email || "---";
-
-
-    document.getElementById(
-        "profileMobile"
-    ).textContent =
-        data.mobile || "---";
-
-
-    document.getElementById(
-        "profilePoints"
-    ).textContent =
-        data.points || 0;
+  document
+    .getElementById("scoreboard")
+    .classList.remove("hidden");
 
 };
 
 
-window.backToMenu =
-function(){
+function showGameMenu() {
 
+  document
+    .getElementById("scoreboard")
+    .classList.add("hidden");
+
+  document
+    .getElementById("gameArea")
+    .classList.add("hidden");
+
+  document
+    .getElementById("gameMenu")
+    .classList.remove("hidden");
+
+}
+
+
+/* ================= UPDATE EMAIL ================= */
+
+window.updateUserEmail = async function() {
+
+  if(!currentUser) return;
+
+
+  const newEmail =
     document.getElementById(
-        "profile"
-    ).style.display =
-        "none";
+      "scoreEmail"
+    ).value.trim();
 
 
-    document.getElementById(
-        "scoreCard"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "loggedIn"
-    ).style.display =
-        "block";
-
-
-    document.getElementById(
-        "gameMenu"
-    ).style.display =
-        "block";
-
-};
-
-
-/* =========================
-   POINTS → CASH
-========================= */
-
-window.convertPointsToCash =
-async function(){
-
-    const user =
-        auth.currentUser;
-
-    if(!user) return;
-
-
-    const userRef =
-        doc(
-            db,
-            "users",
-            user.uid
-        );
-
-
-    const snapshot =
-        await getDoc(userRef);
-
-
-    if(!snapshot.exists()) return;
-
-
-    const data =
-        snapshot.data();
-
-
-    const points =
-        Number(data.points || 0);
-
-
-    if(points < 100){
-
-        document.getElementById(
-            "conversionMessage"
-        ).innerHTML =
-            '<span class="error">Minimum 100 points required.</span>';
-
-        return;
-
-    }
-
-
-    const cash =
-        Math.floor(points / 100) * 10;
-
-
-    document.getElementById(
-        "conversionMessage"
-    ).innerHTML =
-        '<span class="success">Test conversion: '
-        + points +
-        ' points = ₹'
-        + cash +
-        '</span>';
-
-};
-
-
-/* =========================
-   CLOSE ACCOUNT
-========================= */
-
-window.closeAccount =
-async function(){
+  if(!newEmail) {
 
     alert(
-        "Account closing feature will be connected later."
+      "Please enter an email address."
     );
+
+    return;
+
+  }
+
+
+  try {
+
+    await updateEmail(
+      currentUser,
+      newEmail
+    );
+
+
+    await updateDoc(
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      ),
+      {
+        email:newEmail
+      }
+    );
+
+
+    alert(
+      "Email updated successfully."
+    );
+
+
+    await loadUserData();
+
+
+  } catch(error) {
+
+    alert(
+      "Email update failed: " +
+      error.message
+    );
+
+  }
 
 };
 
 
-/* =========================
-   LOGOUT
-========================= */
+/* ================= UPDATE MOBILE ================= */
 
-window.logoutUser =
-async function(){
+window.updateUserMobile = async function() {
+
+  if(!currentUser) return;
+
+
+  const country =
+    document.getElementById(
+      "scoreCountry"
+    ).value;
+
+
+  const mobile =
+    document.getElementById(
+      "scoreMobile"
+    ).value.trim();
+
+
+  const requiredLength =
+    Number(
+      document.getElementById(
+        "scoreCountry"
+      ).selectedOptions[0]
+        .dataset.length
+    );
+
+
+  if(
+    mobile.length !==
+    requiredLength
+  ) {
+
+    alert(
+      "Please enter a valid mobile number."
+    );
+
+    return;
+
+  }
+
+
+  const fullMobile =
+    country + mobile;
+
+
+  try {
+
+    await updateDoc(
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      ),
+      {
+        mobile:fullMobile
+      }
+    );
+
+
+    alert(
+      "Mobile number updated successfully."
+    );
+
+
+    await loadUserData();
+
+
+  } catch(error) {
+
+    alert(
+      "Mobile update failed: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+/* ================= POINT CONVERSION ================= */
+
+window.convertPointsToCash = async function() {
+
+  if(!currentUser || !currentUserData)
+    return;
+
+
+  const points =
+    Number(
+      currentUserData.points || 0
+    );
+
+
+  if(points < 100) {
+
+    alert(
+      "You need at least 100 points."
+    );
+
+    return;
+
+  }
+
+
+  const cash =
+    Math.floor(points / 100) * 10;
+
+
+  alert(
+    "Test conversion amount: ₹" +
+    cash
+  );
+
+};
+
+
+/* ================= GAME ================= */
+
+window.openGame = function(gameName) {
+
+  document
+    .getElementById("gameMenu")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("scoreboard")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("gameArea")
+    .classList.remove("hidden");
+
+
+  document.getElementById(
+    "gameTitle"
+  ).textContent =
+    gameName;
+
+
+  document.getElementById(
+    "gameMessage"
+  ).textContent =
+    gameName +
+    " game will be added next.";
+
+};
+
+
+/* ================= BACK ================= */
+
+window.backToMenu = function() {
+
+  showGameMenu();
+
+};
+
+
+/* ================= CLOSE ACCOUNT ================= */
+
+window.closeAccount = function() {
+
+  alert(
+    "Account closing feature will be connected later."
+  );
+
+};
+
+
+/* ================= LOGOUT ================= */
+
+window.logoutUser = async function() {
+
+  try {
 
     await signOut(auth);
+
+  } catch(error) {
+
+    alert(
+      error.message
+    );
+
+  }
 
 };
 
 </script>
-
-</div>
 
 </body>
 </html>

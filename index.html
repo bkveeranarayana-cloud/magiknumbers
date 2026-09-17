@@ -7,232 +7,341 @@
 <title>MAGIKNUMBER</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f2f4f7;
-  color: #222;
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#f5f7ff,#e8f0ff);
+  color:#222;
 }
 
-.container {
-  width: 100%;
-  max-width: 480px;
-  margin: auto;
-  padding: 20px;
+.container{
+  width:92%;
+  max-width:500px;
+  margin:30px auto;
 }
 
-h1 {
-  text-align: center;
-  color: #111;
-  margin-bottom: 25px;
+h1{
+  text-align:center;
+  color:#4b20d9;
+  margin-bottom:25px;
 }
 
-/* LOGIN / REGISTER */
-
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+h2{
+  text-align:center;
 }
 
-h2 {
-  text-align: center;
-  margin-top: 0;
+/* FIXED USER ID + LOGO */
+
+#userIdBar{
+  position:fixed;
+  top:10px;
+  left:10px;
+  z-index:9999;
+
+  display:flex;
+  align-items:center;
+  gap:7px;
+
+  background:white;
+  padding:6px 10px;
+  border-radius:20px;
+
+  box-shadow:0 3px 12px rgba(0,0,0,.18);
+
+  font-weight:bold;
+  font-size:13px;
 }
+
+#userLogo{
+  width:30px;
+  height:30px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:linear-gradient(135deg,#ff7a00,#ff1744);
+  font-size:18px;
+}
+
+/* BOX */
+
+.box-card{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  margin-bottom:18px;
+
+  box-shadow:0 5px 20px rgba(0,0,0,.10);
+}
+
+/* INPUT */
 
 input,
-select {
-  width: 100%;
-  padding: 13px;
-  margin: 7px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
+select{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+
+  border:1px solid #ccc;
+  border-radius:10px;
+
+  font-size:15px;
 }
 
-button {
-  width: 100%;
-  padding: 13px;
-  margin: 7px 0;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+/* BUTTON */
+
+button{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+
+  border:0;
+  border-radius:10px;
+
+  font-size:15px;
+  font-weight:bold;
+
+  cursor:pointer;
 }
 
-.login-btn {
-  background: #28a745;
-  color: white;
+.login-btn{
+  background:#20a84b;
+  color:white;
 }
 
-.register-btn {
-  background: #007bff;
-  color: white;
+.register-btn{
+  background:#1976d2;
+  color:white;
 }
 
-.google-btn {
-  background: white;
-  border: 1px solid #777;
-  color: #333;
+.google-btn{
+  background:white;
+  border:1px solid #bbb;
 }
 
-.logout-btn {
-  background: #dc3545;
-  color: white;
+.menu-btn{
+  background:#5b2be0;
+  color:white;
 }
 
-.back-btn {
-  background: #6c757d;
-  color: white;
+.logout-btn{
+  background:#e53935;
+  color:white;
 }
 
-.update-btn {
-  background: #6f42c1;
-  color: white;
+.profile-btn{
+  background:#7b1fa2;
+  color:white;
 }
 
-.game-btn {
-  color: white;
-  font-size: 17px;
-  padding: 16px;
+.back-btn{
+  background:#555;
+  color:white;
 }
 
-.score-btn {
-  background: #f0ad00;
+.update-btn{
+  background:#ff9800;
+  color:white;
 }
 
-.diamond-btn {
-  background: #007bff;
+.cancel-btn{
+  background:#777;
+  color:white;
 }
 
-.gold-btn {
-  background: #d49a00;
+.close-btn{
+  background:#1976d2;
+  color:white;
 }
 
-.silver-btn {
-  background: #777;
+/* PASSWORD */
+
+.password-row{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:14px;
 }
 
-.show-password {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 5px 0 10px;
-  font-size: 14px;
-}
-
-.show-password input {
-  width: auto;
-  margin: 0;
-}
-
-/* USER ID + LOGO */
-
-#userIdBar {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 9999;
-
-  display: none;
-  align-items: center;
-  gap: 8px;
-
-  background: white;
-  padding: 6px 10px;
-  border-radius: 25px;
-
-  box-shadow: 0 2px 8px rgba(0,0,0,0.20);
-
-  font-size: 14px;
-  font-weight: bold;
-}
-
-#userLogo {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: linear-gradient(135deg,#ff00cc,#3333ff);
-  color: white;
-  font-size: 19px;
-}
-
-/* MENU */
-
-#welcome {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.menu-title {
-  text-align: center;
-  margin: 20px 0 15px;
-}
-
-/* SCOREBOARD */
-
-.score-row {
-  margin-bottom: 15px;
-}
-
-.score-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.immutable {
-  background: #eee;
-}
-
-.info-box {
-  background: #f7f7f7;
-  padding: 12px;
-  border-radius: 8px;
-  margin: 8px 0;
-}
-
-.small-text {
-  font-size: 13px;
-  color: #666;
-}
-
-.success {
-  color: green;
-  font-weight: bold;
-}
-
-.error {
-  color: red;
-  font-weight: bold;
+.password-row input{
+  width:auto;
+  margin:0;
 }
 
 /* HIDDEN */
 
-.hidden {
-  display: none !important;
+.hidden{
+  display:none !important;
+}
+
+/* GAME MENU */
+
+.menu-title{
+  color:#4b20d9;
+  text-align:center;
+}
+
+/* SCOREBOARD */
+
+.score-row{
+  margin-bottom:15px;
+}
+
+.score-label{
+  font-size:13px;
+  font-weight:bold;
+  color:#555;
+  margin-bottom:5px;
+}
+
+.info-box{
+  width:100%;
+  padding:12px;
+
+  background:#f3f5f9;
+
+  border:1px solid #ddd;
+  border-radius:10px;
+
+  word-break:break-word;
+}
+
+/* LOGO */
+
+.logo-display{
+  display:flex;
+  justify-content:center;
+  margin:10px 0;
+}
+
+#scoreLogo{
+  width:75px;
+  height:75px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  border-radius:50%;
+
+  background:linear-gradient(135deg,#ff7a00,#ff1744);
+
+  font-size:42px;
+
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.55);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  z-index:10000;
+
+  padding:20px;
+}
+
+.modal-box{
+  width:100%;
+  max-width:400px;
+
+  background:white;
+
+  padding:22px;
+
+  border-radius:18px;
+
+  box-shadow:0 8px 30px rgba(0,0,0,.3);
+}
+
+.modal-box h2{
+  margin-top:0;
+}
+
+/* LOGO GRID */
+
+.logo-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+
+  margin:15px 0;
+}
+
+.logo-grid button{
+  width:100%;
+  height:65px;
+
+  margin:0;
+
+  background:#f2f3f7;
+
+  border:2px solid #ddd;
+
+  font-size:32px;
+
+  border-radius:14px;
+}
+
+.logo-grid button:hover{
+  border-color:#6a35e8;
+  background:#eee8ff;
+}
+
+/* COUNTRY */
+
+.country-row{
+  display:flex;
+  gap:7px;
+}
+
+.country-row select{
+  width:45%;
+}
+
+.country-row input{
+  width:55%;
+}
+
+/* RULES */
+
+.rules{
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* SUCCESS */
+
+.success-message{
+  text-align:center;
+  font-size:17px;
+  font-weight:bold;
+  margin:20px 0;
 }
 </style>
 </head>
 
 <body>
 
-<!-- FIXED LOGO + ID -->
-<div id="userIdBar">
-  <div id="userLogo">⚡</div>
-  <div id="displayUserId">ID: --</div>
+<!-- FIXED LOGO + USER ID -->
+
+<div id="userIdBar" class="hidden">
+  <span id="userLogo">⚡</span>
+  <span id="displayUserId">ID: --</span>
 </div>
 
 
@@ -247,7 +356,7 @@ button {
 
   <!-- LOGIN -->
 
-  <div class="card">
+  <div class="box-card">
 
     <h2>LOGIN</h2>
 
@@ -255,23 +364,22 @@ button {
       type="email"
       id="loginEmail"
       placeholder="Email"
-      autocomplete="email"
     >
 
     <input
       type="password"
       id="loginPassword"
       placeholder="Password"
-      autocomplete="current-password"
     >
 
-    <label class="show-password">
+    <div class="password-row">
       <input
         type="checkbox"
-        onclick="togglePassword('loginPassword')"
+        id="showLoginPassword"
+        onchange="toggleLoginPassword()"
       >
-      Show Password
-    </label>
+      <label for="showLoginPassword">Show Password</label>
+    </div>
 
     <button
       class="login-btn"
@@ -287,167 +395,162 @@ button {
       Continue with Google
     </button>
 
-    <p id="loginMessage"></p>
-
   </div>
 
 
   <!-- REGISTER -->
 
-  <div class="card">
+  <div class="box-card">
 
     <h2>REGISTER</h2>
 
     <input
       type="text"
-      id="regName"
+      id="registerName"
       placeholder="Name"
     >
 
+    <div class="country-row">
 
-    <!-- COUNTRY -->
+      <select
+        id="registerCountry"
+        onchange="updateRegisterMobileLength()"
+      >
+        <option value="+91" data-length="10">
+          India +91
+        </option>
 
-    <select
-      id="regCountry"
-      onchange="updateCountryLength('regCountry','regMobile')"
-    >
+        <option value="+1" data-length="10">
+          USA / Canada +1
+        </option>
 
-      <option value="+91" data-length="10">
-        India (+91)
-      </option>
+        <option value="+44" data-length="10">
+          UK +44
+        </option>
 
-      <option value="+1" data-length="10">
-        USA / Canada (+1)
-      </option>
+        <option value="+61" data-length="9">
+          Australia +61
+        </option>
 
-      <option value="+44" data-length="10">
-        United Kingdom (+44)
-      </option>
+        <option value="+64" data-length="9">
+          New Zealand +64
+        </option>
 
-      <option value="+61" data-length="9">
-        Australia (+61)
-      </option>
+        <option value="+971" data-length="9">
+          UAE +971
+        </option>
 
-      <option value="+64" data-length="9">
-        New Zealand (+64)
-      </option>
+        <option value="+966" data-length="9">
+          Saudi Arabia +966
+        </option>
 
-      <option value="+971" data-length="9">
-        UAE (+971)
-      </option>
+        <option value="+974" data-length="8">
+          Qatar +974
+        </option>
 
-      <option value="+966" data-length="9">
-        Saudi Arabia (+966)
-      </option>
+        <option value="+965" data-length="8">
+          Kuwait +965
+        </option>
 
-      <option value="+974" data-length="8">
-        Qatar (+974)
-      </option>
+        <option value="+968" data-length="8">
+          Oman +968
+        </option>
 
-      <option value="+965" data-length="8">
-        Kuwait (+965)
-      </option>
+        <option value="+973" data-length="8">
+          Bahrain +973
+        </option>
 
-      <option value="+968" data-length="8">
-        Oman (+968)
-      </option>
+        <option value="+65" data-length="8">
+          Singapore +65
+        </option>
 
-      <option value="+973" data-length="8">
-        Bahrain (+973)
-      </option>
+        <option value="+60" data-length="9">
+          Malaysia +60
+        </option>
 
-      <option value="+65" data-length="8">
-        Singapore (+65)
-      </option>
+        <option value="+94" data-length="9">
+          Sri Lanka +94
+        </option>
 
-      <option value="+60" data-length="9">
-        Malaysia (+60)
-      </option>
+        <option value="+880" data-length="10">
+          Bangladesh +880
+        </option>
 
-      <option value="+94" data-length="9">
-        Sri Lanka (+94)
-      </option>
+        <option value="+92" data-length="10">
+          Pakistan +92
+        </option>
 
-      <option value="+880" data-length="10">
-        Bangladesh (+880)
-      </option>
+        <option value="+977" data-length="10">
+          Nepal +977
+        </option>
 
-      <option value="+92" data-length="10">
-        Pakistan (+92)
-      </option>
+        <option value="+81" data-length="10">
+          Japan +81
+        </option>
 
-      <option value="+977" data-length="10">
-        Nepal (+977)
-      </option>
+        <option value="+49" data-length="11">
+          Germany +49
+        </option>
 
-      <option value="+81" data-length="10">
-        Japan (+81)
-      </option>
+        <option value="+33" data-length="9">
+          France +33
+        </option>
 
-      <option value="+49" data-length="11">
-        Germany (+49)
-      </option>
+        <option value="+39" data-length="10">
+          Italy +39
+        </option>
 
-      <option value="+33" data-length="9">
-        France (+33)
-      </option>
+        <option value="+34" data-length="9">
+          Spain +34
+        </option>
 
-      <option value="+39" data-length="10">
-        Italy (+39)
-      </option>
+        <option value="+7" data-length="10">
+          Russia +7
+        </option>
 
-      <option value="+34" data-length="9">
-        Spain (+34)
-      </option>
+        <option value="+55" data-length="11">
+          Brazil +55
+        </option>
 
-      <option value="+7" data-length="10">
-        Russia (+7)
-      </option>
+        <option value="+27" data-length="9">
+          South Africa +27
+        </option>
 
-      <option value="+55" data-length="11">
-        Brazil (+55)
-      </option>
+      </select>
 
-      <option value="+27" data-length="9">
-        South Africa (+27)
-      </option>
+      <input
+        type="tel"
+        id="registerMobile"
+        placeholder="Mobile Number"
+        inputmode="numeric"
+        oninput="limitRegisterMobile()"
+      >
 
-    </select>
-
-
-    <input
-      type="tel"
-      id="regMobile"
-      placeholder="Mobile Number"
-      inputmode="numeric"
-      maxlength="10"
-      oninput="limitMobile('regCountry','regMobile')"
-    >
+    </div>
 
 
     <input
       type="email"
-      id="regEmail"
+      id="registerEmail"
       placeholder="Email"
-      autocomplete="email"
     >
-
 
     <input
       type="password"
-      id="regPassword"
+      id="registerPassword"
       placeholder="Password"
-      autocomplete="new-password"
     >
 
-    <label class="show-password">
+    <div class="password-row">
       <input
         type="checkbox"
-        onclick="togglePassword('regPassword')"
+        id="showRegisterPassword"
+        onchange="toggleRegisterPassword()"
       >
-      Show Password
-    </label>
-
+      <label for="showRegisterPassword">
+        Show Password
+      </label>
+    </div>
 
     <button
       class="register-btn"
@@ -456,25 +559,33 @@ button {
       REGISTER
     </button>
 
-    <p id="registerMessage"></p>
-
   </div>
 
 
   <!-- RULES -->
 
-  <div class="card">
+  <div class="box-card rules">
 
     <h2>RULES</h2>
 
     <p>
-      Please play each game according to the instructions
-      shown inside the game.
+      1. Register with your correct details.
     </p>
 
     <p>
-      Game points are added to your MAGIKNUMBER account
-      after successful completion.
+      2. Each registered user receives a unique MAGIKNUMBER ID.
+    </p>
+
+    <p>
+      3. Your points are maintained in your account.
+    </p>
+
+    <p>
+      4. Game rules will be displayed before each game.
+    </p>
+
+    <p>
+      5. Do not share your login password with anyone.
     </p>
 
   </div>
@@ -486,44 +597,40 @@ button {
 
 <div id="loggedIn" class="hidden">
 
-  <div id="welcome">
-    Welcome to MAGIKNUMBER
-  </div>
-
   <!-- GAME MENU -->
 
-  <div id="gameMenu">
+  <div id="gameMenu" class="box-card">
 
     <h2 class="menu-title">
       GAME MENU
     </h2>
 
     <button
-      class="game-btn score-btn"
+      class="menu-btn"
       onclick="showScoreboard()"
     >
-      🏆 SCOREBOARD
+      SCOREBOARD
     </button>
 
     <button
-      class="game-btn diamond-btn"
+      class="menu-btn"
       onclick="openGame('DIAMOND')"
     >
-      💎 DIAMOND – 5 MINUTES
+      DIAMOND – 5 MINUTES
     </button>
 
     <button
-      class="game-btn gold-btn"
+      class="menu-btn"
       onclick="openGame('GOLD')"
     >
-      🥇 GOLD – 1 MINUTE
+      GOLD – 1 MINUTE
     </button>
 
     <button
-      class="game-btn silver-btn"
+      class="menu-btn"
       onclick="openGame('SILVER')"
     >
-      🥈 SILVER – 1 MINUTE
+      SILVER – 1 MINUTE
     </button>
 
     <button
@@ -536,52 +643,86 @@ button {
   </div>
 
 
-  <!-- ================= SCOREBOARD ================= -->
+  <!-- SCOREBOARD -->
 
-  <div
-    id="scoreboard"
-    class="card hidden"
-  >
+  <div id="scoreboard" class="box-card hidden">
 
-    <h2>🏆 SCOREBOARD</h2>
+    <h2>SCOREBOARD</h2>
 
+
+    <!-- ID -->
 
     <div class="score-row">
+
       <div class="score-label">
         MAGIKNUMBER ID
       </div>
 
-      <input
+      <div
         id="scoreId"
-        class="immutable"
-        readonly
+        class="info-box"
       >
+        --
+      </div>
+
     </div>
 
 
+    <!-- LOGO -->
+
     <div class="score-row">
+
+      <div class="score-label">
+        YOUR LOGO
+      </div>
+
+      <div class="logo-display">
+        <span id="scoreLogo">⚡</span>
+      </div>
+
+      <button
+        class="update-btn"
+        onclick="openLogoPopup()"
+      >
+        CHANGE LOGO
+      </button>
+
+    </div>
+
+
+    <!-- JOINING DATE -->
+
+    <div class="score-row">
+
       <div class="score-label">
         DATE OF JOINING
       </div>
 
-      <input
+      <div
         id="scoreJoining"
-        class="immutable"
-        readonly
+        class="info-box"
       >
+        --
+      </div>
+
     </div>
 
 
+    <!-- NAME -->
+
     <div class="score-row">
+
       <div class="score-label">
         NAME
       </div>
 
-      <input
+      <div
         id="scoreName"
-        class="immutable"
-        readonly
+        class="info-box"
       >
+        --
+      </div>
+
     </div>
 
 
@@ -593,14 +734,16 @@ button {
         EMAIL
       </div>
 
-      <input
-        type="email"
+      <div
         id="scoreEmail"
+        class="info-box"
       >
+        --
+      </div>
 
       <button
         class="update-btn"
-        onclick="updateUserEmail()"
+        onclick="openEmailPopup()"
       >
         UPDATE EMAIL
       </button>
@@ -616,127 +759,16 @@ button {
         MOBILE NUMBER
       </div>
 
-      <select
-        id="scoreCountry"
-        onchange="updateCountryLength('scoreCountry','scoreMobile')"
-      >
-
-        <option value="+91" data-length="10">
-          India (+91)
-        </option>
-
-        <option value="+1" data-length="10">
-          USA / Canada (+1)
-        </option>
-
-        <option value="+44" data-length="10">
-          United Kingdom (+44)
-        </option>
-
-        <option value="+61" data-length="9">
-          Australia (+61)
-        </option>
-
-        <option value="+64" data-length="9">
-          New Zealand (+64)
-        </option>
-
-        <option value="+971" data-length="9">
-          UAE (+971)
-        </option>
-
-        <option value="+966" data-length="9">
-          Saudi Arabia (+966)
-        </option>
-
-        <option value="+974" data-length="8">
-          Qatar (+974)
-        </option>
-
-        <option value="+965" data-length="8">
-          Kuwait (+965)
-        </option>
-
-        <option value="+968" data-length="8">
-          Oman (+968)
-        </option>
-
-        <option value="+973" data-length="8">
-          Bahrain (+973)
-        </option>
-
-        <option value="+65" data-length="8">
-          Singapore (+65)
-        </option>
-
-        <option value="+60" data-length="9">
-          Malaysia (+60)
-        </option>
-
-        <option value="+94" data-length="9">
-          Sri Lanka (+94)
-        </option>
-
-        <option value="+880" data-length="10">
-          Bangladesh (+880)
-        </option>
-
-        <option value="+92" data-length="10">
-          Pakistan (+92)
-        </option>
-
-        <option value="+977" data-length="10">
-          Nepal (+977)
-        </option>
-
-        <option value="+81" data-length="10">
-          Japan (+81)
-        </option>
-
-        <option value="+49" data-length="11">
-          Germany (+49)
-        </option>
-
-        <option value="+33" data-length="9">
-          France (+33)
-        </option>
-
-        <option value="+39" data-length="10">
-          Italy (+39)
-        </option>
-
-        <option value="+34" data-length="9">
-          Spain (+34)
-        </option>
-
-        <option value="+7" data-length="10">
-          Russia (+7)
-        </option>
-
-        <option value="+55" data-length="11">
-          Brazil (+55)
-        </option>
-
-        <option value="+27" data-length="9">
-          South Africa (+27)
-        </option>
-
-      </select>
-
-
-      <input
-        type="tel"
+      <div
         id="scoreMobile"
-        placeholder="Mobile Number"
-        inputmode="numeric"
-        maxlength="10"
-        oninput="limitMobile('scoreCountry','scoreMobile')"
+        class="info-box"
       >
-
+        --
+      </div>
 
       <button
         class="update-btn"
-        onclick="updateUserMobile()"
+        onclick="openMobilePopup()"
       >
         UPDATE MOBILE
       </button>
@@ -744,71 +776,89 @@ button {
     </div>
 
 
-    <div class="info-box">
-      <b>TOTAL GAMES PLAYED</b>
-      <div id="scoreGames">0</div>
-    </div>
+    <!-- GAMES -->
 
+    <div class="score-row">
 
-    <div class="info-box">
-      <b>EARNED POINTS</b>
-      <div id="scorePoints">0</div>
-    </div>
+      <div class="score-label">
+        TOTAL GAMES PLAYED
+      </div>
 
-
-    <div class="info-box">
-      <b>CASH BALANCE</b>
-      <div id="scoreCash">₹0</div>
-    </div>
-
-
-    <div class="info-box">
-
-      <b>CONVERSION</b>
-
-      <p class="small-text">
-        Test conversion:
-        100 points = ₹10
-      </p>
-
-      <button
-        class="update-btn"
-        onclick="convertPointsToCash()"
+      <div
+        id="scoreGames"
+        class="info-box"
       >
-        CONVERT POINTS
-      </button>
+        0
+      </div>
 
     </div>
 
 
-    <div class="info-box">
+    <!-- POINTS -->
 
-      <b>CONVERSION HISTORY</b>
+    <div class="score-row">
 
-      <p class="small-text">
-        No conversion history available.
-      </p>
+      <div class="score-label">
+        EARNED POINTS
+      </div>
 
-    </div>
-
-
-    <div class="info-box">
-
-      <b>CLOSE ACCOUNT</b>
-
-      <p class="small-text">
-        Account closing feature will be connected later.
-      </p>
-
-      <button
-        class="logout-btn"
-        onclick="closeAccount()"
+      <div
+        id="scorePoints"
+        class="info-box"
       >
-        CLOSE ACCOUNT
-      </button>
+        0
+      </div>
 
     </div>
 
+
+    <!-- CASH -->
+
+    <div class="score-row">
+
+      <div class="score-label">
+        CASH BALANCE
+      </div>
+
+      <div
+        id="scoreCash"
+        class="info-box"
+      >
+        ₹0
+      </div>
+
+    </div>
+
+
+    <!-- CONVERSION -->
+
+    <div class="score-row">
+
+      <div class="score-label">
+        CONVERSION HISTORY
+      </div>
+
+      <div
+        id="conversionHistory"
+        class="info-box"
+      >
+        No conversion history.
+      </div>
+
+    </div>
+
+
+    <!-- CLOSE ACCOUNT -->
+
+    <button
+      class="logout-btn"
+      onclick="closeAccount()"
+    >
+      CLOSE ACCOUNT
+    </button>
+
+
+    <!-- BACK -->
 
     <button
       class="back-btn"
@@ -820,16 +870,20 @@ button {
   </div>
 
 
-  <!-- ================= GAME AREA ================= -->
+  <!-- GAME AREA -->
 
   <div
     id="gameArea"
-    class="card hidden"
+    class="box-card hidden"
   >
 
-    <h2 id="gameTitle"></h2>
+    <h2 id="gameTitle">
+      GAME
+    </h2>
 
-    <p id="gameMessage"></p>
+    <p id="gameMessage">
+      Game will be added next.
+    </p>
 
     <button
       class="back-btn"
@@ -845,9 +899,279 @@ button {
 </div>
 
 
-<!-- ================= FIREBASE ================= -->
+<!-- ================= EMAIL POPUP ================= -->
+
+<div
+  id="emailModal"
+  class="modal hidden"
+>
+
+  <div class="modal-box">
+
+    <h2>UPDATE EMAIL</h2>
+
+    <input
+      type="email"
+      id="newEmail"
+      placeholder="Enter new email"
+    >
+
+    <button
+      class="update-btn"
+      onclick="confirmEmailUpdate()"
+    >
+      CONFIRM
+    </button>
+
+    <button
+      class="cancel-btn"
+      onclick="cancelEmailUpdate()"
+    >
+      CANCEL
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= MOBILE POPUP ================= -->
+
+<div
+  id="mobileModal"
+  class="modal hidden"
+>
+
+  <div class="modal-box">
+
+    <h2>UPDATE MOBILE</h2>
+
+    <select
+      id="updateCountry"
+      onchange="updateMobilePopupLength()"
+    >
+
+      <option value="+91" data-length="10">
+        India +91
+      </option>
+
+      <option value="+1" data-length="10">
+        USA / Canada +1
+      </option>
+
+      <option value="+44" data-length="10">
+        UK +44
+      </option>
+
+      <option value="+61" data-length="9">
+        Australia +61
+      </option>
+
+      <option value="+64" data-length="9">
+        New Zealand +64
+      </option>
+
+      <option value="+971" data-length="9">
+        UAE +971
+      </option>
+
+      <option value="+966" data-length="9">
+        Saudi Arabia +966
+      </option>
+
+      <option value="+974" data-length="8">
+        Qatar +974
+      </option>
+
+      <option value="+965" data-length="8">
+        Kuwait +965
+      </option>
+
+      <option value="+968" data-length="8">
+        Oman +968
+      </option>
+
+      <option value="+973" data-length="8">
+        Bahrain +973
+      </option>
+
+      <option value="+65" data-length="8">
+        Singapore +65
+      </option>
+
+      <option value="+60" data-length="9">
+        Malaysia +60
+      </option>
+
+      <option value="+94" data-length="9">
+        Sri Lanka +94
+      </option>
+
+      <option value="+880" data-length="10">
+        Bangladesh +880
+      </option>
+
+      <option value="+92" data-length="10">
+        Pakistan +92
+      </option>
+
+      <option value="+977" data-length="10">
+        Nepal +977
+      </option>
+
+      <option value="+81" data-length="10">
+        Japan +81
+      </option>
+
+      <option value="+49" data-length="11">
+        Germany +49
+      </option>
+
+      <option value="+33" data-length="9">
+        France +33
+      </option>
+
+      <option value="+39" data-length="10">
+        Italy +39
+      </option>
+
+      <option value="+34" data-length="9">
+        Spain +34
+      </option>
+
+      <option value="+7" data-length="10">
+        Russia +7
+      </option>
+
+      <option value="+55" data-length="11">
+        Brazil +55
+      </option>
+
+      <option value="+27" data-length="9">
+        South Africa +27
+      </option>
+
+    </select>
+
+
+    <input
+      type="tel"
+      id="newMobile"
+      placeholder="Mobile Number"
+      inputmode="numeric"
+      oninput="limitUpdateMobile()"
+    >
+
+
+    <button
+      class="update-btn"
+      onclick="confirmMobileUpdate()"
+    >
+      CONFIRM
+    </button>
+
+    <button
+      class="cancel-btn"
+      onclick="cancelMobileUpdate()"
+    >
+      CANCEL
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= LOGO POPUP ================= -->
+
+<div
+  id="logoModal"
+  class="modal hidden"
+>
+
+  <div class="modal-box">
+
+    <h2>CHOOSE YOUR LOGO</h2>
+
+    <div class="logo-grid">
+
+      <button onclick="changeLogo('⚡')">
+        ⚡
+      </button>
+
+      <button onclick="changeLogo('🎯')">
+        🎯
+      </button>
+
+      <button onclick="changeLogo('🚀')">
+        🚀
+      </button>
+
+      <button onclick="changeLogo('🔥')">
+        🔥
+      </button>
+
+      <button onclick="changeLogo('👑')">
+        👑
+      </button>
+
+      <button onclick="changeLogo('💎')">
+        💎
+      </button>
+
+      <button onclick="changeLogo('🌀')">
+        🌀
+      </button>
+
+      <button onclick="changeLogo('🌟')">
+        🌟
+      </button>
+
+    </div>
+
+    <button
+      class="cancel-btn"
+      onclick="closeLogoPopup()"
+    >
+      CANCEL
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= SUCCESS POPUP ================= -->
+
+<div
+  id="successModal"
+  class="modal hidden"
+>
+
+  <div class="modal-box">
+
+    <div
+      id="successMessage"
+      class="success-message"
+    >
+      Success
+    </div>
+
+    <button
+      class="close-btn"
+      onclick="closeSuccessPopup()"
+    >
+      CLOSE
+    </button>
+
+  </div>
+
+</div>
+
 
 <script type="module">
+
+/* ================= FIREBASE ================= */
 
 import {
   initializeApp
@@ -860,8 +1184,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   onAuthStateChanged,
-  updateEmail,
-  signOut
+  updateEmail
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import {
@@ -870,120 +1193,145 @@ import {
   getDoc,
   setDoc,
   updateDoc,
-  runTransaction,
-  serverTimestamp
+  runTransaction
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
 /* ================= FIREBASE CONFIG ================= */
 
 const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
-
-  authDomain:
-    "magiknumbers-d42c0.firebaseapp.com",
-
-  projectId:
-    "magiknumbers-d42c0",
-
-  storageBucket:
-    "magiknumbers-d42c0.firebasestorage.app",
-
-  messagingSenderId:
-    "977553928698",
-
-  appId:
-    "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
-
+  apiKey: "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+  authDomain: "magiknumbers-d42c0.firebaseapp.com",
+  projectId: "magiknumbers-d42c0",
+  storageBucket: "magiknumbers-d42c0.firebasestorage.app",
+  messagingSenderId: "977553928698",
+  appId: "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
 };
 
 
-const app =
-  initializeApp(firebaseConfig);
+/* ================= INITIALIZE ================= */
 
-const auth =
-  getAuth(app);
+const app = initializeApp(firebaseConfig);
 
-const db =
-  getFirestore(app);
+const auth = getAuth(app);
+
+const db = getFirestore(app);
 
 
-/* ================= CURRENT USER ================= */
+/* ================= VARIABLES ================= */
 
 let currentUser = null;
+
 let currentUserData = null;
+
+
+/* ================= COUNTRY LENGTH ================= */
+
+function getCountryLength(selectId){
+
+  const select =
+    document.getElementById(selectId);
+
+  const option =
+    select.options[select.selectedIndex];
+
+  return Number(
+    option.dataset.length
+  );
+}
+
+
+/* ================= REGISTER MOBILE ================= */
+
+window.updateRegisterMobileLength = function(){
+
+  const input =
+    document.getElementById("registerMobile");
+
+  const length =
+    getCountryLength("registerCountry");
+
+  input.maxLength = length;
+
+  input.value =
+    input.value.replace(/\D/g,"").slice(0,length);
+};
+
+
+window.limitRegisterMobile = function(){
+
+  const input =
+    document.getElementById("registerMobile");
+
+  const length =
+    getCountryLength("registerCountry");
+
+  input.value =
+    input.value.replace(/\D/g,"").slice(0,length);
+};
+
+
+/* ================= UPDATE MOBILE ================= */
+
+window.updateMobilePopupLength = function(){
+
+  const input =
+    document.getElementById("newMobile");
+
+  const length =
+    getCountryLength("updateCountry");
+
+  input.maxLength = length;
+
+  input.value =
+    input.value.replace(/\D/g,"").slice(0,length);
+};
+
+
+window.limitUpdateMobile = function(){
+
+  const input =
+    document.getElementById("newMobile");
+
+  const length =
+    getCountryLength("updateCountry");
+
+  input.value =
+    input.value.replace(/\D/g,"").slice(0,length);
+};
 
 
 /* ================= PASSWORD ================= */
 
-window.togglePassword = function(id) {
+window.toggleLoginPassword = function(){
 
-  const input =
-    document.getElementById(id);
+  const password =
+    document.getElementById("loginPassword");
 
-  input.type =
-    input.type === "password"
-      ? "text"
-      : "password";
+  const checkbox =
+    document.getElementById("showLoginPassword");
+
+  password.type =
+    checkbox.checked ? "text" : "password";
 };
 
 
-/* ================= MOBILE ================= */
+window.toggleRegisterPassword = function(){
 
-window.updateCountryLength = function(
-  countryId,
-  mobileId
-) {
+  const password =
+    document.getElementById("registerPassword");
 
-  const country =
-    document.getElementById(countryId);
+  const checkbox =
+    document.getElementById("showRegisterPassword");
 
-  const mobile =
-    document.getElementById(mobileId);
-
-  const option =
-    country.options[country.selectedIndex];
-
-  const length =
-    Number(option.dataset.length || 10);
-
-  mobile.maxLength = length;
-
-  mobile.value =
-    mobile.value.replace(/\D/g,"")
-      .slice(0,length);
+  password.type =
+    checkbox.checked ? "text" : "password";
 };
 
 
-window.limitMobile = function(
-  countryId,
-  mobileId
-) {
+/* ================= GENERATE MAGIK NUMBER ================= */
 
-  const country =
-    document.getElementById(countryId);
-
-  const mobile =
-    document.getElementById(mobileId);
-
-  const option =
-    country.options[country.selectedIndex];
-
-  const length =
-    Number(option.dataset.length || 10);
-
-  mobile.value =
-    mobile.value
-      .replace(/\D/g,"")
-      .slice(0,length);
-};
-
-
-/* ================= MAGIK NUMBER ID ================= */
-
-async function generateMagikNumberId() {
+async function generateMagikNumberId(){
 
   const counterRef =
     doc(db,"system","counter");
@@ -991,24 +1339,22 @@ async function generateMagikNumberId() {
   const newId =
     await runTransaction(
       db,
-      async(transaction) => {
+      async(transaction)=>{
 
         const snapshot =
           await transaction.get(counterRef);
 
         let nextNumber = 100002;
 
-        if(snapshot.exists()) {
+        if(snapshot.exists()){
 
           const data =
             snapshot.data();
 
           nextNumber =
             Number(
-              data.nextNumber ||
-              100002
+              data.nextNumber || 100002
             );
-
         }
 
         transaction.set(
@@ -1032,7 +1378,7 @@ async function generateMagikNumberId() {
 
 /* ================= CREATE USER PROFILE ================= */
 
-async function createUserProfile(user) {
+async function createUserProfile(user){
 
   const userRef =
     doc(db,"users",user.uid);
@@ -1041,71 +1387,46 @@ async function createUserProfile(user) {
     await getDoc(userRef);
 
 
-  if(!snapshot.exists()) {
+  if(!snapshot.exists()){
 
     const magikNumberId =
       await generateMagikNumberId();
-
-    const name =
-      document.getElementById("regName")
-        ?.value
-        ?.trim() || "User";
-
-    const country =
-      document.getElementById("regCountry")
-        ?.value || "+91";
-
-    const mobile =
-      document.getElementById("regMobile")
-        ?.value
-        ?.trim() || "";
-
-    const fullMobile =
-      mobile
-        ? country + mobile
-        : "";
 
 
     await setDoc(
       userRef,
       {
-
         magikNumberId:
-
           magikNumberId,
 
         name:
-
-          name,
+          document.getElementById("registerName")?.value.trim()
+          || user.displayName
+          || "User",
 
         email:
-
           user.email || "",
 
         mobile:
+          "",
 
-          fullMobile,
-
-        dateOfJoining:
-
-          serverTimestamp(),
-
-        totalGamesPlayed:
-
-          0,
+        logo:
+          "⚡",
 
         points:
-
           0,
 
         cashBalance:
-
           0,
 
-        avatar:
+        gamesPlayed:
+          0,
 
-          "logo1",
+        conversionHistory:
+          [],
 
+        joiningDate:
+          new Date().toISOString()
       }
     );
 
@@ -1116,82 +1437,70 @@ async function createUserProfile(user) {
 
 /* ================= REGISTER ================= */
 
-window.registerUser = async function() {
+window.registerUser = async function(){
 
   const name =
-    document.getElementById("regName")
+    document.getElementById("registerName")
       .value.trim();
 
   const country =
-    document.getElementById("regCountry")
+    document.getElementById("registerCountry")
       .value;
 
   const mobile =
-    document.getElementById("regMobile")
+    document.getElementById("registerMobile")
       .value.trim();
 
   const email =
-    document.getElementById("regEmail")
+    document.getElementById("registerEmail")
       .value.trim();
 
   const password =
-    document.getElementById("regPassword")
+    document.getElementById("registerPassword")
       .value;
 
 
-  const message =
-    document.getElementById(
-      "registerMessage"
-    );
+  if(!name){
 
-
-  message.className = "";
-  message.textContent = "";
-
-
-  if(!name) {
-
-    message.className = "error";
-    message.textContent =
-      "Please enter your name.";
+    alert("Please enter your name.");
 
     return;
   }
 
-
-  const countryOption =
-    document.getElementById("regCountry")
-      .selectedOptions[0];
 
   const requiredLength =
-    Number(
-      countryOption.dataset.length
+    getCountryLength("registerCountry");
+
+
+  if(mobile.length !== requiredLength){
+
+    alert(
+      "Please enter a valid mobile number."
     );
 
+    return;
+  }
 
-  if(mobile.length !== requiredLength) {
 
-    message.className = "error";
+  if(!email){
 
-    message.textContent =
-      "Please enter a valid mobile number.";
+    alert("Please enter your email.");
 
     return;
   }
 
 
-  if(!email || !password) {
+  if(password.length < 6){
 
-    message.className = "error";
-
-    message.textContent =
-      "Please enter email and password.";
+    alert(
+      "Password must be at least 6 characters."
+    );
 
     return;
   }
 
 
-  try {
+  try{
 
     const result =
       await createUserWithEmailAndPassword(
@@ -1206,20 +1515,26 @@ window.registerUser = async function() {
     );
 
 
-    message.className =
-      "success";
+    await updateDoc(
+      doc(db,"users",result.user.uid),
+      {
+        name:name,
+        mobile:country + mobile
+      }
+    );
 
-    message.textContent =
-      "Registration successful.";
+
+    alert(
+      "Registration successful!"
+    );
 
 
-  } catch(error) {
+  }catch(error){
 
-    message.className =
-      "error";
-
-    message.textContent =
-      error.message;
+    alert(
+      "Registration failed: " +
+      error.message
+    );
 
   }
 
@@ -1228,7 +1543,7 @@ window.registerUser = async function() {
 
 /* ================= LOGIN ================= */
 
-window.loginUser = async function() {
+window.loginUser = async function(){
 
   const email =
     document.getElementById("loginEmail")
@@ -1238,17 +1553,18 @@ window.loginUser = async function() {
     document.getElementById("loginPassword")
       .value;
 
-  const message =
-    document.getElementById(
-      "loginMessage"
+
+  if(!email || !password){
+
+    alert(
+      "Please enter email and password."
     );
 
+    return;
+  }
 
-  message.className = "";
-  message.textContent = "";
 
-
-  try {
+  try{
 
     await signInWithEmailAndPassword(
       auth,
@@ -1256,13 +1572,12 @@ window.loginUser = async function() {
       password
     );
 
-  } catch(error) {
+  }catch(error){
 
-    message.className =
-      "error";
-
-    message.textContent =
-      error.message;
+    alert(
+      "Login failed: " +
+      error.message
+    );
 
   }
 
@@ -1271,12 +1586,12 @@ window.loginUser = async function() {
 
 /* ================= GOOGLE LOGIN ================= */
 
-window.googleLogin = async function() {
+window.googleLogin = async function(){
 
-  const provider =
-    new GoogleAuthProvider();
+  try{
 
-  try {
+    const provider =
+      new GoogleAuthProvider();
 
     const result =
       await signInWithPopup(
@@ -1290,12 +1605,12 @@ window.googleLogin = async function() {
     );
 
 
-  } catch(error) {
+  }catch(error){
 
-    document.getElementById(
-      "loginMessage"
-    ).textContent =
-      error.message;
+    alert(
+      "Google login failed: " +
+      error.message
+    );
 
   }
 
@@ -1306,26 +1621,20 @@ window.googleLogin = async function() {
 
 onAuthStateChanged(
   auth,
-  async(user) => {
+  async(user)=>{
 
-    currentUser = user;
+    if(user){
+
+      currentUser =
+        user;
 
 
-    if(user) {
+      await createUserProfile(
+        user
+      );
 
-      try {
 
-        await createUserProfile(
-          user
-        );
-
-        await loadUserData();
-
-      } catch(error) {
-
-        console.error(error);
-
-      }
+      await loadUserData();
 
 
       document
@@ -1340,16 +1649,31 @@ onAuthStateChanged(
 
       document
         .getElementById("userIdBar")
-        .style.display = "flex";
+        .classList.remove("hidden");
 
 
-      showGameMenu();
+      document
+        .getElementById("gameMenu")
+        .classList.remove("hidden");
 
 
-    } else {
+      document
+        .getElementById("scoreboard")
+        .classList.add("hidden");
 
-      currentUser = null;
-      currentUserData = null;
+
+      document
+        .getElementById("gameArea")
+        .classList.add("hidden");
+
+
+    }else{
+
+      currentUser =
+        null;
+
+      currentUserData =
+        null;
 
 
       document
@@ -1364,7 +1688,7 @@ onAuthStateChanged(
 
       document
         .getElementById("userIdBar")
-        .style.display = "none";
+        .classList.add("hidden");
 
     }
 
@@ -1374,9 +1698,10 @@ onAuthStateChanged(
 
 /* ================= LOAD USER DATA ================= */
 
-async function loadUserData() {
+async function loadUserData(){
 
-  if(!currentUser) return;
+  if(!currentUser)
+    return;
 
 
   const userRef =
@@ -1391,7 +1716,8 @@ async function loadUserData() {
     await getDoc(userRef);
 
 
-  if(!snapshot.exists()) return;
+  if(!snapshot.exists())
+    return;
 
 
   currentUserData =
@@ -1399,179 +1725,155 @@ async function loadUserData() {
 
 
   const id =
-    currentUserData.magikNumberId ||
-    "MN100001";
+    currentUserData.magikNumberId
+    || "--";
 
 
-  document.getElementById(
-    "displayUserId"
-  ).textContent =
-    "ID: " + id;
+  const name =
+    currentUserData.name
+    || "User";
 
 
-  document.getElementById(
-    "scoreId"
-  ).value =
-    id;
+  const email =
+    currentUserData.email
+    || currentUser.email
+    || "--";
 
 
-  document.getElementById(
-    "scoreName"
-  ).value =
-    currentUserData.name || "";
+  const mobile =
+    currentUserData.mobile
+    || "Not available";
 
 
-  document.getElementById(
-    "scoreEmail"
-  ).value =
-    currentUserData.email ||
-    currentUser.email ||
-    "";
+  const logo =
+    currentUserData.logo
+    || "⚡";
 
 
-  document.getElementById(
-    "scoreGames"
-  ).textContent =
-    currentUserData.totalGamesPlayed ||
-    0;
-
-
-  document.getElementById(
-    "scorePoints"
-  ).textContent =
-    currentUserData.points ||
-    0;
-
-
-  document.getElementById(
-    "scoreCash"
-  ).textContent =
-    "₹" +
-    (
-      currentUserData.cashBalance ||
-      0
+  const points =
+    Number(
+      currentUserData.points || 0
     );
 
 
-  /* DATE */
+  const games =
+    Number(
+      currentUserData.gamesPlayed || 0
+    );
 
-  if(currentUserData.dateOfJoining) {
 
-    let date;
+  const cash =
+    Number(
+      currentUserData.cashBalance || 0
+    );
 
-    if(
-      currentUserData.dateOfJoining
-        .toDate
-    ) {
 
-      date =
-        currentUserData.dateOfJoining
-          .toDate();
+  let joining =
+    currentUserData.joiningDate
+    || "--";
 
-    } else {
 
-      date =
-        new Date(
-          currentUserData.dateOfJoining
-        );
+  if(joining !== "--"){
 
-    }
+    try{
 
-    document.getElementById(
-      "scoreJoining"
-    ).value =
-      date.toLocaleDateString(
-        "en-IN"
-      );
+      joining =
+        new Date(joining)
+          .toLocaleDateString();
 
-  } else {
-
-    document.getElementById(
-      "scoreJoining"
-    ).value =
-      "Not available";
+    }catch(e){}
 
   }
 
 
-  /* MOBILE */
+  /* TOP BAR */
 
-  const storedMobile =
-    currentUserData.mobile || "";
-
-
-  const countryCodes = [
-    "+971",
-    "+966",
-    "+880",
-    "+977",
-    "+968",
-    "+973",
-    "+965",
-    "+974",
-    "+44",
-    "+91",
-    "+61",
-    "+64",
-    "+65",
-    "+60",
-    "+94",
-    "+92",
-    "+81",
-    "+49",
-    "+33",
-    "+39",
-    "+34",
-    "+7",
-    "+55",
-    "+27",
-    "+1"
-  ];
+  document
+    .getElementById("displayUserId")
+    .textContent =
+    "ID: " + id;
 
 
-  let foundCode = "+91";
+  document
+    .getElementById("userLogo")
+    .textContent =
+    logo;
 
 
-  for(
-    const code of countryCodes
-  ) {
+  /* SCOREBOARD */
 
-    if(
-      storedMobile.startsWith(code)
-    ) {
-
-      foundCode = code;
-      break;
-
-    }
-
-  }
+  document
+    .getElementById("scoreId")
+    .textContent =
+    id;
 
 
-  document.getElementById(
-    "scoreCountry"
-  ).value =
-    foundCode;
+  document
+    .getElementById("scoreLogo")
+    .textContent =
+    logo;
 
 
-  document.getElementById(
-    "scoreMobile"
-  ).value =
-    storedMobile
-      .replace(foundCode,"");
+  document
+    .getElementById("scoreJoining")
+    .textContent =
+    joining;
 
 
-  updateCountryLength(
-    "scoreCountry",
-    "scoreMobile"
-  );
+  document
+    .getElementById("scoreName")
+    .textContent =
+    name;
+
+
+  document
+    .getElementById("scoreEmail")
+    .textContent =
+    email;
+
+
+  document
+    .getElementById("scoreMobile")
+    .textContent =
+    mobile;
+
+
+  document
+    .getElementById("scoreGames")
+    .textContent =
+    games;
+
+
+  document
+    .getElementById("scorePoints")
+    .textContent =
+    points;
+
+
+  document
+    .getElementById("scoreCash")
+    .textContent =
+    "₹" + cash;
+
+
+  const history =
+    currentUserData.conversionHistory
+    || [];
+
+
+  document
+    .getElementById("conversionHistory")
+    .textContent =
+    history.length
+      ? history.join(" | ")
+      : "No conversion history.";
 
 }
 
 
 /* ================= SCOREBOARD ================= */
 
-window.showScoreboard = async function() {
+window.showScoreboard = async function(){
 
   await loadUserData();
 
@@ -1593,48 +1895,117 @@ window.showScoreboard = async function() {
 };
 
 
-function showGameMenu() {
+/* ================= BACK ================= */
+
+window.backToMenu = function(){
 
   document
     .getElementById("scoreboard")
     .classList.add("hidden");
 
+
   document
     .getElementById("gameArea")
     .classList.add("hidden");
+
 
   document
     .getElementById("gameMenu")
     .classList.remove("hidden");
 
-}
+};
 
 
-/* ================= UPDATE EMAIL ================= */
+/* ================= OPEN GAME ================= */
 
-window.updateUserEmail = async function() {
+window.openGame = function(gameName){
 
-  if(!currentUser) return;
+  document
+    .getElementById("gameMenu")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("scoreboard")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("gameArea")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("gameTitle")
+    .textContent =
+    gameName + " GAME";
+
+
+  document
+    .getElementById("gameMessage")
+    .textContent =
+    "The " +
+    gameName +
+    " game will be added next.";
+
+};
+
+
+/* ================= EMAIL POPUP ================= */
+
+window.openEmailPopup = function(){
+
+  if(!currentUser)
+    return;
+
+
+  document
+    .getElementById("newEmail")
+    .value =
+    currentUserData?.email
+    || currentUser.email
+    || "";
+
+
+  document
+    .getElementById("emailModal")
+    .classList.remove("hidden");
+
+};
+
+
+window.cancelEmailUpdate = function(){
+
+  document
+    .getElementById("emailModal")
+    .classList.add("hidden");
+
+};
+
+
+window.confirmEmailUpdate = async function(){
+
+  if(!currentUser)
+    return;
 
 
   const newEmail =
-    document.getElementById(
-      "scoreEmail"
-    ).value.trim();
+    document
+      .getElementById("newEmail")
+      .value.trim();
 
 
-  if(!newEmail) {
+  if(!newEmail){
 
     alert(
-      "Please enter an email address."
+      "Please enter a new email."
     );
 
     return;
-
   }
 
 
-  try {
+  try{
 
     await updateEmail(
       currentUser,
@@ -1654,7 +2025,12 @@ window.updateUserEmail = async function() {
     );
 
 
-    alert(
+    document
+      .getElementById("emailModal")
+      .classList.add("hidden");
+
+
+    showSuccess(
       "Email updated successfully."
     );
 
@@ -1662,7 +2038,7 @@ window.updateUserEmail = async function() {
     await loadUserData();
 
 
-  } catch(error) {
+  }catch(error){
 
     alert(
       "Email update failed: " +
@@ -1674,53 +2050,141 @@ window.updateUserEmail = async function() {
 };
 
 
-/* ================= UPDATE MOBILE ================= */
+/* ================= MOBILE POPUP ================= */
 
-window.updateUserMobile = async function() {
+window.openMobilePopup = function(){
 
-  if(!currentUser) return;
+  if(!currentUser)
+    return;
+
+
+  const stored =
+    currentUserData?.mobile
+    || "";
+
+
+  let selectedCountry =
+    "+91";
+
+  let mobileNumber =
+    stored;
+
+
+  const countries = [
+
+    "+91",
+    "+1",
+    "+44",
+    "+61",
+    "+64",
+    "+971",
+    "+966",
+    "+974",
+    "+965",
+    "+968",
+    "+973",
+    "+65",
+    "+60",
+    "+94",
+    "+880",
+    "+92",
+    "+977",
+    "+81",
+    "+49",
+    "+33",
+    "+39",
+    "+34",
+    "+7",
+    "+55",
+    "+27"
+
+  ];
+
+
+  for(const code of countries){
+
+    if(stored.startsWith(code)){
+
+      selectedCountry =
+        code;
+
+      mobileNumber =
+        stored.substring(
+          code.length
+        );
+
+      break;
+    }
+
+  }
+
+
+  document
+    .getElementById("updateCountry")
+    .value =
+    selectedCountry;
+
+
+  document
+    .getElementById("newMobile")
+    .value =
+    mobileNumber;
+
+
+  updateMobilePopupLength();
+
+
+  document
+    .getElementById("mobileModal")
+    .classList.remove("hidden");
+
+};
+
+
+window.cancelMobileUpdate = function(){
+
+  document
+    .getElementById("mobileModal")
+    .classList.add("hidden");
+
+};
+
+
+window.confirmMobileUpdate = async function(){
+
+  if(!currentUser)
+    return;
 
 
   const country =
-    document.getElementById(
-      "scoreCountry"
-    ).value;
+    document
+      .getElementById("updateCountry")
+      .value;
 
 
   const mobile =
-    document.getElementById(
-      "scoreMobile"
-    ).value.trim();
+    document
+      .getElementById("newMobile")
+      .value.trim();
 
 
   const requiredLength =
-    Number(
-      document.getElementById(
-        "scoreCountry"
-      ).selectedOptions[0]
-        .dataset.length
+    getCountryLength(
+      "updateCountry"
     );
 
 
-  if(
-    mobile.length !==
-    requiredLength
-  ) {
+  if(mobile.length !== requiredLength){
 
     alert(
       "Please enter a valid mobile number."
     );
 
     return;
-
   }
 
 
-  const fullMobile =
-    country + mobile;
-
-
-  try {
+  try{
 
     await updateDoc(
       doc(
@@ -1729,12 +2193,18 @@ window.updateUserMobile = async function() {
         currentUser.uid
       ),
       {
-        mobile:fullMobile
+        mobile:
+          country + mobile
       }
     );
 
 
-    alert(
+    document
+      .getElementById("mobileModal")
+      .classList.add("hidden");
+
+
+    showSuccess(
       "Mobile number updated successfully."
     );
 
@@ -1742,7 +2212,7 @@ window.updateUserMobile = async function() {
     await loadUserData();
 
 
-  } catch(error) {
+  }catch(error){
 
     alert(
       "Mobile update failed: " +
@@ -1754,92 +2224,116 @@ window.updateUserMobile = async function() {
 };
 
 
-/* ================= POINT CONVERSION ================= */
+/* ================= LOGO ================= */
 
-window.convertPointsToCash = async function() {
+window.openLogoPopup = function(){
 
-  if(!currentUser || !currentUserData)
+  document
+    .getElementById("logoModal")
+    .classList.remove("hidden");
+
+};
+
+
+window.closeLogoPopup = function(){
+
+  document
+    .getElementById("logoModal")
+    .classList.add("hidden");
+
+};
+
+
+window.changeLogo = async function(newLogo){
+
+  if(!currentUser)
     return;
 
 
-  const points =
-    Number(
-      currentUserData.points || 0
+  try{
+
+    await updateDoc(
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      ),
+      {
+        logo:newLogo
+      }
     );
 
 
-  if(points < 100) {
+    currentUserData.logo =
+      newLogo;
+
+
+    document
+      .getElementById("userLogo")
+      .textContent =
+      newLogo;
+
+
+    document
+      .getElementById("scoreLogo")
+      .textContent =
+      newLogo;
+
+
+    document
+      .getElementById("logoModal")
+      .classList.add("hidden");
+
+
+    showSuccess(
+      "Logo changed successfully."
+    );
+
+
+  }catch(error){
 
     alert(
-      "You need at least 100 points."
+      "Logo update failed: " +
+      error.message
     );
-
-    return;
 
   }
 
-
-  const cash =
-    Math.floor(points / 100) * 10;
-
-
-  alert(
-    "Test conversion amount: ₹" +
-    cash
-  );
-
 };
 
 
-/* ================= GAME ================= */
+/* ================= SUCCESS POPUP ================= */
 
-window.openGame = function(gameName) {
-
-  document
-    .getElementById("gameMenu")
-    .classList.add("hidden");
-
+function showSuccess(message){
 
   document
-    .getElementById("scoreboard")
-    .classList.add("hidden");
+    .getElementById("successMessage")
+    .textContent =
+    message;
 
 
   document
-    .getElementById("gameArea")
+    .getElementById("successModal")
     .classList.remove("hidden");
 
-
-  document.getElementById(
-    "gameTitle"
-  ).textContent =
-    gameName;
+}
 
 
-  document.getElementById(
-    "gameMessage"
-  ).textContent =
-    gameName +
-    " game will be added next.";
+window.closeSuccessPopup = function(){
 
-};
-
-
-/* ================= BACK ================= */
-
-window.backToMenu = function() {
-
-  showGameMenu();
+  document
+    .getElementById("successModal")
+    .classList.add("hidden");
 
 };
 
 
 /* ================= CLOSE ACCOUNT ================= */
 
-window.closeAccount = function() {
+window.closeAccount = function(){
 
   alert(
-    "Account closing feature will be connected later."
+    "Close Account feature will be added later."
   );
 
 };
@@ -1847,21 +2341,27 @@ window.closeAccount = function() {
 
 /* ================= LOGOUT ================= */
 
-window.logoutUser = async function() {
+window.logoutUser = async function(){
 
-  try {
+  try{
 
-    await signOut(auth);
+    await auth.signOut();
 
-  } catch(error) {
+  }catch(error){
 
     alert(
+      "Logout failed: " +
       error.message
     );
 
   }
 
 };
+
+
+/* ================= INITIAL MOBILE LIMIT ================= */
+
+updateRegisterMobileLength();
 
 </script>
 

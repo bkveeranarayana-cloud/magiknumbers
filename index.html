@@ -25,7 +25,7 @@
     }
 
     h1 {
-      margin: 10px 0;
+      margin: 10px 0 20px;
       font-size: 32px;
     }
 
@@ -68,11 +68,21 @@
 
     .google {
       background: white;
-      border: 1px solid #aaa;
+      border: 1px solid #999;
     }
 
     .logout {
       background: #e53935;
+      color: white;
+    }
+
+    .profileButton {
+      background: #673ab7;
+      color: white;
+    }
+
+    .backButton {
+      background: #555;
       color: white;
     }
 
@@ -84,6 +94,7 @@
       border-radius: 12px;
       font-size: 19px;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .rules {
@@ -93,7 +104,8 @@
 
     #authArea,
     #loggedIn,
-    #gameMenu {
+    #gameMenu,
+    #profile {
       display: none;
     }
 
@@ -102,7 +114,8 @@
       font-weight: bold;
     }
 
-    /* USER ID - TOP LEFT */
+    /* USER ID - ALWAYS TOP LEFT AFTER LOGIN */
+
     #userIdBar {
       display: none;
       position: fixed;
@@ -117,16 +130,20 @@
       font-size: 15px;
     }
 
-    .profileButton {
-      background: #673ab7;
-      color: white;
+    .profileRow {
+      padding: 10px;
+      margin: 8px 0;
+      background: #f5f5f5;
+      border-radius: 8px;
     }
   </style>
 </head>
 
+
 <body>
 
-<!-- USER ID -->
+<!-- TOP LEFT USER ID -->
+
 <div id="userIdBar">
   ID: <span id="displayUserId">---</span>
 </div>
@@ -137,11 +154,17 @@
   <h1>MAGIKNUMBER</h1>
 
 
+  <!-- ========================= -->
   <!-- LOGIN / REGISTER / RULES -->
+  <!-- ========================= -->
+
   <div id="authArea">
 
+
     <!-- LOGIN FIRST -->
+
     <div class="card">
+
       <h2>LOGIN</h2>
 
       <input
@@ -156,20 +179,27 @@
         placeholder="Password"
       >
 
-      <button class="login" onclick="loginUser()">
+      <button
+        class="login"
+        onclick="loginUser()">
         LOGIN
       </button>
 
-      <button class="google" onclick="googleLogin()">
+      <button
+        class="google"
+        onclick="googleLogin()">
         🔵 Continue with Google
       </button>
 
       <div id="message"></div>
+
     </div>
 
 
     <!-- REGISTER BELOW LOGIN -->
+
     <div class="card">
+
       <h2>REGISTER</h2>
 
       <input
@@ -196,13 +226,17 @@
         placeholder="Password"
       >
 
-      <button class="register" onclick="registerUser()">
+      <button
+        class="register"
+        onclick="registerUser()">
         REGISTER
       </button>
+
     </div>
 
 
     <!-- RULES LAST -->
+
     <div class="card rules">
 
       <h2>RULES</h2>
@@ -217,12 +251,17 @@
 
       <p>• Successful games will add points to your Score Card.</p>
 
+      <p>• Each user has a unique MAGIKNUMBER ID.</p>
+
     </div>
 
   </div>
 
 
-  <!-- LOGGED IN -->
+  <!-- ========================= -->
+  <!-- LOGGED IN AREA -->
+  <!-- ========================= -->
+
   <div id="loggedIn" class="card">
 
     <h2>Welcome!</h2>
@@ -231,72 +270,137 @@
 
     <p id="userEmail"></p>
 
-    <button class="profileButton" onclick="showProfile()">
+    <button
+      class="profileButton"
+      onclick="showProfile()">
       MY PROFILE
     </button>
 
-    <button class="logout" onclick="logoutUser()">
+    <button
+      class="logout"
+      onclick="logoutUser()">
       LOGOUT
     </button>
 
   </div>
 
 
+  <!-- ========================= -->
   <!-- GAME MENU -->
+  <!-- ========================= -->
+
   <div id="gameMenu" class="card">
 
     <h2>GAME MENU</h2>
 
-    <div class="game" onclick="openGame('score')">
+
+    <div
+      class="game"
+      onclick="openGame('score')">
       SCORE CARD
     </div>
 
-    <div class="game" onclick="openGame('diamond')">
+
+    <div
+      class="game"
+      onclick="openGame('diamond')">
       💎 DIAMOND – 5 MINUTES
     </div>
 
-    <div class="game" onclick="openGame('gold')">
+
+    <div
+      class="game"
+      onclick="openGame('gold')">
       🥇 GOLD – 1 MINUTE
     </div>
 
-    <div class="game" onclick="openGame('silver')">
+
+    <div
+      class="game"
+      onclick="openGame('silver')">
       🥈 SILVER – 1 MINUTE
     </div>
 
   </div>
 
 
+  <!-- ========================= -->
   <!-- PROFILE -->
-  <div id="profile" class="card" style="display:none;">
+  <!-- ========================= -->
+
+  <div id="profile" class="card">
 
     <h2>MY PROFILE</h2>
 
-    <p>
-      <b>MAGIKNUMBER ID</b><br>
-      <span id="profileId"></span>
-    </p>
 
-    <p>
-      <b>NAME</b><br>
-      <span id="profileName"></span>
-    </p>
+    <div class="profileRow">
 
-    <p>
-      <b>EMAIL</b><br>
-      <span id="profileEmail"></span>
-    </p>
+      <b>MAGIKNUMBER ID</b>
 
-    <p>
-      <b>MOBILE</b><br>
-      <span id="profileMobile"></span>
-    </p>
+      <br>
 
-    <p>
-      <b>POINTS</b><br>
-      <span id="profilePoints">0</span>
-    </p>
+      <span id="profileId">
+        ---
+      </span>
 
-    <button onclick="closeProfile()">
+    </div>
+
+
+    <div class="profileRow">
+
+      <b>NAME</b>
+
+      <br>
+
+      <span id="profileName">
+        ---
+      </span>
+
+    </div>
+
+
+    <div class="profileRow">
+
+      <b>EMAIL</b>
+
+      <br>
+
+      <span id="profileEmail">
+        ---
+      </span>
+
+    </div>
+
+
+    <div class="profileRow">
+
+      <b>MOBILE</b>
+
+      <br>
+
+      <span id="profileMobile">
+        ---
+      </span>
+
+    </div>
+
+
+    <div class="profileRow">
+
+      <b>OVERALL POINTS</b>
+
+      <br>
+
+      <span id="profilePoints">
+        0
+      </span>
+
+    </div>
+
+
+    <button
+      class="backButton"
+      onclick="closeProfile()">
       BACK
     </button>
 
@@ -305,10 +409,23 @@
 </div>
 
 
+<!-- ================================= -->
+<!-- FIREBASE -->
+<!-- ================================= -->
+
 <script type="module">
 
-  import { initializeApp }
-  from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+  /* FIREBASE APP */
+
+  import {
+    initializeApp
+  }
+  from
+  "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+
+  /* FIREBASE AUTH */
 
   import {
     getAuth,
@@ -319,391 +436,602 @@
     onAuthStateChanged,
     signOut
   }
-  from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+  from
+  "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+  /* FIRESTORE */
 
   import {
     getFirestore,
     doc,
     setDoc,
-    getDoc,
-    collection,
-    getDocs
+    getDoc
   }
-  from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+  from
+  "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-  // FIREBASE CONFIG
+  /* ========================= */
+  /* FIREBASE CONFIG */
+  /* ========================= */
 
   const firebaseConfig = {
-    apiKey: "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
-    authDomain: "magiknumbers-d42c0.firebaseapp.com",
-    projectId: "magiknumbers-d42c0",
-    storageBucket: "magiknumbers-d42c0.firebasestorage.app",
-    messagingSenderId: "977553928698",
-    appId: "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
+    apiKey:
+      "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+
+    authDomain:
+      "magiknumbers-d42c0.firebaseapp.com",
+
+    projectId:
+      "magiknumbers-d42c0",
+
+    storageBucket:
+      "magiknumbers-d42c0.firebasestorage.app",
+
+    messagingSenderId:
+      "977553928698",
+
+    appId:
+      "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
   };
 
 
-  const app = initializeApp(firebaseConfig);
+  /* INITIALIZE */
 
-  const auth = getAuth(app);
-
-  const db = getFirestore(app);
-
-  const provider = new GoogleAuthProvider();
+  const app =
+    initializeApp(firebaseConfig);
 
 
-  // GENERATE MAGIKNUMBER ID
-
-  async function generateMagikNumberId() {
-
-    const usersRef = collection(db, "users");
-
-    const snapshot = await getDocs(usersRef);
-
-    let highestNumber = 100000;
-
-    snapshot.forEach((item) => {
-
-      const data = item.data();
-
-      if (data.magikNumberId) {
-
-        const number =
-          parseInt(
-            data.magikNumberId.replace("MN", "")
-          );
-
-        if (number > highestNumber) {
-          highestNumber = number;
-        }
-      }
-
-    });
-
-    return "MN" + (highestNumber + 1);
-  }
+  const auth =
+    getAuth(app);
 
 
-  // REGISTER
-
-  window.registerUser = async function() {
-
-    const name =
-      document.getElementById("name").value.trim();
-
-    const mobile =
-      document.getElementById("mobile").value.trim();
-
-    const email =
-      document.getElementById("email").value.trim();
-
-    const password =
-      document.getElementById("password").value;
+  const db =
+    getFirestore(app);
 
 
-    if (!name || !mobile || !email || !password) {
+  const googleProvider =
+    new GoogleAuthProvider();
 
-      showMessage("Please fill all details.");
 
-      return;
+  /* ========================= */
+  /* CREATE PROFILE */
+  /* ========================= */
+
+  async function createUserProfile(user) {
+
+    const userRef =
+      doc(db, "users", user.uid);
+
+
+    const existing =
+      await getDoc(userRef);
+
+
+    /*
+      IF PROFILE ALREADY EXISTS
+      DON'T CREATE ANOTHER ONE
+    */
+
+    if (existing.exists()) {
+
+      return existing.data();
+
     }
 
 
-    try {
+    /*
+      FIRST EXISTING USER
+      GETS MN100001
+    */
 
-      const result =
-        await createUserWithEmailAndPassword(
+    const userData = {
+
+      magikNumberId:
+        "MN100001",
+
+      name:
+        user.displayName || "User",
+
+      email:
+        user.email || "",
+
+      mobile:
+        "",
+
+      points:
+        0
+
+    };
+
+
+    await setDoc(
+      userRef,
+      userData
+    );
+
+
+    return userData;
+
+  }
+
+
+  /* ========================= */
+  /* REGISTER */
+  /* ========================= */
+
+  window.registerUser =
+    async function() {
+
+
+      const name =
+        document
+        .getElementById("name")
+        .value
+        .trim();
+
+
+      const mobile =
+        document
+        .getElementById("mobile")
+        .value
+        .trim();
+
+
+      const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+      const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+      if (
+        !name ||
+        !mobile ||
+        !email ||
+        !password
+      ) {
+
+        showMessage(
+          "Please fill all details."
+        );
+
+        return;
+      }
+
+
+      try {
+
+
+        const result =
+          await
+          createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+        const user =
+          result.user;
+
+
+        const userRef =
+          doc(
+            db,
+            "users",
+            user.uid
+          );
+
+
+        const userData = {
+
+          magikNumberId:
+            "MN100001",
+
+          name:
+            name,
+
+          email:
+            email,
+
+          mobile:
+            mobile,
+
+          points:
+            0
+
+        };
+
+
+        await setDoc(
+          userRef,
+          userData
+        );
+
+
+        alert(
+          "Registration successful!\n\n" +
+          "Your MAGIKNUMBER ID:\n" +
+          "MN100001"
+        );
+
+
+      }
+      catch (error) {
+
+        showMessage(
+          error.message
+        );
+
+      }
+
+    };
+
+
+  /* ========================= */
+  /* EMAIL LOGIN */
+  /* ========================= */
+
+  window.loginUser =
+    async function() {
+
+
+      const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+
+      const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+
+      if (!email || !password) {
+
+        showMessage(
+          "Enter email and password."
+        );
+
+        return;
+      }
+
+
+      try {
+
+        await
+        signInWithEmailAndPassword(
           auth,
           email,
           password
         );
 
+      }
+      catch (error) {
 
-      const user = result.user;
+        showMessage(
+          error.message
+        );
 
+      }
 
-      const magikNumberId =
-        await generateMagikNumberId();
-
-
-      // SAVE USER DATA
-
-      await setDoc(
-        doc(db, "users", user.uid),
-        {
-          magikNumberId: magikNumberId,
-          name: name,
-          email: email,
-          mobile: mobile,
-          points: 0
-        }
-      );
+    };
 
 
-      alert(
-        "Registration successful!\n\nYour MagikNumber ID is:\n"
-        + magikNumberId
-      );
+  /* ========================= */
+  /* GOOGLE LOGIN */
+  /* ========================= */
 
-    } catch (error) {
-
-      showMessage(error.message);
-    }
-
-  };
+  window.googleLogin =
+    async function() {
 
 
-  // LOGIN
+      try {
 
-  window.loginUser = async function() {
-
-    const email =
-      document.getElementById("loginEmail").value.trim();
-
-    const password =
-      document.getElementById("loginPassword").value;
-
-
-    if (!email || !password) {
-
-      showMessage("Enter email and password.");
-
-      return;
-    }
-
-
-    try {
-
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-    } catch (error) {
-
-      showMessage(error.message);
-    }
-
-  };
-
-
-  // GOOGLE LOGIN
-
-  window.googleLogin = async function() {
-
-    try {
-
-      const result =
-        await signInWithPopup(
+        await
+        signInWithPopup(
           auth,
-          provider
+          googleProvider
         );
 
+      }
+      catch (error) {
 
-      const user = result.user;
-
-
-      const userRef =
-        doc(db, "users", user.uid);
-
-
-      const existing =
-        await getDoc(userRef);
-
-
-      // CREATE PROFILE FOR FIRST GOOGLE LOGIN
-
-      if (!existing.exists()) {
-
-        const magikNumberId =
-          await generateMagikNumberId();
-
-
-        await setDoc(
-          userRef,
-          {
-            magikNumberId: magikNumberId,
-            name: user.displayName || "User",
-            email: user.email || "",
-            mobile: "",
-            points: 0
-          }
+        showMessage(
+          error.message
         );
 
-
-        alert(
-          "Welcome to MAGIKNUMBER!\n\nYour ID is:\n"
-          + magikNumberId
-        );
       }
 
-    } catch (error) {
-
-      showMessage(error.message);
-    }
-
-  };
+    };
 
 
-  // LOGIN STATUS
+  /* ========================= */
+  /* AUTH STATE */
+  /* ========================= */
 
-  onAuthStateChanged(auth, async (user) => {
-
-    if (user) {
-
-      document.getElementById("authArea")
-        .style.display = "none";
-
-      document.getElementById("loggedIn")
-        .style.display = "block";
-
-      document.getElementById("gameMenu")
-        .style.display = "block";
-
-      document.getElementById("userIdBar")
-        .style.display = "block";
+  onAuthStateChanged(
+    auth,
+    async (user) => {
 
 
-      document.getElementById("userName")
-        .innerText =
-        user.displayName || "User";
+      if (user) {
 
 
-      document.getElementById("userEmail")
-        .innerText =
-        user.email || "";
+        try {
 
 
-      // GET USER PROFILE
+          /*
+            CREATE PROFILE IF
+            EXISTING USER DOESN'T
+            HAVE ONE
+          */
 
-      const userDoc =
-        await getDoc(
-          doc(db, "users", user.uid)
-        );
-
-
-      if (userDoc.exists()) {
-
-        const data = userDoc.data();
-
-
-        document.getElementById("displayUserId")
-          .innerText =
-          data.magikNumberId || "---";
+          const data =
+            await createUserProfile(
+              user
+            );
 
 
-        document.getElementById("profileId")
-          .innerText =
-          data.magikNumberId || "---";
+          /* HIDE LOGIN AREA */
+
+          document
+            .getElementById("authArea")
+            .style.display = "none";
 
 
-        document.getElementById("profileName")
-          .innerText =
-          data.name || "";
+          /* SHOW WELCOME */
+
+          document
+            .getElementById("loggedIn")
+            .style.display = "block";
 
 
-        document.getElementById("profileEmail")
-          .innerText =
-          data.email || "";
+          /* SHOW GAME MENU */
+
+          document
+            .getElementById("gameMenu")
+            .style.display = "block";
 
 
-        document.getElementById("profileMobile")
-          .innerText =
-          data.mobile || "";
+          /* SHOW USER ID */
+
+          document
+            .getElementById("userIdBar")
+            .style.display = "block";
 
 
-        document.getElementById("profilePoints")
-          .innerText =
-          data.points || 0;
+          document
+            .getElementById("displayUserId")
+            .innerText =
+            data.magikNumberId;
+
+
+          /* USER NAME */
+
+          document
+            .getElementById("userName")
+            .innerText =
+            "Name: " + data.name;
+
+
+          /* EMAIL */
+
+          document
+            .getElementById("userEmail")
+            .innerText =
+            "Email: " + data.email;
+
+
+          /* PROFILE */
+
+          document
+            .getElementById("profileId")
+            .innerText =
+            data.magikNumberId;
+
+
+          document
+            .getElementById("profileName")
+            .innerText =
+            data.name;
+
+
+          document
+            .getElementById("profileEmail")
+            .innerText =
+            data.email;
+
+
+          document
+            .getElementById("profileMobile")
+            .innerText =
+            data.mobile ||
+            "Not added";
+
+
+          document
+            .getElementById("profilePoints")
+            .innerText =
+            data.points || 0;
+
+
+        }
+        catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            "Could not load your profile."
+          );
+
+        }
+
+
+      }
+      else {
+
+
+        /* LOGGED OUT */
+
+        document
+          .getElementById("authArea")
+          .style.display = "block";
+
+
+        document
+          .getElementById("loggedIn")
+          .style.display = "none";
+
+
+        document
+          .getElementById("gameMenu")
+          .style.display = "none";
+
+
+        document
+          .getElementById("profile")
+          .style.display = "none";
+
+
+        document
+          .getElementById("userIdBar")
+          .style.display = "none";
+
       }
 
-    } else {
+    }
+  );
 
-      document.getElementById("authArea")
+
+  /* ========================= */
+  /* PROFILE */
+  /* ========================= */
+
+  window.showProfile =
+    function() {
+
+
+      document
+        .getElementById("profile")
         .style.display = "block";
 
-      document.getElementById("loggedIn")
+
+      document
+        .getElementById("loggedIn")
         .style.display = "none";
 
-      document.getElementById("gameMenu")
+
+      document
+        .getElementById("gameMenu")
         .style.display = "none";
 
-      document.getElementById("profile")
+    };
+
+
+  window.closeProfile =
+    function() {
+
+
+      document
+        .getElementById("profile")
         .style.display = "none";
 
-      document.getElementById("userIdBar")
-        .style.display = "none";
-    }
 
-  });
-
-
-  // PROFILE
-
-  window.showProfile = function() {
-
-    document.getElementById("profile")
-      .style.display = "block";
-
-    document.getElementById("loggedIn")
-      .style.display = "none";
-
-    document.getElementById("gameMenu")
-      .style.display = "none";
-  };
+      document
+        .getElementById("loggedIn")
+        .style.display = "block";
 
 
-  window.closeProfile = function() {
+      document
+        .getElementById("gameMenu")
+        .style.display = "block";
 
-    document.getElementById("profile")
-      .style.display = "none";
-
-    document.getElementById("loggedIn")
-      .style.display = "block";
-
-    document.getElementById("gameMenu")
-      .style.display = "block";
-  };
+    };
 
 
-  // LOGOUT
+  /* ========================= */
+  /* LOGOUT */
+  /* ========================= */
 
-  window.logoutUser = async function() {
+  window.logoutUser =
+    async function() {
 
-    await signOut(auth);
-  };
+      await signOut(auth);
 
+    };
+
+
+  /* ========================= */
+  /* MESSAGE */
+  /* ========================= */
 
   function showMessage(text) {
 
-    document.getElementById("message")
+    document
+      .getElementById("message")
       .innerText = text;
+
   }
 
 
-  // GAME BUTTONS
+  /* ========================= */
+  /* GAME MENU */
+  /* ========================= */
 
-  window.openGame = function(game) {
+  window.openGame =
+    function(game) {
 
-    if (game === "score") {
-      alert("SCORE CARD will be added next.");
-    }
 
-    if (game === "diamond") {
-      alert("DIAMOND GAME – 5 MINUTES");
-    }
+      if (game === "score") {
 
-    if (game === "gold") {
-      alert("GOLD GAME – 1 MINUTE");
-    }
+        alert(
+          "SCORE CARD will be added next."
+        );
 
-    if (game === "silver") {
-      alert("SILVER GAME – 1 MINUTE");
-    }
+      }
 
-  };
+
+      if (game === "diamond") {
+
+        alert(
+          "DIAMOND GAME – 5 MINUTES"
+        );
+
+      }
+
+
+      if (game === "gold") {
+
+        alert(
+          "GOLD GAME – 1 MINUTE"
+        );
+
+      }
+
+
+      if (game === "silver") {
+
+        alert(
+          "SILVER GAME – 1 MINUTE"
+        );
+
+      }
+
+    };
+
 
 </script>
 

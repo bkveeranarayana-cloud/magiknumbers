@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
 <title>MAGIKNUMBER</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -34,7 +36,7 @@ h2{
   text-align:center;
 }
 
-/* FIXED USER ID + LOGO */
+/* FIXED USER ID */
 
 #userIdBar{
   position:fixed;
@@ -67,10 +69,11 @@ h2{
   border-radius:50%;
 
   background:linear-gradient(135deg,#ff7a00,#ff1744);
+
   font-size:18px;
 }
 
-/* BOX */
+/* CARD */
 
 .box-card{
   background:white;
@@ -136,11 +139,6 @@ button{
   color:white;
 }
 
-.profile-btn{
-  background:#7b1fa2;
-  color:white;
-}
-
 .back-btn{
   background:#555;
   color:white;
@@ -158,6 +156,21 @@ button{
 
 .close-btn{
   background:#1976d2;
+  color:white;
+}
+
+.answer-btn{
+  background:#111;
+  color:white;
+}
+
+.start-game-btn{
+  background:#20a84b;
+  color:white;
+}
+
+.stop-game-btn{
+  background:#e53935;
   color:white;
 }
 
@@ -181,7 +194,7 @@ button{
   display:none !important;
 }
 
-/* GAME MENU */
+/* MENU */
 
 .menu-title{
   color:#4b20d9;
@@ -289,7 +302,6 @@ button{
   margin:0;
 
   background:#f2f3f7;
-
   border:2px solid #ddd;
 
   font-size:32px;
@@ -332,850 +344,1353 @@ button{
   font-weight:bold;
   margin:20px 0;
 }
+
+/* ================= DIAMOND ================= */
+
+.game-header{
+  text-align:center;
+  color:#4b20d9;
+}
+
+.diamond-badge{
+  text-align:center;
+  font-size:45px;
+  margin:5px 0;
+}
+
+.game-hint{
+  background:#fff8d9;
+  border:1px solid #e3cf62;
+  border-radius:10px;
+  padding:12px;
+
+  margin:12px 0;
+
+  font-weight:bold;
+  line-height:1.8;
+}
+
+.timer{
+  text-align:center;
+
+  font-size:32px;
+  font-weight:bold;
+
+  margin:15px 0;
+}
+
+.timer.warning{
+  color:#e53935;
+}
+
+/* 5 X 5 */
+
+.game-grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(5,1fr);
+
+  gap:6px;
+
+  margin:15px auto;
+
+  max-width:450px;
+}
+
+.game-grid input{
+  width:100%;
+
+  aspect-ratio:1;
+
+  margin:0;
+
+  padding:2px;
+
+  text-align:center;
+
+  font-size:20px;
+
+  font-weight:bold;
+}
+
+/* RESULT */
+
+.result-title{
+  text-align:center;
+
+  font-size:20px;
+
+  font-weight:bold;
+
+  margin:18px 0 10px;
+}
+
+.result-grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(5,1fr);
+
+  gap:5px;
+
+  max-width:450px;
+
+  margin:auto;
+}
+
+.result-box{
+  aspect-ratio:1;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  border:1px solid #aaa;
+
+  border-radius:6px;
+
+  background:#f1f1f1;
+
+  font-size:18px;
+
+  font-weight:bold;
+}
+
+.score-display{
+  text-align:center;
+
+  font-size:28px;
+
+  font-weight:bold;
+
+  margin:18px 0;
+}
+
+.result-message{
+  text-align:center;
+
+  font-size:18px;
+
+  font-weight:bold;
+
+  margin:15px 0;
+}
+
+.score-breakdown{
+  background:#f3f5f9;
+
+  border-radius:10px;
+
+  padding:12px;
+
+  line-height:1.8;
+
+  margin-top:15px;
+}
+
+/* ADMIN */
+
+.admin-title{
+  color:#e53935;
+
+  text-align:center;
+}
+
+.admin-note{
+  font-size:13px;
+
+  color:#666;
+
+  line-height:1.5;
+}
+
+.admin-grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(5,1fr);
+
+  gap:5px;
+
+  margin:10px 0;
+}
+
+.admin-grid input{
+  width:100%;
+
+  aspect-ratio:1;
+
+  padding:2px;
+
+  text-align:center;
+
+  margin:0;
+}
+
 </style>
 </head>
 
+
 <body>
 
-<!-- FIXED LOGO + USER ID -->
+
+<!-- ================= FIXED USER ID ================= -->
 
 <div id="userIdBar" class="hidden">
+
   <span id="userLogo">⚡</span>
-  <span id="displayUserId">ID: --</span>
+
+  <span id="displayUserId">
+    ID: --
+  </span>
+
 </div>
 
 
 <div class="container">
 
-<h1>MAGIKNUMBER</h1>
+
+<h1>
+  MAGIKNUMBER
+</h1>
 
 
-<!-- ================= AUTH AREA ================= -->
+<!-- ===================================================== -->
+<!-- AUTH AREA -->
+<!-- ===================================================== -->
 
 <div id="authArea">
 
-  <!-- LOGIN -->
 
-  <div class="box-card">
+<!-- LOGIN -->
 
-    <h2>LOGIN</h2>
+<div class="box-card">
 
-    <input
-      type="email"
-      id="loginEmail"
-      placeholder="Email"
-    >
+<h2>
+LOGIN
+</h2>
 
-    <input
-      type="password"
-      id="loginPassword"
-      placeholder="Password"
-    >
+<input
+  type="email"
+  id="loginEmail"
+  placeholder="Email"
+>
 
-    <div class="password-row">
-      <input
-        type="checkbox"
-        id="showLoginPassword"
-        onchange="toggleLoginPassword()"
-      >
-      <label for="showLoginPassword">Show Password</label>
-    </div>
+<input
+  type="password"
+  id="loginPassword"
+  placeholder="Password"
+>
 
-    <button
-      class="login-btn"
-      onclick="loginUser()"
-    >
-      LOGIN
-    </button>
+<div class="password-row">
 
-    <button
-      class="google-btn"
-      onclick="googleLogin()"
-    >
-      Continue with Google
-    </button>
+<input
+  type="checkbox"
+  id="showLoginPassword"
+  onchange="toggleLoginPassword()"
+>
 
-  </div>
-
-
-  <!-- REGISTER -->
-
-  <div class="box-card">
-
-    <h2>REGISTER</h2>
-
-    <input
-      type="text"
-      id="registerName"
-      placeholder="Name"
-    >
-
-    <div class="country-row">
-
-      <select
-        id="registerCountry"
-        onchange="updateRegisterMobileLength()"
-      >
-        <option value="+91" data-length="10">
-          India +91
-        </option>
-
-        <option value="+1" data-length="10">
-          USA / Canada +1
-        </option>
-
-        <option value="+44" data-length="10">
-          UK +44
-        </option>
-
-        <option value="+61" data-length="9">
-          Australia +61
-        </option>
-
-        <option value="+64" data-length="9">
-          New Zealand +64
-        </option>
-
-        <option value="+971" data-length="9">
-          UAE +971
-        </option>
-
-        <option value="+966" data-length="9">
-          Saudi Arabia +966
-        </option>
-
-        <option value="+974" data-length="8">
-          Qatar +974
-        </option>
-
-        <option value="+965" data-length="8">
-          Kuwait +965
-        </option>
-
-        <option value="+968" data-length="8">
-          Oman +968
-        </option>
-
-        <option value="+973" data-length="8">
-          Bahrain +973
-        </option>
-
-        <option value="+65" data-length="8">
-          Singapore +65
-        </option>
-
-        <option value="+60" data-length="9">
-          Malaysia +60
-        </option>
-
-        <option value="+94" data-length="9">
-          Sri Lanka +94
-        </option>
-
-        <option value="+880" data-length="10">
-          Bangladesh +880
-        </option>
-
-        <option value="+92" data-length="10">
-          Pakistan +92
-        </option>
-
-        <option value="+977" data-length="10">
-          Nepal +977
-        </option>
-
-        <option value="+81" data-length="10">
-          Japan +81
-        </option>
-
-        <option value="+49" data-length="11">
-          Germany +49
-        </option>
-
-        <option value="+33" data-length="9">
-          France +33
-        </option>
-
-        <option value="+39" data-length="10">
-          Italy +39
-        </option>
-
-        <option value="+34" data-length="9">
-          Spain +34
-        </option>
-
-        <option value="+7" data-length="10">
-          Russia +7
-        </option>
-
-        <option value="+55" data-length="11">
-          Brazil +55
-        </option>
-
-        <option value="+27" data-length="9">
-          South Africa +27
-        </option>
-
-      </select>
-
-      <input
-        type="tel"
-        id="registerMobile"
-        placeholder="Mobile Number"
-        inputmode="numeric"
-        oninput="limitRegisterMobile()"
-      >
-
-    </div>
-
-
-    <input
-      type="email"
-      id="registerEmail"
-      placeholder="Email"
-    >
-
-    <input
-      type="password"
-      id="registerPassword"
-      placeholder="Password"
-    >
-
-    <div class="password-row">
-      <input
-        type="checkbox"
-        id="showRegisterPassword"
-        onchange="toggleRegisterPassword()"
-      >
-      <label for="showRegisterPassword">
-        Show Password
-      </label>
-    </div>
-
-    <button
-      class="register-btn"
-      onclick="registerUser()"
-    >
-      REGISTER
-    </button>
-
-  </div>
-
-
-  <!-- RULES -->
-
-  <div class="box-card rules">
-
-    <h2>RULES</h2>
-
-    <p>
-      1. Register with your correct details.
-    </p>
-
-    <p>
-      2. Each registered user receives a unique MAGIKNUMBER ID.
-    </p>
-
-    <p>
-      3. Your points are maintained in your account.
-    </p>
-
-    <p>
-      4. Game rules will be displayed before each game.
-    </p>
-
-    <p>
-      5. Do not share your login password with anyone.
-    </p>
-
-  </div>
+<label for="showLoginPassword">
+Show Password
+</label>
 
 </div>
 
 
-<!-- ================= LOGGED IN ================= -->
+<button
+  class="login-btn"
+  onclick="loginUser()"
+>
+LOGIN
+</button>
+
+
+<button
+  class="google-btn"
+  onclick="googleLogin()"
+>
+Continue with Google
+</button>
+
+</div>
+
+
+<!-- REGISTER -->
+
+<div class="box-card">
+
+<h2>
+REGISTER
+</h2>
+
+
+<input
+  type="text"
+  id="registerName"
+  placeholder="Name"
+>
+
+
+<div class="country-row">
+
+<select
+  id="registerCountry"
+  onchange="updateRegisterMobileLength()"
+>
+
+<option value="+91" data-length="10">
+India +91
+</option>
+
+<option value="+1" data-length="10">
+USA / Canada +1
+</option>
+
+<option value="+44" data-length="10">
+UK +44
+</option>
+
+<option value="+61" data-length="9">
+Australia +61
+</option>
+
+<option value="+64" data-length="9">
+New Zealand +64
+</option>
+
+<option value="+971" data-length="9">
+UAE +971
+</option>
+
+<option value="+966" data-length="9">
+Saudi Arabia +966
+</option>
+
+<option value="+974" data-length="8">
+Qatar +974
+</option>
+
+<option value="+965" data-length="8">
+Kuwait +965
+</option>
+
+<option value="+968" data-length="8">
+Oman +968
+</option>
+
+<option value="+973" data-length="8">
+Bahrain +973
+</option>
+
+<option value="+65" data-length="8">
+Singapore +65
+</option>
+
+<option value="+60" data-length="9">
+Malaysia +60
+</option>
+
+<option value="+94" data-length="9">
+Sri Lanka +94
+</option>
+
+<option value="+880" data-length="10">
+Bangladesh +880
+</option>
+
+<option value="+92" data-length="10">
+Pakistan +92
+</option>
+
+<option value="+977" data-length="10">
+Nepal +977
+</option>
+
+<option value="+81" data-length="10">
+Japan +81
+</option>
+
+<option value="+49" data-length="11">
+Germany +49
+</option>
+
+<option value="+33" data-length="9">
+France +33
+</option>
+
+<option value="+39" data-length="10">
+Italy +39
+</option>
+
+<option value="+34" data-length="9">
+Spain +34
+</option>
+
+<option value="+7" data-length="10">
+Russia +7
+</option>
+
+<option value="+55" data-length="11">
+Brazil +55
+</option>
+
+<option value="+27" data-length="9">
+South Africa +27
+</option>
+
+</select>
+
+
+<input
+  type="tel"
+  id="registerMobile"
+  placeholder="Mobile Number"
+  inputmode="numeric"
+  oninput="limitRegisterMobile()"
+>
+
+</div>
+
+
+<input
+  type="email"
+  id="registerEmail"
+  placeholder="Email"
+>
+
+
+<input
+  type="password"
+  id="registerPassword"
+  placeholder="Password"
+>
+
+
+<div class="password-row">
+
+<input
+  type="checkbox"
+  id="showRegisterPassword"
+  onchange="toggleRegisterPassword()"
+>
+
+<label for="showRegisterPassword">
+Show Password
+</label>
+
+</div>
+
+
+<button
+  class="register-btn"
+  onclick="registerUser()"
+>
+REGISTER
+</button>
+
+</div>
+
+
+<!-- RULES -->
+
+<div class="box-card rules">
+
+<h2>
+RULES
+</h2>
+
+<p>
+1. Register with your correct details.
+</p>
+
+<p>
+2. Each registered user receives a unique MAGIKNUMBER ID.
+</p>
+
+<p>
+3. Your points are maintained in your account.
+</p>
+
+<p>
+4. Game rules will be displayed before each game.
+</p>
+
+<p>
+5. Do not share your login password with anyone.
+</p>
+
+</div>
+
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- LOGGED IN -->
+<!-- ===================================================== -->
 
 <div id="loggedIn" class="hidden">
 
-  <!-- GAME MENU -->
 
-  <div id="gameMenu" class="box-card">
+<!-- GAME MENU -->
 
-    <h2 class="menu-title">
-      GAME MENU
-    </h2>
+<div id="gameMenu" class="box-card">
 
-    <button
-      class="menu-btn"
-      onclick="showScoreboard()"
-    >
-      SCOREBOARD
-    </button>
+<h2 class="menu-title">
+GAME MENU
+</h2>
 
-    <button
-      class="menu-btn"
-      onclick="openGame('DIAMOND')"
-    >
-      DIAMOND – 5 MINUTES
-    </button>
 
-    <button
-      class="menu-btn"
-      onclick="openGame('GOLD')"
-    >
-      GOLD – 1 MINUTE
-    </button>
+<button
+  class="menu-btn"
+  onclick="showScoreboard()"
+>
+SCOREBOARD
+</button>
 
-    <button
-      class="menu-btn"
-      onclick="openGame('SILVER')"
-    >
-      SILVER – 1 MINUTE
-    </button>
 
-    <button
-      class="logout-btn"
-      onclick="logoutUser()"
-    >
-      LOGOUT
-    </button>
+<button
+  class="menu-btn"
+  onclick="openGame('DIAMOND')"
+>
+DIAMOND – 5 MINUTES
+</button>
 
-  </div>
 
+<button
+  class="menu-btn"
+  onclick="openGame('GOLD')"
+>
+GOLD – 1 MINUTE
+</button>
 
-  <!-- SCOREBOARD -->
 
-  <div id="scoreboard" class="box-card hidden">
+<button
+  class="menu-btn"
+  onclick="openGame('SILVER')"
+>
+SILVER – 1 MINUTE
+</button>
 
-    <h2>SCOREBOARD</h2>
 
+<button
+  class="logout-btn"
+  onclick="logoutUser()"
+>
+LOGOUT
+</button>
 
-    <!-- ID -->
+</div>
 
-    <div class="score-row">
 
-      <div class="score-label">
-        MAGIKNUMBER ID
-      </div>
+<!-- ===================================================== -->
+<!-- SCOREBOARD -->
+<!-- ===================================================== -->
 
-      <div
-        id="scoreId"
-        class="info-box"
-      >
-        --
-      </div>
+<div
+  id="scoreboard"
+  class="box-card hidden"
+>
 
-    </div>
+<h2>
+SCOREBOARD
+</h2>
 
 
-    <!-- LOGO -->
+<div class="score-row">
 
-    <div class="score-row">
+<div class="score-label">
+MAGIKNUMBER ID
+</div>
 
-      <div class="score-label">
-        YOUR LOGO
-      </div>
+<div
+  id="scoreId"
+  class="info-box"
+>
+--
+</div>
 
-      <div class="logo-display">
-        <span id="scoreLogo">⚡</span>
-      </div>
+</div>
 
-      <button
-        class="update-btn"
-        onclick="openLogoPopup()"
-      >
-        CHANGE LOGO
-      </button>
 
-    </div>
+<div class="score-row">
 
+<div class="score-label">
+YOUR LOGO
+</div>
 
-    <!-- JOINING DATE -->
+<div class="logo-display">
 
-    <div class="score-row">
+<span id="scoreLogo">
+⚡
+</span>
 
-      <div class="score-label">
-        DATE OF JOINING
-      </div>
+</div>
 
-      <div
-        id="scoreJoining"
-        class="info-box"
-      >
-        --
-      </div>
 
-    </div>
+<button
+  class="update-btn"
+  onclick="openLogoPopup()"
+>
+CHANGE LOGO
+</button>
 
+</div>
 
-    <!-- NAME -->
 
-    <div class="score-row">
+<div class="score-row">
 
-      <div class="score-label">
-        NAME
-      </div>
+<div class="score-label">
+DATE OF JOINING
+</div>
 
-      <div
-        id="scoreName"
-        class="info-box"
-      >
-        --
-      </div>
+<div
+  id="scoreJoining"
+  class="info-box"
+>
+--
+</div>
 
-    </div>
+</div>
 
 
-    <!-- EMAIL -->
+<div class="score-row">
 
-    <div class="score-row">
+<div class="score-label">
+NAME
+</div>
 
-      <div class="score-label">
-        EMAIL
-      </div>
+<div
+  id="scoreName"
+  class="info-box"
+>
+--
+</div>
 
-      <div
-        id="scoreEmail"
-        class="info-box"
-      >
-        --
-      </div>
+</div>
 
-      <button
-        class="update-btn"
-        onclick="openEmailPopup()"
-      >
-        UPDATE EMAIL
-      </button>
 
-    </div>
+<div class="score-row">
 
+<div class="score-label">
+EMAIL
+</div>
 
-    <!-- MOBILE -->
+<div
+  id="scoreEmail"
+  class="info-box"
+>
+--
+</div>
 
-    <div class="score-row">
 
-      <div class="score-label">
-        MOBILE NUMBER
-      </div>
+<button
+  class="update-btn"
+  onclick="openEmailPopup()"
+>
+UPDATE EMAIL
+</button>
 
-      <div
-        id="scoreMobile"
-        class="info-box"
-      >
-        --
-      </div>
+</div>
 
-      <button
-        class="update-btn"
-        onclick="openMobilePopup()"
-      >
-        UPDATE MOBILE
-      </button>
 
-    </div>
+<div class="score-row">
 
+<div class="score-label">
+MOBILE NUMBER
+</div>
 
-    <!-- GAMES -->
+<div
+  id="scoreMobile"
+  class="info-box"
+>
+--
+</div>
 
-    <div class="score-row">
 
-      <div class="score-label">
-        TOTAL GAMES PLAYED
-      </div>
+<button
+  class="update-btn"
+  onclick="openMobilePopup()"
+>
+UPDATE MOBILE
+</button>
 
-      <div
-        id="scoreGames"
-        class="info-box"
-      >
-        0
-      </div>
+</div>
 
-    </div>
 
+<div class="score-row">
 
-    <!-- POINTS -->
+<div class="score-label">
+TOTAL GAMES PLAYED
+</div>
 
-    <div class="score-row">
+<div
+  id="scoreGames"
+  class="info-box"
+>
+0
+</div>
 
-      <div class="score-label">
-        EARNED POINTS
-      </div>
+</div>
 
-      <div
-        id="scorePoints"
-        class="info-box"
-      >
-        0
-      </div>
 
-    </div>
+<div class="score-row">
 
+<div class="score-label">
+EARNED POINTS
+</div>
 
-    <!-- CASH -->
+<div
+  id="scorePoints"
+  class="info-box"
+>
+0
+</div>
 
-    <div class="score-row">
+</div>
 
-      <div class="score-label">
-        CASH BALANCE
-      </div>
 
-      <div
-        id="scoreCash"
-        class="info-box"
-      >
-        ₹0
-      </div>
+<div class="score-row">
 
-    </div>
+<div class="score-label">
+CASH BALANCE
+</div>
 
+<div
+  id="scoreCash"
+  class="info-box"
+>
+₹0
+</div>
 
-    <!-- CONVERSION -->
+</div>
 
-    <div class="score-row">
 
-      <div class="score-label">
-        CONVERSION HISTORY
-      </div>
+<div class="score-row">
 
-      <div
-        id="conversionHistory"
-        class="info-box"
-      >
-        No conversion history.
-      </div>
+<div class="score-label">
+CONVERSION HISTORY
+</div>
 
-    </div>
+<div
+  id="conversionHistory"
+  class="info-box"
+>
+No conversion history.
+</div>
 
+</div>
 
-    <!-- CLOSE ACCOUNT -->
 
-    <button
-      class="logout-btn"
-      onclick="closeAccount()"
-    >
-      CLOSE ACCOUNT
-    </button>
+<button
+  class="logout-btn"
+  onclick="closeAccount()"
+>
+CLOSE ACCOUNT
+</button>
 
 
-    <!-- BACK -->
+<button
+  class="back-btn"
+  onclick="backToMenu()"
+>
+BACK
+</button>
 
-    <button
-      class="back-btn"
-      onclick="backToMenu()"
-    >
-      BACK
-    </button>
+</div>
 
-  </div>
 
+<!-- ===================================================== -->
+<!-- GAME AREA -->
+<!-- ===================================================== -->
 
-  <!-- GAME AREA -->
+<div
+  id="gameArea"
+  class="box-card hidden"
+>
 
-  <div
-    id="gameArea"
-    class="box-card hidden"
-  >
+<!-- Diamond content will be inserted here -->
 
-    <h2 id="gameTitle">
-      GAME
-    </h2>
+<div id="diamondGame" class="hidden">
 
-    <p id="gameMessage">
-      Game will be added next.
-    </p>
+<div class="diamond-badge">
+💎
+</div>
 
-    <button
-      class="back-btn"
-      onclick="backToMenu()"
-    >
-      BACK
-    </button>
+<h2 class="game-header">
+DIAMOND
+</h2>
 
-  </div>
+
+<div class="game-hint">
+
+Hint: Each row is
+<strong id="diamondRowTotal">
+--
+</strong>
+
+<br>
+
+Total table is
+<strong id="diamondTableTotal">
+--
+</strong>
+
+</div>
+
+
+<div
+  class="timer"
+  id="diamondTimer"
+>
+5:00
+</div>
+
+
+<div
+  class="game-grid"
+  id="diamondPlayerGrid"
+>
+</div>
+
+
+<button
+  class="start-game-btn"
+  id="diamondStartButton"
+  onclick="startDiamondGame()"
+>
+START GAME
+</button>
+
+
+<button
+  class="answer-btn hidden"
+  id="diamondAnswerButton"
+  onclick="submitDiamondAnswer()"
+>
+ANSWER
+</button>
+
+
+<button
+  class="back-btn"
+  id="diamondBackButton"
+  onclick="backToMenu()"
+>
+BACK
+</button>
+
+
+<!-- RESULT -->
+
+<div
+  id="diamondResult"
+  class="hidden"
+>
+
+
+<div class="result-title">
+APP ANSWER
+</div>
+
+<div
+  class="result-grid"
+  id="diamondCorrectGrid"
+>
+</div>
+
+
+<div class="result-title">
+YOUR ANSWER
+</div>
+
+<div
+  class="result-grid"
+  id="diamondYourGrid"
+>
+</div>
+
+
+<div
+  class="score-display"
+  id="diamondScore"
+>
+Score: 0 / 120
+</div>
+
+
+<div
+  class="result-message"
+  id="diamondResultMessage"
+>
+</div>
+
+
+<div
+  class="score-breakdown"
+  id="diamondBreakdown"
+>
+</div>
+
+
+<button
+  class="start-game-btn"
+  onclick="startNewDiamondGame()"
+>
+PLAY AGAIN
+</button>
+
 
 </div>
 
 </div>
 
 
-<!-- ================= EMAIL POPUP ================= -->
+<!-- GOLD PLACEHOLDER -->
+
+<div
+  id="goldGame"
+  class="hidden"
+>
+
+<h2>
+🥇 GOLD
+</h2>
+
+<p>
+Gold 3×3 game will be added after Diamond.
+</p>
+
+<button
+  class="back-btn"
+  onclick="backToMenu()"
+>
+BACK
+</button>
+
+</div>
+
+
+<!-- SILVER PLACEHOLDER -->
+
+<div
+  id="silverGame"
+  class="hidden"
+>
+
+<h2>
+🥈 SILVER
+</h2>
+
+<p>
+Silver 3×3 game will be added after Diamond.
+</p>
+
+<button
+  class="back-btn"
+  onclick="backToMenu()"
+>
+BACK
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- EMAIL POPUP -->
+<!-- ===================================================== -->
 
 <div
   id="emailModal"
   class="modal hidden"
 >
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <h2>UPDATE EMAIL</h2>
+<h2>
+UPDATE EMAIL
+</h2>
 
-    <input
-      type="email"
-      id="newEmail"
-      placeholder="Enter new email"
-    >
+<input
+  type="email"
+  id="newEmail"
+  placeholder="Enter new email"
+>
 
-    <button
-      class="update-btn"
-      onclick="confirmEmailUpdate()"
-    >
-      CONFIRM
-    </button>
 
-    <button
-      class="cancel-btn"
-      onclick="cancelEmailUpdate()"
-    >
-      CANCEL
-    </button>
+<button
+  class="update-btn"
+  onclick="confirmEmailUpdate()"
+>
+CONFIRM
+</button>
 
-  </div>
+
+<button
+  class="cancel-btn"
+  onclick="cancelEmailUpdate()"
+>
+CANCEL
+</button>
+
+</div>
 
 </div>
 
 
-<!-- ================= MOBILE POPUP ================= -->
+<!-- ===================================================== -->
+<!-- MOBILE POPUP -->
+<!-- ===================================================== -->
 
 <div
   id="mobileModal"
   class="modal hidden"
 >
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <h2>UPDATE MOBILE</h2>
-
-    <select
-      id="updateCountry"
-      onchange="updateMobilePopupLength()"
-    >
-
-      <option value="+91" data-length="10">
-        India +91
-      </option>
-
-      <option value="+1" data-length="10">
-        USA / Canada +1
-      </option>
-
-      <option value="+44" data-length="10">
-        UK +44
-      </option>
-
-      <option value="+61" data-length="9">
-        Australia +61
-      </option>
-
-      <option value="+64" data-length="9">
-        New Zealand +64
-      </option>
-
-      <option value="+971" data-length="9">
-        UAE +971
-      </option>
-
-      <option value="+966" data-length="9">
-        Saudi Arabia +966
-      </option>
-
-      <option value="+974" data-length="8">
-        Qatar +974
-      </option>
-
-      <option value="+965" data-length="8">
-        Kuwait +965
-      </option>
-
-      <option value="+968" data-length="8">
-        Oman +968
-      </option>
-
-      <option value="+973" data-length="8">
-        Bahrain +973
-      </option>
-
-      <option value="+65" data-length="8">
-        Singapore +65
-      </option>
-
-      <option value="+60" data-length="9">
-        Malaysia +60
-      </option>
-
-      <option value="+94" data-length="9">
-        Sri Lanka +94
-      </option>
-
-      <option value="+880" data-length="10">
-        Bangladesh +880
-      </option>
-
-      <option value="+92" data-length="10">
-        Pakistan +92
-      </option>
-
-      <option value="+977" data-length="10">
-        Nepal +977
-      </option>
-
-      <option value="+81" data-length="10">
-        Japan +81
-      </option>
-
-      <option value="+49" data-length="11">
-        Germany +49
-      </option>
-
-      <option value="+33" data-length="9">
-        France +33
-      </option>
-
-      <option value="+39" data-length="10">
-        Italy +39
-      </option>
-
-      <option value="+34" data-length="9">
-        Spain +34
-      </option>
-
-      <option value="+7" data-length="10">
-        Russia +7
-      </option>
-
-      <option value="+55" data-length="11">
-        Brazil +55
-      </option>
-
-      <option value="+27" data-length="9">
-        South Africa +27
-      </option>
-
-    </select>
+<h2>
+UPDATE MOBILE
+</h2>
 
 
-    <input
-      type="tel"
-      id="newMobile"
-      placeholder="Mobile Number"
-      inputmode="numeric"
-      oninput="limitUpdateMobile()"
-    >
+<select
+  id="updateCountry"
+  onchange="updateMobilePopupLength()"
+>
+
+<option value="+91" data-length="10">
+India +91
+</option>
+
+<option value="+1" data-length="10">
+USA / Canada +1
+</option>
+
+<option value="+44" data-length="10">
+UK +44
+</option>
+
+<option value="+61" data-length="9">
+Australia +61
+</option>
+
+<option value="+64" data-length="9">
+New Zealand +64
+</option>
+
+<option value="+971" data-length="9">
+UAE +971
+</option>
+
+<option value="+966" data-length="9">
+Saudi Arabia +966
+</option>
+
+<option value="+974" data-length="8">
+Qatar +974
+</option>
+
+<option value="+965" data-length="8">
+Kuwait +965
+</option>
+
+<option value="+968" data-length="8">
+Oman +968
+</option>
+
+<option value="+973" data-length="8">
+Bahrain +973
+</option>
+
+<option value="+65" data-length="8">
+Singapore +65
+</option>
+
+<option value="+60" data-length="9">
+Malaysia +60
+</option>
+
+<option value="+94" data-length="9">
+Sri Lanka +94
+</option>
+
+<option value="+880" data-length="10">
+Bangladesh +880
+</option>
+
+<option value="+92" data-length="10">
+Pakistan +92
+</option>
+
+<option value="+977" data-length="10">
+Nepal +977
+</option>
+
+<option value="+81" data-length="10">
+Japan +81
+</option>
+
+<option value="+49" data-length="11">
+Germany +49
+</option>
+
+<option value="+33" data-length="9">
+France +33
+</option>
+
+<option value="+39" data-length="10">
+Italy +39
+</option>
+
+<option value="+34" data-length="9">
+Spain +34
+</option>
+
+<option value="+7" data-length="10">
+Russia +7
+</option>
+
+<option value="+55" data-length="11">
+Brazil +55
+</option>
+
+<option value="+27" data-length="9">
+South Africa +27
+</option>
+
+</select>
 
 
-    <button
-      class="update-btn"
-      onclick="confirmMobileUpdate()"
-    >
-      CONFIRM
-    </button>
+<input
+  type="tel"
+  id="newMobile"
+  placeholder="Mobile Number"
+  inputmode="numeric"
+  oninput="limitUpdateMobile()"
+>
 
-    <button
-      class="cancel-btn"
-      onclick="cancelMobileUpdate()"
-    >
-      CANCEL
-    </button>
 
-  </div>
+<button
+  class="update-btn"
+  onclick="confirmMobileUpdate()"
+>
+CONFIRM
+</button>
+
+
+<button
+  class="cancel-btn"
+  onclick="cancelMobileUpdate()"
+>
+CANCEL
+</button>
+
+</div>
 
 </div>
 
 
-<!-- ================= LOGO POPUP ================= -->
+<!-- ===================================================== -->
+<!-- LOGO POPUP -->
+<!-- ===================================================== -->
 
 <div
   id="logoModal"
   class="modal hidden"
 >
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <h2>CHOOSE YOUR LOGO</h2>
+<h2>
+CHOOSE YOUR LOGO
+</h2>
 
-    <div class="logo-grid">
 
-      <button onclick="changeLogo('⚡')">
-        ⚡
-      </button>
+<div class="logo-grid">
 
-      <button onclick="changeLogo('🎯')">
-        🎯
-      </button>
+<button onclick="changeLogo('⚡')">
+⚡
+</button>
 
-      <button onclick="changeLogo('🚀')">
-        🚀
-      </button>
+<button onclick="changeLogo('🎯')">
+🎯
+</button>
 
-      <button onclick="changeLogo('🔥')">
-        🔥
-      </button>
+<button onclick="changeLogo('🚀')">
+🚀
+</button>
 
-      <button onclick="changeLogo('👑')">
-        👑
-      </button>
+<button onclick="changeLogo('🔥')">
+🔥
+</button>
 
-      <button onclick="changeLogo('💎')">
-        💎
-      </button>
+<button onclick="changeLogo('👑')">
+👑
+</button>
 
-      <button onclick="changeLogo('🌀')">
-        🌀
-      </button>
+<button onclick="changeLogo('💎')">
+💎
+</button>
 
-      <button onclick="changeLogo('🌟')">
-        🌟
-      </button>
+<button onclick="changeLogo('🌀')">
+🌀
+</button>
 
-    </div>
-
-    <button
-      class="cancel-btn"
-      onclick="closeLogoPopup()"
-    >
-      CANCEL
-    </button>
-
-  </div>
+<button onclick="changeLogo('🌟')">
+🌟
+</button>
 
 </div>
 
 
-<!-- ================= SUCCESS POPUP ================= -->
+<button
+  class="cancel-btn"
+  onclick="closeLogoPopup()"
+>
+CANCEL
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- SUCCESS POPUP -->
+<!-- ===================================================== -->
 
 <div
   id="successModal"
   class="modal hidden"
 >
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div
-      id="successMessage"
-      class="success-message"
-    >
-      Success
-    </div>
+<div
+  id="successMessage"
+  class="success-message"
+>
+Success
+</div>
 
-    <button
-      class="close-btn"
-      onclick="closeSuccessPopup()"
-    >
-      CLOSE
-    </button>
 
-  </div>
+<button
+  class="close-btn"
+  onclick="closeSuccessPopup()"
+>
+CLOSE
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- ADMIN / BACKGROUND SETUP -->
+<!-- ===================================================== -->
+
+<!--
+  TESTING ONLY.
+
+  In production this section must be protected
+  using Firebase Authentication + Admin security.
+-->
+
+<div
+  id="adminSetup"
+  class="box-card hidden"
+>
+
+<h2 class="admin-title">
+DIAMOND BACKGROUND SETUP
+</h2>
+
+<p class="admin-note">
+
+Set the values that the player will see as hints.
+The correct 5×5 answer is also entered here.
+
+</p>
+
+
+<label>
+Each Row Total
+</label>
+
+<input
+  type="number"
+  id="adminDiamondRowTotal"
+  placeholder="Example: 36"
+>
+
+
+<label>
+Total Table
+</label>
+
+<input
+  type="number"
+  id="adminDiamondTableTotal"
+  placeholder="Example: 180"
+>
+
+
+<label>
+Correct Answer 5×5
+</label>
+
+
+<div
+  class="admin-grid"
+  id="adminDiamondGrid"
+>
+</div>
+
+
+<button
+  class="start-game-btn"
+  onclick="saveDiamondBackground()"
+>
+SAVE DIAMOND GAME
+</button>
+
+
+<button
+  class="stop-game-btn"
+  onclick="stopDiamondBackground()"
+>
+STOP DIAMOND GAME
+</button>
 
 </div>
 
 
 <script type="module">
 
-/* ================= FIREBASE ================= */
+
+/* ===================================================== */
+/* FIREBASE */
+/* ===================================================== */
 
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 
 import {
   getAuth,
@@ -1184,8 +1699,12 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   onAuthStateChanged,
+  signOut,
   updateEmail
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
 
 import {
   getFirestore,
@@ -1194,194 +1713,352 @@ import {
   setDoc,
   updateDoc,
   runTransaction
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-/* ================= FIREBASE CONFIG ================= */
+/* ===================================================== */
+/* FIREBASE CONFIG */
+/* ===================================================== */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
-  authDomain: "magiknumbers-d42c0.firebaseapp.com",
-  projectId: "magiknumbers-d42c0",
-  storageBucket: "magiknumbers-d42c0.firebasestorage.app",
-  messagingSenderId: "977553928698",
-  appId: "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
+  apiKey:
+  "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+
+  authDomain:
+  "magiknumbers-d42c0.firebaseapp.com",
+
+  projectId:
+  "magiknumbers-d42c0",
+
+  storageBucket:
+  "magiknumbers-d42c0.firebasestorage.app",
+
+  messagingSenderId:
+  "977553928698",
+
+  appId:
+  "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
 };
 
 
-/* ================= INITIALIZE ================= */
+/* ===================================================== */
+/* INITIALIZE */
+/* ===================================================== */
 
-const app = initializeApp(firebaseConfig);
+const app =
+initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+getAuth(app);
 
-const db = getFirestore(app);
+const db =
+getFirestore(app);
 
 
-/* ================= VARIABLES ================= */
+/* ===================================================== */
+/* VARIABLES */
+/* ===================================================== */
 
 let currentUser = null;
 
 let currentUserData = null;
 
 
-/* ================= COUNTRY LENGTH ================= */
+/* ===================================================== */
+/* DIAMOND VARIABLES */
+/* ===================================================== */
+
+let diamondTimerInterval = null;
+
+let diamondTimeLeft = 300;
+
+let diamondGameRunning = false;
+
+
+/*
+  Testing background game.
+
+  Later this will come from Firestore.
+*/
+
+let diamondGameData = {
+
+  active:true,
+
+  rowTotal:36,
+
+  tableTotal:180,
+
+  answer:[
+
+    [0,0,0,0,0],
+
+    [0,0,0,0,0],
+
+    [0,0,0,0,0],
+
+    [0,0,0,0,0],
+
+    [0,0,0,0,0]
+
+  ]
+
+};
+
+
+/* ===================================================== */
+/* COUNTRY LENGTH */
+/* ===================================================== */
 
 function getCountryLength(selectId){
 
   const select =
-    document.getElementById(selectId);
+  document.getElementById(selectId);
 
   const option =
-    select.options[select.selectedIndex];
+  select.options[select.selectedIndex];
 
   return Number(
     option.dataset.length
   );
+
 }
 
 
-/* ================= REGISTER MOBILE ================= */
+/* ===================================================== */
+/* REGISTER MOBILE */
+/* ===================================================== */
 
-window.updateRegisterMobileLength = function(){
+window.updateRegisterMobileLength =
+function(){
 
   const input =
-    document.getElementById("registerMobile");
+  document.getElementById(
+    "registerMobile"
+  );
 
   const length =
-    getCountryLength("registerCountry");
+  getCountryLength(
+    "registerCountry"
+  );
 
-  input.maxLength = length;
+  input.maxLength =
+  length;
 
   input.value =
-    input.value.replace(/\D/g,"").slice(0,length);
+    input.value
+    .replace(/\D/g,"")
+    .slice(0,length);
+
 };
 
 
-window.limitRegisterMobile = function(){
+window.limitRegisterMobile =
+function(){
 
   const input =
-    document.getElementById("registerMobile");
+  document.getElementById(
+    "registerMobile"
+  );
 
   const length =
-    getCountryLength("registerCountry");
+  getCountryLength(
+    "registerCountry"
+  );
 
   input.value =
-    input.value.replace(/\D/g,"").slice(0,length);
+    input.value
+    .replace(/\D/g,"")
+    .slice(0,length);
+
 };
 
 
-/* ================= UPDATE MOBILE ================= */
+/* ===================================================== */
+/* UPDATE MOBILE */
+/* ===================================================== */
 
-window.updateMobilePopupLength = function(){
+window.updateMobilePopupLength =
+function(){
 
   const input =
-    document.getElementById("newMobile");
+  document.getElementById(
+    "newMobile"
+  );
 
   const length =
-    getCountryLength("updateCountry");
+  getCountryLength(
+    "updateCountry"
+  );
 
-  input.maxLength = length;
+  input.maxLength =
+  length;
 
   input.value =
-    input.value.replace(/\D/g,"").slice(0,length);
+    input.value
+    .replace(/\D/g,"")
+    .slice(0,length);
+
 };
 
 
-window.limitUpdateMobile = function(){
+window.limitUpdateMobile =
+function(){
 
   const input =
-    document.getElementById("newMobile");
+  document.getElementById(
+    "newMobile"
+  );
 
   const length =
-    getCountryLength("updateCountry");
+  getCountryLength(
+    "updateCountry"
+  );
 
   input.value =
-    input.value.replace(/\D/g,"").slice(0,length);
+    input.value
+    .replace(/\D/g,"")
+    .slice(0,length);
+
 };
 
 
-/* ================= PASSWORD ================= */
+/* ===================================================== */
+/* PASSWORD */
+/* ===================================================== */
 
-window.toggleLoginPassword = function(){
+window.toggleLoginPassword =
+function(){
 
   const password =
-    document.getElementById("loginPassword");
+  document.getElementById(
+    "loginPassword"
+  );
 
   const checkbox =
-    document.getElementById("showLoginPassword");
+  document.getElementById(
+    "showLoginPassword"
+  );
 
   password.type =
-    checkbox.checked ? "text" : "password";
+    checkbox.checked
+    ? "text"
+    : "password";
+
 };
 
 
-window.toggleRegisterPassword = function(){
+window.toggleRegisterPassword =
+function(){
 
   const password =
-    document.getElementById("registerPassword");
+  document.getElementById(
+    "registerPassword"
+  );
 
   const checkbox =
-    document.getElementById("showRegisterPassword");
+  document.getElementById(
+    "showRegisterPassword"
+  );
 
   password.type =
-    checkbox.checked ? "text" : "password";
+    checkbox.checked
+    ? "text"
+    : "password";
+
 };
 
 
-/* ================= GENERATE MAGIK NUMBER ================= */
+/* ===================================================== */
+/* GENERATE MAGIK NUMBER */
+/* ===================================================== */
 
 async function generateMagikNumberId(){
 
   const counterRef =
-    doc(db,"system","counter");
-
-  const newId =
-    await runTransaction(
+    doc(
       db,
-      async(transaction)=>{
-
-        const snapshot =
-          await transaction.get(counterRef);
-
-        let nextNumber = 100002;
-
-        if(snapshot.exists()){
-
-          const data =
-            snapshot.data();
-
-          nextNumber =
-            Number(
-              data.nextNumber || 100002
-            );
-        }
-
-        transaction.set(
-          counterRef,
-          {
-            nextNumber:
-              nextNumber + 1
-          },
-          {
-            merge:true
-          }
-        );
-
-        return "MN" + nextNumber;
-      }
+      "system",
+      "counter"
     );
 
+
+  const newId =
+  await runTransaction(
+
+    db,
+
+    async(transaction)=>{
+
+      const snapshot =
+        await transaction.get(
+          counterRef
+        );
+
+
+      let nextNumber =
+        100002;
+
+
+      if(snapshot.exists()){
+
+        const data =
+          snapshot.data();
+
+        nextNumber =
+          Number(
+            data.nextNumber ||
+            100002
+          );
+
+      }
+
+
+      transaction.set(
+
+        counterRef,
+
+        {
+          nextNumber:
+            nextNumber + 1
+        },
+
+        {
+          merge:true
+        }
+
+      );
+
+
+      return "MN" + nextNumber;
+
+    }
+
+  );
+
+
   return newId;
+
 }
 
 
-/* ================= CREATE USER PROFILE ================= */
+/* ===================================================== */
+/* CREATE USER PROFILE */
+/* ===================================================== */
 
 async function createUserProfile(user){
 
   const userRef =
-    doc(db,"users",user.uid);
+    doc(
+      db,
+      "users",
+      user.uid
+    );
+
 
   const snapshot =
     await getDoc(userRef);
@@ -1394,18 +2071,29 @@ async function createUserProfile(user){
 
 
     await setDoc(
+
       userRef,
+
       {
+
         magikNumberId:
           magikNumberId,
 
         name:
-          document.getElementById("registerName")?.value.trim()
-          || user.displayName
-          || "User",
+          document
+          .getElementById(
+            "registerName"
+          )
+          ?.value
+          .trim()
+          ||
+          user.displayName
+          ||
+          "User",
 
         email:
-          user.email || "",
+          user.email ||
+          "",
 
         mobile:
           "",
@@ -1427,7 +2115,9 @@ async function createUserProfile(user){
 
         joiningDate:
           new Date().toISOString()
+
       }
+
     );
 
   }
@@ -1435,58 +2125,95 @@ async function createUserProfile(user){
 }
 
 
-/* ================= REGISTER ================= */
+/* ===================================================== */
+/* REGISTER */
+/* ===================================================== */
 
-window.registerUser = async function(){
+window.registerUser =
+async function(){
 
   const name =
-    document.getElementById("registerName")
-      .value.trim();
+    document
+    .getElementById(
+      "registerName"
+    )
+    .value
+    .trim();
+
 
   const country =
-    document.getElementById("registerCountry")
-      .value;
+    document
+    .getElementById(
+      "registerCountry"
+    )
+    .value;
+
 
   const mobile =
-    document.getElementById("registerMobile")
-      .value.trim();
+    document
+    .getElementById(
+      "registerMobile"
+    )
+    .value
+    .trim();
+
 
   const email =
-    document.getElementById("registerEmail")
-      .value.trim();
+    document
+    .getElementById(
+      "registerEmail"
+    )
+    .value
+    .trim();
+
 
   const password =
-    document.getElementById("registerPassword")
-      .value;
+    document
+    .getElementById(
+      "registerPassword"
+    )
+    .value;
 
 
   if(!name){
 
-    alert("Please enter your name.");
+    alert(
+      "Please enter your name."
+    );
 
     return;
+
   }
 
 
   const requiredLength =
-    getCountryLength("registerCountry");
+    getCountryLength(
+      "registerCountry"
+    );
 
 
-  if(mobile.length !== requiredLength){
+  if(
+    mobile.length !==
+    requiredLength
+  ){
 
     alert(
       "Please enter a valid mobile number."
     );
 
     return;
+
   }
 
 
   if(!email){
 
-    alert("Please enter your email.");
+    alert(
+      "Please enter your email."
+    );
 
     return;
+
   }
 
 
@@ -1497,6 +2224,7 @@ window.registerUser = async function(){
     );
 
     return;
+
   }
 
 
@@ -1504,9 +2232,11 @@ window.registerUser = async function(){
 
     const result =
       await createUserWithEmailAndPassword(
+
         auth,
         email,
         password
+
       );
 
 
@@ -1516,11 +2246,22 @@ window.registerUser = async function(){
 
 
     await updateDoc(
-      doc(db,"users",result.user.uid),
+
+      doc(
+        db,
+        "users",
+        result.user.uid
+      ),
+
       {
+
         name:name,
-        mobile:country + mobile
+
+        mobile:
+          country + mobile
+
       }
+
     );
 
 
@@ -1529,7 +2270,8 @@ window.registerUser = async function(){
     );
 
 
-  }catch(error){
+  }
+  catch(error){
 
     alert(
       "Registration failed: " +
@@ -1541,38 +2283,56 @@ window.registerUser = async function(){
 };
 
 
-/* ================= LOGIN ================= */
+/* ===================================================== */
+/* LOGIN */
+/* ===================================================== */
 
-window.loginUser = async function(){
+window.loginUser =
+async function(){
 
   const email =
-    document.getElementById("loginEmail")
-      .value.trim();
+    document
+    .getElementById(
+      "loginEmail"
+    )
+    .value
+    .trim();
+
 
   const password =
-    document.getElementById("loginPassword")
-      .value;
+    document
+    .getElementById(
+      "loginPassword"
+    )
+    .value;
 
 
-  if(!email || !password){
+  if(
+    !email ||
+    !password
+  ){
 
     alert(
       "Please enter email and password."
     );
 
     return;
+
   }
 
 
   try{
 
     await signInWithEmailAndPassword(
+
       auth,
       email,
       password
+
     );
 
-  }catch(error){
+  }
+  catch(error){
 
     alert(
       "Login failed: " +
@@ -1584,19 +2344,25 @@ window.loginUser = async function(){
 };
 
 
-/* ================= GOOGLE LOGIN ================= */
+/* ===================================================== */
+/* GOOGLE LOGIN */
+/* ===================================================== */
 
-window.googleLogin = async function(){
+window.googleLogin =
+async function(){
 
   try{
 
     const provider =
       new GoogleAuthProvider();
 
+
     const result =
       await signInWithPopup(
+
         auth,
         provider
+
       );
 
 
@@ -1604,8 +2370,8 @@ window.googleLogin = async function(){
       result.user
     );
 
-
-  }catch(error){
+  }
+  catch(error){
 
     alert(
       "Google login failed: " +
@@ -1617,10 +2383,14 @@ window.googleLogin = async function(){
 };
 
 
-/* ================= AUTH STATE ================= */
+/* ===================================================== */
+/* AUTH STATE */
+/* ===================================================== */
 
 onAuthStateChanged(
+
   auth,
+
   async(user)=>{
 
     if(user){
@@ -1638,36 +2408,55 @@ onAuthStateChanged(
 
 
       document
-        .getElementById("authArea")
-        .classList.add("hidden");
+      .getElementById(
+        "authArea"
+      )
+      .classList
+      .add("hidden");
 
 
       document
-        .getElementById("loggedIn")
-        .classList.remove("hidden");
+      .getElementById(
+        "loggedIn"
+      )
+      .classList
+      .remove("hidden");
 
 
       document
-        .getElementById("userIdBar")
-        .classList.remove("hidden");
+      .getElementById(
+        "userIdBar"
+      )
+      .classList
+      .remove("hidden");
 
 
       document
-        .getElementById("gameMenu")
-        .classList.remove("hidden");
+      .getElementById(
+        "gameMenu"
+      )
+      .classList
+      .remove("hidden");
 
 
       document
-        .getElementById("scoreboard")
-        .classList.add("hidden");
+      .getElementById(
+        "scoreboard"
+      )
+      .classList
+      .add("hidden");
 
 
       document
-        .getElementById("gameArea")
-        .classList.add("hidden");
+      .getElementById(
+        "gameArea"
+      )
+      .classList
+      .add("hidden");
 
 
-    }else{
+    }
+    else{
 
       currentUser =
         null;
@@ -1677,26 +2466,38 @@ onAuthStateChanged(
 
 
       document
-        .getElementById("authArea")
-        .classList.remove("hidden");
+      .getElementById(
+        "authArea"
+      )
+      .classList
+      .remove("hidden");
 
 
       document
-        .getElementById("loggedIn")
-        .classList.add("hidden");
+      .getElementById(
+        "loggedIn"
+      )
+      .classList
+      .add("hidden");
 
 
       document
-        .getElementById("userIdBar")
-        .classList.add("hidden");
+      .getElementById(
+        "userIdBar"
+      )
+      .classList
+      .add("hidden");
 
     }
 
   }
+
 );
 
 
-/* ================= LOAD USER DATA ================= */
+/* ===================================================== */
+/* LOAD USER DATA */
+/* ===================================================== */
 
 async function loadUserData(){
 
@@ -1736,35 +2537,42 @@ async function loadUserData(){
 
   const email =
     currentUserData.email
-    || currentUser.email
-    || "--";
+    ||
+    currentUser.email
+    ||
+    "--";
 
 
   const mobile =
     currentUserData.mobile
-    || "Not available";
+    ||
+    "Not available";
 
 
   const logo =
     currentUserData.logo
-    || "⚡";
+    ||
+    "⚡";
 
 
   const points =
     Number(
-      currentUserData.points || 0
+      currentUserData.points
+      || 0
     );
 
 
   const games =
     Number(
-      currentUserData.gamesPlayed || 0
+      currentUserData.gamesPlayed
+      || 0
     );
 
 
   const cash =
     Number(
-      currentUserData.cashBalance || 0
+      currentUserData.cashBalance
+      || 0
     );
 
 
@@ -1778,212 +2586,344 @@ async function loadUserData(){
     try{
 
       joining =
-        new Date(joining)
-          .toLocaleDateString();
+        new Date(
+          joining
+        )
+        .toLocaleDateString();
 
-    }catch(e){}
+    }
+    catch(e){}
 
   }
 
 
-  /* TOP BAR */
-
   document
-    .getElementById("displayUserId")
-    .textContent =
-    "ID: " + id;
-
-
-  document
-    .getElementById("userLogo")
-    .textContent =
-    logo;
-
-
-  /* SCOREBOARD */
-
-  document
-    .getElementById("scoreId")
-    .textContent =
-    id;
+  .getElementById(
+    "displayUserId"
+  )
+  .textContent =
+  "ID: " + id;
 
 
   document
-    .getElementById("scoreLogo")
-    .textContent =
-    logo;
+  .getElementById(
+    "userLogo"
+  )
+  .textContent =
+  logo;
 
 
   document
-    .getElementById("scoreJoining")
-    .textContent =
-    joining;
+  .getElementById(
+    "scoreId"
+  )
+  .textContent =
+  id;
 
 
   document
-    .getElementById("scoreName")
-    .textContent =
-    name;
+  .getElementById(
+    "scoreLogo"
+  )
+  .textContent =
+  logo;
 
 
   document
-    .getElementById("scoreEmail")
-    .textContent =
-    email;
+  .getElementById(
+    "scoreJoining"
+  )
+  .textContent =
+  joining;
 
 
   document
-    .getElementById("scoreMobile")
-    .textContent =
-    mobile;
+  .getElementById(
+    "scoreName"
+  )
+  .textContent =
+  name;
 
 
   document
-    .getElementById("scoreGames")
-    .textContent =
-    games;
+  .getElementById(
+    "scoreEmail"
+  )
+  .textContent =
+  email;
 
 
   document
-    .getElementById("scorePoints")
-    .textContent =
-    points;
+  .getElementById(
+    "scoreMobile"
+  )
+  .textContent =
+  mobile;
 
 
   document
-    .getElementById("scoreCash")
-    .textContent =
-    "₹" + cash;
+  .getElementById(
+    "scoreGames"
+  )
+  .textContent =
+  games;
+
+
+  document
+  .getElementById(
+    "scorePoints"
+  )
+  .textContent =
+  points;
+
+
+  document
+  .getElementById(
+    "scoreCash"
+  )
+  .textContent =
+  "₹" + cash;
 
 
   const history =
-    currentUserData.conversionHistory
+    currentUserData
+    .conversionHistory
     || [];
 
 
   document
-    .getElementById("conversionHistory")
-    .textContent =
+  .getElementById(
+    "conversionHistory"
+  )
+  .textContent =
     history.length
-      ? history.join(" | ")
-      : "No conversion history.";
+    ?
+    history.join(" | ")
+    :
+    "No conversion history.";
 
 }
 
 
-/* ================= SCOREBOARD ================= */
+/* ===================================================== */
+/* SCOREBOARD */
+/* ===================================================== */
 
-window.showScoreboard = async function(){
+window.showScoreboard =
+async function(){
 
   await loadUserData();
 
 
   document
-    .getElementById("gameMenu")
-    .classList.add("hidden");
+  .getElementById(
+    "gameMenu"
+  )
+  .classList
+  .add("hidden");
 
 
   document
-    .getElementById("gameArea")
-    .classList.add("hidden");
+  .getElementById(
+    "gameArea"
+  )
+  .classList
+  .add("hidden");
 
 
   document
-    .getElementById("scoreboard")
-    .classList.remove("hidden");
+  .getElementById(
+    "scoreboard"
+  )
+  .classList
+  .remove("hidden");
 
 };
 
 
-/* ================= BACK ================= */
+/* ===================================================== */
+/* BACK TO MENU */
+/* ===================================================== */
 
-window.backToMenu = function(){
+window.backToMenu =
+function(){
 
-  document
-    .getElementById("scoreboard")
-    .classList.add("hidden");
-
-
-  document
-    .getElementById("gameArea")
-    .classList.add("hidden");
+  stopDiamondTimer();
 
 
   document
-    .getElementById("gameMenu")
-    .classList.remove("hidden");
+  .getElementById(
+    "scoreboard"
+  )
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById(
+    "gameArea"
+  )
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById(
+    "gameMenu"
+  )
+  .classList
+  .remove("hidden");
 
 };
 
 
-/* ================= OPEN GAME ================= */
+/* ===================================================== */
+/* OPEN GAME */
+/* ===================================================== */
 
-window.openGame = function(gameName){
-
-  document
-    .getElementById("gameMenu")
-    .classList.add("hidden");
-
+window.openGame =
+function(gameName){
 
   document
-    .getElementById("scoreboard")
-    .classList.add("hidden");
-
-
-  document
-    .getElementById("gameArea")
-    .classList.remove("hidden");
+  .getElementById(
+    "gameMenu"
+  )
+  .classList
+  .add("hidden");
 
 
   document
-    .getElementById("gameTitle")
-    .textContent =
-    gameName + " GAME";
+  .getElementById(
+    "scoreboard"
+  )
+  .classList
+  .add("hidden");
 
 
   document
-    .getElementById("gameMessage")
-    .textContent =
-    "The " +
-    gameName +
-    " game will be added next.";
+  .getElementById(
+    "gameArea"
+  )
+  .classList
+  .remove("hidden");
+
+
+  document
+  .getElementById(
+    "diamondGame"
+  )
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById(
+    "goldGame"
+  )
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById(
+    "silverGame"
+  )
+  .classList
+  .add("hidden");
+
+
+  if(gameName === "DIAMOND"){
+
+    loadDiamondGame();
+
+    document
+    .getElementById(
+      "diamondGame"
+    )
+    .classList
+    .remove("hidden");
+
+  }
+
+
+  if(gameName === "GOLD"){
+
+    document
+    .getElementById(
+      "goldGame"
+    )
+    .classList
+    .remove("hidden");
+
+  }
+
+
+  if(gameName === "SILVER"){
+
+    document
+    .getElementById(
+      "silverGame"
+    )
+    .classList
+    .remove("hidden");
+
+  }
 
 };
 
 
-/* ================= EMAIL POPUP ================= */
+/* ===================================================== */
+/* EMAIL POPUP */
+/* ===================================================== */
 
-window.openEmailPopup = function(){
+window.openEmailPopup =
+function(){
 
   if(!currentUser)
     return;
 
 
   document
-    .getElementById("newEmail")
-    .value =
+  .getElementById(
+    "newEmail"
+  )
+  .value =
     currentUserData?.email
-    || currentUser.email
-    || "";
+    ||
+    currentUser.email
+    ||
+    "";
 
 
   document
-    .getElementById("emailModal")
-    .classList.remove("hidden");
+  .getElementById(
+    "emailModal"
+  )
+  .classList
+  .remove("hidden");
 
 };
 
 
-window.cancelEmailUpdate = function(){
+window.cancelEmailUpdate =
+function(){
 
   document
-    .getElementById("emailModal")
-    .classList.add("hidden");
+  .getElementById(
+    "emailModal"
+  )
+  .classList
+  .add("hidden");
 
 };
 
 
-window.confirmEmailUpdate = async function(){
+/*
+  Email verification will be added later.
+*/
+
+window.confirmEmailUpdate =
+async function(){
 
   if(!currentUser)
     return;
@@ -1991,8 +2931,11 @@ window.confirmEmailUpdate = async function(){
 
   const newEmail =
     document
-      .getElementById("newEmail")
-      .value.trim();
+    .getElementById(
+      "newEmail"
+    )
+    .value
+    .trim();
 
 
   if(!newEmail){
@@ -2002,6 +2945,7 @@ window.confirmEmailUpdate = async function(){
     );
 
     return;
+
   }
 
 
@@ -2014,20 +2958,26 @@ window.confirmEmailUpdate = async function(){
 
 
     await updateDoc(
+
       doc(
         db,
         "users",
         currentUser.uid
       ),
+
       {
         email:newEmail
       }
+
     );
 
 
     document
-      .getElementById("emailModal")
-      .classList.add("hidden");
+    .getElementById(
+      "emailModal"
+    )
+    .classList
+    .add("hidden");
 
 
     showSuccess(
@@ -2037,8 +2987,8 @@ window.confirmEmailUpdate = async function(){
 
     await loadUserData();
 
-
-  }catch(error){
+  }
+  catch(error){
 
     alert(
       "Email update failed: " +
@@ -2050,9 +3000,12 @@ window.confirmEmailUpdate = async function(){
 };
 
 
-/* ================= MOBILE POPUP ================= */
+/* ===================================================== */
+/* MOBILE POPUP */
+/* ===================================================== */
 
-window.openMobilePopup = function(){
+window.openMobilePopup =
+function(){
 
   if(!currentUser)
     return;
@@ -2065,6 +3018,7 @@ window.openMobilePopup = function(){
 
   let selectedCountry =
     "+91";
+
 
   let mobileNumber =
     stored;
@@ -2101,56 +3055,75 @@ window.openMobilePopup = function(){
   ];
 
 
-  for(const code of countries){
+  for(
+    const code of countries
+  ){
 
-    if(stored.startsWith(code)){
+    if(
+      stored.startsWith(code)
+    ){
 
       selectedCountry =
         code;
+
 
       mobileNumber =
         stored.substring(
           code.length
         );
 
+
       break;
+
     }
 
   }
 
 
   document
-    .getElementById("updateCountry")
-    .value =
-    selectedCountry;
+  .getElementById(
+    "updateCountry"
+  )
+  .value =
+  selectedCountry;
 
 
   document
-    .getElementById("newMobile")
-    .value =
-    mobileNumber;
+  .getElementById(
+    "newMobile"
+  )
+  .value =
+  mobileNumber;
 
 
   updateMobilePopupLength();
 
 
   document
-    .getElementById("mobileModal")
-    .classList.remove("hidden");
+  .getElementById(
+    "mobileModal"
+  )
+  .classList
+  .remove("hidden");
 
 };
 
 
-window.cancelMobileUpdate = function(){
+window.cancelMobileUpdate =
+function(){
 
   document
-    .getElementById("mobileModal")
-    .classList.add("hidden");
+  .getElementById(
+    "mobileModal"
+  )
+  .classList
+  .add("hidden");
 
 };
 
 
-window.confirmMobileUpdate = async function(){
+window.confirmMobileUpdate =
+async function(){
 
   if(!currentUser)
     return;
@@ -2158,14 +3131,19 @@ window.confirmMobileUpdate = async function(){
 
   const country =
     document
-      .getElementById("updateCountry")
-      .value;
+    .getElementById(
+      "updateCountry"
+    )
+    .value;
 
 
   const mobile =
     document
-      .getElementById("newMobile")
-      .value.trim();
+    .getElementById(
+      "newMobile"
+    )
+    .value
+    .trim();
 
 
   const requiredLength =
@@ -2174,34 +3152,46 @@ window.confirmMobileUpdate = async function(){
     );
 
 
-  if(mobile.length !== requiredLength){
+  if(
+    mobile.length !==
+    requiredLength
+  ){
 
     alert(
       "Please enter a valid mobile number."
     );
 
     return;
+
   }
 
 
   try{
 
     await updateDoc(
+
       doc(
         db,
         "users",
         currentUser.uid
       ),
+
       {
+
         mobile:
           country + mobile
+
       }
+
     );
 
 
     document
-      .getElementById("mobileModal")
-      .classList.add("hidden");
+    .getElementById(
+      "mobileModal"
+    )
+    .classList
+    .add("hidden");
 
 
     showSuccess(
@@ -2211,8 +3201,8 @@ window.confirmMobileUpdate = async function(){
 
     await loadUserData();
 
-
-  }catch(error){
+  }
+  catch(error){
 
     alert(
       "Mobile update failed: " +
@@ -2224,27 +3214,38 @@ window.confirmMobileUpdate = async function(){
 };
 
 
-/* ================= LOGO ================= */
+/* ===================================================== */
+/* LOGO */
+/* ===================================================== */
 
-window.openLogoPopup = function(){
+window.openLogoPopup =
+function(){
 
   document
-    .getElementById("logoModal")
-    .classList.remove("hidden");
+  .getElementById(
+    "logoModal"
+  )
+  .classList
+  .remove("hidden");
 
 };
 
 
-window.closeLogoPopup = function(){
+window.closeLogoPopup =
+function(){
 
   document
-    .getElementById("logoModal")
-    .classList.add("hidden");
+  .getElementById(
+    "logoModal"
+  )
+  .classList
+  .add("hidden");
 
 };
 
 
-window.changeLogo = async function(newLogo){
+window.changeLogo =
+async function(newLogo){
 
   if(!currentUser)
     return;
@@ -2253,14 +3254,17 @@ window.changeLogo = async function(newLogo){
   try{
 
     await updateDoc(
+
       doc(
         db,
         "users",
         currentUser.uid
       ),
+
       {
         logo:newLogo
       }
+
     );
 
 
@@ -2269,28 +3273,35 @@ window.changeLogo = async function(newLogo){
 
 
     document
-      .getElementById("userLogo")
-      .textContent =
+    .getElementById(
+      "userLogo"
+    )
+    .textContent =
       newLogo;
 
 
     document
-      .getElementById("scoreLogo")
-      .textContent =
+    .getElementById(
+      "scoreLogo"
+    )
+    .textContent =
       newLogo;
 
 
     document
-      .getElementById("logoModal")
-      .classList.add("hidden");
+    .getElementById(
+      "logoModal"
+    )
+    .classList
+    .add("hidden");
 
 
     showSuccess(
       "Logo changed successfully."
     );
 
-
-  }catch(error){
+  }
+  catch(error){
 
     alert(
       "Logo update failed: " +
@@ -2302,35 +3313,49 @@ window.changeLogo = async function(newLogo){
 };
 
 
-/* ================= SUCCESS POPUP ================= */
+/* ===================================================== */
+/* SUCCESS */
+/* ===================================================== */
 
 function showSuccess(message){
 
   document
-    .getElementById("successMessage")
-    .textContent =
+  .getElementById(
+    "successMessage"
+  )
+  .textContent =
     message;
 
 
   document
-    .getElementById("successModal")
-    .classList.remove("hidden");
+  .getElementById(
+    "successModal"
+  )
+  .classList
+  .remove("hidden");
 
 }
 
 
-window.closeSuccessPopup = function(){
+window.closeSuccessPopup =
+function(){
 
   document
-    .getElementById("successModal")
-    .classList.add("hidden");
+  .getElementById(
+    "successModal"
+  )
+  .classList
+  .add("hidden");
 
 };
 
 
-/* ================= CLOSE ACCOUNT ================= */
+/* ===================================================== */
+/* CLOSE ACCOUNT */
+/* ===================================================== */
 
-window.closeAccount = function(){
+window.closeAccount =
+function(){
 
   alert(
     "Close Account feature will be added later."
@@ -2339,15 +3364,19 @@ window.closeAccount = function(){
 };
 
 
-/* ================= LOGOUT ================= */
+/* ===================================================== */
+/* LOGOUT */
+/* ===================================================== */
 
-window.logoutUser = async function(){
+window.logoutUser =
+async function(){
 
   try{
 
-    await auth.signOut();
+    await signOut(auth);
 
-  }catch(error){
+  }
+  catch(error){
 
     alert(
       "Logout failed: " +
@@ -2359,9 +3388,1563 @@ window.logoutUser = async function(){
 };
 
 
-/* ================= INITIAL MOBILE LIMIT ================= */
+/* ===================================================== */
+/* DIAMOND - CREATE PLAYER GRID */
+/* ===================================================== */
+
+function createDiamondPlayerGrid(){
+
+  const grid =
+    document.getElementById(
+      "diamondPlayerGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      const input =
+        document.createElement(
+          "input"
+        );
+
+
+      input.type =
+        "number";
+
+
+      input.min =
+        0;
+
+
+      input.max =
+        25;
+
+
+      input.id =
+        `diamond-player-${r}-${c}`;
+
+
+      input.disabled =
+        true;
+
+
+      input.addEventListener(
+        "input",
+        function(){
+
+          let value =
+            this.value
+            .replace(/\D/g,"");
+
+
+          if(value !== ""){
+
+            value =
+              Number(value);
+
+            if(value > 25)
+              value = 25;
+
+          }
+
+
+          this.value =
+            value;
+
+        }
+      );
+
+
+      grid.appendChild(
+        input
+      );
+
+    }
+
+  }
+
+}
+
+
+/* ===================================================== */
+/* DIAMOND - CREATE ADMIN GRID */
+/* ===================================================== */
+
+function createDiamondAdminGrid(){
+
+  const grid =
+    document.getElementById(
+      "adminDiamondGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      const input =
+        document.createElement(
+          "input"
+        );
+
+
+      input.type =
+        "number";
+
+
+      input.min =
+        0;
+
+
+      input.max =
+        25;
+
+
+      input.id =
+        `diamond-admin-${r}-${c}`;
+
+
+      grid.appendChild(
+        input
+      );
+
+    }
+
+  }
+
+}
+
+
+/* ===================================================== */
+/* ADMIN SAVE DIAMOND BACKGROUND */
+/* ===================================================== */
+
+window.saveDiamondBackground =
+function(){
+
+  const rowTotal =
+    Number(
+      document
+      .getElementById(
+        "adminDiamondRowTotal"
+      )
+      .value
+    );
+
+
+  const tableTotal =
+    Number(
+      document
+      .getElementById(
+        "adminDiamondTableTotal"
+      )
+      .value
+    );
+
+
+  if(
+    !rowTotal ||
+    !tableTotal
+  ){
+
+    alert(
+      "Please enter Row Total and Total Table."
+    );
+
+    return;
+
+  }
+
+
+  const answer = [];
+
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    const row = [];
+
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      const value =
+        Number(
+          document
+          .getElementById(
+            `diamond-admin-${r}-${c}`
+          )
+          .value
+        );
+
+
+      if(
+        isNaN(value) ||
+        value < 0 ||
+        value > 25
+      ){
+
+        alert(
+          "Numbers must be between 0 and 25."
+        );
+
+        return;
+
+      }
+
+
+      row.push(value);
+
+    }
+
+
+    answer.push(row);
+
+  }
+
+
+  /* UNIQUE NUMBERS */
+
+  const allNumbers =
+    answer.flat();
+
+
+  const uniqueNumbers =
+    new Set(allNumbers);
+
+
+  if(
+    uniqueNumbers.size !== 25
+  ){
+
+    alert(
+      "All 25 answer numbers must be unique."
+    );
+
+    return;
+
+  }
+
+
+  /* ROW CHECK */
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    const sum =
+      answer[r]
+      .reduce(
+        (a,b)=>a+b,
+        0
+      );
+
+
+    if(sum !== rowTotal){
+
+      alert(
+        "Row " +
+        (r+1) +
+        " total is " +
+        sum +
+        ", not " +
+        rowTotal
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  /* DIAGONAL 1 */
+
+  let diagonal1 = 0;
+
+
+  for(
+    let i=0;
+    i<5;
+    i++
+  ){
+
+    diagonal1 +=
+      answer[i][i];
+
+  }
+
+
+  /* DIAGONAL 2 */
+
+  let diagonal2 = 0;
+
+
+  for(
+    let i=0;
+    i<5;
+    i++
+  ){
+
+    diagonal2 +=
+      answer[i][4-i];
+
+  }
+
+
+  if(
+    diagonal1 !== rowTotal ||
+    diagonal2 !== rowTotal
+  ){
+
+    alert(
+      "Both diagonals must equal the Row Total."
+    );
+
+    return;
+
+  }
+
+
+  /* TABLE TOTAL */
+
+  const calculatedTable =
+    allNumbers
+    .reduce(
+      (a,b)=>a+b,
+      0
+    );
+
+
+  if(
+    calculatedTable !==
+    tableTotal
+  ){
+
+    alert(
+      "Table total is " +
+      calculatedTable +
+      ", not " +
+      tableTotal
+    );
+
+    return;
+
+  }
+
+
+  diamondGameData = {
+
+    active:true,
+
+    rowTotal:
+      rowTotal,
+
+    tableTotal:
+      tableTotal,
+
+    answer:
+      answer
+
+  };
+
+
+  localStorage.setItem(
+
+    "diamondGameData",
+
+    JSON.stringify(
+      diamondGameData
+    )
+
+  );
+
+
+  loadDiamondGame();
+
+
+  alert(
+    "Diamond background saved successfully."
+  );
+
+};
+
+
+/* ===================================================== */
+/* STOP DIAMOND BACKGROUND */
+/* ===================================================== */
+
+window.stopDiamondBackground =
+function(){
+
+  diamondGameData.active =
+    false;
+
+
+  localStorage.setItem(
+
+    "diamondGameData",
+
+    JSON.stringify(
+      diamondGameData
+    )
+
+  );
+
+
+  alert(
+    "Diamond game stopped."
+  );
+
+};
+
+
+/* ===================================================== */
+/* LOAD DIAMOND BACKGROUND */
+/* ===================================================== */
+
+function loadDiamondGame(){
+
+  const saved =
+    localStorage.getItem(
+      "diamondGameData"
+    );
+
+
+  if(saved){
+
+    try{
+
+      diamondGameData =
+        JSON.parse(saved);
+
+    }
+    catch(error){}
+
+  }
+
+
+  document
+  .getElementById(
+    "diamondRowTotal"
+  )
+  .textContent =
+    diamondGameData.rowTotal;
+
+
+  document
+  .getElementById(
+    "diamondTableTotal"
+  )
+  .textContent =
+    diamondGameData.tableTotal;
+
+
+  resetDiamondPlayerGrid();
+
+
+  document
+  .getElementById(
+    "diamondResult"
+  )
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById(
+    "diamondAnswerButton"
+  )
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById(
+    "diamondStartButton"
+  )
+  .classList
+  .remove("hidden");
+
+
+  document
+  .getElementById(
+    "diamondTimer"
+  )
+  .textContent =
+    "5:00";
+
+
+  document
+  .getElementById(
+    "diamondTimer"
+  )
+  .classList
+  .remove("warning");
+
+}
+
+
+/* ===================================================== */
+/* RESET DIAMOND PLAYER GRID */
+/* ===================================================== */
+
+function resetDiamondPlayerGrid(){
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      const input =
+        document.getElementById(
+          `diamond-player-${r}-${c}`
+        );
+
+
+      if(input){
+
+        input.value =
+          "";
+
+        input.disabled =
+          true;
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* ===================================================== */
+/* START DIAMOND */
+/* ===================================================== */
+
+window.startDiamondGame =
+function(){
+
+  if(
+    !diamondGameData.active
+  ){
+
+    alert(
+      "Diamond game is currently stopped."
+    );
+
+    return;
+
+  }
+
+
+  diamondGameRunning =
+    true;
+
+
+  diamondTimeLeft =
+    300;
+
+
+  resetDiamondPlayerGrid();
+
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      document
+      .getElementById(
+        `diamond-player-${r}-${c}`
+      )
+      .disabled =
+        false;
+
+    }
+
+  }
+
+
+  document
+  .getElementById(
+    "diamondStartButton"
+  )
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById(
+    "diamondAnswerButton"
+  )
+  .classList
+  .remove("hidden");
+
+
+  document
+  .getElementById(
+    "diamondResult"
+  )
+  .classList
+  .add("hidden");
+
+
+  updateDiamondTimer();
+
+
+  stopDiamondTimer();
+
+
+  diamondTimerInterval =
+    setInterval(
+
+      ()=>{
+
+        diamondTimeLeft--;
+
+        updateDiamondTimer();
+
+
+        if(
+          diamondTimeLeft <= 0
+        ){
+
+          stopDiamondTimer();
+
+          diamondGameRunning =
+            false;
+
+          disableDiamondPlayerGrid();
+
+          document
+          .getElementById(
+            "diamondAnswerButton"
+          )
+          .classList
+          .add("hidden");
+
+
+          showDiamondResult(
+            "Time is over. Better luck next time!",
+            true
+          );
+
+        }
+
+      },
+
+      1000
+
+    );
+
+};
+
+
+/* ===================================================== */
+/* TIMER */
+/* ===================================================== */
+
+function updateDiamondTimer(){
+
+  const minutes =
+    Math.floor(
+      diamondTimeLeft / 60
+    );
+
+
+  const seconds =
+    diamondTimeLeft % 60;
+
+
+  const timer =
+    document
+    .getElementById(
+      "diamondTimer"
+    );
+
+
+  timer.textContent =
+    minutes +
+    ":" +
+    seconds
+    .toString()
+    .padStart(2,"0");
+
+
+  if(
+    diamondTimeLeft <= 30
+  ){
+
+    timer
+    .classList
+    .add("warning");
+
+  }
+  else{
+
+    timer
+    .classList
+    .remove("warning");
+
+  }
+
+}
+
+
+/* ===================================================== */
+/* STOP TIMER */
+/* ===================================================== */
+
+function stopDiamondTimer(){
+
+  if(
+    diamondTimerInterval
+  ){
+
+    clearInterval(
+      diamondTimerInterval
+    );
+
+    diamondTimerInterval =
+      null;
+
+  }
+
+}
+
+
+/* ===================================================== */
+/* GET PLAYER ANSWER */
+/* ===================================================== */
+
+function getDiamondPlayerAnswer(){
+
+  const answer = [];
+
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    const row = [];
+
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      const input =
+        document
+        .getElementById(
+          `diamond-player-${r}-${c}`
+        );
+
+
+      if(
+        input.value === ""
+      ){
+
+        row.push(null);
+
+      }
+      else{
+
+        row.push(
+          Number(input.value)
+        );
+
+      }
+
+    }
+
+
+    answer.push(row);
+
+  }
+
+
+  return answer;
+
+}
+
+
+/* ===================================================== */
+/* CHECK DUPLICATES */
+/* ===================================================== */
+
+function hasDiamondDuplicate(
+  answer
+){
+
+  const numbers = [];
+
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      if(
+        answer[r][c] !== null
+      ){
+
+        numbers.push(
+          answer[r][c]
+        );
+
+      }
+
+    }
+
+  }
+
+
+  return (
+    new Set(numbers).size
+    !==
+    numbers.length
+  );
+
+}
+
+
+/* ===================================================== */
+/* ANSWER */
+/* ===================================================== */
+
+window.submitDiamondAnswer =
+function(){
+
+  if(
+    !diamondGameRunning
+  )
+    return;
+
+
+  stopDiamondTimer();
+
+
+  diamondGameRunning =
+    false;
+
+
+  const playerAnswer =
+    getDiamondPlayerAnswer();
+
+
+  if(
+    hasDiamondDuplicate(
+      playerAnswer
+    )
+  ){
+
+    alert(
+      "Same number cannot be repeated."
+    );
+
+    diamondGameRunning =
+      true;
+
+
+    diamondTimerInterval =
+      setInterval(
+
+        ()=>{
+
+          diamondTimeLeft--;
+
+          updateDiamondTimer();
+
+
+          if(
+            diamondTimeLeft <= 0
+          ){
+
+            stopDiamondTimer();
+
+            diamondGameRunning =
+              false;
+
+            disableDiamondPlayerGrid();
+
+            showDiamondResult(
+              "Time is over. Better luck next time!",
+              true
+            );
+
+          }
+
+        },
+
+        1000
+
+      );
+
+
+    return;
+
+  }
+
+
+  disableDiamondPlayerGrid();
+
+
+  document
+  .getElementById(
+    "diamondAnswerButton"
+  )
+  .classList
+  .add("hidden");
+
+
+  calculateDiamondScore(
+    playerAnswer
+  );
+
+};
+
+
+/* ===================================================== */
+/* CALCULATE SCORE */
+/* ===================================================== */
+
+function calculateDiamondScore(
+  playerAnswer
+){
+
+  let score = 0;
+
+
+  let correctRows = 0;
+
+  let correctDiagonal1 = false;
+
+  let correctDiagonal2 = false;
+
+  let correctTable = false;
+
+
+  /* ROWS */
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    let complete =
+      true;
+
+    let sum = 0;
+
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      if(
+        playerAnswer[r][c]
+        ===
+        null
+      ){
+
+        complete =
+          false;
+
+        break;
+
+      }
+
+
+      sum +=
+        playerAnswer[r][c];
+
+    }
+
+
+    if(
+      complete &&
+      sum ===
+      diamondGameData.rowTotal
+    ){
+
+      correctRows++;
+
+      score += 10;
+
+    }
+
+  }
+
+
+  /* DIAGONAL 1 */
+
+  let diagonal1Sum = 0;
+
+  let diagonal1Complete =
+    true;
+
+
+  for(
+    let i=0;
+    i<5;
+    i++
+  ){
+
+    if(
+      playerAnswer[i][i]
+      ===
+      null
+    ){
+
+      diagonal1Complete =
+        false;
+
+      break;
+
+    }
+
+
+    diagonal1Sum +=
+      playerAnswer[i][i];
+
+  }
+
+
+  if(
+    diagonal1Complete &&
+    diagonal1Sum ===
+    diamondGameData.rowTotal
+  ){
+
+    correctDiagonal1 =
+      true;
+
+    score += 10;
+
+  }
+
+
+  /* DIAGONAL 2 */
+
+  let diagonal2Sum = 0;
+
+  let diagonal2Complete =
+    true;
+
+
+  for(
+    let i=0;
+    i<5;
+    i++
+  ){
+
+    if(
+      playerAnswer[i][4-i]
+      ===
+      null
+    ){
+
+      diagonal2Complete =
+        false;
+
+      break;
+
+    }
+
+
+    diagonal2Sum +=
+      playerAnswer[i][4-i];
+
+  }
+
+
+  if(
+    diagonal2Complete &&
+    diagonal2Sum ===
+    diamondGameData.rowTotal
+  ){
+
+    correctDiagonal2 =
+      true;
+
+    score += 10;
+
+  }
+
+
+  /* TABLE */
+
+  let tableSum = 0;
+
+  let tableComplete =
+    true;
+
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      if(
+        playerAnswer[r][c]
+        ===
+        null
+      ){
+
+        tableComplete =
+          false;
+
+      }
+      else{
+
+        tableSum +=
+          playerAnswer[r][c];
+
+      }
+
+    }
+
+  }
+
+
+  if(
+    tableComplete &&
+    tableSum ===
+    diamondGameData.tableTotal
+  ){
+
+    correctTable =
+      true;
+
+    score += 50;
+
+  }
+
+
+  /*
+    Minimum score is 10
+    only when at least one
+    scoring condition is achieved.
+  */
+
+
+  if(score > 0){
+
+    showDiamondResult(
+
+      score === 120
+      ?
+      "🎉 Congratulations! Full score!"
+      :
+      "Good attempt! Check the comparison below.",
+
+      false
+
+    );
+
+  }
+  else{
+
+    showDiamondResult(
+
+      "Better luck next time!",
+
+      false
+
+    );
+
+  }
+
+
+  document
+  .getElementById(
+    "diamondScore"
+  )
+  .textContent =
+    "Score: " +
+    score +
+    " / 120";
+
+
+  document
+  .getElementById(
+    "diamondBreakdown"
+  )
+  .innerHTML =
+
+    "Correct Rows: " +
+    correctRows +
+    " × 10 = " +
+    (correctRows * 10) +
+
+    "<br>" +
+
+    "Diagonal 1: " +
+    (correctDiagonal1 ? "10" : "0") +
+
+    "<br>" +
+
+    "Diagonal 2: " +
+    (correctDiagonal2 ? "10" : "0") +
+
+    "<br>" +
+
+    "Total Table: " +
+    (correctTable ? "50" : "0");
+
+
+  saveDiamondScore(
+    score
+  );
+
+}
+
+
+/* ===================================================== */
+/* SHOW RESULT */
+/* ===================================================== */
+
+function showDiamondResult(
+  message,
+  timeOver
+){
+
+  document
+  .getElementById(
+    "diamondResult"
+  )
+  .classList
+  .remove("hidden");
+
+
+  document
+  .getElementById(
+    "diamondResultMessage"
+  )
+  .textContent =
+    message;
+
+
+  createDiamondResultGrid(
+    "diamondCorrectGrid",
+    diamondGameData.answer
+  );
+
+
+  createDiamondResultGrid(
+    "diamondYourGrid",
+    getDiamondPlayerAnswer()
+  );
+
+
+  if(timeOver){
+
+    document
+    .getElementById(
+      "diamondScore"
+    )
+    .textContent =
+      "Score: 0 / 120";
+
+  }
+
+}
+
+
+/* ===================================================== */
+/* RESULT GRID */
+/* ===================================================== */
+
+function createDiamondResultGrid(
+  elementId,
+  data
+){
+
+  const grid =
+    document.getElementById(
+      elementId
+    );
+
+
+  grid.innerHTML = "";
+
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      const box =
+        document.createElement(
+          "div"
+        );
+
+
+      box.className =
+        "result-box";
+
+
+      box.textContent =
+        data[r][c] === null
+        ?
+        "-"
+        :
+        data[r][c];
+
+
+      grid.appendChild(
+        box
+      );
+
+    }
+
+  }
+
+}
+
+
+/* ===================================================== */
+/* DISABLE PLAYER GRID */
+/* ===================================================== */
+
+function disableDiamondPlayerGrid(){
+
+  for(
+    let r=0;
+    r<5;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<5;
+      c++
+    ){
+
+      const input =
+        document.getElementById(
+          `diamond-player-${r}-${c}`
+        );
+
+
+      if(input){
+
+        input.disabled =
+          true;
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* ===================================================== */
+/* SAVE DIAMOND SCORE */
+/* ===================================================== */
+
+async function saveDiamondScore(
+  score
+){
+
+  if(!currentUser)
+    return;
+
+
+  try{
+
+    const userRef =
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      );
+
+
+    const snapshot =
+      await getDoc(
+        userRef
+      );
+
+
+    if(!snapshot.exists())
+      return;
+
+
+    const data =
+      snapshot.data();
+
+
+    const oldPoints =
+      Number(
+        data.points || 0
+      );
+
+
+    const oldGames =
+      Number(
+        data.gamesPlayed || 0
+      );
+
+
+    await updateDoc(
+
+      userRef,
+
+      {
+
+        points:
+          oldPoints + score,
+
+        gamesPlayed:
+          oldGames + 1
+
+      }
+
+    );
+
+
+    await loadUserData();
+
+  }
+  catch(error){
+
+    console.error(
+      "Score save error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* ===================================================== */
+/* PLAY AGAIN */
+/* ===================================================== */
+
+window.startNewDiamondGame =
+function(){
+
+  document
+  .getElementById(
+    "diamondResult"
+  )
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById(
+    "diamondScore"
+  )
+  .textContent =
+    "Score: 0 / 120";
+
+
+  document
+  .getElementById(
+    "diamondBreakdown"
+  )
+  .innerHTML =
+    "";
+
+
+  startDiamondGame();
+
+};
+
+
+/* ===================================================== */
+/* INITIALIZE */
+/* ===================================================== */
+
+createDiamondPlayerGrid();
+
+createDiamondAdminGrid();
+
+loadDiamondGame();
 
 updateRegisterMobileLength();
+
 
 </script>
 

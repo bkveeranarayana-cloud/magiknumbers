@@ -363,13 +363,13 @@ button {
   </div>
 
   <div class="scoreRow">
-    <b>NAME</b>
-    <div id="scoreName">---</div>
+    <b>DATE OF JOINING</b>
+    <div id="scoreJoiningDate">---</div>
   </div>
 
   <div class="scoreRow">
-    <b>DATE OF JOINING</b>
-    <div id="scoreJoiningDate">---</div>
+    <b>NAME</b>
+    <div id="scoreName">---</div>
   </div>
 
   <div class="scoreRow">
@@ -555,7 +555,7 @@ const googleProvider =
 
 
 /* ============================= */
-/* CREATE / GET USER PROFILE */
+/* CREATE / UPDATE USER PROFILE */
 /* ============================= */
 
 async function createUserProfile(
@@ -571,12 +571,83 @@ async function createUserProfile(
     await getDoc(userRef);
 
 
+  /* EXISTING USER */
+
   if (existing.exists()) {
 
-    return existing.data();
+    const data =
+      existing.data();
+
+    const updates = {};
+
+
+    /* ADD JOINING DATE ONLY IF MISSING */
+
+    if (!data.joiningDate) {
+
+      const creationDate =
+        user.metadata &&
+        user.metadata.creationTime
+          ? new Date(
+              user.metadata.creationTime
+            ).toLocaleDateString("en-IN")
+          : new Date()
+              .toLocaleDateString("en-IN");
+
+      updates.joiningDate =
+        creationDate;
+    }
+
+
+    /* ADD GAMES PLAYED ONLY IF MISSING */
+
+    if (
+      data.gamesPlayed === undefined
+    ) {
+
+      updates.gamesPlayed = 0;
+
+    }
+
+
+    /* ADD CASH BALANCE ONLY IF MISSING */
+
+    if (
+      data.cashBalance === undefined
+    ) {
+
+      updates.cashBalance = 0;
+
+    }
+
+
+    /* SAVE ONLY MISSING FIELDS */
+
+    if (
+      Object.keys(updates).length > 0
+    ) {
+
+      await updateDoc(
+        userRef,
+        updates
+      );
+
+      const updated =
+        await getDoc(userRef);
+
+      return updated.data();
+
+    }
+
+
+    return data;
 
   }
 
+
+  /* ============================= */
+  /* NEW USER */
+  /* ============================= */
 
   const now =
     new Date();
@@ -910,7 +981,6 @@ onAuthStateChanged(
 
         updateScoreCard(data);
 
-
         showMessage("");
 
       }
@@ -976,15 +1046,15 @@ function updateScoreCard(data) {
 
 
   document
-    .getElementById("scoreName")
-    .innerText =
-    data.name || "---";
-
-
-  document
     .getElementById("scoreJoiningDate")
     .innerText =
     data.joiningDate || "---";
+
+
+  document
+    .getElementById("scoreName")
+    .innerText =
+    data.name || "---";
 
 
   document
@@ -1125,17 +1195,11 @@ async function() {
     }
 
 
-    /*
-      TEST RATE:
-      100 POINTS = ₹10
-    */
-
     const cash =
       Math.floor(points / 100) * 10;
 
     const usedPoints =
       Math.floor(points / 100) * 100;
-
 
     const remainingPoints =
       points - usedPoints;
@@ -1314,15 +1378,6 @@ async function() {
 
   }
 
-
-  /*
-    IMPORTANT:
-    For now we only sign the user out.
-
-    Permanent Firebase account deletion
-    will be added later with secure
-    re-authentication and proper handling.
-  */
 
   await signOut(auth);
 

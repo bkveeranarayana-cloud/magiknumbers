@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAGIKNUMBER</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+    }
+
+    .container {
+      width: 94%;
+      max-width: 500px;
+      margin: auto;
+      padding: 20px 10px;
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: 32px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      margin: 7px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      margin: 7px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .register {
+      background: #2196f3;
+      color: white;
+    }
+
+    .login {
+      background: #4caf50;
+      color: white;
+    }
+
+    .google {
+      background: white;
+      border: 1px solid #aaa;
+    }
+
+    .game {
+      background: #222;
+      color: white;
+      margin: 12px 0;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .game:hover {
+      opacity: 0.85;
+    }
+
+    #gameMenu,
+    #loggedIn {
+      display: none;
+    }
+
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .logout {
+      background: #e53935;
+      color: white;
+    }
+
+    .rules {
+      text-align: left;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>MAGIKNUMBER</h1>
+
+  <!-- RULES -->
+  <div class="card rules">
+    <h2>RULES</h2>
+    <p>• Select the game you want to play.</p>
+    <p>• Enter numbers in the 3 × 3 boxes.</p>
+    <p>• Complete the game within the given time.</p>
+    <p>• Press DONE before the timer ends.</p>
+    <p>• Successful games will add points to your Score Card.</p>
+  </div>
+
+
+  <!-- REGISTER / LOGIN -->
+  <div id="authArea">
+
+    <div class="card">
+      <h2>REGISTER</h2>
+
+      <input type="text" id="name" placeholder="Name">
+      <input type="tel" id="mobile" placeholder="Mobile Number">
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Password">
+
+      <button class="register" onclick="registerUser()">
+        REGISTER
+      </button>
+    </div>
+
+
+    <div class="card">
+      <h2>LOGIN</h2>
+
+      <input type="email" id="loginEmail" placeholder="Email">
+      <input type="password" id="loginPassword" placeholder="Password">
+
+      <button class="login" onclick="loginUser()">
+        LOGIN
+      </button>
+
+      <button class="google" onclick="googleLogin()">
+        🔵 Continue with Google
+      </button>
+
+      <div id="message"></div>
+    </div>
+
+  </div>
+
+
+  <!-- LOGGED IN -->
+  <div id="loggedIn" class="card">
+
+    <h2>Welcome!</h2>
+
+    <p id="userName"></p>
+    <p id="userEmail"></p>
+
+    <button class="logout" onclick="logoutUser()">
+      LOGOUT
+    </button>
+
+  </div>
+
+
+  <!-- GAME MENU -->
+  <div id="gameMenu" class="card">
+
+    <h2>GAME MENU</h2>
+
+    <div class="game" onclick="openGame('score')">
+      SCORE CARD
+    </div>
+
+    <div class="game" onclick="openGame('diamond')">
+      💎 DIAMOND – 5 MINUTES
+    </div>
+
+    <div class="game" onclick="openGame('gold')">
+      🥇 GOLD – 1 MINUTE
+    </div>
+
+    <div class="game" onclick="openGame('silver')">
+      🥈 SILVER – 1 MINUTE
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+  import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    onAuthStateChanged,
+    signOut
+  }
+  from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+  // YOUR FIREBASE CONFIG
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+    authDomain: "magiknumbers-d42c0.firebaseapp.com",
+    projectId: "magiknumbers-d42c0",
+    storageBucket: "magiknumbers-d42c0.firebasestorage.app",
+    messagingSenderId: "977553928698",
+    appId: "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+  };
+
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const provider = new GoogleAuthProvider();
+
+
+  // REGISTER
+
+  window.registerUser = async function() {
+
+    const name =
+      document.getElementById("name").value.trim();
+
+    const mobile =
+      document.getElementById("mobile").value.trim();
+
+    const email =
+      document.getElementById("email").value.trim();
+
+    const password =
+      document.getElementById("password").value;
+
+
+    if (!name || !mobile || !email || !password) {
+
+      showMessage("Please fill all details.");
+      return;
+    }
+
+
+    try {
+
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      showMessage("Registration successful!");
+
+    } catch (error) {
+
+      showMessage(error.message);
+    }
+  };
+
+
+  // EMAIL LOGIN
+
+  window.loginUser = async function() {
+
+    const email =
+      document.getElementById("loginEmail").value.trim();
+
+    const password =
+      document.getElementById("loginPassword").value;
+
+
+    if (!email || !password) {
+
+      showMessage("Enter email and password.");
+      return;
+    }
+
+
+    try {
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    } catch (error) {
+
+      showMessage(error.message);
+    }
+  };
+
+
+  // GOOGLE LOGIN
+
+  window.googleLogin = async function() {
+
+    try {
+
+      await signInWithPopup(auth, provider);
+
+    } catch (error) {
+
+      showMessage(error.message);
+    }
+  };
+
+
+  // LOGOUT
+
+  window.logoutUser = async function() {
+
+    await signOut(auth);
+  };
+
+
+  // LOGIN STATUS
+
+  onAuthStateChanged(auth, (user) => {
+
+    if (user) {
+
+      document.getElementById("authArea")
+        .style.display = "none";
+
+      document.getElementById("loggedIn")
+        .style.display = "block";
+
+      document.getElementById("gameMenu")
+        .style.display = "block";
+
+
+      document.getElementById("userName")
+        .innerText =
+        user.displayName ||
+        "User";
+
+      document.getElementById("userEmail")
+        .innerText =
+        user.email || "";
+
+    } else {
+
+      document.getElementById("authArea")
+        .style.display = "block";
+
+      document.getElementById("loggedIn")
+        .style.display = "none";
+
+      document.getElementById("gameMenu")
+        .style.display = "none";
+    }
+
+  });
+
+
+  function showMessage(text) {
+
+    document.getElementById("message")
+      .innerText = text;
+  }
+
+
+  // GAME BUTTON
+
+  window.openGame = function(game) {
+
+    if (game === "score") {
+      alert("SCORE CARD will be added next.");
+    }
+
+    if (game === "diamond") {
+      alert("DIAMOND GAME – 5 MINUTES");
+    }
+
+    if (game === "gold") {
+      alert("GOLD GAME – 1 MINUTE");
+    }
+
+    if (game === "silver") {
+      alert("SILVER GAME – 1 MINUTE");
+    }
+
+  };
+
+</script>
+
+</body>
+</html>

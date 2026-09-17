@@ -204,8 +204,6 @@ button {
 
 <h1>MAGIKNUMBER</h1>
 
-<!-- AUTH -->
-
 <div id="authArea">
 
   <div class="card">
@@ -288,8 +286,6 @@ button {
 </div>
 
 
-<!-- LOGGED IN -->
-
 <div id="loggedIn" class="card">
 
   <h2>Welcome!</h2>
@@ -317,8 +313,6 @@ button {
 
 </div>
 
-
-<!-- GAME MENU -->
 
 <div id="gameMenu" class="card">
 
@@ -350,8 +344,6 @@ button {
 
 </div>
 
-
-<!-- SCORE CARD -->
 
 <div id="scoreCard" class="card">
 
@@ -435,8 +427,6 @@ button {
 </div>
 
 
-<!-- PROFILE -->
-
 <div id="profile" class="card">
 
   <h2>MY PROFILE</h2>
@@ -484,8 +474,6 @@ button {
 
 <script type="module">
 
-/* FIREBASE */
-
 import {
   initializeApp
 }
@@ -515,8 +503,6 @@ from
 "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-/* FIREBASE CONFIG */
-
 const firebaseConfig = {
 
   apiKey:
@@ -539,8 +525,6 @@ const firebaseConfig = {
 };
 
 
-/* INITIALIZE */
-
 const app =
   initializeApp(firebaseConfig);
 
@@ -555,7 +539,7 @@ const googleProvider =
 
 
 /* ============================= */
-/* CREATE / UPDATE USER PROFILE */
+/* CREATE / UPDATE PROFILE */
 /* ============================= */
 
 async function createUserProfile(
@@ -581,25 +565,40 @@ async function createUserProfile(
     const updates = {};
 
 
-    /* ADD JOINING DATE ONLY IF MISSING */
+    /* JOINING DATE */
 
     if (!data.joiningDate) {
 
-      const creationDate =
+      let joiningDate;
+
+      if (
         user.metadata &&
         user.metadata.creationTime
-          ? new Date(
-              user.metadata.creationTime
-            ).toLocaleDateString("en-IN")
-          : new Date()
-              .toLocaleDateString("en-IN");
+      ) {
+
+        joiningDate =
+          new Date(
+            user.metadata.creationTime
+          ).toLocaleDateString(
+            "en-IN"
+          );
+
+      } else {
+
+        joiningDate =
+          new Date()
+          .toLocaleDateString(
+            "en-IN"
+          );
+
+      }
 
       updates.joiningDate =
-        creationDate;
+        joiningDate;
     }
 
 
-    /* ADD GAMES PLAYED ONLY IF MISSING */
+    /* GAMES PLAYED */
 
     if (
       data.gamesPlayed === undefined
@@ -610,7 +609,7 @@ async function createUserProfile(
     }
 
 
-    /* ADD CASH BALANCE ONLY IF MISSING */
+    /* CASH BALANCE */
 
     if (
       data.cashBalance === undefined
@@ -621,7 +620,7 @@ async function createUserProfile(
     }
 
 
-    /* SAVE ONLY MISSING FIELDS */
+    /* SAVE MISSING FIELDS */
 
     if (
       Object.keys(updates).length > 0
@@ -629,6 +628,11 @@ async function createUserProfile(
 
       await updateDoc(
         userRef,
+        updates
+      );
+
+      console.log(
+        "Profile fields added:",
         updates
       );
 
@@ -649,13 +653,11 @@ async function createUserProfile(
   /* NEW USER */
   /* ============================= */
 
-  const now =
-    new Date();
-
   const joiningDate =
-    now.toLocaleDateString(
-      "en-IN"
-    );
+    new Date()
+      .toLocaleDateString(
+        "en-IN"
+      );
 
 
   const userData = {
@@ -685,7 +687,6 @@ async function createUserProfile(
 
     cashBalance:
       0
-
   };
 
 
@@ -763,13 +764,9 @@ async function() {
       );
 
 
-    const user =
-      result.user;
-
-
     const data =
       await createUserProfile(
-        user,
+        result.user,
         name,
         mobile
       );
@@ -907,18 +904,15 @@ onAuthStateChanged(
           .style.display =
           "none";
 
-
         document
           .getElementById("loggedIn")
           .style.display =
           "block";
 
-
         document
           .getElementById("gameMenu")
           .style.display =
           "block";
-
 
         document
           .getElementById("userIdBar")
@@ -1034,7 +1028,7 @@ onAuthStateChanged(
 
 
 /* ============================= */
-/* UPDATE SCORE CARD */
+/* SCORE CARD */
 /* ============================= */
 
 function updateScoreCard(data) {
@@ -1134,7 +1128,7 @@ function() {
 
 
 /* ============================= */
-/* CONVERT POINTS TO CASH */
+/* CONVERT POINTS */
 /* ============================= */
 
 window.convertPointsToCash =
@@ -1181,7 +1175,9 @@ async function() {
 
 
     const points =
-      Number(data.points || 0);
+      Number(
+        data.points || 0
+      );
 
 
     if (points < 100) {
@@ -1196,10 +1192,16 @@ async function() {
 
 
     const cash =
-      Math.floor(points / 100) * 10;
+      Math.floor(
+        points / 100
+      ) * 10;
+
 
     const usedPoints =
-      Math.floor(points / 100) * 100;
+      Math.floor(
+        points / 100
+      ) * 100;
+
 
     const remainingPoints =
       points - usedPoints;

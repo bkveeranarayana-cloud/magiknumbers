@@ -20,7 +20,68 @@ body{
   color:#111827;
 }
 
-/* HEADER */
+/* LOGIN */
+
+.loginCard{
+  width:92%;
+  max-width:380px;
+  background:white;
+  padding:30px 22px;
+  border-radius:18px;
+
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+
+  text-align:center;
+
+  box-shadow:0 8px 30px rgba(0,0,0,.15);
+}
+
+.loginCard h1{
+  margin:0 0 8px;
+}
+
+.subtitle{
+  color:#64748b;
+  margin-bottom:22px;
+  font-weight:bold;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  font-size:16px;
+}
+
+.loginBtn{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border:0;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+#loginMessage{
+  margin-top:14px;
+  color:#dc2626;
+  font-size:14px;
+}
+
+/* ADMIN */
+
+.adminPanel{
+  display:none;
+  min-height:100vh;
+}
 
 .header{
   background:#111827;
@@ -33,8 +94,6 @@ body{
   margin:0;
   font-size:21px;
 }
-
-/* DASHBOARD */
 
 .dashboard{
   width:94%;
@@ -53,48 +112,43 @@ body{
 
 .frame{
   background:white;
-  border:2px solid #e2e8f0;
   border-radius:16px;
   padding:18px;
   box-shadow:0 4px 14px rgba(0,0,0,.08);
+}
+
+.registration{
+  border:2px solid #2563eb;
+}
+
+.deletion{
+  border:2px solid #dc2626;
 }
 
 .frameTitle{
   text-align:center;
   font-size:18px;
   font-weight:bold;
-  margin-bottom:16px;
   padding-bottom:12px;
+  margin-bottom:8px;
   border-bottom:2px solid #e5e7eb;
-}
-
-/* REGISTRATION */
-
-.registration{
-  border-color:#2563eb;
 }
 
 .registration .frameTitle{
   color:#2563eb;
 }
 
-/* DELETION */
-
-.deletion{
-  border-color:#dc2626;
-}
-
 .deletion .frameTitle{
   color:#dc2626;
 }
 
-/* STAT ROW */
+/* STAT */
 
 .statRow{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:13px 4px;
+  padding:14px 4px;
   border-bottom:1px solid #e5e7eb;
 }
 
@@ -108,18 +162,19 @@ body{
   color:#475569;
 }
 
-.statValue{
-  font-size:21px;
-  font-weight:bold;
-  color:#111827;
+.statRight{
+  text-align:right;
 }
 
-/* CHANGE */
+.statValue{
+  font-size:22px;
+  font-weight:bold;
+}
 
 .change{
   display:block;
-  font-size:12px;
   margin-top:3px;
+  font-size:12px;
   font-weight:bold;
 }
 
@@ -135,26 +190,34 @@ body{
   color:#64748b;
 }
 
+/* BUTTONS */
+
+.logoutBtn,
+.refreshBtn{
+  width:100%;
+  padding:14px;
+  margin-top:20px;
+  border:0;
+  border-radius:10px;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.refreshBtn{
+  background:#2563eb;
+}
+
+.logoutBtn{
+  background:#dc2626;
+}
+
 /* LOADING */
 
 .loading{
   text-align:center;
   padding:30px;
   color:#64748b;
-}
-
-/* BACK */
-
-.backBtn{
-  width:100%;
-  margin-top:20px;
-  padding:14px;
-  border:0;
-  border-radius:10px;
-  background:#64748b;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
 }
 
 /* MOBILE */
@@ -173,177 +236,260 @@ body{
 
 <body>
 
-<div class="header">
-  <h2>MAGIKNUMBER ADMIN</h2>
-</div>
 
-<div class="dashboard">
+<!-- ADMIN LOGIN -->
 
-  <div id="loading" class="loading">
-    Loading dashboard...
+<div class="loginCard" id="loginCard">
+
+  <h1>MAGIKNUMBER</h1>
+
+  <div class="subtitle">
+    ADMIN LOGIN
   </div>
 
-  <div id="dashboardContent" style="display:none;">
+  <input
+    type="email"
+    id="email"
+    placeholder="Admin Email"
+    autocomplete="username"
+  >
 
-    <div class="frames">
+  <input
+    type="password"
+    id="password"
+    placeholder="Password"
+    autocomplete="current-password"
+  >
 
-      <!-- REGISTRATION FRAME -->
+  <button
+    class="loginBtn"
+    id="loginButton">
+    LOGIN
+  </button>
 
-      <div class="frame registration">
+  <div id="loginMessage"></div>
 
-        <div class="frameTitle">
-          REGISTRATION
-        </div>
-
-        <div class="statRow">
-
-          <div class="statName">
-            TOTAL REGISTERED
-          </div>
-
-          <div class="statValue" id="totalRegistered">
-            0
-          </div>
-
-        </div>
-
-
-        <div class="statRow">
-
-          <div class="statName">
-            TODAY REGISTERED
-          </div>
-
-          <div>
-
-            <div class="statValue" id="todayRegistered">
-              0
-            </div>
-
-            <span
-              class="change"
-              id="todayChange">
-            </span>
-
-          </div>
-
-        </div>
+</div>
 
 
-        <div class="statRow">
+<!-- ADMIN PANEL -->
 
-          <div class="statName">
-            LAST 7 DAYS
-          </div>
+<div
+  class="adminPanel"
+  id="adminPanel">
 
-          <div>
+  <div class="header">
 
-            <div class="statValue" id="sevenDaysRegistered">
-              0
-            </div>
+    <h2>
+      MAGIKNUMBER ADMIN
+    </h2>
 
-            <span
-              class="change"
-              id="sevenDaysChange">
-            </span>
-
-          </div>
-
-        </div>
+  </div>
 
 
-        <div class="statRow">
+  <div class="dashboard">
 
-          <div class="statName">
-            LAST 30 DAYS
-          </div>
+    <div
+      id="loading"
+      class="loading">
 
-          <div>
-
-            <div class="statValue" id="thirtyDaysRegistered">
-              0
-            </div>
-
-            <span
-              class="change"
-              id="thirtyDaysChange">
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- DELETION FRAME -->
-
-      <div class="frame deletion">
-
-        <div class="frameTitle">
-          ACCOUNT DELETION
-        </div>
-
-        <div class="statRow">
-
-          <div class="statName">
-            TOTAL DELETED
-          </div>
-
-          <div class="statValue" id="totalDeleted">
-            0
-          </div>
-
-        </div>
-
-
-        <div class="statRow">
-
-          <div class="statName">
-            TODAY DELETED
-          </div>
-
-          <div class="statValue" id="todayDeleted">
-            0
-          </div>
-
-        </div>
-
-
-        <div class="statRow">
-
-          <div class="statName">
-            LAST 7 DAYS DELETED
-          </div>
-
-          <div class="statValue" id="sevenDaysDeleted">
-            0
-          </div>
-
-        </div>
-
-
-        <div class="statRow">
-
-          <div class="statName">
-            LAST 30 DAYS DELETED
-          </div>
-
-          <div class="statValue" id="thirtyDaysDeleted">
-            0
-          </div>
-
-        </div>
-
-      </div>
+      Loading dashboard...
 
     </div>
 
-    <button
-      class="backBtn"
-      onclick="location.href='admin.html'">
-      BACK TO ADMIN
-    </button>
+
+    <div
+      id="dashboardContent"
+      style="display:none;">
+
+      <div class="frames">
+
+
+        <!-- REGISTRATION -->
+
+        <div class="frame registration">
+
+          <div class="frameTitle">
+            REGISTRATION
+          </div>
+
+
+          <div class="statRow">
+
+            <div class="statName">
+              TOTAL REGISTERED
+            </div>
+
+            <div
+              class="statRight statValue"
+              id="totalRegistered">
+              0
+            </div>
+
+          </div>
+
+
+          <div class="statRow">
+
+            <div class="statName">
+              TODAY REGISTERED
+            </div>
+
+            <div class="statRight">
+
+              <div
+                class="statValue"
+                id="todayRegistered">
+                0
+              </div>
+
+              <span
+                class="change"
+                id="todayChange">
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="statRow">
+
+            <div class="statName">
+              LAST 7 DAYS
+            </div>
+
+            <div class="statRight">
+
+              <div
+                class="statValue"
+                id="sevenDaysRegistered">
+                0
+              </div>
+
+              <span
+                class="change"
+                id="sevenDaysChange">
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="statRow">
+
+            <div class="statName">
+              LAST 30 DAYS
+            </div>
+
+            <div class="statRight">
+
+              <div
+                class="statValue"
+                id="thirtyDaysRegistered">
+                0
+              </div>
+
+              <span
+                class="change"
+                id="thirtyDaysChange">
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- DELETION -->
+
+        <div class="frame deletion">
+
+          <div class="frameTitle">
+            ACCOUNT DELETION
+          </div>
+
+
+          <div class="statRow">
+
+            <div class="statName">
+              TOTAL DELETED
+            </div>
+
+            <div
+              class="statValue"
+              id="totalDeleted">
+              0
+            </div>
+
+          </div>
+
+
+          <div class="statRow">
+
+            <div class="statName">
+              TODAY DELETED
+            </div>
+
+            <div
+              class="statValue"
+              id="todayDeleted">
+              0
+            </div>
+
+          </div>
+
+
+          <div class="statRow">
+
+            <div class="statName">
+              LAST 7 DAYS
+            </div>
+
+            <div
+              class="statValue"
+              id="sevenDaysDeleted">
+              0
+            </div>
+
+          </div>
+
+
+          <div class="statRow">
+
+            <div class="statName">
+              LAST 30 DAYS
+            </div>
+
+            <div
+              class="statValue"
+              id="thirtyDaysDeleted">
+              0
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="refreshBtn"
+        id="refreshButton">
+        REFRESH DATA
+      </button>
+
+
+      <button
+        class="logoutBtn"
+        id="logoutButton">
+        LOGOUT
+      </button>
+
+    </div>
 
   </div>
 
@@ -359,12 +505,25 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 
 import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+import {
   getFirestore,
   collection,
-  getDocs
+  getDocs,
+  doc,
+  getDoc
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
+/* FIREBASE */
 
 const firebaseConfig = {
 
@@ -392,11 +551,157 @@ const firebaseConfig = {
 const app =
   initializeApp(firebaseConfig);
 
+
+const auth =
+  getAuth(app);
+
+
 const db =
   getFirestore(app);
 
 
-/* DATE HELPERS */
+/* ADMIN CHECK */
+
+async function checkAdmin(user){
+
+  if(!user){
+    return false;
+  }
+
+  try{
+
+    const adminDoc =
+      await getDoc(
+        doc(
+          db,
+          "admins",
+          user.uid
+        )
+      );
+
+    return (
+      adminDoc.exists() &&
+      adminDoc.data().role === "admin"
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Admin check error:",
+      error
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* LOGIN */
+
+document
+.getElementById("loginButton")
+.addEventListener(
+  "click",
+  async function(){
+
+    const email =
+      document
+      .getElementById("email")
+      .value
+      .trim();
+
+    const password =
+      document
+      .getElementById("password")
+      .value;
+
+    const message =
+      document
+      .getElementById("loginMessage");
+
+    message.textContent = "";
+
+
+    if(!email || !password){
+
+      message.textContent =
+        "Please enter email and password.";
+
+      return;
+
+    }
+
+
+    try{
+
+      const result =
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+      const isAdmin =
+        await checkAdmin(
+          result.user
+        );
+
+
+      if(!isAdmin){
+
+        await signOut(auth);
+
+        message.textContent =
+          "Access denied. Admin account required.";
+
+        return;
+
+      }
+
+
+      showDashboard();
+
+    }
+    catch(error){
+
+      console.error(error);
+
+      message.textContent =
+        "Login failed: " +
+        error.message;
+
+    }
+
+  }
+);
+
+
+/* SHOW DASHBOARD */
+
+function showDashboard(){
+
+  document
+  .getElementById("loginCard")
+  .style.display =
+    "none";
+
+
+  document
+  .getElementById("adminPanel")
+  .style.display =
+    "block";
+
+
+  loadDashboard();
+
+}
+
+
+/* DATE */
 
 function getDate(value){
 
@@ -406,16 +711,28 @@ function getDate(value){
 
   try{
 
-    if(value.toDate){
+    if(
+      typeof value.toDate ===
+      "function"
+    ){
+
       return value.toDate();
+
     }
+
 
     const date =
       new Date(value);
 
-    if(isNaN(date.getTime())){
+
+    if(
+      isNaN(date.getTime())
+    ){
+
       return null;
+
     }
+
 
     return date;
 
@@ -431,45 +748,110 @@ function getDate(value){
 
 function startOfDay(date){
 
-  const d =
+  const result =
     new Date(date);
 
-  d.setHours(0,0,0,0);
+  result.setHours(
+    0,0,0,0
+  );
 
-  return d;
+  return result;
 
 }
 
 
-/* COUNT USERS */
+/* COUNT */
 
-function countBetween(users, start, end){
+function countBetween(
+  records,
+  start,
+  end
+){
 
   let count = 0;
 
-  users.forEach(user => {
 
-    const date =
-      getDate(user.dateOfJoining);
+  records.forEach(
+    record => {
 
-    if(!date){
-      return;
+      const date =
+        getDate(
+          record.dateOfJoining
+        );
+
+
+      if(!date){
+        return;
+      }
+
+
+      if(
+        date >= start &&
+        date < end
+      ){
+
+        count++;
+
+      }
+
     }
+  );
 
-    if(date >= start && date < end){
-      count++;
-    }
-
-  });
 
   return count;
 
 }
 
 
-/* PERCENT CHANGE */
+/* DELETION COUNT */
 
-function percentageChange(current, previous){
+function countDeletedBetween(
+  records,
+  start,
+  end
+){
+
+  let count = 0;
+
+
+  records.forEach(
+    record => {
+
+      const date =
+        getDate(
+          record.deletedAt
+        );
+
+
+      if(!date){
+        return;
+      }
+
+
+      if(
+        date >= start &&
+        date < end
+      ){
+
+        count++;
+
+      }
+
+    }
+  );
+
+
+  return count;
+
+}
+
+
+/* % CHANGE */
+
+function percentageChange(
+  current,
+  previous
+){
 
   if(previous === 0){
 
@@ -481,19 +863,28 @@ function percentageChange(current, previous){
 
   }
 
+
   return Math.round(
-    ((current - previous) / previous) * 100
+    (
+      (current - previous)
+      / previous
+    ) * 100
   );
 
 }
 
 
-/* SHOW CHANGE */
-
-function showChange(elementId, current, previous){
+function showChange(
+  elementId,
+  current,
+  previous
+){
 
   const element =
-    document.getElementById(elementId);
+    document.getElementById(
+      elementId
+    );
+
 
   const change =
     percentageChange(
@@ -501,11 +892,12 @@ function showChange(elementId, current, previous){
       previous
     );
 
+
   if(change === null){
 
     element.textContent =
       current > 0
-      ? "New"
+      ? "NEW"
       : "0%";
 
     element.className =
@@ -514,6 +906,7 @@ function showChange(elementId, current, previous){
     return;
 
   }
+
 
   if(change > 0){
 
@@ -527,7 +920,9 @@ function showChange(elementId, current, previous){
   else if(change < 0){
 
     element.textContent =
-      "▼ " + Math.abs(change) + "%";
+      "▼ " +
+      Math.abs(change) +
+      "%";
 
     element.className =
       "change down";
@@ -546,9 +941,33 @@ function showChange(elementId, current, previous){
 }
 
 
-/* LOAD DASHBOARD */
+/* LOAD */
 
 async function loadDashboard(){
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+
+  const content =
+    document.getElementById(
+      "dashboardContent"
+    );
+
+
+  loading.textContent =
+    "Loading dashboard...";
+
+
+  loading.style.display =
+    "block";
+
+
+  content.style.display =
+    "none";
+
 
   try{
 
@@ -562,76 +981,104 @@ async function loadDashboard(){
         )
       );
 
+
     const users = [];
 
-    usersSnapshot.forEach(doc => {
 
-      users.push(
-        doc.data()
-      );
+    usersSnapshot.forEach(
+      item => {
 
-    });
+        users.push(
+          item.data()
+        );
 
+      }
+    );
+
+
+    /* CURRENT DATE */
 
     const now =
       new Date();
 
+
     const todayStart =
       startOfDay(now);
 
+
     const tomorrowStart =
-      new Date(todayStart);
+      new Date(
+        todayStart
+      );
+
 
     tomorrowStart.setDate(
       tomorrowStart.getDate() + 1
     );
 
 
-    /* TODAY */
+    /* YESTERDAY */
 
     const yesterdayStart =
-      new Date(todayStart);
+      new Date(
+        todayStart
+      );
+
 
     yesterdayStart.setDate(
       yesterdayStart.getDate() - 1
     );
 
 
-    /* 7 DAYS */
+    /* LAST 7 DAYS */
 
     const sevenStart =
-      new Date(todayStart);
+      new Date(
+        todayStart
+      );
+
 
     sevenStart.setDate(
       sevenStart.getDate() - 6
     );
 
+
     const previousSevenStart =
-      new Date(todayStart);
+      new Date(
+        todayStart
+      );
+
 
     previousSevenStart.setDate(
       previousSevenStart.getDate() - 13
     );
 
 
-    /* 30 DAYS */
+    /* LAST 30 DAYS */
 
     const thirtyStart =
-      new Date(todayStart);
+      new Date(
+        todayStart
+      );
+
 
     thirtyStart.setDate(
       thirtyStart.getDate() - 29
     );
 
+
     const previousThirtyStart =
-      new Date(todayStart);
+      new Date(
+        todayStart
+      );
+
 
     previousThirtyStart.setDate(
       previousThirtyStart.getDate() - 59
     );
 
 
-    /* REGISTRATION COUNTS */
+    /* REGISTRATION */
 
     const totalRegistered =
       users.length;
@@ -685,33 +1132,41 @@ async function loadDashboard(){
       );
 
 
-    /* DISPLAY REGISTRATION */
+    /* DISPLAY */
 
-    document.getElementById(
+    document
+    .getElementById(
       "totalRegistered"
-    ).textContent =
+    )
+    .textContent =
       totalRegistered;
 
 
-    document.getElementById(
+    document
+    .getElementById(
       "todayRegistered"
-    ).textContent =
+    )
+    .textContent =
       todayRegistered;
 
 
-    document.getElementById(
+    document
+    .getElementById(
       "sevenDaysRegistered"
-    ).textContent =
+    )
+    .textContent =
       sevenDaysRegistered;
 
 
-    document.getElementById(
+    document
+    .getElementById(
       "thirtyDaysRegistered"
-    ).textContent =
+    )
+    .textContent =
       thirtyDaysRegistered;
 
 
-    /* REGISTRATION % */
+    /* % */
 
     showChange(
       "todayChange",
@@ -734,13 +1189,14 @@ async function loadDashboard(){
     );
 
 
-    /* DELETED ACCOUNTS */
+    /* DELETED */
 
     let deleted = [];
 
+
     try{
 
-      const deletedSnapshot =
+      const deletionSnapshot =
         await getDocs(
           collection(
             db,
@@ -748,19 +1204,22 @@ async function loadDashboard(){
           )
         );
 
-      deletedSnapshot.forEach(doc => {
 
-        deleted.push(
-          doc.data()
-        );
+      deletionSnapshot.forEach(
+        item => {
 
-      });
+          deleted.push(
+            item.data()
+          );
+
+        }
+      );
 
     }
     catch(error){
 
       console.log(
-        "accountDeletions collection not available yet."
+        "Deletion collection not available yet."
       );
 
     }
@@ -771,7 +1230,7 @@ async function loadDashboard(){
 
 
     const todayDeleted =
-      countBetween(
+      countDeletedBetween(
         deleted,
         todayStart,
         tomorrowStart
@@ -779,7 +1238,7 @@ async function loadDashboard(){
 
 
     const sevenDaysDeleted =
-      countBetween(
+      countDeletedBetween(
         deleted,
         sevenStart,
         tomorrowStart
@@ -787,66 +1246,140 @@ async function loadDashboard(){
 
 
     const thirtyDaysDeleted =
-      countBetween(
+      countDeletedBetween(
         deleted,
         thirtyStart,
         tomorrowStart
       );
 
 
-    /* DISPLAY DELETION */
+    /* DISPLAY */
 
-    document.getElementById(
+    document
+    .getElementById(
       "totalDeleted"
-    ).textContent =
+    )
+    .textContent =
       totalDeleted;
 
 
-    document.getElementById(
+    document
+    .getElementById(
       "todayDeleted"
-    ).textContent =
+    )
+    .textContent =
       todayDeleted;
 
 
-    document.getElementById(
+    document
+    .getElementById(
       "sevenDaysDeleted"
-    ).textContent =
+    )
+    .textContent =
       sevenDaysDeleted;
 
 
-    document.getElementById(
+    document
+    .getElementById(
       "thirtyDaysDeleted"
-    ).textContent =
+    )
+    .textContent =
       thirtyDaysDeleted;
 
 
-    document.getElementById(
-      "loading"
-    ).style.display =
+    /* SHOW */
+
+    loading.style.display =
       "none";
 
 
-    document.getElementById(
-      "dashboardContent"
-    ).style.display =
+    content.style.display =
       "block";
 
   }
   catch(error){
 
-    console.error(error);
+    console.error(
+      "Dashboard error:",
+      error
+    );
 
-    document.getElementById(
-      "loading"
-    ).textContent =
-      "Unable to load dashboard.";
+
+    loading.textContent =
+      "Unable to load dashboard: " +
+      error.message;
 
   }
 
 }
 
 
-loadDashboard();
+/* REFRESH */
+
+document
+.getElementById("refreshButton")
+.addEventListener(
+  "click",
+  loadDashboard
+);
+
+
+/* LOGOUT */
+
+document
+.getElementById("logoutButton")
+.addEventListener(
+  "click",
+  async function(){
+
+    await signOut(auth);
+
+    location.reload();
+
+  }
+);
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(
+  auth,
+  async function(user){
+
+    if(!user){
+
+      document
+      .getElementById("loginCard")
+      .style.display =
+        "block";
+
+      document
+      .getElementById("adminPanel")
+      .style.display =
+        "none";
+
+      return;
+
+    }
+
+
+    const isAdmin =
+      await checkAdmin(user);
+
+
+    if(isAdmin){
+
+      showDashboard();
+
+    }
+    else{
+
+      await signOut(auth);
+
+    }
+
+  }
+);
 
 </script>
 

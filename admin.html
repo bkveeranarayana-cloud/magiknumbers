@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MAGIKNUMBER Admin</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f1f5f9;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.loginCard{
+  width:92%;
+  max-width:380px;
+  background:white;
+  padding:30px 22px;
+  border-radius:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,.15);
+  text-align:center;
+}
+
+h1{
+  margin:0 0 8px;
+  color:#111827;
+}
+
+.subtitle{
+  color:#64748b;
+  margin-bottom:25px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  font-size:16px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border:0;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+#message{
+  margin-top:15px;
+  color:#dc2626;
+  font-size:14px;
+  min-height:20px;
+}
+
+.adminPanel{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#f8fafc;
+  overflow:auto;
+}
+
+.adminHeader{
+  background:#111827;
+  color:white;
+  padding:18px;
+  text-align:center;
+}
+
+.adminHeader h2{
+  margin:0;
+}
+
+.dashboard{
+  padding:25px;
+  max-width:600px;
+  margin:auto;
+}
+
+.dashboard button{
+  margin-top:15px;
+}
+
+.usersBtn{
+  background:#2563eb;
+}
+
+.gamesBtn{
+  background:#7c3aed;
+}
+
+.logoutBtn{
+  background:#dc2626;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ADMIN LOGIN -->
+
+<div class="loginCard" id="loginCard">
+
+  <h1>MAGIKNUMBER</h1>
+
+  <div class="subtitle">
+    ADMIN LOGIN
+  </div>
+
+  <input
+    type="email"
+    id="email"
+    placeholder="Admin Email"
+    autocomplete="username"
+  >
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Password"
+    autocomplete="current-password"
+  >
+
+  <button onclick="adminLogin()">
+    LOGIN
+  </button>
+
+  <div id="message"></div>
+
+</div>
+
+
+<!-- ADMIN CONTROL PANEL -->
+
+<div class="adminPanel" id="adminPanel">
+
+  <div class="adminHeader">
+    <h2>MAGIKNUMBER ADMIN</h2>
+  </div>
+
+  <div class="dashboard">
+
+    <button class="usersBtn" onclick="openUsers()">
+      USERS
+    </button>
+
+    <button class="gamesBtn" onclick="openGames()">
+      GAMES
+    </button>
+
+    <button class="logoutBtn" onclick="adminLogout()">
+      LOGOUT
+    </button>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+  authDomain: "magiknumbers-d42c0.firebaseapp.com",
+  projectId: "magiknumbers-d42c0",
+  storageBucket: "magiknumbers-d42c0.firebasestorage.app",
+  messagingSenderId: "977553928698",
+  appId: "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+window.adminLogin = async function(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const message =
+    document.getElementById("message");
+
+  message.textContent = "";
+
+  if(!email || !password){
+
+    message.textContent =
+      "Please enter email and password.";
+
+    return;
+  }
+
+  try{
+
+    const result =
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    const user = result.user;
+
+    /*
+      Check Firebase UID inside:
+      admins/{UID}
+    */
+
+    const adminDoc =
+      await getDoc(
+        doc(db,"admins",user.uid)
+      );
+
+    if(
+      !adminDoc.exists() ||
+      adminDoc.data().role !== "admin"
+    ){
+
+      await signOut(auth);
+
+      message.textContent =
+        "Access denied. You are not an admin.";
+
+      return;
+    }
+
+    document.getElementById("loginCard").style.display =
+      "none";
+
+    document.getElementById("adminPanel").style.display =
+      "block";
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    message.textContent =
+      "Login failed: " + error.message;
+  }
+
+};
+
+
+onAuthStateChanged(auth, async (user)=>{
+
+  if(!user) return;
+
+  try{
+
+    const adminDoc =
+      await getDoc(
+        doc(db,"admins",user.uid)
+      );
+
+    if(
+      adminDoc.exists() &&
+      adminDoc.data().role === "admin"
+    ){
+
+      document.getElementById("loginCard").style.display =
+        "none";
+
+      document.getElementById("adminPanel").style.display =
+        "block";
+
+    }
+    else{
+
+      await signOut(auth);
+
+    }
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    await signOut(auth);
+
+  }
+
+});
+
+
+window.adminLogout = async function(){
+
+  await signOut(auth);
+
+  document.getElementById("adminPanel").style.display =
+    "none";
+
+  document.getElementById("loginCard").style.display =
+    "block";
+
+  document.getElementById("password").value = "";
+
+};
+
+
+window.openUsers = function(){
+
+  alert("USERS Dashboard will be added next.");
+
+};
+
+
+window.openGames = function(){
+
+  alert("GAMES Dashboard will be added next.");
+
+};
+
+</script>
+
+</body>
+</html>

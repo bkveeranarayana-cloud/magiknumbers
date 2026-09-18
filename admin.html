@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>MAGIKNUMBER Admin</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -16,10 +18,9 @@ body{
   font-family:Arial,sans-serif;
   background:#f1f5f9;
   min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
+
+/* LOGIN */
 
 .loginCard{
   width:92%;
@@ -28,10 +29,16 @@ body{
   padding:30px 22px;
   border-radius:18px;
   box-shadow:0 8px 30px rgba(0,0,0,.15);
+
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+
   text-align:center;
 }
 
-h1{
+.loginCard h1{
   margin:0 0 8px;
   color:#111827;
 }
@@ -39,6 +46,7 @@ h1{
 .subtitle{
   color:#64748b;
   margin-bottom:25px;
+  font-weight:bold;
 }
 
 input{
@@ -56,7 +64,6 @@ button{
   margin-top:12px;
   border:0;
   border-radius:10px;
-  background:#2563eb;
   color:white;
   font-size:16px;
   font-weight:bold;
@@ -67,40 +74,8 @@ button:active{
   transform:scale(.98);
 }
 
-#message{
-  margin-top:15px;
-  color:#dc2626;
-  font-size:14px;
-  min-height:20px;
-}
-
-.adminPanel{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#f8fafc;
-  overflow:auto;
-}
-
-.adminHeader{
-  background:#111827;
-  color:white;
-  padding:18px;
-  text-align:center;
-}
-
-.adminHeader h2{
-  margin:0;
-}
-
-.dashboard{
-  padding:25px;
-  max-width:600px;
-  margin:auto;
-}
-
-.dashboard button{
-  margin-top:15px;
+.loginBtn{
+  background:#2563eb;
 }
 
 .usersBtn{
@@ -114,12 +89,115 @@ button:active{
 .logoutBtn{
   background:#dc2626;
 }
+
+.backBtn{
+  background:#64748b;
+}
+
+#message{
+  margin-top:15px;
+  color:#dc2626;
+  font-size:14px;
+  min-height:20px;
+}
+
+/* ADMIN PANEL */
+
+.adminPanel{
+  display:none;
+  min-height:100vh;
+  background:#f8fafc;
+}
+
+.adminHeader{
+  background:#111827;
+  color:white;
+  padding:18px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.adminHeader h2{
+  margin:0;
+  font-size:21px;
+}
+
+.dashboard{
+  width:94%;
+  max-width:700px;
+  margin:auto;
+  padding:22px 0 40px;
+}
+
+/* STAT BOX */
+
+.statBox{
+  background:white;
+  padding:20px;
+  margin:12px 0;
+  border-radius:14px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.statTitle{
+  font-size:13px;
+  color:#64748b;
+  font-weight:bold;
+}
+
+.statNumber{
+  font-size:32px;
+  font-weight:bold;
+  margin-top:8px;
+  color:#111827;
+}
+
+/* USER CARD */
+
+.userCard{
+  background:white;
+  padding:16px;
+  margin:10px 0;
+  border-radius:12px;
+  border-left:5px solid #2563eb;
+  line-height:1.8;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.userId{
+  font-size:18px;
+  font-weight:bold;
+  color:#2563eb;
+}
+
+.sectionTitle{
+  margin-top:28px;
+  margin-bottom:12px;
+  color:#111827;
+}
+
+/* DASHBOARD MENU */
+
+.menuCard{
+  background:white;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
 </style>
+
 </head>
 
 <body>
 
-<!-- ADMIN LOGIN -->
+
+<!-- =========================
+     ADMIN LOGIN
+========================= -->
 
 <div class="loginCard" id="loginCard">
 
@@ -143,7 +221,7 @@ button:active{
     autocomplete="current-password"
   >
 
-  <button onclick="adminLogin()">
+  <button class="loginBtn" onclick="adminLogin()">
     LOGIN
   </button>
 
@@ -152,7 +230,9 @@ button:active{
 </div>
 
 
-<!-- ADMIN CONTROL PANEL -->
+<!-- =========================
+     ADMIN PANEL
+========================= -->
 
 <div class="adminPanel" id="adminPanel">
 
@@ -162,17 +242,21 @@ button:active{
 
   <div class="dashboard">
 
-    <button class="usersBtn" onclick="openUsers()">
-      USERS
-    </button>
+    <div class="menuCard">
 
-    <button class="gamesBtn" onclick="openGames()">
-      GAMES
-    </button>
+      <button class="usersBtn" onclick="openUsers()">
+        USERS
+      </button>
 
-    <button class="logoutBtn" onclick="adminLogout()">
-      LOGOUT
-    </button>
+      <button class="gamesBtn" onclick="openGames()">
+        GAMES
+      </button>
+
+      <button class="logoutBtn" onclick="adminLogout()">
+        LOGOUT
+      </button>
+
+    </div>
 
   </div>
 
@@ -181,8 +265,16 @@ button:active{
 
 <script type="module">
 
-import { initializeApp }
+
+/* =========================
+   FIREBASE IMPORTS
+========================= */
+
+import {
+  initializeApp
+}
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 
 import {
   getAuth,
@@ -192,107 +284,67 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
+
 import {
   getFirestore,
   doc,
-  getDoc
+  getDoc,
+  collection,
+  getDocs
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
-  authDomain: "magiknumbers-d42c0.firebaseapp.com",
-  projectId: "magiknumbers-d42c0",
-  storageBucket: "magiknumbers-d42c0.firebasestorage.app",
-  messagingSenderId: "977553928698",
-  appId: "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
-};
 
+  apiKey:
+  "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
 
-const app = initializeApp(firebaseConfig);
+  authDomain:
+  "magiknumbers-d42c0.firebaseapp.com",
 
-const auth = getAuth(app);
+  projectId:
+  "magiknumbers-d42c0",
 
-const db = getFirestore(app);
+  storageBucket:
+  "magiknumbers-d42c0.firebasestorage.app",
 
+  messagingSenderId:
+  "977553928698",
 
-window.adminLogin = async function(){
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const password =
-    document.getElementById("password").value;
-
-  const message =
-    document.getElementById("message");
-
-  message.textContent = "";
-
-  if(!email || !password){
-
-    message.textContent =
-      "Please enter email and password.";
-
-    return;
-  }
-
-  try{
-
-    const result =
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-    const user = result.user;
-
-    /*
-      Check Firebase UID inside:
-      admins/{UID}
-    */
-
-    const adminDoc =
-      await getDoc(
-        doc(db,"admins",user.uid)
-      );
-
-    if(
-      !adminDoc.exists() ||
-      adminDoc.data().role !== "admin"
-    ){
-
-      await signOut(auth);
-
-      message.textContent =
-        "Access denied. You are not an admin.";
-
-      return;
-    }
-
-    document.getElementById("loginCard").style.display =
-      "none";
-
-    document.getElementById("adminPanel").style.display =
-      "block";
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    message.textContent =
-      "Login failed: " + error.message;
-  }
+  appId:
+  "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
 
 };
 
 
-onAuthStateChanged(auth, async (user)=>{
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
 
-  if(!user) return;
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
+
+
+/* =========================
+   CHECK ADMIN
+========================= */
+
+async function checkAdmin(user){
+
+  if(!user){
+    return false;
+  }
 
   try{
 
@@ -306,11 +358,150 @@ onAuthStateChanged(auth, async (user)=>{
       adminDoc.data().role === "admin"
     ){
 
-      document.getElementById("loginCard").style.display =
-        "none";
+      return true;
 
-      document.getElementById("adminPanel").style.display =
-        "block";
+    }
+
+    return false;
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================
+   ADMIN LOGIN
+========================= */
+
+window.adminLogin = async function(){
+
+  const email =
+    document
+    .getElementById("email")
+    .value
+    .trim();
+
+  const password =
+    document
+    .getElementById("password")
+    .value;
+
+  const message =
+    document
+    .getElementById("message");
+
+  message.textContent = "";
+
+
+  if(!email || !password){
+
+    message.textContent =
+      "Please enter email and password.";
+
+    return;
+
+  }
+
+
+  try{
+
+    const result =
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    const user =
+      result.user;
+
+
+    const isAdmin =
+      await checkAdmin(user);
+
+
+    if(!isAdmin){
+
+      await signOut(auth);
+
+      message.textContent =
+        "Access denied. You are not an admin.";
+
+      return;
+
+    }
+
+
+    showAdminPanel();
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    message.textContent =
+      "Login failed: " + error.message;
+
+  }
+
+};
+
+
+/* =========================
+   SHOW ADMIN PANEL
+========================= */
+
+function showAdminPanel(){
+
+  document
+    .getElementById("loginCard")
+    .style.display = "none";
+
+  document
+    .getElementById("adminPanel")
+    .style.display = "block";
+
+}
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+  auth,
+  async (user)=>{
+
+    if(!user){
+
+      document
+        .getElementById("loginCard")
+        .style.display = "block";
+
+      document
+        .getElementById("adminPanel")
+        .style.display = "none";
+
+      return;
+
+    }
+
+
+    const isAdmin =
+      await checkAdmin(user);
+
+
+    if(isAdmin){
+
+      showAdminPanel();
 
     }
     else{
@@ -320,44 +511,439 @@ onAuthStateChanged(auth, async (user)=>{
     }
 
   }
+);
+
+
+/* =========================
+   USERS DASHBOARD
+========================= */
+
+window.openUsers = async function(){
+
+  const adminPanel =
+    document.getElementById("adminPanel");
+
+
+  adminPanel.innerHTML = `
+
+    <div class="adminHeader">
+      <h2>MAGIKNUMBER USERS</h2>
+    </div>
+
+    <div class="dashboard">
+
+      <div class="statBox">
+
+        <div class="statTitle">
+          TOTAL REGISTERED USERS
+        </div>
+
+        <div
+          class="statNumber"
+          id="totalUsers">
+          ...
+        </div>
+
+      </div>
+
+
+      <div class="statBox">
+
+        <div class="statTitle">
+          TODAY'S NEW USERS
+        </div>
+
+        <div
+          class="statNumber"
+          id="todayUsers">
+          ...
+        </div>
+
+      </div>
+
+
+      <div class="statBox">
+
+        <div class="statTitle">
+          TOTAL GAMES PLAYED
+        </div>
+
+        <div
+          class="statNumber"
+          id="totalGames">
+          ...
+        </div>
+
+      </div>
+
+
+      <div class="statBox">
+
+        <div class="statTitle">
+          TOTAL POINTS
+        </div>
+
+        <div
+          class="statNumber"
+          id="totalPoints">
+          ...
+        </div>
+
+      </div>
+
+
+      <h3 class="sectionTitle">
+        USER LIST
+      </h3>
+
+      <div id="userList">
+        Loading users...
+      </div>
+
+
+      <button
+        class="backBtn"
+        onclick="showAdminMenu()">
+
+        BACK TO ADMIN
+
+      </button>
+
+    </div>
+
+  `;
+
+
+  try{
+
+    const usersSnapshot =
+      await getDocs(
+        collection(db,"users")
+      );
+
+
+    /* TOTAL USERS */
+
+    document
+      .getElementById("totalUsers")
+      .textContent =
+      usersSnapshot.size;
+
+
+    let todayUsers = 0;
+
+    let totalGames = 0;
+
+    let totalPoints = 0;
+
+    let html = "";
+
+
+    /* TODAY DATE */
+
+    const today =
+      new Date();
+
+    today.setHours(
+      0,0,0,0
+    );
+
+
+    usersSnapshot.forEach(
+      (userDoc)=>{
+
+        const user =
+          userDoc.data();
+
+
+        /* TOTAL GAMES */
+
+        totalGames +=
+          Number(user.gamesPlayed || 0);
+
+
+        /* TOTAL POINTS */
+
+        totalPoints +=
+          Number(user.points || 0);
+
+
+        /* TODAY'S REGISTRATION */
+
+        let joinedDate = null;
+
+
+        if(user.dateOfJoining){
+
+          if(
+            user.dateOfJoining.toDate
+          ){
+
+            joinedDate =
+              user.dateOfJoining.toDate();
+
+          }
+          else{
+
+            joinedDate =
+              new Date(
+                user.dateOfJoining
+              );
+
+          }
+
+        }
+
+
+        if(
+          joinedDate &&
+          !isNaN(joinedDate)
+        ){
+
+          joinedDate.setHours(
+            0,0,0,0
+          );
+
+
+          if(
+            joinedDate.getTime() ===
+            today.getTime()
+          ){
+
+            todayUsers++;
+
+          }
+
+        }
+
+
+        /* USER CARD */
+
+        html += `
+
+          <div class="userCard">
+
+            <div class="userId">
+              ${user.magikNumberId || "—"}
+            </div>
+
+            <div>
+              <b>Name:</b>
+              ${user.name || "—"}
+            </div>
+
+            <div>
+              <b>Email:</b>
+              ${user.email || "—"}
+            </div>
+
+            <div>
+              <b>Mobile:</b>
+              ${user.mobile || "—"}
+            </div>
+
+            <div>
+              <b>Country:</b>
+              ${user.country || "—"}
+            </div>
+
+            <div>
+              <b>Joined:</b>
+              ${formatDate(user.dateOfJoining)}
+            </div>
+
+            <div>
+              <b>Games:</b>
+              ${user.gamesPlayed || 0}
+            </div>
+
+            <div>
+              <b>Points:</b>
+              ${user.points || 0}
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+    document
+      .getElementById("todayUsers")
+      .textContent =
+      todayUsers;
+
+
+    document
+      .getElementById("totalGames")
+      .textContent =
+      totalGames;
+
+
+    document
+      .getElementById("totalPoints")
+      .textContent =
+      totalPoints;
+
+
+    document
+      .getElementById("userList")
+      .innerHTML =
+      html ||
+      "No users found.";
+
+  }
   catch(error){
 
     console.error(error);
 
-    await signOut(auth);
+    document
+      .getElementById("userList")
+      .innerHTML =
+      "Unable to load users: " +
+      error.message;
 
   }
 
-});
+};
 
+
+/* =========================
+   FORMAT DATE
+========================= */
+
+function formatDate(value){
+
+  if(!value){
+    return "—";
+  }
+
+
+  try{
+
+    let date;
+
+
+    if(value.toDate){
+
+      date =
+        value.toDate();
+
+    }
+    else{
+
+      date =
+        new Date(value);
+
+    }
+
+
+    if(isNaN(date)){
+      return "—";
+    }
+
+
+    return date.toLocaleDateString(
+      "en-IN",
+      {
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+      }
+    );
+
+  }
+  catch(error){
+
+    return "—";
+
+  }
+
+}
+
+
+/* =========================
+   BACK TO ADMIN MENU
+========================= */
+
+window.showAdminMenu = function(){
+
+  const adminPanel =
+    document.getElementById("adminPanel");
+
+
+  adminPanel.innerHTML = `
+
+    <div class="adminHeader">
+      <h2>MAGIKNUMBER ADMIN</h2>
+    </div>
+
+    <div class="dashboard">
+
+      <div class="menuCard">
+
+        <button
+          class="usersBtn"
+          onclick="openUsers()">
+
+          USERS
+
+        </button>
+
+
+        <button
+          class="gamesBtn"
+          onclick="openGames()">
+
+          GAMES
+
+        </button>
+
+
+        <button
+          class="logoutBtn"
+          onclick="adminLogout()">
+
+          LOGOUT
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+};
+
+
+/* =========================
+   GAMES
+========================= */
+
+window.openGames = function(){
+
+  alert(
+    "GAMES Dashboard will be added next."
+  );
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
 
 window.adminLogout = async function(){
 
   await signOut(auth);
 
-  document.getElementById("adminPanel").style.display =
-    "none";
-
-  document.getElementById("loginCard").style.display =
-    "block";
-
-  document.getElementById("password").value = "";
+  location.reload();
 
 };
 
-
-window.openUsers = function(){
-
-  alert("USERS Dashboard will be added next.");
-
-};
-
-
-window.openGames = function(){
-
-  alert("GAMES Dashboard will be added next.");
-
-};
 
 </script>
 

@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MAGIKNUMBER</title>
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MAGIKNUMBER</title><style>
 *{
   box-sizing:border-box;
 }
@@ -95,8 +90,6 @@ h1,h2,h3{
   color:white;
 }
 
-/* USER BAR */
-
 #userBar{
   display:none;
   position:fixed;
@@ -129,8 +122,6 @@ h1,h2,h3{
   font-weight:bold;
 }
 
-/* MENU */
-
 .menuBtn{
   display:block;
   width:100%;
@@ -138,8 +129,6 @@ h1,h2,h3{
   padding:16px;
   font-size:17px;
 }
-
-/* GAME */
 
 .gameDiamond{
   background:linear-gradient(135deg,#581c87,#2563eb);
@@ -160,8 +149,6 @@ h1,h2,h3{
   min-height:100vh;
   padding:20px 10px 40px;
 }
-
-/* HINT */
 
 .hint{
   text-align:center;
@@ -185,8 +172,6 @@ h1,h2,h3{
   margin:15px auto;
   max-width:180px;
 }
-
-/* BOARD */
 
 .boardWrapper{
   overflow-x:auto;
@@ -249,8 +234,6 @@ h1,h2,h3{
   margin:15px 0;
 }
 
-/* SCORE */
-
 .scoreItem{
   padding:10px 0;
   border-bottom:1px solid #e5e7eb;
@@ -259,8 +242,6 @@ h1,h2,h3{
 .scoreLabel{
   font-weight:bold;
 }
-
-/* POPUP */
 
 #popupOverlay{
   position:fixed;
@@ -308,8 +289,6 @@ h1,h2,h3{
   padding:12px;
 }
 
-/* RESULT */
-
 .resultGrid{
   display:grid;
   gap:5px;
@@ -354,8 +333,6 @@ h1,h2,h3{
   padding:5px 0;
 }
 
-/* HIDE */
-
 .hidden{
   display:none !important;
 }
@@ -375,295 +352,205 @@ h1,h2,h3{
     width:50px;
   }
 }
-</style>
-</head>
-
-<body>
-
-<!-- USER BAR -->
-
-<div id="userBar">
+</style></head><body><!-- USER BAR --><div id="userBar">
   <div id="userLogo" onclick="openLogoPopup()">⚡</div>
   <div id="userIdText">ID: --</div>
+</div><!-- AUTH PAGE --><div id="authPage" class="page active">  <div class="card"><h1>MAGIKNUMBER</h1>
+
+<h2>LOGIN</h2>
+
+<input id="loginEmail"
+       type="email"
+       placeholder="Email">
+
+<input id="loginPassword"
+       type="password"
+       placeholder="Password">
+
+<label>
+  <input type="checkbox"
+         style="width:auto"
+         onclick="togglePassword('loginPassword')">
+  Show Password
+</label>
+
+<br>
+
+<button class="green"
+        style="width:100%"
+        onclick="loginUser()">
+  LOGIN
+</button>
+
+<button style="width:100%"
+        onclick="googleLogin()">
+  Continue with Google
+</button>
+
+  </div>  <!-- REGISTER -->  <div class="card"><h2>REGISTER</h2>
+
+<input id="regName"
+       type="text"
+       placeholder="Name">
+
+<select id="regCountry">
+</select>
+
+<input id="regEmail"
+       type="email"
+       placeholder="Email">
+
+<input id="regPassword"
+       type="password"
+       placeholder="Password">
+
+<label>
+  <input type="checkbox"
+         style="width:auto"
+         onclick="togglePassword('regPassword')">
+  Show Password
+</label>
+
+<br>
+
+<button class="blue"
+        style="width:100%"
+        onclick="registerUser()">
+  REGISTER
+</button>
+
+  </div>  <div class="card"><h3>RULES</h3>
+
+<p>
+  Enter numbers according to the game instructions.
+  Duplicate numbers are not allowed.
+</p>
+
+<p>
+  Only numbers from 0 to 25 are allowed.
+</p>
+
+  </div></div><!-- MENU --><div id="menuPage" class="page">  <div class="card"><h1>MAGIKNUMBER</h1>
+
+<button class="purple menuBtn"
+        onclick="showScoreboard()">
+  SCOREBOARD
+</button>
+
+<button class="purple menuBtn"
+        onclick="startGame('DIAMOND')">
+  DIAMOND – 5 MINUTES
+</button>
+
+<button class="orange menuBtn"
+        onclick="startGame('GOLD')">
+  GOLD – 1 MINUTE
+</button>
+
+<button class="silverBtn menuBtn"
+        onclick="startGame('SILVER')">
+  SILVER – 1 MINUTE
+</button>
+
+<button class="red menuBtn"
+        onclick="logoutUser()">
+  LOGOUT
+</button>
+
+  </div></div><!-- SCOREBOARD --><div id="scorePage" class="page">  <div class="card"><h2>SCOREBOARD</h2>
+
+<div class="scoreItem">
+  <span class="scoreLabel">MAGIKNUMBER ID</span>
+  <div id="profileId">--</div>
 </div>
 
-<!-- AUTH PAGE -->
-
-<div id="authPage" class="page active">
-
-  <div class="card">
-
-    <h1>MAGIKNUMBER</h1>
-
-    <h2>LOGIN</h2>
-
-    <input id="loginEmail"
-           type="email"
-           placeholder="Email">
-
-    <input id="loginPassword"
-           type="password"
-           placeholder="Password">
-
-    <label>
-      <input type="checkbox"
-             style="width:auto"
-             onclick="togglePassword('loginPassword')">
-      Show Password
-    </label>
-
-    <br>
-
-    <button class="green"
-            style="width:100%"
-            onclick="loginUser()">
-      LOGIN
-    </button>
-
-    <button style="width:100%"
-            onclick="googleLogin()">
-      Continue with Google
-    </button>
-
-  </div>
-
-  <div class="card">
-
-    <h2>REGISTER</h2>
-
-    <input id="regName"
-           type="text"
-           placeholder="Name">
-
-    <select id="regCountry"
-            onchange="countryChanged()">
-    </select>
-
-    <input id="regMobile"
-           type="tel"
-           placeholder="Mobile Number">
-
-    <input id="regEmail"
-           type="email"
-           placeholder="Email">
-
-    <input id="regPassword"
-           type="password"
-           placeholder="Password">
-
-    <label>
-      <input type="checkbox"
-             style="width:auto"
-             onclick="togglePassword('regPassword')">
-      Show Password
-    </label>
-
-    <br>
-
-    <button class="blue"
-            style="width:100%"
-            onclick="registerUser()">
-      REGISTER
-    </button>
-
-  </div>
-
-  <div class="card">
-
-    <h3>RULES</h3>
-
-    <p>
-      Enter numbers according to the game instructions.
-      Duplicate numbers are not allowed.
-    </p>
-
-    <p>
-      Only numbers from 0 to 25 are allowed.
-    </p>
-
-  </div>
-
+<div class="scoreItem">
+  <span class="scoreLabel">Date of Joining</span>
+  <div id="profileDate">--</div>
 </div>
 
-<!-- MENU -->
-
-<div id="menuPage" class="page">
-
-  <div class="card">
-
-    <h1>MAGIKNUMBER</h1>
-
-    <button class="purple menuBtn"
-            onclick="showScoreboard()">
-      SCOREBOARD
-    </button>
-
-    <button class="purple menuBtn"
-            onclick="startGame('DIAMOND')">
-      DIAMOND – 5 MINUTES
-    </button>
-
-    <button class="orange menuBtn"
-            onclick="startGame('GOLD')">
-      GOLD – 1 MINUTE
-    </button>
-
-    <button class="silverBtn menuBtn"
-            onclick="startGame('SILVER')">
-      SILVER – 1 MINUTE
-    </button>
-
-    <button class="red menuBtn"
-            onclick="logoutUser()">
-      LOGOUT
-    </button>
-
-  </div>
-
+<div class="scoreItem">
+  <span class="scoreLabel">Name</span>
+  <div id="profileName">--</div>
 </div>
 
-<!-- SCOREBOARD -->
-
-<div id="scorePage" class="page">
-
-  <div class="card">
-
-    <h2>SCOREBOARD</h2>
-
-    <div class="scoreItem">
-      <span class="scoreLabel">MAGIKNUMBER ID</span>
-      <div id="profileId">--</div>
-    </div>
-
-    <div class="scoreItem">
-      <span class="scoreLabel">Date of Joining</span>
-      <div id="profileDate">--</div>
-    </div>
-
-    <div class="scoreItem">
-      <span class="scoreLabel">Name</span>
-      <div id="profileName">--</div>
-    </div>
-
-    <div class="scoreItem">
-      <span class="scoreLabel">Email</span>
-      <div id="profileEmail">--</div>
-
-      <button class="blue"
-              onclick="openEmailPopup()">
-        Update Email
-      </button>
-    </div>
-
-    <div class="scoreItem">
-      <span class="scoreLabel">Mobile Number</span>
-      <div id="profileMobile">--</div>
-
-      <button class="blue"
-              onclick="openMobilePopup()">
-        Update Mobile
-      </button>
-    </div>
-
-    <div class="scoreItem">
-      <span class="scoreLabel">Total Games Played</span>
-      <div id="profileGames">0</div>
-    </div>
-
-    <div class="scoreItem">
-      <span class="scoreLabel">Earned Points</span>
-      <div id="profilePoints">0</div>
-    </div>
-
-    <button class="purple"
-            style="width:100%"
-            onclick="redeemPoints()">
-      REDEEM POINTS
-    </button>
-
-    <button class="blue"
-            style="width:100%"
-            onclick="redemptionHistory()">
-      REDEMPTION HISTORY
-    </button>
-
-    <button class="red"
-            style="width:100%"
-            onclick="closeAccount()">
-      CLOSE ACCOUNT
-    </button>
-
-    <button class="gray"
-            style="width:100%"
-            onclick="showMenu()">
-      BACK
-    </button>
-
-  </div>
-
+<div class="scoreItem">
+  <span class="scoreLabel">Country</span>
+  <div id="profileCountry">--</div>
 </div>
 
-<!-- GAME PAGE -->
-
-<div id="gamePage" class="page">
-
-  <div id="gameContainer"></div>
-
+<div class="scoreItem">
+  <span class="scoreLabel">Email</span>
+  <div id="profileEmail">--</div>
 </div>
 
-<!-- RESULT PAGE -->
-
-<div id="resultPage" class="page">
-
-  <div class="card">
-
-    <h2 id="resultTitle">RESULT</h2>
-
-    <h3>YOUR ANSWER</h3>
-
-    <div id="yourAnswer"></div>
-
-    <h3>OUR ANSWER</h3>
-
-    <div id="ourAnswer"></div>
-
-    <div class="pointsList"
-         id="pointsBreakdown">
-    </div>
-
-    <div class="resultMessage"
-         id="resultMessage">
-    </div>
-
-    <button class="blue"
-            style="width:100%"
-            onclick="showMenu()">
-      BACK TO MENU
-    </button>
-
-  </div>
-
+<div class="scoreItem">
+  <span class="scoreLabel">Total Games Played</span>
+  <div id="profileGames">0</div>
 </div>
 
-<!-- POPUP -->
-
-<div id="popupOverlay">
-
-  <div class="popup">
-
-    <h3 id="popupTitle">MAGIKNUMBER</h3>
-
-    <div id="popupMessage"></div>
-
-    <div id="popupButtons"
-         style="margin-top:15px">
-    </div>
-
-  </div>
-
+<div class="scoreItem">
+  <span class="scoreLabel">Earned Points</span>
+  <div id="profilePoints">0</div>
 </div>
 
-<script type="module">
+<button class="purple"
+        style="width:100%"
+        onclick="redeemPoints()">
+  REDEEM POINTS
+</button>
+
+<button class="blue"
+        style="width:100%"
+        onclick="redemptionHistory()">
+  REDEMPTION HISTORY
+</button>
+
+<button class="red"
+        style="width:100%"
+        onclick="closeAccount()">
+  CLOSE ACCOUNT
+</button>
+
+<button class="gray"
+        style="width:100%"
+        onclick="showMenu()">
+  BACK
+</button>
+
+  </div></div><!-- GAME PAGE --><div id="gamePage" class="page">  <div id="gameContainer"></div></div><!-- RESULT PAGE --><div id="resultPage" class="page">  <div class="card"><h2 id="resultTitle">RESULT</h2>
+
+<h3>YOUR ANSWER</h3>
+
+<div id="yourAnswer"></div>
+
+<h3>OUR ANSWER</h3>
+
+<div id="ourAnswer"></div>
+
+<div class="pointsList"
+     id="pointsBreakdown">
+</div>
+
+<div class="resultMessage"
+     id="resultMessage">
+</div>
+
+<button class="blue"
+        style="width:100%"
+        onclick="showMenu()">
+  BACK TO MENU
+</button>
+
+  </div></div><!-- POPUP --><div id="popupOverlay">  <div class="popup"><h3 id="popupTitle">MAGIKNUMBER</h3>
+
+<div id="popupMessage"></div>
+
+<div id="popupButtons"
+     style="margin-top:15px">
+</div>
+
+  </div></div><script type="module">
 
 import {
   initializeApp
@@ -676,7 +563,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   onAuthStateChanged,
-  updateEmail
+  sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import {
@@ -689,10 +576,11 @@ import {
   increment
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
 /* FIREBASE */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+  apiKey: "AIzaSyCX8mVCr-i4m_7uADo_Y41hpvg1OrLlVI",
   authDomain: "magiknumbers-d42c0.firebaseapp.com",
   projectId: "magiknumbers-d42c0",
   storageBucket: "magiknumbers-d42c0.firebasestorage.app",
@@ -700,192 +588,74 @@ const firebaseConfig = {
   appId: "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
 };
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+  getAuth(app);
 
-const db = getFirestore(app);
+const db =
+  getFirestore(app);
+
 
 /* COUNTRIES */
 
 const countries = [
-  ["India","+91",10],
-  ["USA","+1",10],
-  ["Canada","+1",10],
-  ["UK","+44",10],
-  ["Australia","+61",9],
-  ["New Zealand","+64",9],
-  ["UAE","+971",9],
-  ["Saudi Arabia","+966",9],
-  ["Qatar","+974",8],
-  ["Kuwait","+965",8],
-  ["Oman","+968",8],
-  ["Bahrain","+973",8],
-  ["Singapore","+65",8],
-  ["Malaysia","+60",9],
-  ["Sri Lanka","+94",9],
-  ["Bangladesh","+880",10],
-  ["Pakistan","+92",10],
-  ["Nepal","+977",10],
-  ["Japan","+81",10],
-  ["Germany","+49",11],
-  ["France","+33",9],
-  ["Italy","+39",10],
-  ["Spain","+34",9],
-  ["Russia","+7",10],
-  ["Brazil","+55",11],
-  ["South Africa","+27",9]
+  ["India","+91"],
+  ["USA","+1"],
+  ["Canada","+1"],
+  ["UK","+44"],
+  ["Australia","+61"],
+  ["New Zealand","+64"],
+  ["UAE","+971"],
+  ["Saudi Arabia","+966"],
+  ["Qatar","+974"],
+  ["Kuwait","+965"],
+  ["Oman","+968"],
+  ["Bahrain","+973"],
+  ["Singapore","+65"],
+  ["Malaysia","+60"],
+  ["Sri Lanka","+94"],
+  ["Bangladesh","+880"],
+  ["Pakistan","+92"],
+  ["Nepal","+977"],
+  ["Japan","+81"],
+  ["Germany","+49"],
+  ["France","+33"],
+  ["Italy","+39"],
+  ["Spain","+34"],
+  ["Russia","+7"],
+  ["Brazil","+55"],
+  ["South Africa","+27"]
 ];
+
 
 const countrySelect =
   document.getElementById("regCountry");
 
-countries.forEach(c=>{
+
+countries.forEach(country=>{
 
   const option =
     document.createElement("option");
 
   option.value =
-    c[1]+"|"+c[2];
+    country[0];
 
   option.textContent =
-    `${c[0]} (${c[1]})`;
+    country[0];
 
   countrySelect.appendChild(option);
 
 });
 
-function countryChanged(){
-
-  const value =
-    countrySelect.value.split("|");
-
-  const length =
-    Number(value[1]);
-
-  const mobile =
-    document.getElementById("regMobile");
-
-  mobile.maxLength = length;
-
-  mobile.placeholder =
-    `Mobile Number (${length} digits)`;
-}
-
-countryChanged();
 
 /*
-  GAME CONFIG
-  ONLY ONE GAME_CONFIG
+  DEFAULT COUNTRY
 */
 
-const GAME_CONFIG = {
+countrySelect.value = "India";
 
-  DIAMOND:{
-
-    name:"DIAMOND",
-
-    rows:5,
-
-    cols:5,
-
-    duration:300,
-
-    rowTarget:60,
-
-    totalTarget:300,
-
-    answer:[
-      [16,23,0,7,14],
-      [22,4,6,13,15],
-      [3,5,12,19,21],
-      [9,11,18,20,2],
-      [10,17,24,1,8]
-    ],
-
-    points:{
-      row:10,
-      column:10,
-      diagonal1:10,
-      diagonal2:10,
-      table:50
-    }
-
-  },
-
-  GOLD:{
-
-    name:"GOLD",
-
-    rows:3,
-
-    cols:3,
-
-    duration:60,
-
-    rowTarget:15,
-
-    totalTarget:45,
-
-    answer:[
-      [8,1,6],
-      [3,5,7],
-      [4,9,2]
-    ],
-
-    points:{
-      row:5,
-      column:5,
-      diagonal1:5,
-      diagonal2:5,
-      table:25
-    }
-
-  },
-
-  SILVER:{
-
-    name:"SILVER",
-
-    rows:3,
-
-    cols:3,
-
-    duration:60,
-
-    hintTotal:150,
-
-    tableTarget:45,
-
-    answer:[
-      [6,1,8],
-      [7,5,3],
-      [2,9,4]
-    ],
-
-    points:{
-      row:0,
-      column:0,
-      diagonal1:0,
-      diagonal2:0,
-      table:25
-    }
-
-  }
-
-};
-
-/* CURRENT GAME */
-
-let currentGame = null;
-
-let timerInterval = null;
-
-let timeLeft = 0;
-
-let gameEnded = false;
-
-let currentUser = null;
 
 /* POPUP */
 
@@ -902,16 +672,19 @@ window.showPopup = function(
 
   document.getElementById("popupButtons")
     .innerHTML =
-    `<button class="blue"
-             onclick="closePopup()">
-       OK
-     </button>`;
+    `
+    <button class="blue"
+            onclick="closePopup()">
+      OK
+    </button>
+    `;
 
   document.getElementById("popupOverlay")
     .style.display = "flex";
 
   document.body.style.overflow = "hidden";
 };
+
 
 window.closePopup = function(){
 
@@ -920,6 +693,7 @@ window.closePopup = function(){
 
   document.body.style.overflow = "";
 };
+
 
 /* PASSWORD */
 
@@ -934,15 +708,17 @@ window.togglePassword = function(id){
     : "password";
 };
 
+
 /* NAVIGATION */
 
 function hideAll(){
 
   document.querySelectorAll(".page")
-    .forEach(p=>{
-      p.classList.remove("active");
+    .forEach(page=>{
+      page.classList.remove("active");
     });
 }
+
 
 window.showMenu = function(){
 
@@ -954,6 +730,7 @@ window.showMenu = function(){
   window.scrollTo(0,0);
 };
 
+
 function showAuth(){
 
   hideAll();
@@ -964,6 +741,103 @@ function showAuth(){
   document.getElementById("userBar")
     .style.display = "none";
 }
+
+
+/* IP COUNTRY DETECTION */
+
+async function getIPCountry(){
+
+  try{
+
+    const response =
+      await fetch(
+        "https://ipapi.co/json/",
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "IP service unavailable"
+      );
+    }
+
+    const data =
+      await response.json();
+
+
+    return {
+
+      country:
+        data.country_name || null,
+
+      ip:
+        data.ip || null
+
+    };
+
+  }catch(error){
+
+    console.log(
+      "IP country detection failed:",
+      error
+    );
+
+    return {
+
+      country:null,
+
+      ip:null
+
+    };
+
+  }
+}
+
+
+/* FIND COUNTRY */
+
+function normalizeCountry(country){
+
+  if(!country){
+    return "";
+  }
+
+  return String(country)
+    .trim()
+    .toLowerCase();
+}
+
+
+/*
+  Only accept a country returned by
+  IP service if it matches our country
+  list.
+
+  Otherwise selected country becomes
+  fallback.
+*/
+
+function findListedCountry(ipCountry){
+
+  const normalized =
+    normalizeCountry(ipCountry);
+
+  const found =
+    countries.find(
+      country =>
+        normalizeCountry(country[0])
+        === normalized
+    );
+
+  return found
+    ? found[0]
+    : null;
+}
+
 
 /* REGISTER */
 
@@ -981,25 +855,16 @@ window.registerUser = async function(){
     document.getElementById("regPassword")
       .value;
 
-  const mobile =
-    document.getElementById("regMobile")
-      .value.trim();
-
-  const country =
+  const selectedCountry =
     document.getElementById("regCountry")
-      .value.split("|");
+      .value;
 
-  const countryCode =
-    country[0];
-
-  const requiredLength =
-    Number(country[1]);
 
   if(
     !name ||
     !email ||
     !password ||
-    !mobile
+    !selectedCountry
   ){
 
     showPopup(
@@ -1009,16 +874,65 @@ window.registerUser = async function(){
     return;
   }
 
-  if(mobile.length !== requiredLength){
+
+  if(password.length < 6){
 
     showPopup(
-      `Mobile number must contain ${requiredLength} digits.`
+      "Password must contain at least 6 characters."
     );
 
     return;
   }
 
+
   try{
+
+    /*
+      FIRST:
+      Detect IP country.
+    */
+
+    const ipData =
+      await getIPCountry();
+
+
+    const ipCountry =
+      findListedCountry(
+        ipData.country
+      );
+
+
+    /*
+      IP HAS FIRST PRIORITY
+    */
+
+    let finalCountry;
+
+    let countrySource;
+
+
+    if(ipCountry){
+
+      finalCountry =
+        ipCountry;
+
+      countrySource =
+        "IP";
+
+    }else{
+
+      finalCountry =
+        selectedCountry;
+
+      countrySource =
+        "Selected";
+
+    }
+
+
+    /*
+      CREATE FIREBASE AUTH USER
+    */
 
     const credential =
       await createUserWithEmailAndPassword(
@@ -1027,11 +941,25 @@ window.registerUser = async function(){
         password
       );
 
+
     const user =
       credential.user;
 
+
+    /*
+      SEND EMAIL VERIFICATION
+    */
+
+    await sendEmailVerification(user);
+
+
+    /*
+      CREATE MAGIKNUMBER ID
+    */
+
     const counterRef =
       doc(db,"system","counter");
+
 
     const magikId =
       await runTransaction(
@@ -1043,6 +971,7 @@ window.registerUser = async function(){
 
           let nextNumber = 100001;
 
+
           if(snapshot.exists()){
 
             nextNumber =
@@ -1050,49 +979,119 @@ window.registerUser = async function(){
                 snapshot.data().nextNumber
                 || 100001
               );
+
           }
+
 
           transaction.set(
             counterRef,
             {
-              nextNumber:nextNumber+1
+              nextNumber:
+                nextNumber + 1
             },
             {
               merge:true
             }
           );
 
+
           return "MN"+nextNumber;
+
         }
       );
+
+
+    /*
+      SAVE USER
+    */
 
     await setDoc(
       doc(db,"users",user.uid),
       {
-        magikNumberId:magikId,
-        name:name,
-        email:email,
-        mobile:countryCode+" "+mobile,
-        points:0,
-        gamesPlayed:0,
+
+        magikNumberId:
+          magikId,
+
+        name:
+          name,
+
+        email:
+          email,
+
+        country:
+          finalCountry,
+
+        countrySource:
+          countrySource,
+
+        registrationIp:
+          ipData.ip || "",
+
+        points:
+          0,
+
+        gamesPlayed:
+          0,
+
         dateOfJoining:
           new Date().toISOString(),
-        logo:"⚡",
-        closeRequestedAt:null
+
+        logo:
+          "⚡",
+
+        closeRequestedAt:
+          null
+
       }
     );
 
+
+    /*
+      SIGN OUT UNTIL EMAIL
+      IS VERIFIED
+    */
+
+    await auth.signOut();
+
+
     showPopup(
-      "Registration successful."
+      `Registration successful.
+
+We detected your country as ${finalCountry}.
+
+A verification email has been sent to ${email}.
+
+Please verify your email and then login.`,
+      "EMAIL VERIFICATION"
     );
 
+
+    /*
+      CLEAR REGISTER FORM
+    */
+
+    document.getElementById("regName")
+      .value = "";
+
+    document.getElementById("regEmail")
+      .value = "";
+
+    document.getElementById("regPassword")
+      .value = "";
+
+
   }catch(error){
+
+    console.error(error);
 
     showPopup(
       error.message
     );
+
   }
+
 };
+
 
 /* LOGIN */
 
@@ -1106,6 +1105,7 @@ window.loginUser = async function(){
     document.getElementById("loginPassword")
       .value;
 
+
   if(!email || !password){
 
     showPopup(
@@ -1115,21 +1115,49 @@ window.loginUser = async function(){
     return;
   }
 
+
   try{
 
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    const credential =
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    const user =
+      credential.user;
+
+
+    /*
+      EMAIL VERIFICATION CHECK
+    */
+
+    if(!user.emailVerified){
+
+      await auth.signOut();
+
+
+      showPopup(
+        "Please verify your email before login. Check your email inbox and spam folder.",
+        "EMAIL NOT VERIFIED"
+      );
+
+      return;
+    }
+
 
   }catch(error){
 
     showPopup(
       error.message
     );
+
   }
+
 };
+
 
 /* GOOGLE */
 
@@ -1150,10 +1178,13 @@ window.googleLogin = async function(){
     showPopup(
       error.message
     );
+
   }
+
 };
 
-/* CREATE PROFILE FOR GOOGLE USER */
+
+/* CREATE GOOGLE PROFILE */
 
 async function createGoogleProfile(user){
 
@@ -1163,12 +1194,59 @@ async function createGoogleProfile(user){
   const snap =
     await getDoc(ref);
 
+
+  /*
+    Existing Google user:
+    DO NOT overwrite profile.
+  */
+
   if(snap.exists()){
     return;
   }
 
+
+  /*
+    Detect IP country
+  */
+
+  const ipData =
+    await getIPCountry();
+
+
+  const ipCountry =
+    findListedCountry(
+      ipData.country
+    );
+
+
+  /*
+    Google registration:
+    IP country is first priority.
+
+    If IP cannot be detected,
+    use currently selected country.
+  */
+
+  const selectedCountry =
+    document.getElementById("regCountry")
+      .value;
+
+
+  const finalCountry =
+    ipCountry ||
+    selectedCountry ||
+    "Unknown";
+
+
+  const countrySource =
+    ipCountry
+    ? "IP"
+    : "Selected";
+
+
   const counterRef =
     doc(db,"system","counter");
+
 
   const magikId =
     await runTransaction(
@@ -1180,6 +1258,7 @@ async function createGoogleProfile(user){
 
         let nextNumber = 100001;
 
+
         if(snapshot.exists()){
 
           nextNumber =
@@ -1187,38 +1266,70 @@ async function createGoogleProfile(user){
               snapshot.data().nextNumber
               || 100001
             );
+
         }
+
 
         transaction.set(
           counterRef,
           {
-            nextNumber:nextNumber+1
+            nextNumber:
+              nextNumber + 1
           },
           {
             merge:true
           }
         );
 
+
         return "MN"+nextNumber;
+
       }
     );
+
 
   await setDoc(
     ref,
     {
-      magikNumberId:magikId,
-      name:user.displayName || "",
-      email:user.email || "",
-      mobile:"",
-      points:0,
-      gamesPlayed:0,
+
+      magikNumberId:
+        magikId,
+
+      name:
+        user.displayName || "",
+
+      email:
+        user.email || "",
+
+      country:
+        finalCountry,
+
+      countrySource:
+        countrySource,
+
+      registrationIp:
+        ipData.ip || "",
+
+      points:
+        0,
+
+      gamesPlayed:
+        0,
+
       dateOfJoining:
         new Date().toISOString(),
-      logo:"⚡",
-      closeRequestedAt:null
+
+      logo:
+        "⚡",
+
+      closeRequestedAt:
+        null
+
     }
   );
+
 }
+
 
 /* AUTH STATE */
 
@@ -1228,29 +1339,65 @@ onAuthStateChanged(
 
     if(user){
 
-      currentUser = user;
+      currentUser =
+        user;
+
+
+      /*
+        Email/password users must
+        have verified email.
+      */
+
+      if(
+        user.providerData.some(
+          provider =>
+            provider.providerId ===
+            "password"
+        ) &&
+        !user.emailVerified
+      ){
+
+        await auth.signOut();
+
+        showAuth();
+
+        showPopup(
+          "Please verify your email before login.",
+          "EMAIL NOT VERIFIED"
+        );
+
+        return;
+
+      }
+
 
       await createGoogleProfile(user);
+
 
       const ref =
         doc(db,"users",user.uid);
 
+
       const snap =
         await getDoc(ref);
+
 
       if(snap.exists()){
 
         const data =
           snap.data();
 
+
         document.getElementById("userIdText")
           .innerText =
           "ID: "+
           (data.magikNumberId || "--");
 
+
         document.getElementById("userLogo")
           .innerText =
           data.logo || "⚡";
+
 
         if(data.closeRequestedAt){
 
@@ -1260,23 +1407,31 @@ onAuthStateChanged(
               closeRequestedAt:null
             }
           );
+
         }
+
       }
+
 
       document.getElementById("userBar")
         .style.display = "flex";
 
+
       showMenu();
+
 
     }else{
 
-      currentUser = null;
+      currentUser =
+        null;
 
       showAuth();
+
     }
 
   }
 );
+
 
 /* LOGOUT */
 
@@ -1291,44 +1446,63 @@ window.logoutUser = async function(){
     showPopup(
       error.message
     );
+
   }
+
 };
+
 
 /* LOGO */
 
 window.openLogoPopup = function(){
 
   document.getElementById("popupTitle")
-    .innerText = "SELECT LOGO";
+    .innerText =
+    "SELECT LOGO";
+
 
   document.getElementById("popupMessage")
     .innerText = "";
 
+
   const logos =
     ["⚡","🎯","🚀","🔥","👑","💎","🌀","🌟"];
+
 
   let html =
     `<div class="logoChoices">`;
 
+
   logos.forEach(logo=>{
 
     html +=
-      `<button class="logoChoice"
-               onclick="selectLogo('${logo}')">
-         ${logo}
-       </button>`;
+      `
+      <button class="logoChoice"
+              onclick="selectLogo('${logo}')">
+        ${logo}
+      </button>
+      `;
+
   });
 
-  html += `</div>`;
+
+  html +=
+    `</div>`;
+
 
   document.getElementById("popupButtons")
     .innerHTML = html;
 
+
   document.getElementById("popupOverlay")
     .style.display = "flex";
 
-  document.body.style.overflow = "hidden";
+
+  document.body.style.overflow =
+    "hidden";
+
 };
+
 
 window.selectLogo = async function(logo){
 
@@ -1336,8 +1510,11 @@ window.selectLogo = async function(logo){
     return;
   }
 
+
   document.getElementById("userLogo")
-    .innerText = logo;
+    .innerText =
+    logo;
+
 
   try{
 
@@ -1355,10 +1532,14 @@ window.selectLogo = async function(logo){
     );
 
     return;
+
   }
 
+
   closePopup();
+
 };
+
 
 /* SCOREBOARD */
 
@@ -1368,12 +1549,14 @@ window.showScoreboard = async function(){
     return;
   }
 
+
   try{
 
     const snap =
       await getDoc(
         doc(db,"users",currentUser.uid)
       );
+
 
     if(!snap.exists()){
 
@@ -1382,227 +1565,73 @@ window.showScoreboard = async function(){
       );
 
       return;
+
     }
+
 
     const data =
       snap.data();
+
 
     document.getElementById("profileId")
       .innerText =
       data.magikNumberId || "--";
 
+
     document.getElementById("profileDate")
       .innerText =
       data.dateOfJoining
-      ? new Date(data.dateOfJoining)
-          .toLocaleDateString()
+      ? new Date(
+          data.dateOfJoining
+        ).toLocaleDateString()
       : "--";
+
 
     document.getElementById("profileName")
       .innerText =
       data.name || "--";
 
+
+    document.getElementById("profileCountry")
+      .innerText =
+      data.country || "--";
+
+
     document.getElementById("profileEmail")
       .innerText =
       data.email || "--";
 
-    document.getElementById("profileMobile")
-      .innerText =
-      data.mobile || "--";
 
     document.getElementById("profileGames")
       .innerText =
       data.gamesPlayed || 0;
 
+
     document.getElementById("profilePoints")
       .innerText =
       data.points || 0;
 
+
     hideAll();
+
 
     document.getElementById("scorePage")
       .classList.add("active");
 
+
     window.scrollTo(0,0);
 
-  }catch(error){
-
-    showPopup(
-      error.message
-    );
-  }
-};
-
-/* EMAIL UPDATE */
-
-window.openEmailPopup = function(){
-
-  document.getElementById("popupTitle")
-    .innerText = "UPDATE EMAIL";
-
-  document.getElementById("popupMessage")
-    .innerHTML =
-    `<input id="newEmail"
-            type="email"
-            placeholder="New Email">`;
-
-  document.getElementById("popupButtons")
-    .innerHTML =
-    `
-    <button class="blue"
-            onclick="confirmEmailUpdate()">
-      CONFIRM
-    </button>
-
-    <button class="gray"
-            onclick="closePopup()">
-      CANCEL
-    </button>
-    `;
-
-  document.getElementById("popupOverlay")
-    .style.display = "flex";
-
-  document.body.style.overflow = "hidden";
-};
-
-window.confirmEmailUpdate = async function(){
-
-  const email =
-    document.getElementById("newEmail")
-      .value.trim();
-
-  if(!email){
-
-    showPopup(
-      "Enter new email."
-    );
-
-    return;
-  }
-
-  try{
-
-    await updateEmail(
-      currentUser,
-      email
-    );
-
-    await updateDoc(
-      doc(db,"users",currentUser.uid),
-      {
-        email:email
-      }
-    );
-
-    showPopup(
-      "Email updated successfully."
-    );
 
   }catch(error){
 
     showPopup(
       error.message
     );
-  }
-};
 
-/* MOBILE UPDATE */
-
-window.openMobilePopup = function(){
-
-  document.getElementById("popupTitle")
-    .innerText = "UPDATE MOBILE";
-
-  document.getElementById("popupMessage")
-    .innerHTML =
-    `
-    <select id="updateCountry"></select>
-
-    <input id="newMobile"
-           type="tel"
-           placeholder="Mobile Number">
-    `;
-
-  const select =
-    document.getElementById("updateCountry");
-
-  countries.forEach(c=>{
-
-    const option =
-      document.createElement("option");
-
-    option.value =
-      c[1]+"|"+c[2];
-
-    option.textContent =
-      `${c[0]} (${c[1]})`;
-
-    select.appendChild(option);
-  });
-
-  document.getElementById("popupButtons")
-    .innerHTML =
-    `
-    <button class="blue"
-            onclick="confirmMobileUpdate()">
-      CONFIRM
-    </button>
-
-    <button class="gray"
-            onclick="closePopup()">
-      CANCEL
-    </button>
-    `;
-
-  document.getElementById("popupOverlay")
-    .style.display = "flex";
-
-  document.body.style.overflow = "hidden";
-};
-
-window.confirmMobileUpdate = async function(){
-
-  const country =
-    document.getElementById("updateCountry")
-      .value.split("|");
-
-  const mobile =
-    document.getElementById("newMobile")
-      .value.trim();
-
-  const requiredLength =
-    Number(country[1]);
-
-  if(mobile.length !== requiredLength){
-
-    showPopup(
-      `Mobile number must contain ${requiredLength} digits.`
-    );
-
-    return;
   }
 
-  try{
-
-    await updateDoc(
-      doc(db,"users",currentUser.uid),
-      {
-        mobile:country[0]+" "+mobile
-      }
-    );
-
-    showPopup(
-      "Mobile number updated successfully."
-    );
-
-  }catch(error){
-
-    showPopup(
-      error.message
-    );
-  }
 };
+
 
 /* REDEEM */
 
@@ -1611,25 +1640,32 @@ window.redeemPoints = function(){
   showPopup(
     "Points redemption options such as PhonePe, Paytm, Google Pay, Amazon and Flipkart can be added later."
   );
+
 };
+
 
 window.redemptionHistory = function(){
 
   showPopup(
     "Redemption history will appear here."
   );
+
 };
+
 
 /* CLOSE ACCOUNT */
 
 window.closeAccount = function(){
 
   document.getElementById("popupTitle")
-    .innerText = "CLOSE ACCOUNT";
+    .innerText =
+    "CLOSE ACCOUNT";
+
 
   document.getElementById("popupMessage")
     .innerText =
     "Do you really want to close account permanently?";
+
 
   document.getElementById("popupButtons")
     .innerHTML =
@@ -1645,11 +1681,17 @@ window.closeAccount = function(){
     </button>
     `;
 
-  document.getElementById("popupOverlay")
-    .style.display = "flex";
 
-  document.body.style.overflow = "hidden";
+  document.getElementById("popupOverlay")
+    .style.display =
+    "flex";
+
+
+  document.body.style.overflow =
+    "hidden";
+
 };
+
 
 window.confirmCloseAccount = async function(){
 
@@ -1663,27 +1705,37 @@ window.confirmCloseAccount = async function(){
       }
     );
 
+
     document.getElementById("popupTitle")
-      .innerText = "ACCOUNT CLOSURE";
+      .innerText =
+      "ACCOUNT CLOSURE";
+
 
     document.getElementById("popupMessage")
       .innerText =
       "If you will not relogin before 30 days from today, your account will be deleted permanently.";
 
+
     document.getElementById("popupButtons")
       .innerHTML =
-      `<button class="blue"
-               onclick="closePopup()">
-         OK
-       </button>`;
+      `
+      <button class="blue"
+              onclick="closePopup()">
+        OK
+      </button>
+      `;
+
 
   }catch(error){
 
     showPopup(
       error.message
     );
+
   }
+
 };
+
 
 /* START GAME */
 
@@ -1692,32 +1744,44 @@ window.startGame = function(gameName){
   const config =
     GAME_CONFIG[gameName];
 
+
   if(!config){
     return;
   }
 
-  /*
-    Stop any previous timer
-  */
 
-  clearInterval(timerInterval);
+  clearInterval(
+    timerInterval
+  );
 
-  currentGame = gameName;
 
-  gameEnded = false;
+  currentGame =
+    gameName;
+
+
+  gameEnded =
+    false;
+
 
   timeLeft =
     config.duration;
 
+
   hideAll();
+
 
   document.getElementById("gamePage")
     .classList.add("active");
 
+
   const container =
-    document.getElementById("gameContainer");
+    document.getElementById(
+      "gameContainer"
+    );
+
 
   container.innerHTML = "";
+
 
   const gameClass =
     gameName === "DIAMOND"
@@ -1726,13 +1790,17 @@ window.startGame = function(gameName){
     ? "gameGold"
     : "gameSilver";
 
+
   const gameCard =
     document.createElement("div");
+
 
   gameCard.className =
     "gameCard "+gameClass;
 
+
   let hintText = "";
+
 
   if(gameName === "SILVER"){
 
@@ -1743,7 +1811,9 @@ window.startGame = function(gameName){
 
     hintText =
       `Hint: Row Total: ${config.rowTarget} | Column Total: ${config.rowTarget} | All Boxes Total: ${config.totalTarget}`;
+
   }
+
 
   gameCard.innerHTML =
     `
@@ -1786,14 +1856,20 @@ window.startGame = function(gameName){
     </div>
     `;
 
+
   container.appendChild(gameCard);
+
 
   createBoard();
 
+
   startTimer();
 
+
   window.scrollTo(0,0);
+
 };
+
 
 /* FORMAT TIME */
 
@@ -1804,13 +1880,17 @@ function formatTime(seconds){
       .toString()
       .padStart(2,"0");
 
+
   const sec =
     (seconds%60)
       .toString()
       .padStart(2,"0");
 
+
   return `${min}:${sec}`;
+
 }
+
 
 /* CREATE BOARD */
 
@@ -1819,116 +1899,137 @@ function createBoard(){
   const config =
     GAME_CONFIG[currentGame];
 
+
   const board =
-    document.getElementById("gameBoard");
+    document.getElementById(
+      "gameBoard"
+    );
+
 
   board.innerHTML = "";
 
-  /*
-    SILVER:
-    simple 3 x 3
-  */
 
   if(currentGame === "SILVER"){
 
     board.style.gridTemplateColumns =
       `repeat(${config.cols},52px)`;
 
-    for(let r=0;r<config.rows;r++){
 
-      for(let c=0;c<config.cols;c++){
+    for(
+      let r=0;
+      r<config.rows;
+      r++
+    ){
+
+      for(
+        let c=0;
+        c<config.cols;
+        c++
+      ){
 
         const input =
           createNumberInput(r,c);
 
         board.appendChild(input);
+
       }
+
     }
 
     return;
+
   }
 
-  /*
-    DIAMOND / GOLD
-
-    Column totals above
-    Row totals beside
-
-    These are LIVE values.
-  */
 
   board.style.gridTemplateColumns =
     `repeat(${config.cols},52px) 58px`;
 
-  /*
-    TOP COLUMN TOTALS
-  */
 
-  for(let c=0;c<config.cols;c++){
+  for(
+    let c=0;
+    c<config.cols;
+    c++
+  ){
 
     const total =
       document.createElement("div");
 
+
     total.className =
       "totalBox";
+
 
     total.id =
       "columnTotal"+c;
 
+
     total.innerText =
       "0";
 
+
     board.appendChild(total);
+
   }
 
-  /*
-    EMPTY CORNER
-  */
 
   const empty =
     document.createElement("div");
 
+
   empty.className =
     "totalBox";
+
 
   empty.innerText =
     "";
 
+
   board.appendChild(empty);
 
-  /*
-    NUMBER ROWS
-  */
 
-  for(let r=0;r<config.rows;r++){
+  for(
+    let r=0;
+    r<config.rows;
+    r++
+  ){
 
-    for(let c=0;c<config.cols;c++){
+    for(
+      let c=0;
+      c<config.cols;
+      c++
+    ){
 
       const input =
         createNumberInput(r,c);
 
+
       board.appendChild(input);
+
     }
 
-    /*
-      LIVE ROW TOTAL
-    */
 
     const rowTotal =
       document.createElement("div");
 
+
     rowTotal.className =
       "totalBox rowTotal";
+
 
     rowTotal.id =
       "rowTotal"+r;
 
+
     rowTotal.innerText =
       "0";
 
+
     board.appendChild(rowTotal);
+
   }
+
 }
+
 
 /* INPUT */
 
@@ -1937,31 +2038,30 @@ function createNumberInput(r,c){
   const input =
     document.createElement("input");
 
-  input.type = "number";
+
+  input.type =
+    "number";
+
 
   input.className =
     "numberBox";
 
-  input.min = 0;
 
-  input.max = 25;
+  input.min =
+    0;
 
-  input.dataset.row = r;
 
-  input.dataset.col = c;
+  input.max =
+    25;
 
-  /*
-    INPUT EVENT
 
-    Only update totals.
+  input.dataset.row =
+    r;
 
-    IMPORTANT:
-    We do NOT check duplicate here.
 
-    Therefore:
-    1 -> 10 works.
-    2 -> 22 works.
-  */
+  input.dataset.col =
+    c;
+
 
   input.addEventListener(
     "input",
@@ -1971,26 +2071,23 @@ function createNumberInput(r,c){
         return;
       }
 
+
       updateEnteredTotal();
 
     }
   );
 
-  /*
-    CHANGE EVENT
-
-    Duplicate and range validation
-    happens after the complete number
-    has been entered.
-  */
 
   input.addEventListener(
     "change",
     numberChanged
   );
 
+
   return input;
+
 }
+
 
 /* NUMBER VALIDATION */
 
@@ -2000,29 +2097,27 @@ function numberChanged(event){
     return;
   }
 
+
   const input =
     event.target;
+
 
   const value =
     input.value.trim();
 
-  /*
-    BLANK
-  */
 
   if(value === ""){
 
     updateEnteredTotal();
 
     return;
+
   }
+
 
   const number =
     Number(value);
 
-  /*
-    RANGE CHECK
-  */
 
   if(
     !Number.isInteger(number) ||
@@ -2034,23 +2129,27 @@ function numberChanged(event){
       "0-25 numbers only"
     );
 
+
     input.value = "";
+
 
     updateEnteredTotal();
 
+
     return;
+
   }
 
-  /*
-    COMPLETE NUMBER DUPLICATE CHECK
-  */
 
   const inputs =
     document.querySelectorAll(
       ".numberBox"
     );
 
-  let duplicate = false;
+
+  let duplicate =
+    false;
+
 
   inputs.forEach(other=>{
 
@@ -2060,11 +2159,13 @@ function numberChanged(event){
       Number(other.value) === number
     ){
 
-      duplicate = true;
+      duplicate =
+        true;
 
     }
 
   });
+
 
   if(duplicate){
 
@@ -2072,33 +2173,40 @@ function numberChanged(event){
       "Same number repeat is not possible."
     );
 
+
     input.value = "";
+
 
     updateEnteredTotal();
 
+
     return;
+
   }
 
+
   updateEnteredTotal();
+
 }
 
-/* TOTAL + LIVE ROW/COLUMN TOTALS */
+
+/* TOTALS */
 
 function updateEnteredTotal(){
 
   const config =
     GAME_CONFIG[currentGame];
 
-  let total = 0;
+
+  let total =
+    0;
+
 
   const inputs =
     document.querySelectorAll(
       ".numberBox"
     );
 
-  /*
-    YOUR ENTERED TOTAL
-  */
 
   inputs.forEach(input=>{
 
@@ -2106,42 +2214,52 @@ function updateEnteredTotal(){
 
       total +=
         Number(input.value);
+
     }
 
   });
 
+
   const element =
-    document.getElementById("enteredTotal");
+    document.getElementById(
+      "enteredTotal"
+    );
+
 
   if(element){
 
     element.innerText =
       "Your Entered Total: "+total;
+
   }
 
-  /*
-    SILVER:
-    NO ROW/COLUMN TOTALS
-  */
 
   if(currentGame === "SILVER"){
     return;
   }
 
-  /*
-    LIVE ROW TOTALS
-  */
 
-  for(let r=0;r<config.rows;r++){
+  for(
+    let r=0;
+    r<config.rows;
+    r++
+  ){
 
-    let rowSum = 0;
+    let rowSum =
+      0;
 
-    for(let c=0;c<config.cols;c++){
+
+    for(
+      let c=0;
+      c<config.cols;
+      c++
+    ){
 
       const input =
         document.querySelector(
           `.numberBox[data-row="${r}"][data-col="${c}"]`
         );
+
 
       if(
         input &&
@@ -2150,37 +2268,49 @@ function updateEnteredTotal(){
 
         rowSum +=
           Number(input.value);
+
       }
 
     }
+
 
     const rowElement =
       document.getElementById(
         "rowTotal"+r
       );
 
+
     if(rowElement){
 
       rowElement.innerText =
         rowSum;
+
     }
 
   }
 
-  /*
-    LIVE COLUMN TOTALS
-  */
 
-  for(let c=0;c<config.cols;c++){
+  for(
+    let c=0;
+    c<config.cols;
+    c++
+  ){
 
-    let columnSum = 0;
+    let columnSum =
+      0;
 
-    for(let r=0;r<config.rows;r++){
+
+    for(
+      let r=0;
+      r<config.rows;
+      r++
+    ){
 
       const input =
         document.querySelector(
           `.numberBox[data-row="${r}"][data-col="${c}"]`
         );
+
 
       if(
         input &&
@@ -2189,61 +2319,82 @@ function updateEnteredTotal(){
 
         columnSum +=
           Number(input.value);
+
       }
 
     }
+
 
     const columnElement =
       document.getElementById(
         "columnTotal"+c
       );
 
+
     if(columnElement){
 
       columnElement.innerText =
         columnSum;
+
     }
 
   }
+
 }
+
 
 /* TIMER */
 
 function startTimer(){
 
-  clearInterval(timerInterval);
+  clearInterval(
+    timerInterval
+  );
+
 
   updateTimer();
+
 
   timerInterval =
     setInterval(()=>{
 
       timeLeft--;
 
-      /*
-        TIMER REACHED ZERO
-      */
 
       if(timeLeft <= 0){
 
-        timeLeft = 0;
+        timeLeft =
+          0;
 
-        clearInterval(timerInterval);
+
+        clearInterval(
+          timerInterval
+        );
+
 
         endGame();
 
+
         return;
+
       }
+
 
       updateTimer();
 
+
     },1000);
+
 }
+
 
 function updateTimer(){
 
   const timer =
-    document.getElementById("gameTimer");
+    document.getElementById(
+      "gameTimer"
+    );
+
 
   if(timer){
 
@@ -2251,8 +2402,11 @@ function updateTimer(){
       formatTime(
         Math.max(0,timeLeft)
       );
+
   }
+
 }
+
 
 /* END GAME */
 
@@ -2262,28 +2416,38 @@ function endGame(){
     return;
   }
 
-  gameEnded = true;
 
-  clearInterval(timerInterval);
+  gameEnded =
+    true;
 
-  timeLeft = 0;
+
+  clearInterval(
+    timerInterval
+  );
+
+
+  timeLeft =
+    0;
+
 
   updateTimer();
 
-  /*
-    LOCK ALL NUMBER BOXES
-  */
 
   document
     .querySelectorAll(".numberBox")
     .forEach(input=>{
 
-      input.disabled = true;
+      input.disabled =
+        true;
 
-      input.readOnly = true;
+
+      input.readOnly =
+        true;
 
     });
+
 }
+
 
 /* ANSWER */
 
@@ -2295,11 +2459,16 @@ window.answerGame = function(){
       "Game is still running"
     );
 
+
     return;
+
   }
 
+
   showResult();
+
 };
+
 
 /* BACK */
 
@@ -2307,19 +2476,28 @@ window.backFromGame = function(){
 
   if(gameEnded){
 
-    clearInterval(timerInterval);
+    clearInterval(
+      timerInterval
+    );
+
 
     showMenu();
 
+
     return;
+
   }
 
+
   document.getElementById("popupTitle")
-    .innerText = "QUIT GAME";
+    .innerText =
+    "QUIT GAME";
+
 
   document.getElementById("popupMessage")
     .innerText =
     "Are you sure do you want quit game?";
+
 
   document.getElementById("popupButtons")
     .innerHTML =
@@ -2335,20 +2513,32 @@ window.backFromGame = function(){
     </button>
     `;
 
-  document.getElementById("popupOverlay")
-    .style.display = "flex";
 
-  document.body.style.overflow = "hidden";
+  document.getElementById("popupOverlay")
+    .style.display =
+    "flex";
+
+
+  document.body.style.overflow =
+    "hidden";
+
 };
+
 
 window.confirmQuitGame = function(){
 
-  clearInterval(timerInterval);
+  clearInterval(
+    timerInterval
+  );
+
 
   closePopup();
 
+
   showMenu();
+
 };
+
 
 /* GET USER GRID */
 
@@ -2357,23 +2547,40 @@ function getUserGrid(){
   const config =
     GAME_CONFIG[currentGame];
 
-  const grid = [];
+
+  const grid =
+    [];
+
 
   const inputs =
     document.querySelectorAll(
       ".numberBox"
     );
 
-  let index = 0;
 
-  for(let r=0;r<config.rows;r++){
+  let index =
+    0;
 
-    const row = [];
 
-    for(let c=0;c<config.cols;c++){
+  for(
+    let r=0;
+    r<config.rows;
+    r++
+  ){
+
+    const row =
+      [];
+
+
+    for(
+      let c=0;
+      c<config.cols;
+      c++
+    ){
 
       const value =
         inputs[index].value;
+
 
       row.push(
         value === ""
@@ -2381,14 +2588,21 @@ function getUserGrid(){
         : Number(value)
       );
 
+
       index++;
+
     }
 
+
     grid.push(row);
+
   }
 
+
   return grid;
+
 }
+
 
 /* CONDITION CHECK */
 
@@ -2405,7 +2619,9 @@ function checkRow(
   ){
 
     return false;
+
   }
+
 
   const sum =
     grid[row].reduce(
@@ -2413,8 +2629,11 @@ function checkRow(
       0
     );
 
+
   return sum === target;
+
 }
+
 
 function checkColumn(
   grid,
@@ -2422,46 +2641,82 @@ function checkColumn(
   target
 ){
 
-  for(let r=0;r<grid.length;r++){
+  for(
+    let r=0;
+    r<grid.length;
+    r++
+  ){
 
     if(grid[r][col] === null){
 
       return false;
+
     }
+
   }
 
-  let sum = 0;
 
-  for(let r=0;r<grid.length;r++){
+  let sum =
+    0;
 
-    sum += grid[r][col];
+
+  for(
+    let r=0;
+    r<grid.length;
+    r++
+  ){
+
+    sum +=
+      grid[r][col];
+
   }
+
 
   return sum === target;
+
 }
+
 
 function checkDiagonal1(
   grid,
   target
 ){
 
-  for(let i=0;i<grid.length;i++){
+  for(
+    let i=0;
+    i<grid.length;
+    i++
+  ){
 
     if(grid[i][i] === null){
 
       return false;
+
     }
+
   }
 
-  let sum = 0;
 
-  for(let i=0;i<grid.length;i++){
+  let sum =
+    0;
 
-    sum += grid[i][i];
+
+  for(
+    let i=0;
+    i<grid.length;
+    i++
+  ){
+
+    sum +=
+      grid[i][i];
+
   }
+
 
   return sum === target;
+
 }
+
 
 function checkDiagonal2(
   grid,
@@ -2471,50 +2726,85 @@ function checkDiagonal2(
   const n =
     grid.length;
 
-  for(let i=0;i<n;i++){
+
+  for(
+    let i=0;
+    i<n;
+    i++
+  ){
 
     if(
       grid[i][n-1-i] === null
     ){
 
       return false;
+
     }
+
   }
 
-  let sum = 0;
 
-  for(let i=0;i<n;i++){
+  let sum =
+    0;
+
+
+  for(
+    let i=0;
+    i<n;
+    i++
+  ){
 
     sum +=
       grid[i][n-1-i];
+
   }
 
+
   return sum === target;
+
 }
+
 
 function checkTable(
   grid,
   target
 ){
 
-  let total = 0;
+  let total =
+    0;
 
-  for(let r=0;r<grid.length;r++){
 
-    for(let c=0;c<grid[r].length;c++){
+  for(
+    let r=0;
+    r<grid.length;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<grid[r].length;
+      c++
+    ){
 
       if(grid[r][c] === null){
 
         return false;
+
       }
+
 
       total +=
         grid[r][c];
+
     }
+
   }
 
+
   return total === target;
+
 }
+
 
 /* RESULT */
 
@@ -2523,18 +2813,24 @@ async function showResult(){
   const config =
     GAME_CONFIG[currentGame];
 
+
   const userGrid =
     getUserGrid();
 
-  let earned = 0;
 
-  const breakdown = [];
+  let earned =
+    0;
 
-  /*
-    ROWS
-  */
 
-  for(let r=0;r<config.rows;r++){
+  const breakdown =
+    [];
+
+
+  for(
+    let r=0;
+    r<config.rows;
+    r++
+  ){
 
     const correct =
       config.points.row > 0 &&
@@ -2544,11 +2840,13 @@ async function showResult(){
         config.rowTarget
       );
 
+
     if(config.points.row > 0){
 
       breakdown.push({
 
-        label:`Row ${r+1}`,
+        label:
+          `Row ${r+1}`,
 
         points:
           correct
@@ -2557,20 +2855,24 @@ async function showResult(){
 
       });
 
+
       if(correct){
 
         earned +=
           config.points.row;
 
       }
+
     }
+
   }
 
-  /*
-    COLUMNS
-  */
 
-  for(let c=0;c<config.cols;c++){
+  for(
+    let c=0;
+    c<config.cols;
+    c++
+  ){
 
     const correct =
       config.points.column > 0 &&
@@ -2580,11 +2882,13 @@ async function showResult(){
         config.rowTarget
       );
 
+
     if(config.points.column > 0){
 
       breakdown.push({
 
-        label:`Column ${c+1}`,
+        label:
+          `Column ${c+1}`,
 
         points:
           correct
@@ -2593,18 +2897,18 @@ async function showResult(){
 
       });
 
+
       if(correct){
 
         earned +=
           config.points.column;
 
       }
+
     }
+
   }
 
-  /*
-    DIAGONAL 1
-  */
 
   if(config.points.diagonal1 > 0){
 
@@ -2614,9 +2918,11 @@ async function showResult(){
         config.rowTarget
       );
 
+
     breakdown.push({
 
-      label:"Diagonal 1",
+      label:
+        "Diagonal 1",
 
       points:
         correct
@@ -2625,17 +2931,16 @@ async function showResult(){
 
     });
 
+
     if(correct){
 
       earned +=
         config.points.diagonal1;
 
     }
+
   }
 
-  /*
-    DIAGONAL 2
-  */
 
   if(config.points.diagonal2 > 0){
 
@@ -2645,9 +2950,11 @@ async function showResult(){
         config.rowTarget
       );
 
+
     breakdown.push({
 
-      label:"Diagonal 2",
+      label:
+        "Diagonal 2",
 
       points:
         correct
@@ -2656,22 +2963,22 @@ async function showResult(){
 
     });
 
+
     if(correct){
 
       earned +=
         config.points.diagonal2;
 
     }
+
   }
 
-  /*
-    TABLE
-  */
 
   const tableTarget =
     currentGame === "SILVER"
     ? config.tableTarget
     : config.totalTarget;
+
 
   const tableCorrect =
     config.points.table > 0 &&
@@ -2680,9 +2987,11 @@ async function showResult(){
       tableTarget
     );
 
+
   breakdown.push({
 
-    label:"Total Table",
+    label:
+      "Total Table",
 
     points:
       tableCorrect
@@ -2691,6 +3000,7 @@ async function showResult(){
 
   });
 
+
   if(tableCorrect){
 
     earned +=
@@ -2698,9 +3008,6 @@ async function showResult(){
 
   }
 
-  /*
-    SHOW YOUR ANSWER
-  */
 
   createResultGrid(
     "yourAnswer",
@@ -2709,9 +3016,6 @@ async function showResult(){
     config.cols
   );
 
-  /*
-    SHOW OUR ANSWER
-  */
 
   createResultGrid(
     "ourAnswer",
@@ -2720,11 +3024,10 @@ async function showResult(){
     config.cols
   );
 
-  /*
-    POINT BREAKDOWN
-  */
 
-  let html = "";
+  let html =
+    "";
+
 
   breakdown.forEach(item=>{
 
@@ -2732,14 +3035,19 @@ async function showResult(){
       `
       <div class="pointsLine">
 
-        <span>${item.label}</span>
+        <span>
+          ${item.label}
+        </span>
 
-        <strong>${item.points}</strong>
+        <strong>
+          ${item.points}
+        </strong>
 
       </div>
       `;
 
   });
+
 
   html +=
     `
@@ -2747,19 +3055,22 @@ async function showResult(){
 
     <div class="pointsLine">
 
-      <strong>Earned Points</strong>
+      <strong>
+        Earned Points
+      </strong>
 
-      <strong>${earned}</strong>
+      <strong>
+        ${earned}
+      </strong>
 
     </div>
     `;
 
-  document.getElementById("pointsBreakdown")
-    .innerHTML = html;
 
-  /*
-    RESULT MESSAGE
-  */
+  document.getElementById("pointsBreakdown")
+    .innerHTML =
+    html;
+
 
   const complete =
     userGrid.every(row=>
@@ -2768,7 +3079,10 @@ async function showResult(){
       )
     );
 
-  let message = "";
+
+  let message =
+    "";
+
 
   if(earned > 0){
 
@@ -2782,6 +3096,7 @@ async function showResult(){
 
   }
 
+
   if(!complete){
 
     message +=
@@ -2789,31 +3104,37 @@ async function showResult(){
 
   }
 
+
   document.getElementById("resultMessage")
-    .innerText = message;
+    .innerText =
+    message;
+
 
   document.getElementById("resultTitle")
     .innerText =
     currentGame+" RESULT";
 
+
   hideAll();
+
 
   document.getElementById("resultPage")
     .classList.add("active");
 
+
   window.scrollTo(0,0);
 
-  /*
-    SAVE SCORE TO FIRESTORE
-  */
 
   try{
 
     await updateDoc(
       doc(db,"users",currentUser.uid),
       {
-        points:increment(earned),
-        gamesPlayed:increment(1)
+        points:
+          increment(earned),
+
+        gamesPlayed:
+          increment(1)
       }
     );
 
@@ -2823,8 +3144,11 @@ async function showResult(){
       "Score save blocked by Firestore rules:",
       error
     );
+
   }
+
 }
+
 
 /* RESULT GRID */
 
@@ -2840,54 +3164,201 @@ function createResultGrid(
       elementId
     );
 
-  element.innerHTML = "";
+
+  element.innerHTML =
+    "";
+
 
   const board =
     document.createElement("div");
 
+
   board.className =
     "resultGrid";
+
 
   board.style.gridTemplateColumns =
     `repeat(${cols},48px)`;
 
-  for(let r=0;r<rows;r++){
 
-    for(let c=0;c<cols;c++){
+  for(
+    let r=0;
+    r<rows;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<cols;
+      c++
+    ){
 
       const box =
         document.createElement("div");
 
+
       box.className =
         "resultBox";
 
+
       const value =
         grid[r][c];
+
 
       if(
         value === null ||
         value === undefined
       ){
 
-        box.innerText = "—";
+        box.innerText =
+          "—";
 
-        box.classList.add("blank");
+
+        box.classList.add(
+          "blank"
+        );
 
       }else{
 
-        box.innerText = value;
+        box.innerText =
+          value;
 
       }
+
 
       board.appendChild(box);
 
     }
+
   }
 
+
   element.appendChild(board);
+
 }
 
-</script>
 
-</body>
+/* GAME CONFIG */
+
+const GAME_CONFIG = {
+
+  DIAMOND:{
+
+    name:"DIAMOND",
+
+    rows:5,
+
+    cols:5,
+
+    duration:300,
+
+    rowTarget:60,
+
+    totalTarget:300,
+
+    answer:[
+      [16,23,0,7,14],
+      [22,4,6,13,15],
+      [3,5,12,19,21],
+      [9,11,18,20,2],
+      [10,17,24,1,8]
+    ],
+
+    points:{
+      row:10,
+      column:10,
+      diagonal1:10,
+      diagonal2:10,
+      table:50
+    }
+
+  },
+
+
+  GOLD:{
+
+    name:"GOLD",
+
+    rows:3,
+
+    cols:3,
+
+    duration:60,
+
+    rowTarget:15,
+
+    totalTarget:45,
+
+    answer:[
+      [8,1,6],
+      [3,5,7],
+      [4,9,2]
+    ],
+
+    points:{
+      row:5,
+      column:5,
+      diagonal1:5,
+      diagonal2:5,
+      table:25
+    }
+
+  },
+
+
+  SILVER:{
+
+    name:"SILVER",
+
+    rows:3,
+
+    cols:3,
+
+    duration:60,
+
+    hintTotal:150,
+
+    tableTarget:45,
+
+    answer:[
+      [6,1,8],
+      [7,5,3],
+      [2,9,4]
+    ],
+
+    points:{
+      row:0,
+      column:0,
+      diagonal1:0,
+      diagonal2:0,
+      table:25
+    }
+
+  }
+
+};
+
+
+/* CURRENT GAME */
+
+let currentGame =
+  null;
+
+
+let timerInterval =
+  null;
+
+
+let timeLeft =
+  0;
+
+
+let gameEnded =
+  false;
+
+
+let currentUser =
+  null;
+
+</script></body>
 </html>

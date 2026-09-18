@@ -161,7 +161,7 @@ h1,h2,h3{
   padding:20px 10px 40px;
 }
 
-/* SEPARATE HINT BACKGROUND */
+/* HINT */
 
 .hint{
   text-align:center;
@@ -214,6 +214,12 @@ h1,h2,h3{
   border:2px solid #cbd5e1;
   background:white;
   color:#111827;
+}
+
+.numberBox:disabled{
+  background:#e5e7eb;
+  color:#64748b;
+  opacity:1;
 }
 
 .totalBox{
@@ -1690,6 +1696,12 @@ window.startGame = function(gameName){
     return;
   }
 
+  /*
+    Stop any previous timer
+  */
+
+  clearInterval(timerInterval);
+
   currentGame = gameName;
 
   gameEnded = false;
@@ -1938,8 +1950,42 @@ function createNumberInput(r,c){
 
   input.dataset.col = c;
 
+  /*
+    INPUT EVENT
+
+    Only update totals.
+
+    IMPORTANT:
+    We do NOT check duplicate here.
+
+    Therefore:
+    1 -> 10 works.
+    2 -> 22 works.
+  */
+
   input.addEventListener(
     "input",
+    function(){
+
+      if(gameEnded){
+        return;
+      }
+
+      updateEnteredTotal();
+
+    }
+  );
+
+  /*
+    CHANGE EVENT
+
+    Duplicate and range validation
+    happens after the complete number
+    has been entered.
+  */
+
+  input.addEventListener(
+    "change",
     numberChanged
   );
 
@@ -1957,8 +2003,12 @@ function numberChanged(event){
   const input =
     event.target;
 
-  let value =
+  const value =
     input.value.trim();
+
+  /*
+    BLANK
+  */
 
   if(value === ""){
 
@@ -1969,6 +2019,10 @@ function numberChanged(event){
 
   const number =
     Number(value);
+
+  /*
+    RANGE CHECK
+  */
 
   if(
     !Number.isInteger(number) ||
@@ -1988,7 +2042,7 @@ function numberChanged(event){
   }
 
   /*
-    DUPLICATE CHECK
+    COMPLETE NUMBER DUPLICATE CHECK
   */
 
   const inputs =
@@ -2002,12 +2056,14 @@ function numberChanged(event){
 
     if(
       other !== input &&
-      other.value !== "" &&
+      other.value.trim() !== "" &&
       Number(other.value) === number
     ){
 
       duplicate = true;
+
     }
+
   });
 
   if(duplicate){
@@ -2051,6 +2107,7 @@ function updateEnteredTotal(){
       total +=
         Number(input.value);
     }
+
   });
 
   const element =
@@ -2094,6 +2151,7 @@ function updateEnteredTotal(){
         rowSum +=
           Number(input.value);
       }
+
     }
 
     const rowElement =
@@ -2106,6 +2164,7 @@ function updateEnteredTotal(){
       rowElement.innerText =
         rowSum;
     }
+
   }
 
   /*
@@ -2131,6 +2190,7 @@ function updateEnteredTotal(){
         columnSum +=
           Number(input.value);
       }
+
     }
 
     const columnElement =
@@ -2143,6 +2203,7 @@ function updateEnteredTotal(){
       columnElement.innerText =
         columnSum;
     }
+
   }
 }
 
@@ -2159,14 +2220,22 @@ function startTimer(){
 
       timeLeft--;
 
-      updateTimer();
+      /*
+        TIMER REACHED ZERO
+      */
 
       if(timeLeft <= 0){
+
+        timeLeft = 0;
 
         clearInterval(timerInterval);
 
         endGame();
+
+        return;
       }
+
+      updateTimer();
 
     },1000);
 }
@@ -2189,16 +2258,31 @@ function updateTimer(){
 
 function endGame(){
 
+  if(gameEnded){
+    return;
+  }
+
   gameEnded = true;
+
+  clearInterval(timerInterval);
+
+  timeLeft = 0;
+
+  updateTimer();
+
+  /*
+    LOCK ALL NUMBER BOXES
+  */
 
   document
     .querySelectorAll(".numberBox")
     .forEach(input=>{
 
       input.disabled = true;
-    });
 
-  updateTimer();
+      input.readOnly = true;
+
+    });
 }
 
 /* ANSWER */
@@ -2470,12 +2554,14 @@ async function showResult(){
           correct
           ? config.points.row
           : 0
+
       });
 
       if(correct){
 
         earned +=
           config.points.row;
+
       }
     }
   }
@@ -2504,12 +2590,14 @@ async function showResult(){
           correct
           ? config.points.column
           : 0
+
       });
 
       if(correct){
 
         earned +=
           config.points.column;
+
       }
     }
   }
@@ -2534,12 +2622,14 @@ async function showResult(){
         correct
         ? config.points.diagonal1
         : 0
+
     });
 
     if(correct){
 
       earned +=
         config.points.diagonal1;
+
     }
   }
 
@@ -2563,12 +2653,14 @@ async function showResult(){
         correct
         ? config.points.diagonal2
         : 0
+
     });
 
     if(correct){
 
       earned +=
         config.points.diagonal2;
+
     }
   }
 
@@ -2596,12 +2688,14 @@ async function showResult(){
       tableCorrect
       ? config.points.table
       : 0
+
   });
 
   if(tableCorrect){
 
     earned +=
       config.points.table;
+
   }
 
   /*
@@ -2644,6 +2738,7 @@ async function showResult(){
 
       </div>
       `;
+
   });
 
   html +=
@@ -2684,12 +2779,14 @@ async function showResult(){
 
     message =
       "Better luck next time.";
+
   }
 
   if(!complete){
 
     message +=
       " Blank boxes received 0 points for those conditions.";
+
   }
 
   document.getElementById("resultMessage")
@@ -2707,7 +2804,7 @@ async function showResult(){
   window.scrollTo(0,0);
 
   /*
-    SAVE SCORE
+    SAVE SCORE TO FIRESTORE
   */
 
   try{
@@ -2779,9 +2876,11 @@ function createResultGrid(
       }else{
 
         box.innerText = value;
+
       }
 
       board.appendChild(box);
+
     }
   }
 

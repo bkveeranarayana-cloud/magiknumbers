@@ -1,11 +1,13 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MAGIKNUMBER</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -13,202 +15,501 @@
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#eef2ff,#f8f9ff);
+  background:#f2f4f8;
   color:#222;
 }
 
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* =========================
+   AUTH
+========================= */
+
 .container{
-  width:100%;
-  max-width:500px;
-  margin:auto;
-  padding:20px;
+  width:92%;
+  max-width:450px;
+  margin:25px auto;
 }
 
 h1{
   text-align:center;
-  color:#4b35c5;
-  margin-bottom:20px;
+  color:#222;
+  margin-bottom:25px;
 }
 
 .card{
   background:white;
   padding:20px;
-  border-radius:18px;
-  box-shadow:0 5px 20px rgba(0,0,0,.12);
-  margin-bottom:15px;
+  border-radius:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.12);
+  margin-bottom:20px;
 }
 
-input,select{
+.card h2{
+  text-align:center;
+  margin-top:0;
+}
+
+input,
+select{
   width:100%;
-  padding:13px;
-  margin:6px 0;
-  border:1px solid #ccc;
-  border-radius:10px;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid #bbb;
+  border-radius:8px;
   font-size:16px;
 }
 
-button{
+.passwordRow{
+  position:relative;
+}
+
+.showPassword{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:14px;
+  margin:4px 0 10px;
+}
+
+.showPassword input{
+  width:auto;
+  margin:0;
+}
+
+.btn{
   width:100%;
   padding:13px;
-  margin-top:10px;
   border:0;
-  border-radius:10px;
+  border-radius:9px;
   font-size:16px;
   font-weight:bold;
-  cursor:pointer;
+  margin-top:8px;
 }
 
-.loginBtn{background:#28a745;color:white;}
-.registerBtn{background:#1976d2;color:white;}
-.googleBtn{background:white;border:1px solid #777;}
-.logoutBtn{background:#dc3545;color:white;}
-.backBtn{background:#777;color:white;}
-.answerBtn{background:#673ab7;color:white;}
-
-.hidden{
-  display:none;
+.loginBtn{
+  background:#16803c;
+  color:white;
 }
+
+.registerBtn{
+  background:#1976d2;
+  color:white;
+}
+
+.googleBtn{
+  background:white;
+  border:1px solid #888;
+  color:#222;
+}
+
+.rules{
+  background:#fff;
+  border-radius:15px;
+  padding:18px;
+  box-shadow:0 3px 12px rgba(0,0,0,.1);
+  line-height:1.6;
+}
+
+/* =========================
+   USER ID BAR
+========================= */
 
 #userIdBar{
   position:fixed;
   top:0;
   left:0;
   right:0;
-  background:#171717;
+  height:52px;
+  background:#111;
   color:white;
-  padding:8px 12px;
+  display:flex;
+  align-items:center;
+  padding:5px 10px;
   z-index:1000;
-  font-weight:bold;
 }
 
-#userLogo{
-  cursor:pointer;
-  margin-right:8px;
-  font-size:20px;
+.logoButton{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:2px solid white;
+  background:#222;
+  color:white;
+  font-size:23px;
+  margin-right:10px;
 }
+
+.userIdText{
+  font-weight:bold;
+  font-size:14px;
+}
+
+/* =========================
+   MENU
+========================= */
 
 #loggedIn{
-  padding-top:55px;
+  padding-top:75px;
 }
 
-.menuBtn{
-  background:#4b35c5;
+.menuTitle{
+  text-align:center;
+  font-size:27px;
+  font-weight:bold;
+  margin-bottom:20px;
+}
+
+.menu{
+  width:92%;
+  max-width:430px;
+  margin:auto;
+}
+
+.menu button{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:17px;
+  margin:8px 0;
+  font-size:17px;
+  font-weight:bold;
   color:white;
-  margin-bottom:10px;
+}
+
+.scoreBtn{
+  background:#673ab7;
+}
+
+.diamondBtn{
+  background:#673ab7;
+}
+
+.goldBtn{
+  background:#e89b00;
+}
+
+.silverBtn{
+  background:#65758b;
+}
+
+.logoutBtn{
+  background:#d32f2f;
+}
+
+/* =========================
+   COMMON PAGE
+========================= */
+
+.page{
+  padding-top:70px;
+  width:94%;
+  max-width:520px;
+  margin:auto;
+}
+
+.pageTitle{
+  text-align:center;
+  font-size:27px;
+  margin-bottom:20px;
+}
+
+/* =========================
+   PROFILE / SCOREBOARD
+========================= */
+
+.profileCard{
+  background:white;
+  padding:18px;
+  border-radius:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.12);
+}
+
+.profileRow{
+  border-bottom:1px solid #ddd;
+  padding:12px 0;
+}
+
+.profileLabel{
+  font-size:13px;
+  color:#777;
+}
+
+.profileValue{
+  font-size:17px;
+  font-weight:bold;
+  margin-top:3px;
+  word-break:break-word;
+}
+
+.smallAction{
+  width:100%;
+  border:0;
+  border-radius:8px;
+  padding:11px;
+  margin-top:7px;
+  font-weight:bold;
+  color:white;
+}
+
+.emailUpdate{
+  background:#1976d2;
+}
+
+.mobileUpdate{
+  background:#00897b;
+}
+
+.redeemBtn{
+  background:#8e24aa;
+}
+
+.historyBtn{
+  background:#455a64;
+}
+
+.closeAccountBtn{
+  background:#c62828;
+}
+
+.backBtn{
+  background:#555;
+  color:white;
+}
+
+/* =========================
+   GAME
+========================= */
+
+.gamePage{
+  padding-top:65px;
+  width:96%;
+  max-width:650px;
+  margin:auto;
 }
 
 .gameTitle{
   text-align:center;
-  font-size:26px;
+  font-size:28px;
   font-weight:bold;
-  margin-bottom:15px;
+  margin:5px 0 12px;
 }
 
-.gameInfo{
+.gameHint{
   text-align:center;
-  margin-bottom:15px;
+  font-size:17px;
+  font-weight:bold;
+  margin:8px 0 12px;
+  line-height:1.5;
 }
 
-.hint{
-  font-size:18px;
+.columnTotals{
+  text-align:center;
+  font-size:15px;
   font-weight:bold;
-  color:#673ab7;
-  margin:8px;
-}
-
-.allTotal{
-  font-size:18px;
-  font-weight:bold;
-  color:#d97706;
-  margin:8px;
+  margin:8px 0;
+  word-break:break-word;
 }
 
 .timer{
-  font-size:30px;
+  text-align:center;
+  font-size:31px;
   font-weight:bold;
-  color:#d32f2f;
-  margin:10px;
-}
-
-.enteredTotal{
-  font-size:18px;
-  font-weight:bold;
-  color:#1976d2;
-  margin:8px;
+  margin:10px 0 14px;
 }
 
 .gameBoard{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  max-width:300px;
-  margin:20px auto;
-}
-
-.gameBox{
-  width:100%;
-  aspect-ratio:1/1;
-  text-align:center;
-  font-size:25px;
-  font-weight:bold;
-  border:3px solid #673ab7;
-  border-radius:12px;
-}
-
-.gameBox:disabled{
-  background:#eeeeee;
-  color:#555;
-}
-
-.resultBoard{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  max-width:280px;
-  margin:15px auto;
-}
-
-.resultBox{
-  height:65px;
-  display:flex;
-  align-items:center;
   justify-content:center;
-  border-radius:10px;
-  background:#eee;
-  border:2px solid #777;
-  font-size:22px;
+  gap:7px;
+  margin:10px auto 15px;
+}
+
+.gameBoard input{
+  width:58px;
+  height:58px;
+  text-align:center;
+  font-size:21px;
   font-weight:bold;
+  border:2px solid #555;
+  border-radius:9px;
+  background:white;
+}
+
+.gameBoard input:disabled{
+  background:#ddd;
+  color:#333;
+}
+
+.enteredTotal{
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+.gameButton{
+  display:block;
+  width:190px;
+  margin:9px auto;
+  padding:13px;
+  border:0;
+  border-radius:10px;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.answerBtn{
+  background:#1976d2;
+  color:white;
+}
+
+.gameBackBtn{
+  background:#555;
+  color:white;
+}
+
+/* =========================
+   RESULT
+========================= */
+
+.resultCard{
+  background:white;
+  border-radius:15px;
+  padding:18px;
+  box-shadow:0 3px 12px rgba(0,0,0,.12);
+  margin-bottom:15px;
 }
 
 .resultTitle{
-  text-align:center;
-  font-size:20px;
+  font-size:21px;
   font-weight:bold;
-  margin-top:15px;
+  text-align:center;
+  margin-bottom:12px;
 }
 
-.popup{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
+.resultGrid{
+  display:grid;
+  justify-content:center;
+  gap:5px;
+  margin:10px auto;
+}
+
+.resultBox{
+  width:48px;
+  height:48px;
   display:flex;
   justify-content:center;
   align-items:center;
+  border:2px solid #555;
+  border-radius:7px;
+  font-size:18px;
+  font-weight:bold;
+  background:#f8f8f8;
+}
+
+.resultInfo{
+  font-size:16px;
+  line-height:1.7;
+}
+
+.pointsBox{
+  background:#eef7ff;
+  padding:13px;
+  border-radius:10px;
+  margin-top:12px;
+}
+
+.earned{
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+  margin-top:10px;
+}
+
+.resultMessage{
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  margin:14px 0;
+}
+
+/* =========================
+   POPUP
+========================= */
+
+.popupOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
   z-index:2000;
 }
 
-.popupBox{
-  background:white;
+.popup{
   width:90%;
   max-width:380px;
+  background:white;
+  border-radius:15px;
   padding:22px;
-  border-radius:18px;
+  box-shadow:0 5px 25px rgba(0,0,0,.3);
+}
+
+.popup h3{
+  margin-top:0;
   text-align:center;
 }
 
-.popupBox button{
-  margin-top:8px;
+.popup p{
+  line-height:1.5;
+  text-align:center;
 }
+
+.popupButtons{
+  display:flex;
+  gap:8px;
+  margin-top:15px;
+}
+
+.popupButtons button{
+  flex:1;
+  padding:11px;
+  border:0;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.yesBtn{
+  background:#d32f2f;
+  color:white;
+}
+
+.noBtn{
+  background:#777;
+  color:white;
+}
+
+.confirmBtn{
+  background:#1976d2;
+  color:white;
+}
+
+.cancelBtn{
+  background:#777;
+  color:white;
+}
+
+/* =========================
+   LOGO POPUP
+========================= */
 
 .logoChoices{
   display:grid;
@@ -217,313 +518,587 @@ button{
 }
 
 .logoChoice{
-  font-size:30px;
-  padding:10px;
-  background:#f1f1f1;
+  height:55px;
+  font-size:28px;
+  border:1px solid #ccc;
   border-radius:10px;
-  cursor:pointer;
+  background:#fafafa;
 }
 
-.smallText{
-  font-size:13px;
-  color:#666;
+/* =========================
+   COUNTRY
+========================= */
+
+.mobileRow{
+  display:flex;
+  gap:7px;
 }
+
+.mobileRow select{
+  width:42%;
+}
+
+.mobileRow input{
+  width:58%;
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media(min-width:600px){
+
+  .gameBoard input{
+    width:65px;
+    height:65px;
+    font-size:24px;
+  }
+
+  .gameBoard{
+    gap:9px;
+  }
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="userIdBar" class="hidden">
-  <span id="userLogo" onclick="openLogoPopup()">⚡</span>
-  ID: <span id="displayUserId"></span>
-</div>
+<!-- =====================================================
+     AUTH AREA
+===================================================== -->
 
-<div class="container">
-
-<!-- AUTH -->
 <div id="authArea">
 
-  <h1>MAGIKNUMBER</h1>
-
-  <div class="card">
-    <h2>LOGIN</h2>
-
-    <input id="loginEmail" type="email" placeholder="Email">
-    <input id="loginPassword" type="password" placeholder="Password">
-
-    <label>
-      <input type="checkbox" style="width:auto"
-             onclick="togglePassword('loginPassword')">
-      Show Password
-    </label>
-
-    <button class="loginBtn" onclick="loginUser()">LOGIN</button>
-    <button class="googleBtn" onclick="googleLogin()">
-      Continue with Google
-    </button>
-  </div>
-
-  <div class="card">
-    <h2>REGISTER</h2>
-
-    <input id="regName" placeholder="Name">
-
-    <select id="regCountry" onchange="updateMobileLimit()">
-      <option value="+91|10">India +91</option>
-      <option value="+1|10">USA +1</option>
-      <option value="+1|10">Canada +1</option>
-      <option value="+44|10">UK +44</option>
-      <option value="+61|9">Australia +61</option>
-      <option value="+64|9">New Zealand +64</option>
-      <option value="+971|9">UAE +971</option>
-      <option value="+966|9">Saudi Arabia +966</option>
-      <option value="+974|8">Qatar +974</option>
-      <option value="+965|8">Kuwait +965</option>
-      <option value="+968|8">Oman +968</option>
-      <option value="+973|8">Bahrain +973</option>
-      <option value="+65|8">Singapore +65</option>
-      <option value="+60|9">Malaysia +60</option>
-      <option value="+94|9">Sri Lanka +94</option>
-      <option value="+880|10">Bangladesh +880</option>
-      <option value="+92|10">Pakistan +92</option>
-      <option value="+977|10">Nepal +977</option>
-      <option value="+81|10">Japan +81</option>
-      <option value="+49|11">Germany +49</option>
-      <option value="+33|9">France +33</option>
-      <option value="+39|10">Italy +39</option>
-      <option value="+34|9">Spain +34</option>
-      <option value="+7|10">Russia +7</option>
-      <option value="+55|11">Brazil +55</option>
-      <option value="+27|9">South Africa +27</option>
-    </select>
-
-    <input id="regMobile"
-           type="tel"
-           placeholder="Mobile Number"
-           oninput="limitMobile()">
-
-    <input id="regEmail" type="email" placeholder="Email">
-    <input id="regPassword" type="password" placeholder="Password">
-
-    <label>
-      <input type="checkbox" style="width:auto"
-             onclick="togglePassword('regPassword')">
-      Show Password
-    </label>
-
-    <button class="registerBtn" onclick="registerUser()">
-      REGISTER
-    </button>
-
-    <p class="smallText">
-      Rules: Use unique numbers. Enter your answer before the timer ends.
-    </p>
-  </div>
-
-</div>
-
-
-<!-- LOGGED IN -->
-<div id="loggedIn" class="hidden">
-
-  <!-- MENU -->
-  <div id="gameMenu">
+  <div class="container">
 
     <h1>MAGIKNUMBER</h1>
 
+    <!-- LOGIN -->
+
     <div class="card">
-      <button class="menuBtn" onclick="openScoreboard()">
-        SCOREBOARD
+
+      <h2>LOGIN</h2>
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+      >
+
+      <label class="showPassword">
+        <input
+          type="checkbox"
+          onclick="togglePassword('loginPassword')"
+        >
+        Show Password
+      </label>
+
+      <button
+        class="btn loginBtn"
+        onclick="loginUser()"
+      >
+        LOGIN
       </button>
 
-      <button class="menuBtn" onclick="startGame('DIAMOND')">
-        💎 DIAMOND – 5 MINUTES
+      <button
+        class="btn googleBtn"
+        onclick="googleLogin()"
+      >
+        Continue with Google
       </button>
 
-      <button class="menuBtn" onclick="startGame('GOLD')">
-        🥇 GOLD – 1 MINUTE
+    </div>
+
+
+    <!-- REGISTER -->
+
+    <div class="card">
+
+      <h2>REGISTER</h2>
+
+      <input
+        type="text"
+        id="registerName"
+        placeholder="Name"
+      >
+
+      <div class="mobileRow">
+
+        <select id="registerCountry"></select>
+
+        <input
+          type="tel"
+          id="registerMobile"
+          placeholder="Mobile Number"
+          inputmode="numeric"
+        >
+
+      </div>
+
+      <input
+        type="email"
+        id="registerEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="registerPassword"
+        placeholder="Password"
+      >
+
+      <label class="showPassword">
+        <input
+          type="checkbox"
+          onclick="togglePassword('registerPassword')"
+        >
+        Show Password
+      </label>
+
+      <button
+        class="btn registerBtn"
+        onclick="registerUser()"
+      >
+        REGISTER
       </button>
 
-      <button class="menuBtn" onclick="startGame('SILVER')">
-        🥈 SILVER – 1 MINUTE
-      </button>
+    </div>
 
-      <button class="logoutBtn" onclick="logoutUser()">
-        LOGOUT
-      </button>
+
+    <!-- RULES -->
+
+    <div class="rules">
+
+      <h3>RULES</h3>
+
+      <ol>
+        <li>Select a game.</li>
+        <li>Timer starts automatically.</li>
+        <li>Enter numbers in the boxes.</li>
+        <li>Same number cannot be repeated.</li>
+        <li>ANSWER is available after the timer ends.</li>
+        <li>Correct conditions earn points.</li>
+        <li>Blank or wrong conditions receive zero points.</li>
+      </ol>
+
     </div>
 
   </div>
 
+</div>
 
-  <!-- SCOREBOARD -->
-  <div id="scoreboard" class="hidden">
 
-    <div class="card">
-      <h2>SCOREBOARD</h2>
+<!-- =====================================================
+     USER ID BAR
+===================================================== -->
 
-      <p><b>MAGIKNUMBER ID:</b>
-        <span id="profileId"></span>
-      </p>
+<div
+  id="userIdBar"
+  class="hidden"
+>
 
-      <p><b>Date of Joining:</b>
-        <span id="profileDate"></span>
-      </p>
+  <button
+    id="logoButton"
+    class="logoButton"
+    onclick="openLogoPopup()"
+  >
+    ⚡
+  </button>
 
-      <p><b>Name:</b>
-        <span id="profileName"></span>
-      </p>
+  <div
+    id="userIdText"
+    class="userIdText"
+  >
+    ID:
+  </div>
 
-      <p><b>Email:</b>
-        <span id="profileEmail"></span>
-      </p>
+</div>
 
-      <button onclick="openEmailUpdate()">
+
+<!-- =====================================================
+     LOGGED IN MENU
+===================================================== -->
+
+<div
+  id="loggedIn"
+  class="hidden"
+>
+
+  <div class="menu">
+
+    <div class="menuTitle">
+      MAGIKNUMBER
+    </div>
+
+    <button
+      class="scoreBtn"
+      onclick="showProfile()"
+    >
+      SCOREBOARD
+    </button>
+
+    <button
+      class="diamondBtn"
+      onclick="startGame('DIAMOND')"
+    >
+      DIAMOND – 5 MINUTES
+    </button>
+
+    <button
+      class="goldBtn"
+      onclick="startGame('GOLD')"
+    >
+      GOLD – 1 MINUTE
+    </button>
+
+    <button
+      class="silverBtn"
+      onclick="startGame('SILVER')"
+    >
+      SILVER – 1 MINUTE
+    </button>
+
+    <button
+      class="logoutBtn"
+      onclick="logoutUser()"
+    >
+      LOGOUT
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     SCOREBOARD
+===================================================== -->
+
+<div
+  id="profile"
+  class="page hidden"
+>
+
+  <div class="pageTitle">
+    SCOREBOARD
+  </div>
+
+  <div class="profileCard">
+
+    <div class="profileRow">
+      <div class="profileLabel">MAGIKNUMBER ID</div>
+      <div
+        class="profileValue"
+        id="profileMagikId"
+      >
+        -
+      </div>
+    </div>
+
+    <div class="profileRow">
+      <div class="profileLabel">Date of Joining</div>
+      <div
+        class="profileValue"
+        id="profileJoiningDate"
+      >
+        -
+      </div>
+    </div>
+
+    <div class="profileRow">
+      <div class="profileLabel">Name</div>
+      <div
+        class="profileValue"
+        id="profileName"
+      >
+        -
+      </div>
+    </div>
+
+    <div class="profileRow">
+      <div class="profileLabel">Email</div>
+      <div
+        class="profileValue"
+        id="profileEmail"
+      >
+        -
+      </div>
+
+      <button
+        class="smallAction emailUpdate"
+        onclick="openEmailPopup()"
+      >
         UPDATE EMAIL
       </button>
+    </div>
 
-      <p><b>Mobile Number:</b>
-        <span id="profileMobile"></span>
-      </p>
+    <div class="profileRow">
 
-      <button onclick="openMobileUpdate()">
+      <div class="profileLabel">
+        Mobile Number
+      </div>
+
+      <div
+        class="profileValue"
+        id="profileMobile"
+      >
+        -
+      </div>
+
+      <button
+        class="smallAction mobileUpdate"
+        onclick="openMobilePopup()"
+      >
         UPDATE MOBILE
       </button>
 
-      <p><b>Total Games Played:</b>
-        <span id="profileGames">0</span>
-      </p>
+    </div>
 
-      <p><b>Earned Points:</b>
-        <span id="profilePoints">0</span>
-      </p>
+    <div class="profileRow">
 
-      <button onclick="redeemPoints()">
+      <div class="profileLabel">
+        Total Games Played
+      </div>
+
+      <div
+        class="profileValue"
+        id="profileGames"
+      >
+        0
+      </div>
+
+    </div>
+
+    <div class="profileRow">
+
+      <div class="profileLabel">
+        Earned Points
+      </div>
+
+      <div
+        class="profileValue"
+        id="profilePoints"
+      >
+        0
+      </div>
+
+    </div>
+
+    <div class="profileRow">
+
+      <button
+        class="smallAction redeemBtn"
+        onclick="redeemPoints()"
+      >
         REDEEM POINTS
       </button>
 
-      <button onclick="redemptionHistory()">
+    </div>
+
+    <div class="profileRow">
+
+      <button
+        class="smallAction historyBtn"
+        onclick="showHistory()"
+      >
         REDEMPTION HISTORY
       </button>
 
-      <button onclick="closeAccount()" style="background:#8b0000;color:white">
+    </div>
+
+    <div class="profileRow">
+
+      <button
+        class="smallAction closeAccountBtn"
+        onclick="requestCloseAccount()"
+      >
         CLOSE ACCOUNT
       </button>
 
-      <button class="backBtn" onclick="backToMenu()">
-        BACK
-      </button>
     </div>
 
-  </div>
-
-
-  <!-- GAME -->
-  <div id="gamePage" class="hidden">
-
-    <div class="card">
-
-      <div id="gameTitle" class="gameTitle">
-        GAME
-      </div>
-
-      <div class="gameInfo">
-
-        <div id="hintText" class="hint">
-          Hint: Row total is 45
-        </div>
-
-        <div id="allBoxesTotal" class="allTotal">
-          All Boxes Total: 150
-        </div>
-
-        <div id="timerText" class="timer">
-          1:00
-        </div>
-
-        <div id="enteredTotal" class="enteredTotal">
-          Your Entered Total: 0
-        </div>
-
-      </div>
-
-      <div id="gameBoard" class="gameBoard"></div>
-
-      <button class="answerBtn" onclick="submitAnswer()">
-        ANSWER
-      </button>
-
-      <button class="backBtn" onclick="gameBack()">
-        BACK
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- RESULT -->
-  <div id="resultPage" class="hidden">
-
-    <div class="card">
-
-      <h2 style="text-align:center">
-        RESULT
-      </h2>
-
-      <div class="resultTitle">
-        YOUR ANSWER
-      </div>
-
-      <div id="yourResultBoard" class="resultBoard"></div>
-
-      <p>
-        <b>Your Entered Total:</b>
-        <span id="resultUserTotal">0</span>
-      </p>
-
-      <div class="resultTitle">
-        OUR ANSWER
-      </div>
-
-      <div id="ourResultBoard" class="resultBoard"></div>
-
-      <p><b>Points Earned:</b>
-        <span id="earnedResultPoints">0</span>
-      </p>
-
-      <p id="resultMessage"
-         style="text-align:center;font-weight:bold">
-      </p>
-
-      <button class="backBtn" onclick="resultBack()">
-        BACK TO MENU
-      </button>
-
-    </div>
+    <button
+      class="gameButton backBtn"
+      onclick="profileBack()"
+    >
+      BACK
+    </button>
 
   </div>
 
 </div>
 
+
+<!-- =====================================================
+     GAME PAGE
+===================================================== -->
+
+<div
+  id="gamePage"
+  class="gamePage hidden"
+>
+
+  <div
+    id="gameTitle"
+    class="gameTitle"
+  >
+    SILVER
+  </div>
+
+  <div
+    id="gameHint"
+    class="gameHint"
+  >
+    Hint: Row total is 45 | All Boxes Total: 150
+  </div>
+
+  <div
+    id="columnTotals"
+    class="columnTotals"
+  >
+    Column Total: 0 | 0 | 0
+  </div>
+
+  <div
+    id="timerText"
+    class="timer"
+  >
+    1:00
+  </div>
+
+  <div
+    id="gameBoard"
+    class="gameBoard"
+  ></div>
+
+  <div
+    id="enteredTotal"
+    class="enteredTotal"
+  >
+    Your Entered Total: 0
+  </div>
+
+  <button
+    class="gameButton answerBtn"
+    onclick="submitGame()"
+  >
+    ANSWER
+  </button>
+
+  <button
+    class="gameButton gameBackBtn"
+    onclick="gameBack()"
+  >
+    BACK
+  </button>
+
 </div>
 
 
-<!-- POPUP -->
-<div id="popup" class="popup hidden">
+<!-- =====================================================
+     RESULT PAGE
+===================================================== -->
 
-  <div class="popupBox">
+<div
+  id="resultPage"
+  class="page hidden"
+>
 
-    <div id="popupMessage"></div>
+  <div class="pageTitle">
+    RESULT
+  </div>
 
-    <div id="popupButtons"></div>
+  <div class="resultCard">
+
+    <div class="resultTitle">
+      YOUR ANSWER
+    </div>
+
+    <div
+      id="yourResultGrid"
+      class="resultGrid"
+    ></div>
+
+    <div
+      id="yourResultInfo"
+      class="resultInfo"
+    ></div>
 
   </div>
 
+
+  <div class="resultCard">
+
+    <div class="resultTitle">
+      OUR ANSWER
+    </div>
+
+    <div
+      id="ourResultGrid"
+      class="resultGrid"
+    ></div>
+
+  </div>
+
+
+  <div class="resultCard">
+
+    <div class="resultTitle">
+      POINTS
+    </div>
+
+    <div
+      id="pointsBreakdown"
+      class="pointsBox"
+    ></div>
+
+    <div
+      id="earnedPoints"
+      class="earned"
+    >
+      Earned Points: 0
+    </div>
+
+    <div
+      id="resultMessage"
+      class="resultMessage"
+    ></div>
+
+  </div>
+
+
+  <button
+    class="gameButton backBtn"
+    onclick="resultBack()"
+  >
+    BACK TO MENU
+  </button>
+
 </div>
+
+
+<!-- =====================================================
+     POPUP CONTAINER
+===================================================== -->
+
+<div
+  id="popupContainer"
+  class="hidden"
+></div>
 
 
 <script type="module">
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 import {
   initializeApp
@@ -546,1172 +1121,2816 @@ import {
   getDoc,
   setDoc,
   updateDoc,
-  runTransaction
+  runTransaction,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
-  authDomain: "magiknumbers-d42c0.firebaseapp.com",
-  projectId: "magiknumbers-d42c0",
-  storageBucket: "magiknumbers-d42c0.firebasestorage.app",
-  messagingSenderId: "977553928698",
-  appId: "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
+  apiKey:
+    "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+
+  authDomain:
+    "magiknumbers-d42c0.firebaseapp.com",
+
+  projectId:
+    "magiknumbers-d42c0",
+
+  storageBucket:
+    "magiknumbers-d42c0.firebasestorage.app",
+
+  messagingSenderId:
+    "977553928698",
+
+  appId:
+    "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
 };
 
+
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
+
 const db = getFirestore(app);
 
+const googleProvider =
+  new GoogleAuthProvider();
 
-/* =========================
-   ONLY ONE GAME CONFIG
-========================= */
+
+/* =====================================================
+   GAME CONFIG
+===================================================== */
 
 const GAME_CONFIG = {
 
   SILVER:{
+
     name:"SILVER",
+
     rows:3,
+
     cols:3,
+
     duration:60,
+
     rowTarget:45,
+
     totalTarget:150,
+
     answer:[
+
       [6,1,8],
+
       [7,5,3],
+
       [2,9,4]
-    ]
+
+    ],
+
+    points:{
+
+      row:0,
+
+      column:0,
+
+      diagonal1:0,
+
+      diagonal2:0,
+
+      table:25
+
+    }
+
   },
+
 
   GOLD:{
+
     name:"GOLD",
+
     rows:3,
+
     cols:3,
+
     duration:60,
+
     rowTarget:15,
+
     totalTarget:45,
+
     answer:[
+
       [8,1,6],
+
       [3,5,7],
+
       [4,9,2]
-    ]
+
+    ],
+
+    points:{
+
+      row:5,
+
+      column:5,
+
+      diagonal1:5,
+
+      diagonal2:5,
+
+      table:25
+
+    }
+
   },
 
+
   DIAMOND:{
+
     name:"DIAMOND",
+
     rows:5,
+
     cols:5,
+
     duration:300,
+
     rowTarget:60,
+
     totalTarget:300,
+
     answer:[
+
       [16,23,0,7,14],
+
       [22,4,6,13,15],
+
       [3,5,12,19,21],
+
       [9,11,18,20,2],
+
       [10,17,24,1,8]
-    ]
+
+    ],
+
+    points:{
+
+      row:10,
+
+      column:10,
+
+      diagonal1:10,
+
+      diagonal2:10,
+
+      table:50
+
+    }
+
   }
 
 };
 
 
-let currentGame=null;
-let timerInterval=null;
-let remainingSeconds=0;
-let gameEnded=false;
-let currentUserData=null;
-let userInputs=[];
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let currentUser = null;
+
+let currentProfile = null;
+
+let currentGame = null;
+
+let currentGameName = "";
+
+let timerInterval = null;
+
+let timeLeft = 0;
+
+let gameEnded = false;
+
+let currentUserAnswer = [];
 
 
-/* =========================
-   POPUP
-========================= */
+/* =====================================================
+   COUNTRY LIST
+===================================================== */
 
-function showPopup(message,buttons="OK"){
+const countries = [
 
-  document.getElementById("popupMessage").innerHTML =
-    "<h3>"+message+"</h3>";
+  ["India","+91",10],
 
-  let html="";
+  ["USA","+1",10],
 
-  if(buttons==="OK"){
-    html=`<button onclick="closePopup()">OK</button>`;
-  }
+  ["Canada","+1",10],
 
-  document.getElementById("popupButtons").innerHTML=html;
+  ["UK","+44",10],
 
-  document.getElementById("popup").classList.remove("hidden");
+  ["Australia","+61",9],
+
+  ["New Zealand","+64",9],
+
+  ["UAE","+971",9],
+
+  ["Saudi Arabia","+966",9],
+
+  ["Qatar","+974",8],
+
+  ["Kuwait","+965",8],
+
+  ["Oman","+968",8],
+
+  ["Bahrain","+973",8],
+
+  ["Singapore","+65",8],
+
+  ["Malaysia","+60",9],
+
+  ["Sri Lanka","+94",9],
+
+  ["Bangladesh","+880",10],
+
+  ["Pakistan","+92",10],
+
+  ["Nepal","+977",10],
+
+  ["Japan","+81",10],
+
+  ["Germany","+49",11],
+
+  ["France","+33",9],
+
+  ["Italy","+39",10],
+
+  ["Spain","+34",9],
+
+  ["Russia","+7",10],
+
+  ["Brazil","+55",11],
+
+  ["South Africa","+27",9]
+
+];
+
+
+function loadCountries(){
+
+  const select =
+    document.getElementById("registerCountry");
+
+  select.innerHTML = "";
+
+  countries.forEach((country,index)=>{
+
+    const option =
+      document.createElement("option");
+
+    option.value = index;
+
+    option.textContent =
+      country[0] + " " + country[1];
+
+    select.appendChild(option);
+
+  });
+
+  updateMobileLimit();
+
 }
 
-function closePopup(){
-  document.getElementById("popup").classList.add("hidden");
+
+document
+  .getElementById("registerCountry")
+  .addEventListener(
+    "change",
+    updateMobileLimit
+  );
+
+
+function updateMobileLimit(){
+
+  const index =
+    Number(
+      document.getElementById(
+        "registerCountry"
+      ).value
+    );
+
+  const country =
+    countries[index];
+
+  const mobile =
+    document.getElementById(
+      "registerMobile"
+    );
+
+  mobile.maxLength = country[2];
+
+  mobile.placeholder =
+    "Mobile (" + country[2] + " digits)";
+
 }
 
-window.closePopup=closePopup;
+
+loadCountries();
 
 
-/* =========================
+/* =====================================================
    PASSWORD
-========================= */
+===================================================== */
 
-window.togglePassword=function(id){
+window.togglePassword =
+function(id){
 
-  const input=document.getElementById(id);
+  const input =
+    document.getElementById(id);
 
   input.type =
-    input.type==="password"
-    ? "text"
-    : "password";
-};
-
-
-/* =========================
-   COUNTRY MOBILE
-========================= */
-
-window.updateMobileLimit=function(){
-
-  const value=document.getElementById("regCountry").value;
-  const parts=value.split("|");
-
-  document.getElementById("regMobile").maxLength=
-    Number(parts[1]);
+    input.type === "password"
+      ? "text"
+      : "password";
 
 };
 
-window.limitMobile=function(){
 
-  const select=document.getElementById("regCountry");
-  const max=Number(select.value.split("|")[1]);
+/* =====================================================
+   POPUP
+===================================================== */
 
-  const input=document.getElementById("regMobile");
+window.showPopup =
+function(message){
 
-  input.value=
-    input.value.replace(/\D/g,"").slice(0,max);
+  const container =
+    document.getElementById(
+      "popupContainer"
+    );
+
+  container.className =
+    "popupOverlay";
+
+  container.innerHTML = `
+
+    <div class="popup">
+
+      <p>${message}</p>
+
+      <div class="popupButtons">
+
+        <button
+          class="confirmBtn"
+          id="simplePopupOk"
+        >
+          OK
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document
+    .getElementById("simplePopupOk")
+    .onclick = closePopup;
+
 };
 
 
-/* =========================
-   GENERATE ID
-========================= */
+function closePopup(){
 
-async function generateMagikNumberId(){
+  const container =
+    document.getElementById(
+      "popupContainer"
+    );
 
-  const counterRef=doc(db,"system","counter");
+  container.className = "hidden";
 
-  return await runTransaction(
-    db,
-    async(transaction)=>{
+  container.innerHTML = "";
 
-      const snapshot=
-        await transaction.get(counterRef);
-
-      let nextNumber=100001;
-
-      if(snapshot.exists()){
-        nextNumber=
-          Number(snapshot.data().nextNumber||100001);
-      }
-
-      transaction.set(
-        counterRef,
-        {nextNumber:nextNumber+1},
-        {merge:true}
-      );
-
-      return "MN"+nextNumber;
-    }
-  );
 }
 
 
-/* =========================
+/* =====================================================
    REGISTER
-========================= */
+===================================================== */
 
-window.registerUser=async function(){
+window.registerUser =
+async function(){
 
-  const name=
-    document.getElementById("regName").value.trim();
+  const name =
+    document
+      .getElementById("registerName")
+      .value
+      .trim();
 
-  const country=
-    document.getElementById("regCountry").value;
+  const countryIndex =
+    Number(
+      document
+        .getElementById("registerCountry")
+        .value
+    );
 
-  const mobile=
-    document.getElementById("regMobile").value.trim();
+  const mobile =
+    document
+      .getElementById("registerMobile")
+      .value
+      .trim();
 
-  const email=
-    document.getElementById("regEmail").value.trim();
+  const email =
+    document
+      .getElementById("registerEmail")
+      .value
+      .trim();
 
-  const password=
-    document.getElementById("regPassword").value;
+  const password =
+    document
+      .getElementById("registerPassword")
+      .value;
 
-  if(!name||!mobile||!email||!password){
 
-    showPopup("Please fill all details.");
+  if(!name){
+
+    showPopup("Please enter your name.");
+
     return;
+
   }
+
+
+  const country =
+    countries[countryIndex];
+
+
+  if(mobile.length !== country[2]){
+
+    showPopup(
+      "Please enter a valid mobile number."
+    );
+
+    return;
+
+  }
+
+
+  if(!email){
+
+    showPopup("Please enter your email.");
+
+    return;
+
+  }
+
+
+  if(password.length < 6){
+
+    showPopup(
+      "Password must contain at least 6 characters."
+    );
+
+    return;
+
+  }
+
 
   try{
 
-    const credential=
+    const credential =
       await createUserWithEmailAndPassword(
-        auth,email,password
+        auth,
+        email,
+        password
       );
 
-    const id=
+
+    const user =
+      credential.user;
+
+
+    const magikNumberId =
       await generateMagikNumberId();
 
-    const user=credential.user;
 
     await setDoc(
       doc(db,"users",user.uid),
       {
-        magikNumberId:id,
-        name:name,
-        email:email,
-        mobile:country.split("|")[0]+" "+mobile,
-        points:0,
-        gamesPlayed:0,
+
+        magikNumberId,
+
+        name,
+
+        email,
+
+        mobile,
+
+        country:country[0],
+
+        countryCode:country[1],
+
         logo:"⚡",
-        joinedAt:new Date().toISOString()
+
+        points:0,
+
+        gamesPlayed:0,
+
+        joiningDate:
+          new Date().toISOString(),
+
+        createdAt:
+          serverTimestamp()
+
       }
     );
 
-    showPopup("Registration successful.");
+
+    showPopup(
+      "Registration success. Your MAGIKNUMBER ID is "
+      + magikNumberId
+    );
+
 
   }catch(error){
 
-    showPopup(error.message);
+    showPopup(
+      error.message
+    );
+
   }
+
 };
 
 
-/* =========================
+/* =====================================================
+   MAGIK NUMBER ID
+===================================================== */
+
+async function generateMagikNumberId(){
+
+  const counterRef =
+    doc(db,"system","counter");
+
+
+  const newId =
+    await runTransaction(
+      db,
+      async(transaction)=>{
+
+        const snapshot =
+          await transaction.get(
+            counterRef
+          );
+
+
+        let nextNumber = 100001;
+
+
+        if(snapshot.exists()){
+
+          const data =
+            snapshot.data();
+
+          nextNumber =
+            Number(
+              data.nextNumber ||
+              100001
+            );
+
+        }
+
+
+        transaction.set(
+          counterRef,
+          {
+            nextNumber:
+              nextNumber + 1
+          },
+          {
+            merge:true
+          }
+        );
+
+
+        return "MN" + nextNumber;
+
+      }
+    );
+
+
+  return newId;
+
+}
+
+
+/* =====================================================
    LOGIN
-========================= */
+===================================================== */
 
-window.loginUser=async function(){
+window.loginUser =
+async function(){
 
-  const email=
-    document.getElementById("loginEmail").value.trim();
+  const email =
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim();
 
-  const password=
-    document.getElementById("loginPassword").value;
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
+
+
+  if(!email || !password){
+
+    showPopup(
+      "Please enter email and password."
+    );
+
+    return;
+
+  }
+
 
   try{
 
     await signInWithEmailAndPassword(
-      auth,email,password
+      auth,
+      email,
+      password
     );
+
 
   }catch(error){
 
-    showPopup(error.message);
+    showPopup(
+      error.message
+    );
+
   }
+
 };
 
 
-/* =========================
-   GOOGLE
-========================= */
+/* =====================================================
+   GOOGLE LOGIN
+===================================================== */
 
-window.googleLogin=async function(){
+window.googleLogin =
+async function(){
 
   try{
 
-    const provider=new GoogleAuthProvider();
+    const result =
+      await signInWithPopup(
+        auth,
+        googleProvider
+      );
 
-    await signInWithPopup(auth,provider);
+
+    const user =
+      result.user;
+
+
+    const userRef =
+      doc(db,"users",user.uid);
+
+
+    const snapshot =
+      await getDoc(userRef);
+
+
+    if(!snapshot.exists()){
+
+      const magikNumberId =
+        await generateMagikNumberId();
+
+
+      await setDoc(
+        userRef,
+        {
+
+          magikNumberId,
+
+          name:
+            user.displayName || "",
+
+          email:
+            user.email || "",
+
+          mobile:"",
+
+          country:"",
+
+          countryCode:"",
+
+          logo:"⚡",
+
+          points:0,
+
+          gamesPlayed:0,
+
+          joiningDate:
+            new Date().toISOString(),
+
+          createdAt:
+            serverTimestamp()
+
+        }
+      );
+
+    }
+
 
   }catch(error){
 
-    showPopup(error.message);
+    showPopup(
+      error.message
+    );
+
   }
+
 };
 
 
-/* =========================
+/* =====================================================
    AUTH STATE
-========================= */
+===================================================== */
 
-onAuthStateChanged(auth,async(user)=>{
+onAuthStateChanged(
+  auth,
+  async(user)=>{
 
-  if(user){
+    if(user){
 
-    document.getElementById("authArea")
-      .classList.add("hidden");
+      currentUser = user;
 
-    document.getElementById("loggedIn")
-      .classList.remove("hidden");
+      await createUserProfile(user);
 
-    document.getElementById("userIdBar")
-      .classList.remove("hidden");
+      document
+        .getElementById("authArea")
+        .classList
+        .add("hidden");
 
-    await loadUserProfile(user);
+      document
+        .getElementById("loggedIn")
+        .classList
+        .remove("hidden");
 
-  }else{
+      document
+        .getElementById("userIdBar")
+        .classList
+        .remove("hidden");
 
-    document.getElementById("authArea")
-      .classList.remove("hidden");
+      hideAllPages();
 
-    document.getElementById("loggedIn")
-      .classList.add("hidden");
+      document
+        .getElementById("loggedIn")
+        .classList
+        .remove("hidden");
 
-    document.getElementById("userIdBar")
-      .classList.add("hidden");
+    }else{
+
+      currentUser = null;
+
+      currentProfile = null;
+
+      stopTimer();
+
+      document
+        .getElementById("authArea")
+        .classList
+        .remove("hidden");
+
+      document
+        .getElementById("loggedIn")
+        .classList
+        .add("hidden");
+
+      document
+        .getElementById("userIdBar")
+        .classList
+        .add("hidden");
+
+      hideAllPages();
+
+      document
+        .getElementById("authArea")
+        .classList
+        .remove("hidden");
+
+    }
+
   }
+);
 
-});
+
+/* =====================================================
+   USER PROFILE
+===================================================== */
+
+async function createUserProfile(user){
+
+  const userRef =
+    doc(db,"users",user.uid);
 
 
-/* =========================
-   LOAD PROFILE
-========================= */
+  const snapshot =
+    await getDoc(userRef);
 
-async function loadUserProfile(user){
 
-  const ref=doc(db,"users",user.uid);
+  if(!snapshot.exists()){
 
-  const snap=await getDoc(ref);
+    const magikNumberId =
+      await generateMagikNumberId();
 
-  if(!snap.exists()){
 
-    const id=await generateMagikNumberId();
+    currentProfile = {
 
-    await setDoc(ref,{
-      magikNumberId:id,
-      name:user.displayName||"",
-      email:user.email||"",
+      magikNumberId,
+
+      name:
+        user.displayName || "",
+
+      email:
+        user.email || "",
+
       mobile:"",
-      points:0,
-      gamesPlayed:0,
-      logo:"⚡",
-      joinedAt:new Date().toISOString()
-    });
 
-    currentUserData={
-      magikNumberId:id,
-      name:user.displayName||"",
-      email:user.email||"",
-      mobile:"",
-      points:0,
-      gamesPlayed:0,
+      country:"",
+
+      countryCode:"",
+
       logo:"⚡",
-      joinedAt:new Date().toISOString()
+
+      points:0,
+
+      gamesPlayed:0,
+
+      joiningDate:
+        new Date().toISOString()
+
     };
 
+
+    await setDoc(
+      userRef,
+      currentProfile
+    );
+
+
   }else{
 
-    currentUserData=snap.data();
+    currentProfile =
+      snapshot.data();
+
   }
 
-  document.getElementById("displayUserId").innerText=
-    currentUserData.magikNumberId;
 
-  document.getElementById("userLogo").innerText=
-    currentUserData.logo||"⚡";
+  document
+    .getElementById("userIdText")
+    .innerText =
+      "ID: " +
+      (currentProfile.magikNumberId || "-");
+
+
+  document
+    .getElementById("logoButton")
+    .innerText =
+      currentProfile.logo || "⚡";
+
+
+  /*
+    If user had requested account closure
+    and logs in again before deletion,
+    cancel the close request.
+  */
+
+  if(currentProfile.closeRequestedAt){
+
+    try{
+
+      await updateDoc(
+        userRef,
+        {
+          closeRequestedAt:null
+        }
+      );
+
+      currentProfile.closeRequestedAt =
+        null;
+
+    }catch(error){
+
+      console.log(error);
+
+    }
+
+  }
+
 }
 
 
-/* =========================
+/* =====================================================
    LOGOUT
-========================= */
+===================================================== */
 
-window.logoutUser=async function(){
+window.logoutUser =
+async function(){
+
+  stopTimer();
 
   await signOut(auth);
+
 };
 
 
-/* =========================
-   LOGO POPUP
-========================= */
+/* =====================================================
+   HIDE ALL PAGES
+===================================================== */
 
-window.openLogoPopup=function(){
+function hideAllPages(){
 
-  const logos=[
-    "⚡","🎯","🚀","🔥",
-    "👑","💎","🌀","🌟"
+  document
+    .getElementById("loggedIn")
+    .classList
+    .add("hidden");
+
+  document
+    .getElementById("profile")
+    .classList
+    .add("hidden");
+
+  document
+    .getElementById("gamePage")
+    .classList
+    .add("hidden");
+
+  document
+    .getElementById("resultPage")
+    .classList
+    .add("hidden");
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+window.showProfile =
+async function(){
+
+  if(!currentUser) return;
+
+
+  const snapshot =
+    await getDoc(
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      )
+    );
+
+
+  if(snapshot.exists()){
+
+    currentProfile =
+      snapshot.data();
+
+  }
+
+
+  document
+    .getElementById("profileMagikId")
+    .innerText =
+      currentProfile.magikNumberId || "-";
+
+
+  document
+    .getElementById("profileJoiningDate")
+    .innerText =
+      formatDate(
+        currentProfile.joiningDate
+      );
+
+
+  document
+    .getElementById("profileName")
+    .innerText =
+      currentProfile.name || "-";
+
+
+  document
+    .getElementById("profileEmail")
+    .innerText =
+      currentProfile.email ||
+      currentUser.email ||
+      "-";
+
+
+  let mobileText = "-";
+
+
+  if(currentProfile.mobile){
+
+    mobileText =
+      (currentProfile.countryCode || "") +
+      " " +
+      currentProfile.mobile;
+
+  }
+
+
+  document
+    .getElementById("profileMobile")
+    .innerText =
+      mobileText;
+
+
+  document
+    .getElementById("profileGames")
+    .innerText =
+      currentProfile.gamesPlayed || 0;
+
+
+  document
+    .getElementById("profilePoints")
+    .innerText =
+      currentProfile.points || 0;
+
+
+  hideAllPages();
+
+  document
+    .getElementById("profile")
+    .classList
+    .remove("hidden");
+
+};
+
+
+function formatDate(value){
+
+  if(!value) return "-";
+
+  try{
+
+    const date =
+      new Date(value);
+
+    return date.toLocaleDateString();
+
+  }catch{
+
+    return "-";
+
+  }
+
+}
+
+
+window.profileBack =
+function(){
+
+  hideAllPages();
+
+  document
+    .getElementById("loggedIn")
+    .classList
+    .remove("hidden");
+
+};
+
+
+/* =====================================================
+   EMAIL UPDATE
+===================================================== */
+
+window.openEmailPopup =
+function(){
+
+  const container =
+    document.getElementById(
+      "popupContainer"
+    );
+
+
+  container.className =
+    "popupOverlay";
+
+
+  container.innerHTML = `
+
+    <div class="popup">
+
+      <h3>UPDATE EMAIL</h3>
+
+      <input
+        type="email"
+        id="newEmail"
+        placeholder="New Email"
+      >
+
+      <div class="popupButtons">
+
+        <button
+          class="confirmBtn"
+          id="confirmEmail"
+        >
+          CONFIRM
+        </button>
+
+        <button
+          class="cancelBtn"
+          id="cancelEmail"
+        >
+          CANCEL
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById("cancelEmail")
+    .onclick = closePopup;
+
+
+  document
+    .getElementById("confirmEmail")
+    .onclick =
+      async()=>{
+
+        const newEmail =
+          document
+            .getElementById("newEmail")
+            .value
+            .trim();
+
+
+        if(!newEmail){
+
+          showPopup(
+            "Please enter a new email."
+          );
+
+          return;
+
+        }
+
+
+        try{
+
+          await updateEmail(
+            currentUser,
+            newEmail
+          );
+
+
+          await updateDoc(
+            doc(
+              db,
+              "users",
+              currentUser.uid
+            ),
+            {
+              email:newEmail
+            }
+          );
+
+
+          closePopup();
+
+          showPopup(
+            "Email updated successfully."
+          );
+
+
+          await showProfile();
+
+
+        }catch(error){
+
+          showPopup(
+            error.message
+          );
+
+        }
+
+      };
+
+};
+
+
+/* =====================================================
+   MOBILE UPDATE
+===================================================== */
+
+window.openMobilePopup =
+function(){
+
+  const container =
+    document.getElementById(
+      "popupContainer"
+    );
+
+
+  let options = "";
+
+  countries.forEach(
+    (country,index)=>{
+
+      options += `
+
+        <option value="${index}">
+
+          ${country[0]} ${country[1]}
+
+        </option>
+
+      `;
+
+    }
+  );
+
+
+  container.className =
+    "popupOverlay";
+
+
+  container.innerHTML = `
+
+    <div class="popup">
+
+      <h3>UPDATE MOBILE</h3>
+
+      <select id="updateCountry">
+
+        ${options}
+
+      </select>
+
+      <input
+        type="tel"
+        id="updateMobile"
+        placeholder="Mobile Number"
+        inputmode="numeric"
+      >
+
+      <div class="popupButtons">
+
+        <button
+          class="confirmBtn"
+          id="confirmMobile"
+        >
+          CONFIRM
+        </button>
+
+        <button
+          class="cancelBtn"
+          id="cancelMobile"
+        >
+          CANCEL
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  const countrySelect =
+    document.getElementById(
+      "updateCountry"
+    );
+
+  const mobileInput =
+    document.getElementById(
+      "updateMobile"
+    );
+
+
+  function updateLimit(){
+
+    const country =
+      countries[
+        Number(countrySelect.value)
+      ];
+
+    mobileInput.maxLength =
+      country[2];
+
+    mobileInput.placeholder =
+      "Mobile (" +
+      country[2] +
+      " digits)";
+
+  }
+
+
+  countrySelect.onchange =
+    updateLimit;
+
+
+  updateLimit();
+
+
+  document
+    .getElementById("cancelMobile")
+    .onclick = closePopup;
+
+
+  document
+    .getElementById("confirmMobile")
+    .onclick =
+      async()=>{
+
+        const country =
+          countries[
+            Number(countrySelect.value)
+          ];
+
+
+        const mobile =
+          mobileInput.value.trim();
+
+
+        if(mobile.length !== country[2]){
+
+          showPopup(
+            "Please enter a valid mobile number."
+          );
+
+          return;
+
+        }
+
+
+        try{
+
+          await updateDoc(
+            doc(
+              db,
+              "users",
+              currentUser.uid
+            ),
+            {
+
+              mobile,
+
+              country:
+                country[0],
+
+              countryCode:
+                country[1]
+
+            }
+          );
+
+
+          closePopup();
+
+          showPopup(
+            "Mobile number updated successfully."
+          );
+
+
+          await showProfile();
+
+
+        }catch(error){
+
+          showPopup(
+            error.message
+          );
+
+        }
+
+      };
+
+};
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+window.openLogoPopup =
+function(){
+
+  const logos = [
+
+    "⚡",
+    "🎯",
+    "🚀",
+    "🔥",
+    "👑",
+    "💎",
+    "🌀",
+    "🌟"
+
   ];
 
-  let html=`
-    <h3>Choose Logo</h3>
-    <div class="logoChoices">
-  `;
+
+  const container =
+    document.getElementById(
+      "popupContainer"
+    );
+
+
+  let html = "";
 
   logos.forEach(logo=>{
 
-    html+=`
-      <div class="logoChoice"
-           onclick="selectLogo('${logo}')">
+    html += `
+
+      <button
+        class="logoChoice"
+        data-logo="${logo}"
+      >
         ${logo}
-      </div>
+      </button>
+
     `;
 
   });
 
-  html+=`</div>`;
 
-  document.getElementById("popupMessage").innerHTML=html;
-  document.getElementById("popupButtons").innerHTML="";
-
-  document.getElementById("popup")
-    .classList.remove("hidden");
-};
-
-window.selectLogo=async function(logo){
-
-  if(!auth.currentUser)return;
-
-  await updateDoc(
-    doc(db,"users",auth.currentUser.uid),
-    {logo:logo}
-  );
-
-  currentUserData.logo=logo;
-
-  document.getElementById("userLogo").innerText=logo;
-
-  closePopup();
-};
+  container.className =
+    "popupOverlay";
 
 
-/* =========================
-   SCOREBOARD
-========================= */
+  container.innerHTML = `
 
-window.openScoreboard=async function(){
+    <div class="popup">
 
-  document.getElementById("gameMenu")
-    .classList.add("hidden");
+      <h3>SELECT LOGO</h3>
 
-  document.getElementById("scoreboard")
-    .classList.remove("hidden");
+      <div class="logoChoices">
 
-  await loadScoreboard();
-};
+        ${html}
 
-async function loadScoreboard(){
+      </div>
 
-  if(!auth.currentUser)return;
+      <div class="popupButtons">
 
-  const snap=
-    await getDoc(
-      doc(db,"users",auth.currentUser.uid)
-    );
+        <button
+          class="cancelBtn"
+          id="closeLogo"
+        >
+          CANCEL
+        </button>
 
-  if(!snap.exists())return;
+      </div>
 
-  const d=snap.data();
+    </div>
 
-  currentUserData=d;
-
-  document.getElementById("profileId").innerText=
-    d.magikNumberId||"";
-
-  document.getElementById("profileDate").innerText=
-    d.joinedAt
-      ? new Date(d.joinedAt).toLocaleDateString()
-      : "";
-
-  document.getElementById("profileName").innerText=
-    d.name||"";
-
-  document.getElementById("profileEmail").innerText=
-    d.email||"";
-
-  document.getElementById("profileMobile").innerText=
-    d.mobile||"";
-
-  document.getElementById("profileGames").innerText=
-    d.gamesPlayed||0;
-
-  document.getElementById("profilePoints").innerText=
-    d.points||0;
-}
-
-
-/* =========================
-   EMAIL UPDATE
-========================= */
-
-window.openEmailUpdate=function(){
-
-  document.getElementById("popupMessage").innerHTML=`
-    <h3>Update Email</h3>
-    <input id="newEmail"
-           type="email"
-           placeholder="New Email">
   `;
 
-  document.getElementById("popupButtons").innerHTML=`
-    <button onclick="confirmEmailUpdate()">CONFIRM</button>
-    <button onclick="closePopup()">CANCEL</button>
-  `;
 
-  document.getElementById("popup")
-    .classList.remove("hidden");
-};
-
-window.confirmEmailUpdate=async function(){
-
-  const email=
-    document.getElementById("newEmail").value.trim();
-
-  if(!email){
-    showPopup("Enter new email.");
-    return;
-  }
-
-  try{
-
-    await updateEmail(auth.currentUser,email);
-
-    await updateDoc(
-      doc(db,"users",auth.currentUser.uid),
-      {email:email}
-    );
-
-    currentUserData.email=email;
-
-    closePopup();
-
-    loadScoreboard();
-
-  }catch(error){
-
-    showPopup(error.message);
-  }
-};
+  document
+    .getElementById("closeLogo")
+    .onclick = closePopup;
 
 
-/* =========================
-   MOBILE UPDATE
-========================= */
+  document
+    .querySelectorAll(".logoChoice")
+    .forEach(button=>{
 
-window.openMobileUpdate=function(){
+      button.onclick =
+        async()=>{
 
-  document.getElementById("popupMessage").innerHTML=`
-    <h3>Update Mobile</h3>
+          const logo =
+            button.dataset.logo;
 
-    <select id="updateCountry">
-      <option value="+91|10">India +91</option>
-      <option value="+1|10">USA +1</option>
-      <option value="+44|10">UK +44</option>
-      <option value="+61|9">Australia +61</option>
-      <option value="+971|9">UAE +971</option>
-    </select>
 
-    <input id="newMobile"
-           type="tel"
-           placeholder="Mobile Number">
-  `;
+          try{
 
-  document.getElementById("popupButtons").innerHTML=`
-    <button onclick="confirmMobileUpdate()">CONFIRM</button>
-    <button onclick="closePopup()">CANCEL</button>
-  `;
+            await updateDoc(
+              doc(
+                db,
+                "users",
+                currentUser.uid
+              ),
+              {
+                logo
+              }
+            );
 
-  document.getElementById("popup")
-    .classList.remove("hidden");
-};
 
-window.confirmMobileUpdate=async function(){
+            currentProfile.logo =
+              logo;
 
-  const country=
-    document.getElementById("updateCountry").value;
 
-  const mobile=
-    document.getElementById("newMobile").value
-      .replace(/\D/g,"");
+            document
+              .getElementById(
+                "logoButton"
+              )
+              .innerText =
+                logo;
 
-  const max=Number(country.split("|")[1]);
 
-  if(mobile.length!==max){
+            closePopup();
 
-    showPopup("Enter valid mobile number.");
-    return;
-  }
 
-  await updateDoc(
-    doc(db,"users",auth.currentUser.uid),
-    {
-      mobile:country.split("|")[0]+" "+mobile
-    }
-  );
+          }catch(error){
 
-  closePopup();
+            showPopup(
+              error.message
+            );
 
-  loadScoreboard();
+          }
+
+        };
+
+    });
+
 };
 
 
-/* =========================
+/* =====================================================
    REDEEM
-========================= */
+===================================================== */
 
-window.redeemPoints=function(){
+window.redeemPoints =
+function(){
 
   showPopup(
-    "Redeem options will be added later.<br><br>" +
-    "PhonePe • Paytm • Google Pay • Amazon • Flipkart"
+    "Redeem options such as PhonePe, Paytm, Google Pay, Amazon and Flipkart will be added later."
   );
-};
 
-window.redemptionHistory=function(){
-
-  showPopup("No redemption history available.");
 };
 
 
-/* =========================
+/* =====================================================
+   HISTORY
+===================================================== */
+
+window.showHistory =
+function(){
+
+  showPopup(
+    "Redemption history will appear here."
+  );
+
+};
+
+
+/* =====================================================
    CLOSE ACCOUNT
-========================= */
+===================================================== */
 
-window.closeAccount=function(){
+window.requestCloseAccount =
+function(){
 
-  document.getElementById("popupMessage").innerHTML=`
-    <h3>Do you really want to close account permanently?</h3>
+  const container =
+    document.getElementById(
+      "popupContainer"
+    );
+
+
+  container.className =
+    "popupOverlay";
+
+
+  container.innerHTML = `
+
+    <div class="popup">
+
+      <h3>Close Account</h3>
+
+      <p>
+        Do you really want to close account permanently?
+      </p>
+
+      <div class="popupButtons">
+
+        <button
+          class="yesBtn"
+          id="closeYes"
+        >
+          YES
+        </button>
+
+        <button
+          class="noBtn"
+          id="closeNo"
+        >
+          NO
+        </button>
+
+      </div>
+
+    </div>
+
   `;
 
-  document.getElementById("popupButtons").innerHTML=`
-    <button onclick="confirmCloseAccount()">YES</button>
-    <button onclick="closePopup()">NO</button>
-  `;
 
-  document.getElementById("popup")
-    .classList.remove("hidden");
+  document
+    .getElementById("closeNo")
+    .onclick = closePopup;
+
+
+  document
+    .getElementById("closeYes")
+    .onclick =
+      async()=>{
+
+        try{
+
+          await updateDoc(
+            doc(
+              db,
+              "users",
+              currentUser.uid
+            ),
+            {
+              closeRequestedAt:
+                new Date().toISOString()
+            }
+          );
+
+
+          container.innerHTML = `
+
+            <div class="popup">
+
+              <p>
+                If you will not relogin before
+                30 days from today, your account
+                will be deleted permanently.
+              </p>
+
+              <div class="popupButtons">
+
+                <button
+                  class="confirmBtn"
+                  id="closeInfo"
+                >
+                  OK
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+
+          document
+            .getElementById("closeInfo")
+            .onclick = closePopup;
+
+
+        }catch(error){
+
+          showPopup(
+            error.message
+          );
+
+        }
+
+      };
+
 };
 
-window.confirmCloseAccount=async function(){
 
-  await updateDoc(
-    doc(db,"users",auth.currentUser.uid),
-    {
-      closeRequestedAt:new Date().toISOString()
-    }
-  );
-
-  document.getElementById("popupMessage").innerHTML=`
-    <h3>
-      If you will not relogin before 30 days from today,
-      your account will be deleted permanently.
-    </h3>
-  `;
-
-  document.getElementById("popupButtons").innerHTML=`
-    <button onclick="closePopup()">OK</button>
-  `;
-};
-
-
-/* =========================
-   BACK MENU
-========================= */
-
-window.backToMenu=function(){
-
-  document.getElementById("scoreboard")
-    .classList.add("hidden");
-
-  document.getElementById("gameMenu")
-    .classList.remove("hidden");
-};
-
-
-/* =========================
+/* =====================================================
    START GAME
-========================= */
+===================================================== */
 
-window.startGame=function(gameName){
+window.startGame =
+function(gameName){
 
-  currentGame=GAME_CONFIG[gameName];
+  currentGameName =
+    gameName;
 
-  gameEnded=false;
+  currentGame =
+    GAME_CONFIG[gameName];
 
-  clearInterval(timerInterval);
 
-  document.getElementById("gameMenu")
-    .classList.add("hidden");
+  if(!currentGame){
 
-  document.getElementById("scoreboard")
-    .classList.add("hidden");
+    showPopup(
+      "Game configuration not found."
+    );
 
-  document.getElementById("resultPage")
-    .classList.add("hidden");
+    return;
 
-  document.getElementById("gamePage")
-    .classList.remove("hidden");
+  }
 
-  document.getElementById("gameTitle").innerText=
-    currentGame.name;
 
-  /*
-    Requested format:
-    Hint: Row total is 45
-    All Boxes Total: 150
-    Timer
-    Your Entered Total
-  */
+  gameEnded = false;
 
-  document.getElementById("hintText").innerText=
-    "Hint: Row total is "+currentGame.rowTarget;
+  timeLeft =
+    currentGame.duration;
 
-  document.getElementById("allBoxesTotal").innerText=
-    "All Boxes Total: "+currentGame.totalTarget;
 
-  remainingSeconds=currentGame.duration;
+  document
+    .getElementById("gameTitle")
+    .innerText =
+      currentGame.name;
 
-  updateTimer();
+
+  document
+    .getElementById("gameHint")
+    .innerText =
+      "Hint: Row total is " +
+      currentGame.rowTarget +
+      " | All Boxes Total: " +
+      currentGame.totalTarget;
+
+
+  document
+    .getElementById("timerText")
+    .innerText =
+      formatTime(timeLeft);
+
+
+  hideAllPages();
+
+
+  document
+    .getElementById("gamePage")
+    .classList
+    .remove("hidden");
+
 
   buildGameBoard();
 
-  timerInterval=setInterval(()=>{
 
-    remainingSeconds--;
+  startTimer();
 
-    updateTimer();
-
-    if(remainingSeconds<=0){
-
-      endGame();
-    }
-
-  },1000);
 };
 
 
-/* =========================
-   BUILD BOARD
-========================= */
+/* =====================================================
+   BUILD GAME BOARD
+===================================================== */
 
 function buildGameBoard(){
 
-  const board=
-    document.getElementById("gameBoard");
-
-  board.innerHTML="";
-
-  userInputs=[];
-
-  const count=
-    currentGame.rows*
-    currentGame.cols;
-
-  for(let i=0;i<count;i++){
-
-    const input=
-      document.createElement("input");
-
-    input.type="number";
-    input.className="gameBox";
-    input.dataset.index=i;
-
-    input.addEventListener(
-      "input",
-      handleNumberInput
+  const board =
+    document.getElementById(
+      "gameBoard"
     );
 
-    board.appendChild(input);
 
-    userInputs.push(input);
+  board.innerHTML = "";
+
+
+  const size =
+    currentGame.rows;
+
+
+  board.style.gridTemplateColumns =
+    `repeat(${size}, 58px)`;
+
+
+  for(let r=0;r<size;r++){
+
+    for(let c=0;c<size;c++){
+
+      const input =
+        document.createElement("input");
+
+
+      input.type = "number";
+
+      input.inputMode = "numeric";
+
+      input.id =
+        `cell_${r}_${c}`;
+
+
+      input.addEventListener(
+        "input",
+        function(){
+
+          handleNumberInput(this);
+
+          updateEnteredTotal();
+
+          updateColumnTotals();
+
+        }
+      );
+
+
+      board.appendChild(input);
+
+    }
+
   }
 
+
   updateEnteredTotal();
+
+  updateColumnTotals();
+
 }
 
 
-/* =========================
+/* =====================================================
    DUPLICATE CHECK
-========================= */
+===================================================== */
 
-function handleNumberInput(e){
+function handleNumberInput(input){
 
-  if(gameEnded)return;
+  if(input.value === ""){
 
-  const current=e.target;
-  const value=current.value.trim();
-
-  if(value===""){
-
-    updateEnteredTotal();
     return;
+
   }
 
-  const duplicate=
-    userInputs.some(
-      box =>
-        box!==current &&
-        box.value.trim()===value &&
-        value!==""
+
+  const value =
+    input.value;
+
+
+  const inputs =
+    document.querySelectorAll(
+      "#gameBoard input"
     );
 
-  if(duplicate){
 
-    current.value="";
+  let duplicate = false;
+
+
+  inputs.forEach(other=>{
+
+    if(
+      other !== input &&
+      other.value !== "" &&
+      other.value === value
+    ){
+
+      duplicate = true;
+
+    }
+
+  });
+
+
+  if(duplicate){
 
     showPopup(
       "Same number repeat is not possible."
     );
 
-    updateEnteredTotal();
-    return;
+
+    input.value = "";
+
   }
 
-  updateEnteredTotal();
 }
 
 
-/* =========================
-   USER ENTERED TOTAL
-========================= */
+/* =====================================================
+   ENTERED TOTAL
+===================================================== */
 
 function updateEnteredTotal(){
 
-  let total=0;
+  let total = 0;
 
-  userInputs.forEach(box=>{
 
-    const value=box.value.trim();
+  const inputs =
+    document.querySelectorAll(
+      "#gameBoard input"
+    );
 
-    if(value!==""){
-      total+=Number(value);
+
+  inputs.forEach(input=>{
+
+    if(input.value !== ""){
+
+      total +=
+        Number(input.value);
+
     }
 
   });
 
-  document.getElementById("enteredTotal")
-    .innerText=
-      "Your Entered Total: "+total;
+
+  document
+    .getElementById(
+      "enteredTotal"
+    )
+    .innerText =
+      "Your Entered Total: " +
+      total;
+
 }
 
 
-/* =========================
+/* =====================================================
+   COLUMN TOTAL
+===================================================== */
+
+function updateColumnTotals(){
+
+  if(!currentGame) return;
+
+
+  const size =
+    currentGame.cols;
+
+
+  const totals = [];
+
+
+  for(let c=0;c<size;c++){
+
+    let total = 0;
+
+
+    for(let r=0;r<size;r++){
+
+      const input =
+        document.getElementById(
+          `cell_${r}_${c}`
+        );
+
+
+      if(
+        input &&
+        input.value !== ""
+      ){
+
+        total +=
+          Number(input.value);
+
+      }
+
+    }
+
+
+    totals.push(total);
+
+  }
+
+
+  document
+    .getElementById(
+      "columnTotals"
+    )
+    .innerText =
+      "Column Total: " +
+      totals.join(" | ");
+
+}
+
+
+/* =====================================================
    TIMER
-========================= */
+===================================================== */
 
-function updateTimer(){
+function startTimer(){
 
-  const min=
-    Math.floor(remainingSeconds/60);
+  stopTimer();
 
-  const sec=
-    remainingSeconds%60;
 
-  document.getElementById("timerText")
-    .innerText=
-      min+":"+
-      String(sec).padStart(2,"0");
+  timerInterval =
+    setInterval(()=>{
+
+      timeLeft--;
+
+
+      document
+        .getElementById(
+          "timerText"
+        )
+        .innerText =
+          formatTime(timeLeft);
+
+
+      if(timeLeft <= 0){
+
+        stopTimer();
+
+        gameEnded = true;
+
+        lockGameInputs();
+
+        document
+          .getElementById(
+            "timerText"
+          )
+          .innerText =
+            "0:00";
+
+      }
+
+    },1000);
+
 }
 
 
-/* =========================
-   END GAME
-========================= */
+function stopTimer(){
 
-function endGame(){
+  if(timerInterval){
 
-  clearInterval(timerInterval);
+    clearInterval(
+      timerInterval
+    );
 
-  gameEnded=true;
+    timerInterval = null;
 
-  userInputs.forEach(
-    box=>box.disabled=true
+  }
+
+}
+
+
+function formatTime(seconds){
+
+  const minutes =
+    Math.floor(seconds / 60);
+
+  const secs =
+    seconds % 60;
+
+
+  return (
+    minutes +
+    ":" +
+    String(secs).padStart(2,"0")
   );
 
-  remainingSeconds=0;
-
-  updateTimer();
 }
 
 
-/* =========================
-   ANSWER
-========================= */
+/* =====================================================
+   LOCK INPUTS
+===================================================== */
 
-window.submitAnswer=function(){
+function lockGameInputs(){
+
+  const inputs =
+    document.querySelectorAll(
+      "#gameBoard input"
+    );
+
+
+  inputs.forEach(input=>{
+
+    input.disabled = true;
+
+  });
+
+}
+
+
+/* =====================================================
+   ANSWER
+===================================================== */
+
+window.submitGame =
+function(){
+
+  if(!currentGame) return;
+
 
   if(!gameEnded){
 
-    showPopup("Game is still running");
+    showPopup(
+      "Game is still running"
+    );
+
     return;
+
   }
 
+
+  currentUserAnswer =
+    getUserAnswer();
+
+
   showResultPage();
+
 };
 
 
-/* =========================
+/* =====================================================
+   GET USER ANSWER
+===================================================== */
+
+function getUserAnswer(){
+
+  const answer = [];
+
+
+  for(
+    let r=0;
+    r<currentGame.rows;
+    r++
+  ){
+
+    const row = [];
+
+
+    for(
+      let c=0;
+      c<currentGame.cols;
+      c++
+    ){
+
+      const input =
+        document.getElementById(
+          `cell_${r}_${c}`
+        );
+
+
+      if(
+        input &&
+        input.value !== ""
+      ){
+
+        row.push(
+          Number(input.value)
+        );
+
+      }else{
+
+        row.push("");
+
+      }
+
+    }
+
+
+    answer.push(row);
+
+  }
+
+
+  return answer;
+
+}
+
+
+/* =====================================================
+   CALCULATE POINTS
+===================================================== */
+
+function calculatePoints(answer){
+
+  const points =
+    currentGame.points;
+
+
+  let total = 0;
+
+
+  const breakdown = {
+
+    rows:0,
+
+    columns:0,
+
+    diagonal1:0,
+
+    diagonal2:0,
+
+    table:0
+
+  };
+
+
+  /*
+    ROWS
+  */
+
+  for(
+    let r=0;
+    r<currentGame.rows;
+    r++
+  ){
+
+    let complete = true;
+
+    let sum = 0;
+
+
+    for(
+      let c=0;
+      c<currentGame.cols;
+      c++
+    ){
+
+      const value =
+        answer[r][c];
+
+
+      if(
+        value === "" ||
+        value === null ||
+        value === undefined
+      ){
+
+        complete = false;
+
+        break;
+
+      }
+
+
+      sum += Number(value);
+
+    }
+
+
+    if(
+      complete &&
+      sum === currentGame.rowTarget
+    ){
+
+      breakdown.rows +=
+        points.row;
+
+      total +=
+        points.row;
+
+    }
+
+  }
+
+
+  /*
+    COLUMNS
+  */
+
+  for(
+    let c=0;
+    c<currentGame.cols;
+    c++
+  ){
+
+    let complete = true;
+
+    let sum = 0;
+
+
+    for(
+      let r=0;
+      r<currentGame.rows;
+      r++
+    ){
+
+      const value =
+        answer[r][c];
+
+
+      if(
+        value === "" ||
+        value === null ||
+        value === undefined
+      ){
+
+        complete = false;
+
+        break;
+
+      }
+
+
+      sum += Number(value);
+
+    }
+
+
+    if(
+      complete &&
+      sum === currentGame.rowTarget
+    ){
+
+      breakdown.columns +=
+        points.column;
+
+      total +=
+        points.column;
+
+    }
+
+  }
+
+
+  /*
+    DIAGONAL 1
+  */
+
+  let d1Complete = true;
+
+  let d1 = 0;
+
+
+  for(
+    let i=0;
+    i<currentGame.rows;
+    i++
+  ){
+
+    const value =
+      answer[i][i];
+
+
+    if(
+      value === "" ||
+      value === null ||
+      value === undefined
+    ){
+
+      d1Complete = false;
+
+      break;
+
+    }
+
+
+    d1 += Number(value);
+
+  }
+
+
+  if(
+    d1Complete &&
+    d1 === currentGame.rowTarget
+  ){
+
+    breakdown.diagonal1 =
+      points.diagonal1;
+
+    total +=
+      points.diagonal1;
+
+  }
+
+
+  /*
+    DIAGONAL 2
+  */
+
+  let d2Complete = true;
+
+  let d2 = 0;
+
+
+  for(
+    let i=0;
+    i<currentGame.rows;
+    i++
+  ){
+
+    const value =
+      answer[
+        i
+      ][
+        currentGame.cols - 1 - i
+      ];
+
+
+    if(
+      value === "" ||
+      value === null ||
+      value === undefined
+    ){
+
+      d2Complete = false;
+
+      break;
+
+    }
+
+
+    d2 += Number(value);
+
+  }
+
+
+  if(
+    d2Complete &&
+    d2 === currentGame.rowTarget
+  ){
+
+    breakdown.diagonal2 =
+      points.diagonal2;
+
+    total +=
+      points.diagonal2;
+
+  }
+
+
+  /*
+    TABLE TOTAL
+  */
+
+  let tableComplete = true;
+
+  let tableTotal = 0;
+
+
+  for(
+    let r=0;
+    r<currentGame.rows;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<currentGame.cols;
+      c++
+    ){
+
+      const value =
+        answer[r][c];
+
+
+      if(
+        value === "" ||
+        value === null ||
+        value === undefined
+      ){
+
+        tableComplete = false;
+
+        break;
+
+      }
+
+
+      tableTotal += Number(value);
+
+    }
+
+
+    if(!tableComplete){
+
+      break;
+
+    }
+
+  }
+
+
+  if(
+    tableComplete &&
+    tableTotal === currentGame.totalTarget
+  ){
+
+    breakdown.table =
+      points.table;
+
+    total +=
+      points.table;
+
+  }
+
+
+  return {
+
+    total,
+
+    breakdown
+
+  };
+
+}
+
+
+/* =====================================================
    RESULT PAGE
-========================= */
+===================================================== */
 
 function showResultPage(){
 
-  document.getElementById("gamePage")
-    .classList.add("hidden");
+  const result =
+    calculatePoints(
+      currentUserAnswer
+    );
 
-  document.getElementById("resultPage")
-    .classList.remove("hidden");
 
-  const userGrid=[];
+  const maxPoints =
+    currentGame.points.row *
+      currentGame.rows +
 
-  for(let r=0;r<currentGame.rows;r++){
+    currentGame.points.column *
+      currentGame.cols +
 
-    const row=[];
+    currentGame.points.diagonal1 +
 
-    for(let c=0;c<currentGame.cols;c++){
+    currentGame.points.diagonal2 +
 
-      const index=
-        r*currentGame.cols+c;
+    currentGame.points.table;
 
-      const value=
-        userInputs[index].value.trim();
 
-      row.push(
-        value==="" ? null : Number(value)
-      );
+  /*
+    YOUR ANSWER
+  */
+
+  const yourGrid =
+    document.getElementById(
+      "yourResultGrid"
+    );
+
+
+  yourGrid.innerHTML = "";
+
+
+  yourGrid.style.gridTemplateColumns =
+    `repeat(${currentGame.cols},48px)`;
+
+
+  for(
+    let r=0;
+    r<currentGame.rows;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<currentGame.cols;
+      c++
+    ){
+
+      const box =
+        document.createElement("div");
+
+
+      box.className =
+        "resultBox";
+
+
+      const value =
+        currentUserAnswer[r][c];
+
+
+      box.innerText =
+        value === ""
+          ? ""
+          : value;
+
+
+      yourGrid.appendChild(box);
+
     }
 
-    userGrid.push(row);
   }
 
 
-  /* YOUR ANSWER */
+  /*
+    OUR ANSWER
+  */
 
-  const yourBoard=
-    document.getElementById("yourResultBoard");
-
-  yourBoard.innerHTML="";
-
-  userGrid.flat().forEach(value=>{
-
-    const box=
-      document.createElement("div");
-
-    box.className="resultBox";
-
-    box.innerText=
-      value===null ? "" : value;
-
-    yourBoard.appendChild(box);
-  });
+  const ourGrid =
+    document.getElementById(
+      "ourResultGrid"
+    );
 
 
-  /* OUR ANSWER */
-
-  const ourBoard=
-    document.getElementById("ourResultBoard");
-
-  ourBoard.innerHTML="";
-
-  currentGame.answer.flat().forEach(value=>{
-
-    const box=
-      document.createElement("div");
-
-    box.className="resultBox";
-
-    box.innerText=value;
-
-    ourBoard.appendChild(box);
-  });
+  ourGrid.innerHTML = "";
 
 
-  let enteredTotal=0;
+  ourGrid.style.gridTemplateColumns =
+    `repeat(${currentGame.cols},48px)`;
 
-  userGrid.flat().forEach(value=>{
 
-    if(value!==null){
-      enteredTotal+=value;
+  for(
+    let r=0;
+    r<currentGame.rows;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<currentGame.cols;
+      c++
+    ){
+
+      const box =
+        document.createElement("div");
+
+
+      box.className =
+        "resultBox";
+
+
+      box.innerText =
+        currentGame.answer[r][c];
+
+
+      ourGrid.appendChild(box);
+
     }
 
+  }
+
+
+  /*
+    YOUR ANSWER INFO
+  */
+
+  let enteredTotal = 0;
+
+
+  currentUserAnswer.forEach(row=>{
+
+    row.forEach(value=>{
+
+      if(value !== ""){
+
+        enteredTotal +=
+          Number(value);
+
+      }
+
+    });
+
   });
 
-  document.getElementById("resultUserTotal")
-    .innerText=enteredTotal;
+
+  document
+    .getElementById(
+      "yourResultInfo"
+    )
+    .innerHTML = `
+
+      <div>
+        Your Entered Total:
+        <b>${enteredTotal}</b>
+      </div>
+
+      <div>
+        Required Row Total:
+        <b>${currentGame.rowTarget}</b>
+      </div>
+
+      <div>
+        All Boxes Total:
+        <b>${currentGame.totalTarget}</b>
+      </div>
+
+    `;
 
 
-  const points=
-    calculatePoints(userGrid);
+  /*
+    POINTS
+  */
 
-  document.getElementById("earnedResultPoints")
-    .innerText=points;
+  document
+    .getElementById(
+      "pointsBreakdown"
+    )
+    .innerHTML = `
+
+      <div>Rows: ${result.breakdown.rows}</div>
+
+      <div>Columns: ${result.breakdown.columns}</div>
+
+      <div>
+        Diagonal 1:
+        ${result.breakdown.diagonal1}
+      </div>
+
+      <div>
+        Diagonal 2:
+        ${result.breakdown.diagonal2}
+      </div>
+
+      <div>
+        Total Table:
+        ${result.breakdown.table}
+      </div>
+
+      <hr>
+
+      <div>
+        Maximum:
+        ${maxPoints}
+      </div>
+
+    `;
 
 
-  document.getElementById("resultMessage")
-    .innerText=
-      points>0
-      ? "Points earned for correct conditions."
-      : "Better luck next time!";
+  document
+    .getElementById(
+      "earnedPoints"
+    )
+    .innerText =
+      "Earned Points: " +
+      result.total;
 
 
-  saveGameScore(points);
+  document
+    .getElementById(
+      "resultMessage"
+    )
+    .innerText =
+      result.total > 0
+        ? "Congratulations!"
+        : "Better luck next time.";
+
+
+  hideAllPages();
+
+
+  document
+    .getElementById(
+      "resultPage"
+    )
+    .classList
+    .remove("hidden");
+
+
+  /*
+    Save score
+  */
+
+  saveGameScore(
+    result.total
+  );
+
 }
 
 
-/* =========================
-   SCORING
-========================= */
+/* =====================================================
+   SAVE GAME SCORE
+===================================================== */
 
-function calculatePoints(grid){
+async function saveGameScore(pointsEarned){
 
-  let points=0;
+  if(!currentUser) return;
 
-  const n=currentGame.rows;
-  const target=currentGame.rowTarget;
-
-
-  /* ROWS */
-
-  for(let r=0;r<n;r++){
-
-    const row=grid[r];
-
-    if(row.every(v=>v!==null)){
-
-      const total=
-        row.reduce((a,b)=>a+b,0);
-
-      if(total===target){
-
-        if(currentGame.name==="DIAMOND")
-          points+=10;
-
-        else if(currentGame.name==="GOLD")
-          points+=5;
-
-      }
-    }
-  }
-
-
-  /* COLUMNS */
-
-  for(let c=0;c<n;c++){
-
-    let complete=true;
-    let total=0;
-
-    for(let r=0;r<n;r++){
-
-      if(grid[r][c]===null){
-
-        complete=false;
-        break;
-      }
-
-      total+=grid[r][c];
-    }
-
-    if(complete && total===target){
-
-      if(currentGame.name==="DIAMOND")
-        points+=10;
-
-      else if(currentGame.name==="GOLD")
-        points+=5;
-    }
-  }
-
-
-  /* DIAGONAL 1 */
-
-  let d1=[];
-  let d2=[];
-
-  for(let i=0;i<n;i++){
-
-    d1.push(grid[i][i]);
-    d2.push(grid[i][n-1-i]);
-  }
-
-  if(
-    d1.every(v=>v!==null) &&
-    d1.reduce((a,b)=>a+b,0)===target
-  ){
-
-    if(currentGame.name==="DIAMOND")
-      points+=10;
-
-    else if(currentGame.name==="GOLD")
-      points+=5;
-  }
-
-
-  if(
-    d2.every(v=>v!==null) &&
-    d2.reduce((a,b)=>a+b,0)===target
-  ){
-
-    if(currentGame.name==="DIAMOND")
-      points+=10;
-
-    else if(currentGame.name==="GOLD")
-      points+=5;
-  }
-
-
-  /* TOTAL TABLE */
-
-  const flat=grid.flat();
-
-  if(flat.every(v=>v!==null)){
-
-    const total=
-      flat.reduce((a,b)=>a+b,0);
-
-    if(total===currentGame.totalTarget){
-
-      if(currentGame.name==="DIAMOND")
-        points+=50;
-
-      else if(currentGame.name==="GOLD")
-        points+=25;
-
-      else if(currentGame.name==="SILVER")
-        points+=25;
-    }
-  }
-
-  return points;
-}
-
-
-/* =========================
-   SAVE SCORE
-========================= */
-
-async function saveGameScore(points){
-
-  if(!auth.currentUser)return;
 
   try{
 
-    const ref=
-      doc(db,"users",auth.currentUser.uid);
+    const userRef =
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      );
 
-    const snap=await getDoc(ref);
 
-    if(!snap.exists())return;
+    const snapshot =
+      await getDoc(userRef);
 
-    const d=snap.data();
 
-    const oldPoints=
-      Number(d.points||0);
+    if(!snapshot.exists()) return;
 
-    const oldGames=
-      Number(d.gamesPlayed||0);
+
+    const data =
+      snapshot.data();
+
+
+    const oldPoints =
+      Number(
+        data.points || 0
+      );
+
+
+    const oldGames =
+      Number(
+        data.gamesPlayed || 0
+      );
+
+
+    /*
+      This update may be blocked by
+      your current Firestore security rule.
+      Game itself will still work.
+    */
 
     await updateDoc(
-      ref,
+      userRef,
       {
-        points:oldPoints+points,
-        gamesPlayed:oldGames+1
+
+        points:
+          oldPoints +
+          pointsEarned,
+
+        gamesPlayed:
+          oldGames + 1
+
       }
     );
+
+
+    currentProfile.points =
+      oldPoints +
+      pointsEarned;
+
+
+    currentProfile.gamesPlayed =
+      oldGames + 1;
+
 
   }catch(error){
 
@@ -1719,76 +3938,148 @@ async function saveGameScore(points){
       "Score save error:",
       error
     );
+
   }
+
 }
 
 
-/* =========================
+/* =====================================================
    GAME BACK
-========================= */
+===================================================== */
 
-window.gameBack=function(){
+window.gameBack =
+function(){
 
-  if(gameEnded){
+  if(
+    !currentGame ||
+    gameEnded
+  ){
 
-    clearInterval(timerInterval);
+    stopTimer();
 
-    document.getElementById("gamePage")
-      .classList.add("hidden");
+    hideAllPages();
 
-    document.getElementById("gameMenu")
-      .classList.remove("hidden");
+    document
+      .getElementById(
+        "loggedIn"
+      )
+      .classList
+      .remove("hidden");
 
     return;
+
   }
 
 
-  document.getElementById("popupMessage")
-    .innerHTML=`
-      <h3>
+  const container =
+    document.getElementById(
+      "popupContainer"
+    );
+
+
+  container.className =
+    "popupOverlay";
+
+
+  container.innerHTML = `
+
+    <div class="popup">
+
+      <h3>Quit Game?</h3>
+
+      <p>
         Are you sure do you want quit game?
-      </h3>
-    `;
+      </p>
 
-  document.getElementById("popupButtons")
-    .innerHTML=`
-      <button onclick="confirmQuitGame()">YES</button>
-      <button onclick="closePopup()">NO</button>
-    `;
+      <div class="popupButtons">
 
-  document.getElementById("popup")
-    .classList.remove("hidden");
+        <button
+          class="yesBtn"
+          id="quitYes"
+        >
+          YES
+        </button>
+
+        <button
+          class="noBtn"
+          id="quitNo"
+        >
+          NO
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById("quitNo")
+    .onclick = closePopup;
+
+
+  document
+    .getElementById("quitYes")
+    .onclick =
+      ()=>{
+
+        closePopup();
+
+        stopTimer();
+
+        currentGame = null;
+
+        currentGameName = "";
+
+        hideAllPages();
+
+        document
+          .getElementById(
+            "loggedIn"
+          )
+          .classList
+          .remove("hidden");
+
+      };
+
 };
 
 
-window.confirmQuitGame=function(){
-
-  clearInterval(timerInterval);
-
-  gameEnded=true;
-
-  closePopup();
-
-  document.getElementById("gamePage")
-    .classList.add("hidden");
-
-  document.getElementById("gameMenu")
-    .classList.remove("hidden");
-};
-
-
-/* =========================
+/* =====================================================
    RESULT BACK
-========================= */
+===================================================== */
 
-window.resultBack=function(){
+window.resultBack =
+function(){
 
-  document.getElementById("resultPage")
-    .classList.add("hidden");
+  currentGame = null;
 
-  document.getElementById("gameMenu")
-    .classList.remove("hidden");
+  currentGameName = "";
+
+  hideAllPages();
+
+  document
+    .getElementById(
+      "loggedIn"
+    )
+    .classList
+    .remove("hidden");
+
 };
+
+
+/* =====================================================
+   INITIAL
+===================================================== */
+
+document
+  .getElementById(
+    "gamePage"
+  )
+  .classList
+  .add("hidden");
 
 </script>
 

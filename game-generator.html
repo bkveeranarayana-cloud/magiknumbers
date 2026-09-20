@@ -1,1271 +1,771 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GAME GENERATOR</title>
+<title>5 × 5 Magic Number</title>
 
 <style>
-
 *{
     box-sizing:border-box;
 }
 
 body{
     margin:0;
+    padding:15px;
     font-family:Arial,sans-serif;
     background:#f2f2f2;
-}
-
-.header{
-    background:#111;
-    color:#fff;
     text-align:center;
-    padding:16px;
-    font-size:22px;
-    font-weight:bold;
 }
 
-.container{
-    max-width:600px;
-    margin:auto;
-    padding:12px;
-}
-
-.card{
-    background:#fff;
-    padding:15px;
-    border-radius:12px;
-    box-shadow:0 2px 8px #bbb;
-}
-
-h2{
-    text-align:center;
+h1{
     margin:5px 0 15px;
+    font-size:25px;
 }
 
-.setup{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+.controls{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
 }
 
-.field{
+.row{
     display:flex;
-    flex-direction:column;
+    gap:8px;
+    margin-bottom:10px;
+    align-items:center;
 }
 
-.field label{
+.row label{
+    width:105px;
+    text-align:left;
     font-weight:bold;
-    font-size:13px;
-    margin-bottom:5px;
 }
 
-.field input,
-.field select{
-    height:42px;
-    border:1px solid #aaa;
-    border-radius:7px;
-    padding:8px;
+input,select{
+    flex:1;
+    padding:10px;
     font-size:16px;
-    width:100%;
-}
-
-.full{
-    grid-column:1 / -1;
+    border:1px solid #aaa;
+    border-radius:6px;
 }
 
 .buttons{
     display:flex;
-    gap:10px;
+    gap:8px;
     margin-top:12px;
 }
 
 button{
-    height:44px;
-    border:0;
-    border-radius:8px;
+    flex:1;
+    padding:11px;
+    border:none;
+    border-radius:6px;
     font-size:16px;
     font-weight:bold;
+    cursor:pointer;
 }
 
-.apply{
-    flex:1;
+#applyBtn{
     background:#1976d2;
     color:white;
 }
 
-.next{
-    flex:1;
-    background:#ff9800;
+#changeBtn{
+    background:#388e3c;
     color:white;
 }
 
-.save{
-    width:100%;
-    background:#2e7d32;
-    color:white;
-    margin-top:12px;
+.gameArea{
+    max-width:500px;
+    margin:20px auto;
 }
 
-.info{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:6px;
-    margin-top:15px;
-}
-
-.infoBox{
-    background:#eee;
-    border-radius:7px;
-    padding:8px;
-    text-align:center;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.infoBox span{
-    display:block;
-    font-size:14px;
-    margin-top:4px;
-}
-
-.gridTitle{
-    text-align:center;
-    font-weight:bold;
+.gameId{
     font-size:18px;
-    margin:20px 0 8px;
+    font-weight:bold;
+    margin-bottom:12px;
 }
-
-/* ==============================
-   MAIN 25 BOXES
-============================== */
 
 .grid{
+    width:min(95vw,430px);
+    margin:auto;
     display:grid;
     grid-template-columns:repeat(5,1fr);
     gap:5px;
-    max-width:400px;
-    margin:auto;
 }
 
-.numberBox{
+.box{
     aspect-ratio:1/1;
     background:white;
-    border:2px solid #222;
-    border-radius:8px;
+    border:2px solid #333;
+    border-radius:5px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    font-size:20px;
+    font-size:clamp(15px,5vw,25px);
     font-weight:bold;
-
-    cursor:pointer;
-    user-select:none;
-
-    touch-action:manipulation;
-}
-
-.numberBox:active{
-    transform:scale(.94);
-}
-
-.numberBox.selected{
-    background:#2196f3;
-    color:white;
-    border-color:#0d47a1;
-}
-
-.totals{
-    margin-top:12px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:7px;
-}
-
-.total{
-    background:#eee;
-    padding:8px;
-    border-radius:7px;
-    text-align:center;
-    font-weight:bold;
-    font-size:13px;
 }
 
 .status{
-    margin-top:12px;
-    padding:10px;
-    text-align:center;
-    border-radius:8px;
-    background:#e8f5e9;
-    color:#1b5e20;
+    margin-top:15px;
+    font-size:17px;
     font-weight:bold;
 }
 
-.error{
-    background:#ffebee;
-    color:#b71c1c;
+#rowTotals,
+#colTotals{
+    margin-top:8px;
+    font-size:14px;
+    color:#444;
 }
-
-.selectedTitle{
-    text-align:center;
-    margin-top:18px;
-    font-weight:bold;
-}
-
-.selected{
-    min-height:45px;
-    background:#f5f5f5;
-    border-radius:8px;
-    margin-top:7px;
-    padding:10px;
-    text-align:center;
-    font-size:18px;
-    font-weight:bold;
-}
-
-.message{
-    text-align:center;
-    font-weight:bold;
-    margin-top:10px;
-    min-height:20px;
-}
-
-@media(max-width:400px){
-
-    .numberBox{
-        font-size:17px;
-    }
-
-    .grid{
-        gap:4px;
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="header">
-GAME-GENERATOR
-</div>
+<h1>5 × 5 MAGIC NUMBER</h1>
 
-<div class="container">
+<div class="controls">
 
-<div class="card">
+    <div class="row">
+        <label>Range From</label>
+        <input type="number" id="rangeFrom" value="1">
+    </div>
 
-<h2>DIAMOND GAME SETUP</h2>
+    <div class="row">
+        <label>Range To</label>
+        <input type="number" id="rangeTo" value="100">
+    </div>
 
+    <div class="row">
+        <label>Magic Total</label>
+        <input type="number" id="magicTotal" value="65">
+    </div>
 
-<div class="setup">
+    <div class="buttons">
+        <button id="applyBtn" onclick="applySettings()">
+            APPLY
+        </button>
 
-<div class="field">
-<label>RANGE FROM</label>
-<input
-type="number"
-id="rangeFrom"
-min="0"
-max="200"
-value="0">
-</div>
-
-
-<div class="field">
-<label>RANGE TO</label>
-<input
-type="number"
-id="rangeTo"
-min="0"
-max="200"
-value="24">
-</div>
-
-
-<div class="field full">
-<label>MAGIC TOTAL</label>
-<input
-type="number"
-id="magicTotal"
-value="60">
-</div>
-
-
-<div class="field full">
-<label>GAME ID</label>
-
-<select id="gameId">
-
-<option>MKND840001</option>
-<option>MKND840002</option>
-<option>MKND840003</option>
-<option>MKND840004</option>
-<option>MKND840005</option>
-
-</select>
-
-</div>
+        <button id="changeBtn" onclick="changeNumberOrder()">
+            CHANGE NUMBER ORDER
+        </button>
+    </div>
 
 </div>
 
 
-<div class="buttons">
+<div class="gameArea">
 
-<button
-class="apply"
-onclick="applyGame()">
-APPLY
-</button>
+    <div class="row" style="margin-top:15px;">
+        <label>Game ID</label>
 
-<button
-class="next"
-onclick="nextGame()">
-NEXT
-</button>
+        <select id="gameId">
+        </select>
+    </div>
 
-</div>
+    <div class="gameId">
+        Selected Game ID:
+        <span id="selectedGameId">MKND840001</span>
+    </div>
 
+    <div class="grid" id="grid">
+    </div>
 
-<div class="info">
+    <div class="status" id="status">
+        Enter settings and press APPLY
+    </div>
 
-<div class="infoBox">
-GAME ID
-<span id="showId">MKND840001</span>
-</div>
+    <div id="rowTotals"></div>
+    <div id="colTotals"></div>
 
-<div class="infoBox">
-GRID
-<span>5 × 5</span>
-</div>
-
-<div class="infoBox">
-MAGIC TOTAL
-<span id="showTotal">60</span>
-</div>
-
-</div>
-
-
-<div class="gridTitle">
-5 × 5 NUMBER BOXES
-</div>
-
-
-<!-- ==================================
-     THESE ARE THE 25 MAIN BOXES
-================================== -->
-
-<div class="grid" id="numberGrid">
-
-<div class="numberBox" id="box0" onclick="selectBox(0)">0</div>
-<div class="numberBox" id="box1" onclick="selectBox(1)">0</div>
-<div class="numberBox" id="box2" onclick="selectBox(2)">0</div>
-<div class="numberBox" id="box3" onclick="selectBox(3)">0</div>
-<div class="numberBox" id="box4" onclick="selectBox(4)</div>
-
-<div class="numberBox" id="box5" onclick="selectBox(5)">0</div>
-<div class="numberBox" id="box6" onclick="selectBox(6)">0</div>
-<div class="numberBox" id="box7" onclick="selectBox(7)">0</div>
-<div class="numberBox" id="box8" onclick="selectBox(8)">0</div>
-<div class="numberBox" id="box9" onclick="selectBox(9)">0</div>
-
-<div class="numberBox" id="box10" onclick="selectBox(10)">0</div>
-<div class="numberBox" id="box11" onclick="selectBox(11)">0</div>
-<div class="numberBox" id="box12" onclick="selectBox(12)">0</div>
-<div class="numberBox" id="box13" onclick="selectBox(13)">0</div>
-<div class="numberBox" id="box14" onclick="selectBox(14)">0</div>
-
-<div class="numberBox" id="box15" onclick="selectBox(15)">0</div>
-<div class="numberBox" id="box16" onclick="selectBox(16)">0</div>
-<div class="numberBox" id="box17" onclick="selectBox(17)">0</div>
-<div class="numberBox" id="box18" onclick="selectBox(18)">0</div>
-<div class="numberBox" id="box19" onclick="selectBox(19)">0</div>
-
-<div class="numberBox" id="box20" onclick="selectBox(20)">0</div>
-<div class="numberBox" id="box21" onclick="selectBox(21)">0</div>
-<div class="numberBox" id="box22" onclick="selectBox(22)">0</div>
-<div class="numberBox" id="box23" onclick="selectBox(23)">0</div>
-<div class="numberBox" id="box24" onclick="selectBox(24)">0</div>
-
-</div>
-
-
-<div class="totals">
-
-<div class="total">
-ROW 1:
-<span id="r0">0</span>
-</div>
-
-<div class="total">
-ROW 2:
-<span id="r1">0</span>
-</div>
-
-<div class="total">
-ROW 3:
-<span id="r2">0</span>
-</div>
-
-<div class="total">
-ROW 4:
-<span id="r3">0</span>
-</div>
-
-<div class="total">
-ROW 5:
-<span id="r4">0</span>
-</div>
-
-<div class="total">
-COLUMN 1:
-<span id="c0">0</span>
-</div>
-
-<div class="total">
-COLUMN 2:
-<span id="c1">0</span>
-</div>
-
-<div class="total">
-COLUMN 3:
-<span id="c2">0</span>
-</div>
-
-<div class="total">
-COLUMN 4:
-<span id="c3">0</span>
-</div>
-
-<div class="total">
-COLUMN 5:
-<span id="c4">0</span>
-</div>
-
-<div class="total">
-DIAGONAL 1:
-<span id="d1">0</span>
-</div>
-
-<div class="total">
-DIAGONAL 2:
-<span id="d2">0</span>
-</div>
-
-</div>
-
-
-<div class="status" id="status">
-VALID GAME ✓
-</div>
-
-
-<div class="selectedTitle">
-SELECTED NUMBERS
-</div>
-
-<div class="selected" id="selectedNumbers">
-Select 3 numbers
-</div>
-
-
-<button
-class="save"
-onclick="saveGame()">
-SAVE GAME
-</button>
-
-
-<div class="message" id="message"></div>
-
-</div>
 </div>
 
 
 <script>
 
-/* ==================================
-   BASE 5×5 MAGIC SQUARE
-   TOTAL = 60
-================================== */
-
-const base = [
-
-16,23,0,7,14,
-22,4,6,13,15,
-3,5,12,19,21,
-9,11,18,20,2,
-10,17,24,1,8
-
-];
-
-
 let currentNumbers = [];
-
-let selected = [];
-
-let rangeFrom = 0;
-
-let rangeTo = 24;
-
-let magicTotal = 60;
-
-let gameId = "MKND840001";
+let currentTotal = 0;
 
 
-/* ==================================
-   RANDOM
-================================== */
+/* =========================================
+   CREATE GAME ID DROPDOWN
+   MKND840001 → MKND840250
+========================================= */
 
-function randomInt(min,max){
+const gameIdSelect = document.getElementById("gameId");
 
-return Math.floor(
-Math.random()*(max-min+1)
-)+min;
+for(let i = 1; i <= 250; i++){
 
+    const number = String(i).padStart(3,"0");
+
+    const option = document.createElement("option");
+
+    option.value = "MKND84" + number;
+    option.textContent = "MKND84" + number;
+
+    gameIdSelect.appendChild(option);
 }
 
 
-/* ==================================
+gameIdSelect.addEventListener("change",function(){
+
+    document.getElementById("selectedGameId").textContent =
+        this.value;
+
+});
+
+
+/* =========================================
+   CREATE 25 GRID BOXES
+========================================= */
+
+const grid = document.getElementById("grid");
+
+for(let i=0;i<25;i++){
+
+    const box = document.createElement("div");
+
+    box.className = "box";
+
+    box.id = "box" + i;
+
+    box.textContent = "-";
+
+    grid.appendChild(box);
+}
+
+
+/* =========================================
    SHUFFLE
-================================== */
+========================================= */
 
-function shuffle(a){
+function shuffle(array){
 
-let x=[...a];
+    for(let i=array.length-1;i>0;i--){
 
-for(let i=x.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
 
-let j=randomInt(0,i);
+        [array[i],array[j]] =
+        [array[j],array[i]];
+    }
 
-[x[i],x[j]]=[x[j],x[i]];
-
-}
-
-return x;
-
+    return array;
 }
 
 
-/* ==================================
-   GENERATE NUMBERS
-================================== */
+/* =========================================
+   CREATE 5 × 5 MAGIC POSITION
+   Standard 5×5 magic square pattern
+========================================= */
 
-function generateNumbers(){
+function createMagicPositions(){
 
-let from=rangeFrom;
+    const n = 5;
 
-let to=rangeTo;
+    let square =
+    Array.from(
+        {length:n},
+        ()=>Array(n).fill(0)
+    );
 
-let target=magicTotal;
+    let row = 0;
+    let col = Math.floor(n/2);
 
+    for(let num=1;num<=n*n;num++){
 
-/*
-   Need 25 different numbers.
-*/
+        square[row][col] = num;
 
-if(to-from+1<25){
+        let newRow = (row - 1 + n) % n;
+        let newCol = (col + 1) % n;
 
-return null;
+        if(square[newRow][newCol] !== 0){
 
+            row = (row + 1) % n;
+
+        }else{
+
+            row = newRow;
+            col = newCol;
+        }
+    }
+
+    return square;
 }
 
 
-/*
-   Try arithmetic spacing.
+/* =========================================
+   FIND 25 UNIQUE NUMBERS
+   THAT CAN PRODUCE REQUESTED MAGIC TOTAL
+========================================= */
 
-   Formula:
-   numbers = start + step × 0...24
+function createNumbers(from,to,total){
 
-   Their total = 25×start + 300×step
+    /*
+       Every row has 5 numbers.
 
-   Magic total = total/5
-*/
+       Therefore the centre number must be:
+       total / 5
+    */
 
-let choices=[];
+    if(total % 5 !== 0){
 
+        return null;
+    }
 
-for(let step=1;step<=8;step++){
+    const center = total / 5;
 
-for(
-let start=from;
-start+step*24<=to;
-start++
-){
+    if(center < from || center > to){
 
-let total=
-25*start+
-300*step;
-
-if(total===target*5){
-
-choices.push({
-start:start,
-step:step
-});
-
-}
-
-}
-
-}
+        return null;
+    }
 
 
-if(choices.length===0){
+    /*
+       We need 12 pairs:
 
-/*
-   Try direct consecutive numbers.
-*/
+       a + b = 2 × center
 
-for(
-let start=from;
-start+24<=to;
-start++
-){
+       Plus center.
 
-let total=25*start+300;
+       This makes the total of every
+       magic row/column/diagonal correct.
+    */
 
-if(total===target*5){
+    const candidates = [];
 
-choices.push({
-start:start,
-step:1
-});
+    for(let n=from;n<=to;n++){
 
-}
+        if(n !== center){
 
-}
-
-}
+            candidates.push(n);
+        }
+    }
 
 
-if(choices.length===0){
-
-return null;
-
-}
+    shuffle(candidates);
 
 
-let choice=
-choices[
-randomInt(
-0,
-choices.length-1
-)
-];
+    const used = new Set();
+
+    used.add(center);
+
+    const numbers = [center];
+
+    let pairsFound = 0;
 
 
-let values=[];
+    /*
+       Randomly search complementary pairs.
+    */
+
+    for(let attempt=0; attempt<10000 && pairsFound<12; attempt++){
+
+        if(candidates.length < 2){
+            break;
+        }
+
+        const a =
+            candidates[
+                Math.floor(Math.random()*candidates.length)
+            ];
+
+        const b =
+            (2*center)-a;
 
 
-for(let i=0;i<25;i++){
+        if(
+            b >= from &&
+            b <= to &&
+            b !== a &&
+            b !== center &&
+            !used.has(a) &&
+            !used.has(b)
+        ){
 
-values.push(
-choice.start+
-choice.step*i
-);
+            used.add(a);
+            used.add(b);
 
-}
+            numbers.push(a);
+            numbers.push(b);
 
-
-/*
-   Change actual number positions
-*/
-
-values=shuffle(values);
-
-
-/*
-   The shuffled values must still
-   follow magic-square positions.
-
-   Sort them and map according to
-   the base magic-square numbers.
-*/
-
-values.sort((a,b)=>a-b);
+            pairsFound++;
+        }
+    }
 
 
-let result=[];
+    if(pairsFound !== 12){
+
+        return null;
+    }
 
 
-for(let i=0;i<25;i++){
+    shuffle(numbers);
 
-result.push(
-values[base[i]]
-);
-
+    return numbers;
 }
 
 
-return result;
+/* =========================================
+   BUILD MAGIC SQUARE
+========================================= */
 
+function generateMagicSquare(){
+
+    const from =
+        parseInt(
+            document.getElementById("rangeFrom").value
+        );
+
+    const to =
+        parseInt(
+            document.getElementById("rangeTo").value
+        );
+
+    const total =
+        parseInt(
+            document.getElementById("magicTotal").value
+        );
+
+
+    if(
+        isNaN(from) ||
+        isNaN(to) ||
+        isNaN(total)
+    ){
+
+        showError("Please enter all values.");
+
+        return;
+    }
+
+
+    if(from >= to){
+
+        showError("Range From must be smaller than Range To.");
+
+        return;
+    }
+
+
+    if((to-from+1) < 25){
+
+        showError(
+            "The selected range must contain at least 25 numbers."
+        );
+
+        return;
+    }
+
+
+    if(total % 5 !== 0){
+
+        showError(
+            "For a 5 × 5 magic square, Magic Total must be divisible by 5."
+        );
+
+        return;
+    }
+
+
+    let numbers = createNumbers(
+        from,
+        to,
+        total
+    );
+
+
+    if(numbers === null){
+
+        showError(
+            "Could not create 25 unique numbers for this Range and Magic Total. Try another range or total."
+        );
+
+        return;
+    }
+
+
+    /*
+       Standard 5×5 magic arrangement
+    */
+
+    let positions = createMagicPositions();
+
+
+    /*
+       Put random unique numbers into
+       the magic positions.
+
+       Center remains the required center value.
+    */
+
+    const center = total/5;
+
+    let otherNumbers =
+        numbers.filter(n => n !== center);
+
+    shuffle(otherNumbers);
+
+
+    let index = 0;
+
+    let result =
+        Array.from(
+            {length:5},
+            ()=>Array(5).fill(0)
+        );
+
+
+    for(let r=0;r<5;r++){
+
+        for(let c=0;c<5;c++){
+
+            if(positions[r][c] === 13){
+
+                result[r][c] = center;
+
+            }else{
+
+                result[r][c] =
+                    otherNumbers[index++];
+
+            }
+        }
+    }
+
+
+    /*
+       The above assignment requires the numbers
+       to correspond to complementary positions.
+
+       So instead create values according to
+       the magic position numbers.
+    */
+
+    const pairValues = [];
+
+
+    for(let i=1;i<=12;i++){
+
+        const a =
+            otherNumbers[(i-1)*2];
+
+        const b =
+            otherNumbers[(i-1)*2+1];
+
+        pairValues.push([a,b]);
+    }
+
+
+    /*
+       Rebuild using symmetric cells.
+    */
+
+    result =
+        Array.from(
+            {length:5},
+            ()=>Array(5).fill(0)
+        );
+
+
+    result[2][2] = center;
+
+
+    const cells = [
+        [0,0],[0,1],[0,2],[0,3],[0,4],
+        [1,0],[1,1],[1,2],[1,3],[1,4],
+        [2,0],[2,1]
+    ];
+
+
+    shuffle(pairValues);
+
+
+    for(let i=0;i<12;i++){
+
+        const [r,c] = cells[i];
+
+        const rr = 4-r;
+        const cc = 4-c;
+
+        result[r][c] =
+            pairValues[i][0];
+
+        result[rr][cc] =
+            pairValues[i][1];
+    }
+
+
+    /*
+       Display
+    */
+
+    currentNumbers = result;
+    currentTotal = total;
+
+    displayGrid(result);
+
+    checkTotals(result,total);
 }
 
 
-/* ==================================
-   DISPLAY
-================================== */
+/* =========================================
+   DISPLAY GRID
+========================================= */
 
-function display(){
+function displayGrid(square){
 
-for(let i=0;i<25;i++){
+    for(let r=0;r<5;r++){
 
-let box=
-document.getElementById(
-"box"+i
-);
+        for(let c=0;c<5;c++){
 
-box.textContent=
-currentNumbers[i];
+            const index =
+                r*5+c;
 
-box.classList.remove(
-"selected"
-);
-
-}
-
-updateTotals();
-
+            document.getElementById(
+                "box"+index
+            ).textContent =
+                square[r][c];
+        }
+    }
 }
 
 
-/* ==================================
-   TOTALS
-================================== */
+/* =========================================
+   CHECK TOTALS
+========================================= */
 
-function updateTotals(){
+function checkTotals(square,total){
 
-for(let r=0;r<5;r++){
+    let rows = [];
+    let cols = [];
 
-let sum=0;
+    for(let r=0;r<5;r++){
 
-for(let c=0;c<5;c++){
+        let sum = 0;
 
-sum+=
-currentNumbers[r*5+c];
+        for(let c=0;c<5;c++){
 
-}
+            sum += square[r][c];
+        }
 
-document.getElementById(
-"r"+r
-).textContent=sum;
-
-}
+        rows.push(sum);
+    }
 
 
-for(let c=0;c<5;c++){
+    for(let c=0;c<5;c++){
 
-let sum=0;
+        let sum = 0;
 
-for(let r=0;r<5;r++){
+        for(let r=0;r<5;r++){
 
-sum+=
-currentNumbers[r*5+c];
+            sum += square[r][c];
+        }
 
-}
-
-document.getElementById(
-"c"+c
-).textContent=sum;
-
-}
+        cols.push(sum);
+    }
 
 
-let d1=0;
-
-let d2=0;
-
-for(let i=0;i<5;i++){
-
-d1+=
-currentNumbers[i*5+i];
-
-d2+=
-currentNumbers[i*5+(4-i)];
-
-}
+    let diagonal1 = 0;
+    let diagonal2 = 0;
 
 
-document.getElementById("d1")
-.textContent=d1;
+    for(let i=0;i<5;i++){
 
-document.getElementById("d2")
-.textContent=d2;
+        diagonal1 += square[i][i];
 
-
-let valid=true;
+        diagonal2 += square[i][4-i];
+    }
 
 
-for(let r=0;r<5;r++){
+    const valid =
+        rows.every(x => x === total) &&
+        cols.every(x => x === total) &&
+        diagonal1 === total &&
+        diagonal2 === total;
 
-let sum=0;
 
-for(let c=0;c<5;c++){
+    if(valid){
 
-sum+=
-currentNumbers[r*5+c];
+        document.getElementById("status").textContent =
+            "✓ MAGIC SQUARE — ALL TOTALS = " + total;
 
-}
+    }else{
 
-if(sum!==magicTotal){
+        document.getElementById("status").textContent =
+            "ERROR — Magic Total not matched.";
+    }
 
-valid=false;
 
-}
+    document.getElementById("rowTotals").textContent =
+        "Rows: " + rows.join(" | ");
 
+    document.getElementById("colTotals").textContent =
+        "Columns: " + cols.join(" | ") +
+        " | Diagonal 1: " + diagonal1 +
+        " | Diagonal 2: " + diagonal2;
 }
 
 
-for(let c=0;c<5;c++){
-
-let sum=0;
-
-for(let r=0;r<5;r++){
-
-sum+=
-currentNumbers[r*5+c];
-
-}
-
-if(sum!==magicTotal){
-
-valid=false;
-
-}
-
-}
-
-
-if(d1!==magicTotal ||
-d2!==magicTotal){
-
-valid=false;
-
-}
-
-
-let status=
-document.getElementById(
-"status"
-);
-
-
-if(valid){
-
-status.textContent=
-"VALID GAME ✓";
-
-status.classList.remove(
-"error"
-);
-
-}else{
-
-status.textContent=
-"INVALID GAME";
-
-status.classList.add(
-"error"
-);
-
-}
-
-}
-
-
-/* ==================================
-   SELECT BOX
-================================== */
-
-function selectBox(index){
-
-if(currentNumbers.length!==25){
-
-return;
-
-}
-
-
-let position=
-selected.indexOf(index);
-
-
-if(position!==-1){
-
-selected.splice(
-position,
-1
-);
-
-document.getElementById(
-"box"+index
-).classList.remove(
-"selected"
-);
-
-showSelected();
-
-return;
-
-}
-
-
-if(selected.length>=3){
-
-showMessage(
-"Only 3 numbers can be selected."
-);
-
-return;
-
-}
-
-
-selected.push(index);
-
-
-document.getElementById(
-"box"+index
-).classList.add(
-"selected"
-);
-
-
-showSelected();
-
-}
-
-
-/* ==================================
-   SHOW SELECTED
-================================== */
-
-function showSelected(){
-
-let el=
-document.getElementById(
-"selectedNumbers"
-);
-
-
-if(selected.length===0){
-
-el.textContent=
-"Select 3 numbers";
-
-return;
-
-}
-
-
-let nums=
-selected.map(
-i=>currentNumbers[i]
-);
-
-
-el.textContent=
-nums.join(" | ");
-
-}
-
-
-/* ==================================
+/* =========================================
    APPLY
-================================== */
+========================================= */
 
-function applyGame(){
+function applySettings(){
 
-rangeFrom=
-parseInt(
-document.getElementById(
-"rangeFrom"
-).value
-);
-
-rangeTo=
-parseInt(
-document.getElementById(
-"rangeTo"
-).value
-);
-
-magicTotal=
-parseInt(
-document.getElementById(
-"magicTotal"
-).value
-);
-
-gameId=
-document.getElementById(
-"gameId"
-).value;
-
-
-if(
-isNaN(rangeFrom) ||
-isNaN(rangeTo) ||
-isNaN(magicTotal)
-){
-
-showMessage(
-"Enter all values."
-);
-
-return;
-
+    generateMagicSquare();
 }
 
 
-if(rangeFrom<0 ||
-rangeTo>200){
+/* =========================================
+   CHANGE NUMBER ORDER
+========================================= */
 
-showMessage(
-"Range must be 0 to 200."
-);
+function changeNumberOrder(){
 
-return;
+    if(!currentNumbers.length){
 
+        generateMagicSquare();
+
+        return;
+    }
+
+    /*
+       Generate a completely new arrangement
+       using the same inputs.
+    */
+
+    generateMagicSquare();
 }
 
 
-if(rangeFrom>=rangeTo){
+/* =========================================
+   ERROR MESSAGE
+========================================= */
 
-showMessage(
-"FROM must be smaller than TO."
-);
+function showError(message){
 
-return;
+    document.getElementById("status").textContent =
+        "⚠ " + message;
 
+    document.getElementById("rowTotals").textContent = "";
+
+    document.getElementById("colTotals").textContent = "";
 }
 
 
-let numbers=
-generateNumbers();
-
-
-if(!numbers){
-
-showMessage(
-"No valid 5×5 formation for these settings."
-);
-
-return;
-
-}
-
-
-currentNumbers=
-numbers;
-
-selected=[];
-
-
-document.getElementById(
-"showId"
-).textContent=
-gameId;
-
-document.getElementById(
-"showTotal"
-).textContent=
-magicTotal;
-
-
-display();
-
-showSelected();
-
-showMessage(
-"GAME APPLIED ✓"
-);
-
-}
-
-
-/* ==================================
-   NEXT
-================================== */
-
-function nextGame(){
-
-if(currentNumbers.length!==25){
-
-showMessage(
-"Press APPLY first."
-);
-
-return;
-
-}
-
-
-let numbers=
-generateNumbers();
-
-
-if(!numbers){
-
-showMessage(
-"No valid formation."
-);
-
-return;
-
-}
-
-
-currentNumbers=
-numbers;
-
-selected=[];
-
-
-display();
-
-showSelected();
-
-showMessage(
-"NEW RANDOM NUMBERS ✓"
-);
-
-}
-
-
-/* ==================================
-   GAME ID
-================================== */
-
-document.getElementById(
-"gameId"
-).addEventListener(
-"change",
-function(){
-
-gameId=this.value;
-
-document.getElementById(
-"showId"
-).textContent=
-gameId;
-
-}
-);
-
-
-/* ==================================
-   SAVE
-================================== */
-
-function saveGame(){
-
-if(currentNumbers.length!==25){
-
-showMessage(
-"Press APPLY first."
-);
-
-return;
-
-}
-
-
-if(selected.length!==3){
-
-showMessage(
-"Select exactly 3 numbers."
-);
-
-return;
-
-}
-
-
-let selectedNumbers=
-selected.map(
-i=>currentNumbers[i]
-);
-
-
-let data={
-
-gameId:gameId,
-
-gameType:"DIAMOND",
-
-gridSize:5,
-
-rangeFrom:rangeFrom,
-
-rangeTo:rangeTo,
-
-magicTotal:magicTotal,
-
-numbers:currentNumbers,
-
-selectedNumbers:selectedNumbers,
-
-selectedPositions:selected,
-
-createdAt:
-new Date().toISOString()
-
-};
-
-
-localStorage.setItem(
-"DIAMOND_"+gameId,
-JSON.stringify(data)
-);
-
-
-showMessage(
-"GAME SAVED ✓"
-);
-
-}
-
-
-/* ==================================
-   MESSAGE
-================================== */
-
-function showMessage(text){
-
-let el=
-document.getElementById(
-"message"
-);
-
-el.textContent=text;
-
-setTimeout(
-()=>{
-el.textContent="";
-},
-3000
-);
-
-
-/* ==================================
-   INITIAL
-================================== */
-
-currentNumbers=[
-16,23,0,7,14,
-22,4,6,13,15,
-3,5,12,19,21,
-9,11,18,20,2,
-10,17,24,1,8
-];
-
-display();
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
+generateMagicSquare();
 
 </script>
 

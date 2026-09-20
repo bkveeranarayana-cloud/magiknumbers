@@ -68,6 +68,7 @@ input{
   color:white;
   font-size:16px;
   font-weight:bold;
+  cursor:pointer;
 }
 
 #loginMessage{
@@ -202,6 +203,7 @@ input{
   color:white;
   font-size:16px;
   font-weight:bold;
+  cursor:pointer;
 }
 
 .refreshBtn{
@@ -237,7 +239,9 @@ input{
 <body>
 
 
-<!-- ADMIN LOGIN -->
+<!-- =====================================================
+     ADMIN LOGIN
+===================================================== -->
 
 <div class="loginCard" id="loginCard">
 
@@ -272,7 +276,9 @@ input{
 </div>
 
 
-<!-- ADMIN PANEL -->
+<!-- =====================================================
+     ADMIN PANEL
+===================================================== -->
 
 <div
   class="adminPanel"
@@ -305,7 +311,9 @@ input{
       <div class="frames">
 
 
-        <!-- REGISTRATION -->
+        <!-- =================================================
+             REGISTRATION
+        ================================================== -->
 
         <div class="frame registration">
 
@@ -403,7 +411,9 @@ input{
         </div>
 
 
-        <!-- DELETION -->
+        <!-- =================================================
+             ACCOUNT DELETION
+        ================================================== -->
 
         <div class="frame deletion">
 
@@ -498,6 +508,11 @@ input{
 
 <script type="module">
 
+
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
+
 import {
   initializeApp
 }
@@ -506,6 +521,8 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
   getAuth,
+  setPersistence,
+  browserLocalPersistence,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut
@@ -523,12 +540,14 @@ import {
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-/* FIREBASE */
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
 
 const firebaseConfig = {
 
   apiKey:
-  "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+  "AIzaSyCX8mVCr-i4m_7uADo_Y41hpvg1OrLlVI",
 
   authDomain:
   "magiknumbers-d42c0.firebaseapp.com",
@@ -560,7 +579,39 @@ const db =
   getFirestore(app);
 
 
-/* ADMIN CHECK */
+/* =====================================================
+   LOGIN SESSION
+   SAVE UNTIL LOGOUT
+===================================================== */
+
+await setPersistence(
+  auth,
+  browserLocalPersistence
+);
+
+
+/*
+   IMPORTANT:
+
+   Password is NOT saved.
+
+   Only Firebase Authentication session
+   is kept in the browser.
+
+   Browser close:
+   session remains.
+
+   Website open again:
+   admin can continue.
+
+   LOGOUT:
+   session is removed.
+*/
+
+
+/* =====================================================
+   ADMIN CHECK
+===================================================== */
 
 async function checkAdmin(user){
 
@@ -578,6 +629,7 @@ async function checkAdmin(user){
           user.uid
         )
       );
+
 
     return (
       adminDoc.exists() &&
@@ -599,7 +651,9 @@ async function checkAdmin(user){
 }
 
 
-/* LOGIN */
+/* =====================================================
+   LOGIN
+===================================================== */
 
 document
 .getElementById("loginButton")
@@ -613,14 +667,17 @@ document
       .value
       .trim();
 
+
     const password =
       document
       .getElementById("password")
       .value;
 
+
     const message =
       document
       .getElementById("loginMessage");
+
 
     message.textContent = "";
 
@@ -663,6 +720,15 @@ document
       }
 
 
+      /*
+       * Password field is cleared.
+       */
+
+      document
+      .getElementById("password")
+      .value = "";
+
+
       showDashboard();
 
     }
@@ -680,7 +746,9 @@ document
 );
 
 
-/* SHOW DASHBOARD */
+/* =====================================================
+   SHOW DASHBOARD
+===================================================== */
 
 function showDashboard(){
 
@@ -701,13 +769,16 @@ function showDashboard(){
 }
 
 
-/* DATE */
+/* =====================================================
+   DATE
+===================================================== */
 
 function getDate(value){
 
   if(!value){
     return null;
   }
+
 
   try{
 
@@ -752,7 +823,10 @@ function startOfDay(date){
     new Date(date);
 
   result.setHours(
-    0,0,0,0
+    0,
+    0,
+    0,
+    0
   );
 
   return result;
@@ -760,7 +834,9 @@ function startOfDay(date){
 }
 
 
-/* COUNT */
+/* =====================================================
+   COUNT REGISTRATION
+===================================================== */
 
 function countBetween(
   records,
@@ -803,7 +879,9 @@ function countBetween(
 }
 
 
-/* DELETION COUNT */
+/* =====================================================
+   COUNT DELETED
+===================================================== */
 
 function countDeletedBetween(
   records,
@@ -846,7 +924,9 @@ function countDeletedBetween(
 }
 
 
-/* % CHANGE */
+/* =====================================================
+   PERCENTAGE CHANGE
+===================================================== */
 
 function percentageChange(
   current,
@@ -856,8 +936,11 @@ function percentageChange(
   if(previous === 0){
 
     if(current === 0){
+
       return 0;
+
     }
+
 
     return null;
 
@@ -873,6 +956,10 @@ function percentageChange(
 
 }
 
+
+/* =====================================================
+   SHOW CHANGE
+===================================================== */
 
 function showChange(
   elementId,
@@ -900,8 +987,10 @@ function showChange(
       ? "NEW"
       : "0%";
 
+
     element.className =
       "change noChange";
+
 
     return;
 
@@ -911,7 +1000,10 @@ function showChange(
   if(change > 0){
 
     element.textContent =
-      "▲ " + change + "%";
+      "▲ " +
+      change +
+      "%";
+
 
     element.className =
       "change up";
@@ -924,6 +1016,7 @@ function showChange(
       Math.abs(change) +
       "%";
 
+
     element.className =
       "change down";
 
@@ -933,6 +1026,7 @@ function showChange(
     element.textContent =
       "0%";
 
+
     element.className =
       "change noChange";
 
@@ -941,7 +1035,9 @@ function showChange(
 }
 
 
-/* LOAD */
+/* =====================================================
+   LOAD DASHBOARD
+===================================================== */
 
 async function loadDashboard(){
 
@@ -971,7 +1067,10 @@ async function loadDashboard(){
 
   try{
 
-    /* USERS */
+
+    /* =================================================
+       USERS
+    ================================================= */
 
     const usersSnapshot =
       await getDocs(
@@ -996,7 +1095,9 @@ async function loadDashboard(){
     );
 
 
-    /* CURRENT DATE */
+    /* =================================================
+       CURRENT DATE
+    ================================================= */
 
     const now =
       new Date();
@@ -1017,7 +1118,9 @@ async function loadDashboard(){
     );
 
 
-    /* YESTERDAY */
+    /* =================================================
+       YESTERDAY
+    ================================================= */
 
     const yesterdayStart =
       new Date(
@@ -1030,7 +1133,9 @@ async function loadDashboard(){
     );
 
 
-    /* LAST 7 DAYS */
+    /* =================================================
+       LAST 7 DAYS
+    ================================================= */
 
     const sevenStart =
       new Date(
@@ -1054,7 +1159,9 @@ async function loadDashboard(){
     );
 
 
-    /* LAST 30 DAYS */
+    /* =================================================
+       LAST 30 DAYS
+    ================================================= */
 
     const thirtyStart =
       new Date(
@@ -1078,7 +1185,9 @@ async function loadDashboard(){
     );
 
 
-    /* REGISTRATION */
+    /* =================================================
+       REGISTRATION
+    ================================================= */
 
     const totalRegistered =
       users.length;
@@ -1132,7 +1241,9 @@ async function loadDashboard(){
       );
 
 
-    /* DISPLAY */
+    /* =================================================
+       DISPLAY REGISTRATION
+    ================================================= */
 
     document
     .getElementById(
@@ -1166,7 +1277,9 @@ async function loadDashboard(){
       thirtyDaysRegistered;
 
 
-    /* % */
+    /* =================================================
+       REGISTRATION %
+    ================================================= */
 
     showChange(
       "todayChange",
@@ -1189,7 +1302,9 @@ async function loadDashboard(){
     );
 
 
-    /* DELETED */
+    /* =================================================
+       ACCOUNT DELETION
+    ================================================= */
 
     let deleted = [];
 
@@ -1253,7 +1368,9 @@ async function loadDashboard(){
       );
 
 
-    /* DISPLAY */
+    /* =================================================
+       DISPLAY DELETION
+    ================================================= */
 
     document
     .getElementById(
@@ -1287,7 +1404,9 @@ async function loadDashboard(){
       thirtyDaysDeleted;
 
 
-    /* SHOW */
+    /* =================================================
+       SHOW DASHBOARD
+    ================================================= */
 
     loading.style.display =
       "none";
@@ -1295,6 +1414,7 @@ async function loadDashboard(){
 
     content.style.display =
       "block";
+
 
   }
   catch(error){
@@ -1314,7 +1434,9 @@ async function loadDashboard(){
 }
 
 
-/* REFRESH */
+/* =====================================================
+   REFRESH
+===================================================== */
 
 document
 .getElementById("refreshButton")
@@ -1324,7 +1446,9 @@ document
 );
 
 
-/* LOGOUT */
+/* =====================================================
+   LOGOUT
+===================================================== */
 
 document
 .getElementById("logoutButton")
@@ -1332,19 +1456,39 @@ document
   "click",
   async function(){
 
-    await signOut(auth);
+    try{
 
-    location.reload();
+      await signOut(auth);
+
+      /*
+       * Firebase session is now cleared.
+       * Next time login is required.
+       */
+
+      location.reload();
+
+    }
+    catch(error){
+
+      console.error(
+        "Logout error:",
+        error
+      );
+
+    }
 
   }
 );
 
 
-/* AUTH STATE */
+/* =====================================================
+   AUTH STATE
+===================================================== */
 
 onAuthStateChanged(
   auth,
   async function(user){
+
 
     if(!user){
 
@@ -1353,10 +1497,12 @@ onAuthStateChanged(
       .style.display =
         "block";
 
+
       document
       .getElementById("adminPanel")
       .style.display =
         "none";
+
 
       return;
 
@@ -1364,7 +1510,9 @@ onAuthStateChanged(
 
 
     const isAdmin =
-      await checkAdmin(user);
+      await checkAdmin(
+        user
+      );
 
 
     if(isAdmin){

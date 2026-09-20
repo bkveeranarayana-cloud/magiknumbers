@@ -7,191 +7,229 @@
 <title>GAME-GENERATOR</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    padding: 15px;
-    background: #101522;
-    color: white;
-    font-family: Arial, sans-serif;
+body{
+    margin:0;
+    padding:15px;
+    background:#101522;
+    color:white;
+    font-family:Arial,sans-serif;
 }
 
-.container {
-    max-width: 500px;
-    margin: auto;
+.container{
+    max-width:500px;
+    margin:auto;
 }
 
-h1 {
-    text-align: center;
-    color: #f5c542;
-    font-size: 25px;
+h1{
+    text-align:center;
+    color:#f5c542;
+    font-size:25px;
 }
 
-h2 {
-    text-align: center;
-    font-size: 19px;
-    margin: 20px 0;
+h2{
+    text-align:center;
+    font-size:19px;
+    margin:20px 0;
 }
 
-.info {
-    background: #1c2638;
-    padding: 14px;
-    border-radius: 10px;
-    margin-bottom: 15px;
+.info{
+    background:#1c2638;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:15px;
 }
 
-.info-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #39445a;
-    font-size: 14px;
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid #39445a;
+    font-size:14px;
 }
 
-.info-row:last-child {
-    border-bottom: none;
+.info-row:last-child{
+    border-bottom:none;
 }
 
-.info-row span:last-child {
-    color: #f5c542;
-    font-weight: bold;
+.info-row span:last-child{
+    color:#f5c542;
+    font-weight:bold;
 }
 
-.magic-table {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-    margin: 15px 0;
+.magic-table{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:5px;
+    margin:15px 0;
 }
 
-.box {
-    background: #25334b;
-    border: 2px solid #435574;
-    border-radius: 7px;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: clamp(17px, 5vw, 25px);
-    font-weight: bold;
+.box{
+    background:#25334b;
+    border:2px solid #435574;
+    border-radius:7px;
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:clamp(17px,5vw,25px);
+    font-weight:bold;
 }
 
-.box.selected {
-    background: #f5c542;
-    color: #101522;
-    border-color: white;
-    box-shadow: 0 0 10px #f5c542;
+.box.selected{
+    background:#f5c542;
+    color:#101522;
+    border-color:white;
+    box-shadow:0 0 10px #f5c542;
 }
 
-.diagonals {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin: 15px 0;
+.diagonals{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:15px 0;
 }
 
-.diagonal {
-    background: #1c2638;
-    padding: 12px 5px;
-    text-align: center;
-    border-radius: 8px;
-    font-size: 13px;
+.diagonal{
+    background:#1c2638;
+    padding:12px 5px;
+    text-align:center;
+    border-radius:8px;
+    font-size:13px;
 }
 
-.diagonal span {
-    display: inline-block;
-    color: #f5c542;
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 5px;
+.diagonal span{
+    display:inline-block;
+    color:#f5c542;
+    font-size:22px;
+    font-weight:bold;
+    margin-top:5px;
 }
 
-.status {
-    text-align: center;
-    background: #123b2b;
-    color: #45f0a5;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    margin: 12px 0;
+.status{
+    text-align:center;
+    background:#123b2b;
+    color:#45f0a5;
+    padding:12px;
+    border-radius:8px;
+    font-weight:bold;
+    margin:12px 0;
 }
 
-.selected-box {
-    background: #1c2638;
-    padding: 14px;
-    border-radius: 8px;
-    text-align: center;
-    margin: 15px 0;
+.selected-box{
+    background:#1c2638;
+    padding:14px;
+    border-radius:8px;
+    text-align:center;
+    margin:15px 0;
 }
 
-.selected-numbers {
-    color: #f5c542;
-    font-size: 23px;
-    font-weight: bold;
-    margin-top: 10px;
-    min-height: 30px;
-    overflow-wrap: anywhere;
+.selected-numbers{
+    color:#f5c542;
+    font-size:23px;
+    font-weight:bold;
+    margin-top:10px;
+    min-height:30px;
 }
 
-.buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin: 15px 0;
+.buttons{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    margin:15px 0;
 }
 
-button {
-    border: none;
-    border-radius: 8px;
-    padding: 15px 8px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
+button{
+    border:none;
+    border-radius:8px;
+    padding:15px 8px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.next {
-    background: #f5c542;
-    color: #101522;
+.generate{
+    background:#f5c542;
+    color:#101522;
 }
 
-.save {
-    background: #168b60;
-    color: white;
+.generate:disabled{
+    opacity:.5;
+    cursor:not-allowed;
 }
 
-.back {
-    width: 100%;
-    background: #39445a;
-    color: white;
-    margin-top: 8px;
+.back{
+    width:100%;
+    background:#39445a;
+    color:white;
+    margin-top:8px;
 }
 
-.message {
-    text-align: center;
-    color: #45f0a5;
-    font-size: 13px;
-    margin: 10px 0;
+.message{
+    text-align:center;
+    color:#45f0a5;
+    font-size:13px;
+    margin:10px 0;
+    line-height:1.6;
 }
 
-.saved-list {
-    margin-top: 20px;
-    background: #1c2638;
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 13px;
-    overflow-wrap: anywhere;
+.progress-box{
+    background:#1c2638;
+    border-radius:8px;
+    padding:12px;
+    margin:15px 0;
+    display:none;
 }
 
-.saved-list h3 {
-    color: #f5c542;
+.progress-bar{
+    width:100%;
+    height:12px;
+    background:#39445a;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:8px;
 }
 
-.saved-item {
-    border-bottom: 1px solid #39445a;
-    padding: 8px 0;
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:#f5c542;
+    transition:.2s;
+}
+
+.saved-list{
+    margin-top:20px;
+    background:#1c2638;
+    border-radius:8px;
+    padding:12px;
+    font-size:13px;
+}
+
+.saved-list h3{
+    color:#f5c542;
+    margin-top:0;
+}
+
+.saved-count{
+    color:#45f0a5;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.saved-item{
+    border-bottom:1px solid #39445a;
+    padding:8px 0;
+}
+
+.saved-item:last-child{
+    border-bottom:none;
+}
+
+.error{
+    color:#ff7777;
 }
 </style>
 </head>
@@ -207,8 +245,18 @@ button {
 <div class="info">
 
     <div class="info-row">
-        <span>GAME ID</span>
-        <span id="gameId">MKND840001</span>
+        <span>FIRST GAME ID</span>
+        <span>MKND840001</span>
+    </div>
+
+    <div class="info-row">
+        <span>LAST GAME ID</span>
+        <span>MKND842500</span>
+    </div>
+
+    <div class="info-row">
+        <span>TOTAL GAMES</span>
+        <span>2500</span>
     </div>
 
     <div class="info-row">
@@ -224,6 +272,17 @@ button {
     <div class="info-row">
         <span>MAGIC TOTAL</span>
         <span>60</span>
+    </div>
+
+</div>
+
+<!-- CURRENT GAME -->
+
+<div class="info">
+
+    <div class="info-row">
+        <span>CURRENT GAME</span>
+        <span id="gameId">MKND840001</span>
     </div>
 
 </div>
@@ -250,13 +309,13 @@ button {
 
 </div>
 
-<!-- GAME STATUS -->
+<!-- STATUS -->
 
 <div class="status" id="gameStatus">
     VALID GAME ✓
 </div>
 
-<!-- RANDOM SELECTION -->
+<!-- SELECTED NUMBERS -->
 
 <div class="selected-box">
 
@@ -268,404 +327,992 @@ button {
 
 </div>
 
-<!-- BUTTONS -->
+<!-- GENERATE BUTTON -->
 
 <div class="buttons">
 
-    <button class="next" onclick="nextGame()">
-        NEXT
-    </button>
+    <button
+        class="generate"
+        id="generateButton"
+        onclick="generateAllGames()">
 
-    <button class="save" onclick="saveGame()">
-        SAVE GAME
+        GENERATE 2500 GAMES
+
     </button>
 
 </div>
 
-<div class="message" id="message"></div>
+<!-- PROGRESS -->
+
+<div class="progress-box" id="progressBox">
+
+    <div id="progressText">
+        Preparing...
+    </div>
+
+    <div class="progress-bar">
+
+        <div
+            class="progress-fill"
+            id="progressFill">
+        </div>
+
+    </div>
+
+</div>
+
+<div
+    class="message"
+    id="message">
+</div>
 
 <!-- SAVED GAMES -->
 
 <div class="saved-list">
 
-    <h3>SAVED GAMES</h3>
+    <h3>🔥 FIREBASE SAVED GAMES</h3>
+
+    <div
+        class="saved-count"
+        id="savedCount">
+        Loading...
+    </div>
 
     <div id="savedGames">
-        No games saved
+        Loading games...
     </div>
 
 </div>
 
-<button class="back" onclick="history.back()">
+<button
+    class="back"
+    onclick="history.back()">
+
     BACK TO ADMIN
+
 </button>
 
 </div>
 
-<script>
 
-// =================================
-// GAME SETTINGS
-// =================================
+<script type="module">
 
-let gameNumber = 840001;
+// =====================================================
+// FIREBASE
+// =====================================================
 
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    doc,
+    writeBatch
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+// =====================================================
+// FIREBASE CONFIG
+// =====================================================
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+
+    authDomain:
+        "magiknumbers-d42c0.firebaseapp.com",
+
+    projectId:
+        "magiknumbers-d42c0",
+
+    storageBucket:
+        "magiknumbers-d42c0.firebasestorage.app",
+
+    messagingSenderId:
+        "977553928698",
+
+    appId:
+        "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
+};
+
+
+// =====================================================
+// FIREBASE INITIALIZE
+// =====================================================
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+// =====================================================
+// SETTINGS
+// =====================================================
+
+const FIRST_GAME = 840001;
+const LAST_GAME = 842500;
 const MAGIC_TOTAL = 60;
 
 let currentGrid = [];
 let selectedNumbers = [];
 
 
-// =================================
-// SHUFFLE FUNCTION
-// =================================
+// =====================================================
+// RANDOM SHUFFLE
+// =====================================================
 
-function shuffle(array) {
+function shuffle(array){
 
-    for (let i = array.length - 1; i > 0; i--) {
+    let arr = [...array];
+
+    for(let i = arr.length - 1; i > 0; i--){
 
         let j = Math.floor(Math.random() * (i + 1));
 
-        [array[i], array[j]] = [array[j], array[i]];
+        [arr[i], arr[j]] =
+        [arr[j], arr[i]];
     }
 
-    return array;
+    return arr;
 }
 
 
-// =================================
-// CREATE 5x5 MAGIC SQUARE
-// Using Siamese method
-// =================================
+// =====================================================
+// CREATE UNIQUE 5×5 MAGIC SQUARE
+//
+// This construction guarantees:
+//
+// 0–24 exactly once
+// Every row = 60
+// Every column = 60
+// Both diagonals = 60
+//
+// Random permutations create many possible
+// different valid magic squares.
+// =====================================================
 
-function createMagicSquare() {
+function createMagicSquare(){
 
-    let size = 5;
+    while(true){
 
-    let square = Array.from(
-        { length: size },
-        () => Array(size).fill(null)
-    );
+        // Random permutations of 0..4
 
-    let row = 0;
-    let col = Math.floor(size / 2);
+        const pA = shuffle([0,1,2,3,4]);
+        const pB = shuffle([0,1,2,3,4]);
 
-    for (let num = 1; num <= 25; num++) {
-
-        square[row][col] = num - 1;
-
-        let nextRow = (row - 1 + size) % size;
-        let nextCol = (col + 1) % size;
-
-        if (square[nextRow][nextCol] !== null) {
-
-            row = (row + 1) % size;
-
-        } else {
-
-            row = nextRow;
-            col = nextCol;
-        }
-    }
-
-    return square;
-}
+        const qA = shuffle([0,1,2,3,4]);
+        const qB = shuffle([0,1,2,3,4]);
 
 
-// =================================
-// RANDOMIZE MAGIC SQUARE
-// Valid transformations preserve
-// all row/column/diagonal totals
-// =================================
+        // Constants
 
-function randomizeMagicSquare(square) {
+        const cA =
+            Math.floor(Math.random() * 5);
 
-    let grid = square.map(row => [...row]);
+        const cB =
+            Math.floor(Math.random() * 5);
 
-    // Randomly rotate or reflect
-    let rotations = Math.floor(Math.random() * 4);
 
-    if (Math.random() < 0.5) {
-        grid = grid.map(row => [...row].reverse());
-    }
+        let grid =
+            Array.from(
+                {length:5},
+                () => Array(5).fill(0)
+            );
 
-    for (let r = 0; r < rotations; r++) {
 
-        let n = grid.length;
+        for(let r=0;r<5;r++){
 
-        let rotated = Array.from(
-            { length: n },
-            () => Array(n).fill(0)
-        );
+            for(let c=0;c<5;c++){
 
-        for (let i = 0; i < n; i++) {
-            for (let j = 0; j < n; j++) {
+                /*
+                 * Two orthogonal Latin squares
+                 *
+                 * A = r + 2c
+                 * B = 2r + c
+                 *
+                 * Mod 5
+                 */
 
-                rotated[j][n - 1 - i] = grid[i][j];
+                let A =
+                    (r + 2*c + cA) % 5;
+
+                let B =
+                    (2*r + c + cB) % 5;
+
+
+                // Randomly rename residues
+
+                A = pA[A];
+
+                B = pB[B];
+
+
+                /*
+                 * Additional permutation
+                 * keeps every line balanced.
+                 */
+
+                A =
+                    qA[A];
+
+                B =
+                    qB[B];
+
+
+                grid[r][c] =
+                    A * 5 + B;
             }
         }
 
-        grid = rotated;
+
+        if(validateGrid(grid)){
+
+            return grid;
+        }
     }
-
-    // Shuffle rows inside bands
-    let rowBands = shuffle([0, 1, 2]);
-
-    let rowOrder = [];
-
-    rowBands.forEach(band => {
-
-        let rows = [0, 1, 2, 3, 4]
-            .filter(r => Math.floor(r / 1) === band);
-
-        if (band === 0) rows = [0, 1];
-        if (band === 1) rows = [2, 3];
-        if (band === 2) rows = [4];
-
-        shuffle(rows).forEach(r => rowOrder.push(r));
-    });
-
-    // Use only transformations that preserve
-    // the standard 5x5 magic square properties.
-    // Randomly shuffle rows within each pair
-    // and columns within each pair.
-
-    let rowPairs = [[0,1],[2,3],[4]];
-    let colPairs = [[0,1],[2,3],[4]];
-
-    shuffle(rowPairs);
-    shuffle(colPairs);
-
-    rowPairs.forEach(pair => shuffle(pair));
-    colPairs.forEach(pair => shuffle(pair));
-
-    let rows = rowPairs.flat();
-    let cols = colPairs.flat();
-
-    let transformed = rows.map(r =>
-        cols.map(c => grid[r][c])
-    );
-
-    return transformed;
 }
 
 
-// =================================
-// CHECK MAGIC SQUARE
-// =================================
+// =====================================================
+// VALIDATE GRID
+// =====================================================
 
-function validateGrid(grid) {
+function validateGrid(grid){
 
-    // Check every row
-    for (let r = 0; r < 5; r++) {
+    // Check numbers 0–24
 
-        let total = grid[r].reduce((a, b) => a + b, 0);
+    const numbers = grid.flat();
 
-        if (total !== MAGIC_TOTAL) return false;
+    const unique =
+        new Set(numbers);
+
+    if(unique.size !== 25){
+
+        return false;
     }
 
-    // Check every column
-    for (let c = 0; c < 5; c++) {
+
+    for(let n=0;n<25;n++){
+
+        if(!unique.has(n)){
+
+            return false;
+        }
+    }
+
+
+    // Rows
+
+    for(let r=0;r<5;r++){
 
         let total = 0;
 
-        for (let r = 0; r < 5; r++) {
+        for(let c=0;c<5;c++){
+
             total += grid[r][c];
         }
 
-        if (total !== MAGIC_TOTAL) return false;
+        if(total !== MAGIC_TOTAL){
+
+            return false;
+        }
     }
 
-    // Check diagonals
-    let d1 = 0;
-    let d2 = 0;
 
-    for (let i = 0; i < 5; i++) {
+    // Columns
+
+    for(let c=0;c<5;c++){
+
+        let total = 0;
+
+        for(let r=0;r<5;r++){
+
+            total += grid[r][c];
+        }
+
+        if(total !== MAGIC_TOTAL){
+
+            return false;
+        }
+    }
+
+
+    // Diagonal 1
+
+    let d1 = 0;
+
+    for(let i=0;i<5;i++){
 
         d1 += grid[i][i];
-        d2 += grid[i][4 - i];
     }
 
-    return d1 === MAGIC_TOTAL && d2 === MAGIC_TOTAL;
+
+    // Diagonal 2
+
+    let d2 = 0;
+
+    for(let i=0;i<5;i++){
+
+        d2 += grid[i][4-i];
+    }
+
+
+    return (
+        d1 === MAGIC_TOTAL &&
+        d2 === MAGIC_TOTAL
+    );
 }
 
 
-// =================================
+// =====================================================
+// GRID SIGNATURE
+// =====================================================
+
+function gridSignature(grid){
+
+    return grid
+        .flat()
+        .join(",");
+}
+
+
+// =====================================================
+// RANDOM 3 SELECTED NUMBERS
+// =====================================================
+
+function getRandomThree(grid){
+
+    return shuffle(grid.flat())
+        .slice(0,3);
+}
+
+
+// =====================================================
 // DISPLAY GRID
-// =================================
+// =====================================================
 
-function displayGrid() {
+function displayGrid(){
 
-    const table = document.getElementById("magicTable");
+    const table =
+        document.getElementById("magicTable");
 
     table.innerHTML = "";
 
+
     currentGrid.flat().forEach(num => {
 
-        let box = document.createElement("div");
+        const box =
+            document.createElement("div");
 
         box.className = "box";
-        box.textContent = num;
-        box.dataset.number = num;
 
-        if (selectedNumbers.includes(num)) {
+        box.textContent = num;
+
+
+        if(selectedNumbers.includes(num)){
+
             box.classList.add("selected");
         }
 
+
         table.appendChild(box);
+
     });
 
-    document.getElementById("diagonal1").textContent =
-        currentGrid.reduce((sum, row, i) => sum + row[i], 0);
 
-    document.getElementById("diagonal2").textContent =
-        currentGrid.reduce((sum, row, i) => sum + row[4 - i], 0);
+    let d1 = 0;
+    let d2 = 0;
+
+
+    for(let i=0;i<5;i++){
+
+        d1 += currentGrid[i][i];
+
+        d2 += currentGrid[i][4-i];
+    }
+
+
+    document.getElementById(
+        "diagonal1"
+    ).textContent = d1;
+
+
+    document.getElementById(
+        "diagonal2"
+    ).textContent = d2;
+
+
+    document.getElementById(
+        "selectedNumbers"
+    ).textContent =
+        selectedNumbers.join(" | ");
 }
 
 
-// =================================
-// AUTOMATIC RANDOM 3 NUMBER SELECT
-// =================================
+// =====================================================
+// CREATE NEXT PREVIEW GAME
+// =====================================================
 
-function selectRandomThree() {
+function createPreview(){
 
-    let allNumbers = currentGrid.flat();
+    currentGrid =
+        createMagicSquare();
 
-    shuffle(allNumbers);
-
-    selectedNumbers = allNumbers.slice(0, 3);
-
-    document.getElementById("selectedNumbers").textContent =
-        selectedNumbers.join("  |  ");
+    selectedNumbers =
+        getRandomThree(currentGrid);
 
     displayGrid();
 }
 
 
-// =================================
-// GENERATE NEW GAME
-// =================================
+// =====================================================
+// GENERATE GAME DATA
+// =====================================================
 
-function nextGame() {
+function createGameData(gameNumber, grid){
 
-    let baseSquare = createMagicSquare();
-
-    currentGrid = randomizeMagicSquare(baseSquare);
-
-    // Update Game ID
-    gameNumber++;
-
-    document.getElementById("gameId").textContent =
+    const gameId =
         "MKND" + gameNumber;
 
-    // Automatically select 3 new random numbers
-    selectRandomThree();
 
-    document.getElementById("gameStatus").textContent =
-        "VALID GAME ✓";
+    return {
 
-    document.getElementById("message").textContent = "";
+        gameId: gameId,
 
-}
+        gameNumber: gameNumber,
 
+        grid: grid,
 
-// =================================
-// SAVE GAME
-// =================================
+        selectedNumbers:
+            getRandomThree(grid),
 
-function saveGame() {
+        magicTotal:
+            MAGIC_TOTAL,
 
-    let gameData = {
+        gridSignature:
+            gridSignature(grid),
 
-        gameId: document.getElementById("gameId").textContent,
+        createdAt:
+            new Date().toISOString()
 
-        grid: currentGrid,
-
-        selectedNumbers: selectedNumbers,
-
-        magicTotal: MAGIC_TOTAL,
-
-        date: new Date().toLocaleString()
     };
+}
 
-    let saved = JSON.parse(
-        localStorage.getItem("diamondGames") || "[]"
-    );
 
-    // Prevent duplicate save for same game ID
-    if (saved.some(g => g.gameId === gameData.gameId)) {
+// =====================================================
+// LOAD EXISTING FIREBASE GAMES
+// =====================================================
 
-        document.getElementById("message").textContent =
-            "This game is already saved!";
+async function loadSavedGames(){
 
-        return;
+    const savedGames =
+        document.getElementById("savedGames");
+
+    const savedCount =
+        document.getElementById("savedCount");
+
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(db,"diamondGames")
+            );
+
+
+        let games = [];
+
+
+        snapshot.forEach(item => {
+
+            const data = item.data();
+
+            const number =
+                Number(data.gameNumber);
+
+
+            if(
+                number >= FIRST_GAME &&
+                number <= LAST_GAME
+            ){
+
+                games.push(data);
+            }
+
+        });
+
+
+        games.sort(
+            (a,b) =>
+            Number(a.gameNumber) -
+            Number(b.gameNumber)
+        );
+
+
+        savedCount.textContent =
+            games.length +
+            " / 2500 GAMES SAVED";
+
+
+        if(games.length === 0){
+
+            savedGames.textContent =
+                "No games saved yet.";
+
+            return;
+        }
+
+
+        savedGames.innerHTML = "";
+
+
+        // Show first 100 in the list
+        // to keep the page fast.
+
+        games.slice(0,100)
+        .forEach(game => {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "saved-item";
+
+
+            item.textContent =
+                game.gameId +
+                " ✓";
+
+
+            savedGames.appendChild(item);
+
+        });
+
+
+        if(games.length > 100){
+
+            const more =
+                document.createElement("div");
+
+            more.className =
+                "saved-item";
+
+
+            more.textContent =
+                "... and " +
+                (games.length - 100) +
+                " more games";
+
+
+            savedGames.appendChild(more);
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        savedCount.textContent =
+            "Firebase error";
+
+
+        savedGames.innerHTML =
+            '<span class="error">' +
+            error.message +
+            '</span>';
+    }
+}
+
+
+// =====================================================
+// GENERATE ALL 2500 GAMES
+// =====================================================
+
+window.generateAllGames =
+async function(){
+
+    const button =
+        document.getElementById(
+            "generateButton"
+        );
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    const progressBox =
+        document.getElementById(
+            "progressBox"
+        );
+
+
+    const progressText =
+        document.getElementById(
+            "progressText"
+        );
+
+
+    const progressFill =
+        document.getElementById(
+            "progressFill"
+        );
+
+
+    button.disabled = true;
+
+    progressBox.style.display =
+        "block";
+
+
+    message.textContent =
+        "Checking Firebase...";
+
+
+    try{
+
+        // ==========================================
+        // READ EXISTING GAMES
+        // ==========================================
+
+        const snapshot =
+            await getDocs(
+                collection(db,"diamondGames")
+            );
+
+
+        const existingIds =
+            new Set();
+
+
+        const existingSignatures =
+            new Set();
+
+
+        snapshot.forEach(item => {
+
+            const data =
+                item.data();
+
+
+            const gameNumber =
+                Number(data.gameNumber);
+
+
+            if(
+                gameNumber >= FIRST_GAME &&
+                gameNumber <= LAST_GAME
+            ){
+
+                existingIds.add(
+                    data.gameId
+                );
+
+
+                if(data.gridSignature){
+
+                    existingSignatures.add(
+                        data.gridSignature
+                    );
+
+                }
+
+            }
+
+        });
+
+
+        // ==========================================
+        // CHECK IF ALL 2500 ALREADY EXIST
+        // ==========================================
+
+        if(existingIds.size === 2500){
+
+            message.textContent =
+                "ALL 2500 GAMES ARE ALREADY SAVED ✓";
+
+
+            progressText.textContent =
+                "2500 / 2500 completed";
+
+
+            progressFill.style.width =
+                "100%";
+
+
+            button.disabled = false;
+
+            await loadSavedGames();
+
+            return;
+        }
+
+
+        // ==========================================
+        // GENERATE MISSING GAMES
+        // ==========================================
+
+        let gamesToSave = [];
+
+
+        let totalNeeded =
+            2500 - existingIds.size;
+
+
+        let created =
+            0;
+
+
+        message.textContent =
+            "Generating unique games...";
+
+
+        for(
+            let gameNumber = FIRST_GAME;
+            gameNumber <= LAST_GAME;
+            gameNumber++
+        ){
+
+            const gameId =
+                "MKND" + gameNumber;
+
+
+            // Already in Firebase
+
+            if(existingIds.has(gameId)){
+
+                continue;
+            }
+
+
+            let grid;
+
+            let signature;
+
+            let attempts = 0;
+
+
+            do{
+
+                grid =
+                    createMagicSquare();
+
+
+                signature =
+                    gridSignature(grid);
+
+
+                attempts++;
+
+
+                /*
+                 * Safety limit.
+                 * With the construction used here,
+                 * unique squares are abundant.
+                 */
+
+                if(attempts > 10000){
+
+                    throw new Error(
+                        "Unable to create a unique game."
+                    );
+                }
+
+
+            }
+            while(
+                existingSignatures.has(signature)
+            );
+
+
+            existingSignatures.add(
+                signature
+            );
+
+
+            const game =
+                createGameData(
+                    gameNumber,
+                    grid
+                );
+
+
+            gamesToSave.push(game);
+
+
+            created++;
+
+
+            progressText.textContent =
+                "Generating: " +
+                created +
+                " / " +
+                totalNeeded;
+
+
+            progressFill.style.width =
+                (
+                    created /
+                    totalNeeded *
+                    100
+                ) + "%";
+
+
+            /*
+             * Allow browser UI to update
+             * during large generation.
+             */
+
+            if(created % 100 === 0){
+
+                await new Promise(
+                    resolve =>
+                    setTimeout(resolve,0)
+                );
+            }
+
+        }
+
+
+        // ==========================================
+        // FIRESTORE BATCH SAVE
+        //
+        // Firestore max batch = 500 writes
+        // ==========================================
+
+        let savedCount = 0;
+
+
+        for(
+            let start = 0;
+            start < gamesToSave.length;
+            start += 500
+        ){
+
+            const batch =
+                writeBatch(db);
+
+
+            const chunk =
+                gamesToSave.slice(
+                    start,
+                    start + 500
+                );
+
+
+            chunk.forEach(game => {
+
+                const ref =
+                    doc(
+                        db,
+                        "diamondGames",
+                        game.gameId
+                    );
+
+
+                batch.set(
+                    ref,
+                    game
+                );
+
+            });
+
+
+            message.textContent =
+                "Saving to Firebase...";
+
+
+            await batch.commit();
+
+
+            savedCount +=
+                chunk.length;
+
+
+            progressText.textContent =
+                "Firebase saved: " +
+                savedCount +
+                " / " +
+                gamesToSave.length;
+
+
+            progressFill.style.width =
+                (
+                    savedCount /
+                    gamesToSave.length *
+                    100
+                ) + "%";
+
+        }
+
+
+        // ==========================================
+        // FINISHED
+        // ==========================================
+
+        message.textContent =
+            "✓ " +
+            savedCount +
+            " NEW GAMES SAVED TO FIREBASE";
+
+
+        progressText.textContent =
+            "COMPLETE ✓";
+
+
+        progressFill.style.width =
+            "100%";
+
+
+        button.disabled = false;
+
+
+        // Show saved games
+
+        await loadSavedGames();
+
+    }
+    catch(error){
+
+        console.error(
+            "Firebase Error:",
+            error
+        );
+
+
+        message.innerHTML =
+            '<span class="error">' +
+            "ERROR: " +
+            error.message +
+            "</span>";
+
+
+        button.disabled = false;
+
     }
 
-    saved.push(gameData);
-
-    localStorage.setItem(
-        "diamondGames",
-        JSON.stringify(saved)
-    );
-
-    document.getElementById("message").textContent =
-        "GAME SAVED SUCCESSFULLY ✓";
-
-    showSavedGames();
-}
+};
 
 
-// =================================
-// DISPLAY SAVED GAMES
-// =================================
+// =====================================================
+// INITIAL PREVIEW
+// =====================================================
 
-function showSavedGames() {
-
-    let saved = JSON.parse(
-        localStorage.getItem("diamondGames") || "[]"
-    );
-
-    let container = document.getElementById("savedGames");
-
-    if (saved.length === 0) {
-
-        container.textContent = "No games saved";
-        return;
-    }
-
-    container.innerHTML = "";
-
-    saved.forEach(game => {
-
-        let item = document.createElement("div");
-
-        item.className = "saved-item";
-
-        item.textContent =
-            game.gameId +
-            " | Selected: " +
-            game.selectedNumbers.join(", ") +
-            " | " + game.date;
-
-        container.appendChild(item);
-    });
-}
+createPreview();
 
 
-// =================================
-// INITIAL GAME
-// =================================
+// =====================================================
+// LOAD SAVED GAMES WHEN PAGE OPENS
+// =====================================================
 
-function initializeGame() {
-
-    currentGrid = createMagicSquare();
-
-    selectRandomThree();
-
-    showSavedGames();
-}
-
-initializeGame();
+loadSavedGames();
 
 </script>
 

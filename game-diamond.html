@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>GAME-DIAMOND</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+  background:#f3f4f6;
+  color:#111;
+}
+
+/* HEADER */
+
+.header{
+  width:100%;
+  background:#111827;
+  color:white;
+  text-align:center;
+  padding:18px 10px;
+  font-size:24px;
+  font-weight:bold;
+}
+
+/* MAIN */
+
+.container{
+  width:94%;
+  max-width:600px;
+  margin:20px auto;
+}
+
+/* GAME CARD */
+
+.game-card{
+  background:white;
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:20px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.10);
+}
+
+/* GAME ID */
+
+.game-id{
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:14px;
+}
+
+/* 5 × 5 GRID */
+
+.game-grid{
+  width:100%;
+  max-width:360px;
+  margin:0 auto;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+  gap:5px;
+}
+
+/* EMPTY BOX */
+
+.box{
+  width:100%;
+  aspect-ratio:1 / 1;
+
+  background:white;
+
+  border:2px solid #222;
+
+  border-radius:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+  GAME-DIAMOND
+</div>
+
+
+<!-- GAMES -->
+
+<div
+  class="container"
+  id="gamesContainer"
+></div>
+
+
+<script>
+
+/*
+  GAME IDs
+
+  MKND840001
+  to
+  MKND840250
+*/
+
+
+const container =
+  document.getElementById(
+    "gamesContainer"
+  );
+
+
+const startNumber = 1;
+const totalGames = 250;
+
+
+/* CREATE 250 GAMES */
+
+for(
+  let i = startNumber;
+  i <= totalGames;
+  i++
+){
+
+  /*
+    Convert number to
+    6 digit format
+
+    1   → 000001
+    25  → 000025
+    250 → 000250
+  */
+
+  const number =
+    String(i).padStart(6,"0");
+
+
+  const gameId =
+    "MKND84" + number;
+
+
+  /* GAME CARD */
+
+  const gameCard =
+    document.createElement("div");
+
+  gameCard.className =
+    "game-card";
+
+
+  /* GAME ID */
+
+  const gameIdElement =
+    document.createElement("div");
+
+  gameIdElement.className =
+    "game-id";
+
+  gameIdElement.textContent =
+    "Game ID: " + gameId;
+
+
+  /* GRID */
+
+  const grid =
+    document.createElement("div");
+
+  grid.className =
+    "game-grid";
+
+
+  /*
+    5 × 5 = 25 empty boxes
+  */
+
+  for(
+    let boxNumber = 1;
+    boxNumber <= 25;
+    boxNumber++
+  ){
+
+    const box =
+      document.createElement("div");
+
+    box.className =
+      "box";
+
+
+    /*
+      Future number loading
+      can use this data attribute.
+    */
+
+    box.dataset.gameId =
+      gameId;
+
+    box.dataset.boxNumber =
+      boxNumber;
+
+
+    grid.appendChild(box);
+
+  }
+
+
+  gameCard.appendChild(
+    gameIdElement
+  );
+
+  gameCard.appendChild(
+    grid
+  );
+
+
+  container.appendChild(
+    gameCard
+  );
+
+}
+
+</script>
+
+</body>
+</html>

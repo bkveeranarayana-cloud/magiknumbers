@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GAME GENERATOR</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f2f4f7;
+    color:#222;
+}
+
+.header{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:18px 10px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.container{
+    max-width:500px;
+    margin:20px auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.12);
+}
+
+h2{
+    text-align:center;
+    margin-top:0;
+}
+
+.game-info{
+    background:#eef2ff;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:18px;
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    margin:7px 0;
+    font-weight:bold;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:7px;
+    max-width:400px;
+    margin:20px auto;
+}
+
+.box{
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#ffffff;
+    border:2px solid #2563eb;
+    border-radius:9px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.status{
+    text-align:center;
+    padding:12px;
+    border-radius:10px;
+    background:#ecfdf5;
+    color:#166534;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+button{
+    flex:1;
+    border:0;
+    padding:14px 8px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.next{
+    background:#2563eb;
+    color:white;
+}
+
+.save{
+    background:#16a34a;
+    color:white;
+}
+
+.back{
+    width:100%;
+    margin-top:10px;
+    background:#6b7280;
+    color:white;
+}
+
+.saved{
+    text-align:center;
+    margin-top:15px;
+    font-weight:bold;
+    color:#166534;
+}
+
+@media(max-width:400px){
+    .grid{
+        gap:5px;
+    }
+
+    .box{
+        font-size:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    GAME-GENERATOR
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>DIAMOND GAME SETUP</h2>
+
+<div class="game-info">
+
+    <div class="info-row">
+        <span>GAME ID</span>
+        <span id="gameId">MKND840001</span>
+    </div>
+
+    <div class="info-row">
+        <span>GRID</span>
+        <span>5 × 5</span>
+    </div>
+
+    <div class="info-row">
+        <span>NUMBERS</span>
+        <span>0 – 24</span>
+    </div>
+
+    <div class="info-row">
+        <span>TOTAL</span>
+        <span>60</span>
+    </div>
+
+</div>
+
+<div id="grid" class="grid"></div>
+
+<div id="status" class="status">
+    VALID GAME
+</div>
+
+<div class="buttons">
+
+    <button class="next" onclick="nextGame()">
+        NEXT
+    </button>
+
+    <button class="save" onclick="saveGame()">
+        SAVE GAME
+    </button>
+
+</div>
+
+<button class="back" onclick="goBack()">
+    BACK TO ADMIN
+</button>
+
+<div id="savedMessage" class="saved"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DIAMOND MAGIC SQUARE
+   Numbers 0 - 24
+   Every row = 60
+   Every column = 60
+   Both diagonals = 60
+   ===================================================== */
+
+
+/* Base valid 5x5 magic square */
+
+const baseSquare = [
+
+    [16,23,0,7,14],
+
+    [22,4,6,13,15],
+
+    [3,5,12,19,21],
+
+    [9,11,18,20,2],
+
+    [10,17,24,1,8]
+
+];
+
+
+/* Current game number */
+
+let currentNumber = 1;
+
+
+/* Current square */
+
+let currentSquare = [];
+
+
+/* =====================================================
+   COPY ARRAY
+   ===================================================== */
+
+function copySquare(square){
+
+    return square.map(row => [...row]);
+
+}
+
+
+/* =====================================================
+   ROTATE 90 DEGREE
+   ===================================================== */
+
+function rotate90(square){
+
+    const n = square.length;
+
+    const result =
+        Array.from(
+            {length:n},
+            () => Array(n).fill(0)
+        );
+
+    for(let r=0;r<n;r++){
+
+        for(let c=0;c<n;c++){
+
+            result[c][n-1-r] = square[r][c];
+
+        }
+
+    }
+
+    return result;
+
+}
+
+
+/* =====================================================
+   FLIP HORIZONTAL
+   ===================================================== */
+
+function flipHorizontal(square){
+
+    return square.map(row => [...row].reverse());
+
+}
+
+
+/* =====================================================
+   FLIP VERTICAL
+   ===================================================== */
+
+function flipVertical(square){
+
+    return [...square].reverse()
+        .map(row => [...row]);
+
+}
+
+
+/* =====================================================
+   RANDOM TRANSFORMATION
+   ===================================================== */
+
+function generateSquare(){
+
+    let square = copySquare(baseSquare);
+
+    const random = Math.floor(Math.random()*8);
+
+    switch(random){
+
+        case 0:
+            break;
+
+        case 1:
+            square = rotate90(square);
+            break;
+
+        case 2:
+            square = rotate90(rotate90(square));
+            break;
+
+        case 3:
+            square = rotate90(
+                rotate90(
+                    rotate90(square)
+                )
+            );
+            break;
+
+        case 4:
+            square = flipHorizontal(square);
+            break;
+
+        case 5:
+            square = flipVertical(square);
+            break;
+
+        case 6:
+            square = flipHorizontal(
+                rotate90(square)
+            );
+            break;
+
+        case 7:
+            square = flipVertical(
+                rotate90(square)
+            );
+            break;
+
+    }
+
+    return square;
+
+}
+
+
+/* =====================================================
+   CHECK VALID GAME
+   ===================================================== */
+
+function validateSquare(square){
+
+    const numbers = [];
+
+    for(let r=0;r<5;r++){
+
+        for(let c=0;c<5;c++){
+
+            numbers.push(square[r][c]);
+
+        }
+
+    }
+
+
+    /* Check numbers 0 - 24 */
+
+    const unique =
+        new Set(numbers);
+
+    if(unique.size !== 25){
+
+        return false;
+
+    }
+
+
+    for(let n=0;n<=24;n++){
+
+        if(!unique.has(n)){
+
+            return false;
+
+        }
+
+    }
+
+
+    /* Check rows */
+
+    for(let r=0;r<5;r++){
+
+        let total = 0;
+
+        for(let c=0;c<5;c++){
+
+            total += square[r][c];
+
+        }
+
+        if(total !== 60){
+
+            return false;
+
+        }
+
+    }
+
+
+    /* Check columns */
+
+    for(let c=0;c<5;c++){
+
+        let total = 0;
+
+        for(let r=0;r<5;r++){
+
+            total += square[r][c];
+
+        }
+
+        if(total !== 60){
+
+            return false;
+
+        }
+
+    }
+
+
+    /* Main diagonal */
+
+    let diagonal1 = 0;
+
+    for(let i=0;i<5;i++){
+
+        diagonal1 += square[i][i];
+
+    }
+
+    if(diagonal1 !== 60){
+
+        return false;
+
+    }
+
+
+    /* Other diagonal */
+
+    let diagonal2 = 0;
+
+    for(let i=0;i<5;i++){
+
+        diagonal2 += square[i][4-i];
+
+    }
+
+    if(diagonal2 !== 60){
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   DISPLAY GAME
+   ===================================================== */
+
+function displayGame(){
+
+    const grid =
+        document.getElementById("grid");
+
+    grid.innerHTML = "";
+
+
+    for(let r=0;r<5;r++){
+
+        for(let c=0;c<5;c++){
+
+            const box =
+                document.createElement("div");
+
+            box.className = "box";
+
+            box.textContent =
+                currentSquare[r][c];
+
+            grid.appendChild(box);
+
+        }
+
+    }
+
+
+    document.getElementById("gameId")
+        .textContent =
+        "MKND84" +
+        String(currentNumber)
+            .padStart(4,"0");
+
+
+    const valid =
+        validateSquare(currentSquare);
+
+
+    const status =
+        document.getElementById("status");
+
+
+    if(valid){
+
+        status.textContent =
+            "VALID GAME ✓";
+
+        status.style.background =
+            "#ecfdf5";
+
+        status.style.color =
+            "#166534";
+
+    }else{
+
+        status.textContent =
+            "INVALID GAME ✕";
+
+        status.style.background =
+            "#fef2f2";
+
+        status.style.color =
+            "#991b1b";
+
+    }
+
+}
+
+
+/* =====================================================
+   NEXT GAME
+   ===================================================== */
+
+function nextGame(){
+
+    currentNumber++;
+
+    if(currentNumber > 250){
+
+        currentNumber = 1;
+
+    }
+
+
+    currentSquare =
+        generateSquare();
+
+
+    displayGame();
+
+
+    document.getElementById("savedMessage")
+        .textContent = "";
+
+}
+
+
+/* =====================================================
+   SAVE GAME
+   ===================================================== */
+
+function saveGame(){
+
+    if(!validateSquare(currentSquare)){
+
+        alert("Game is invalid.");
+
+        return;
+
+    }
+
+
+    const gameId =
+        "MKND84" +
+        String(currentNumber)
+            .padStart(4,"0");
+
+
+    const gameData = {
+
+        gameId: gameId,
+
+        gameType: "DIAMOND",
+
+        gridSize: 5,
+
+        numbers: currentSquare,
+
+        magicTotal: 60,
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    /*
+       Temporary local storage.
+
+       Later this can be replaced
+       with Firebase Firestore.
+    */
+
+    localStorage.setItem(
+
+        "DIAMOND_" + gameId,
+
+        JSON.stringify(gameData)
+
+    );
+
+
+    document.getElementById("savedMessage")
+        .textContent =
+        gameId + " SAVED ✓";
+
+
+}
+
+
+/* =====================================================
+   BACK
+   ===================================================== */
+
+function goBack(){
+
+    window.location.href =
+        "admin.html";
+
+}
+
+
+/* =====================================================
+   FIRST GAME
+   ===================================================== */
+
+currentSquare =
+    generateSquare();
+
+displayGame();
+
+</script>
+
+</body>
+</html>

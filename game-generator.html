@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>GAME GENERATOR</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -15,12 +16,11 @@ body{
     margin:0;
     font-family:Arial,sans-serif;
     background:#f2f2f2;
-    color:#111;
 }
 
 .header{
     background:#111;
-    color:white;
+    color:#fff;
     text-align:center;
     padding:16px;
     font-size:22px;
@@ -29,21 +29,20 @@ body{
 
 .container{
     max-width:600px;
-    margin:15px auto;
+    margin:auto;
     padding:12px;
 }
 
 .card{
-    background:white;
-    border-radius:12px;
+    background:#fff;
     padding:15px;
-    box-shadow:0 2px 8px rgba(0,0,0,.15);
+    border-radius:12px;
+    box-shadow:0 2px 8px #bbb;
 }
 
 h2{
     text-align:center;
     margin:5px 0 15px;
-    font-size:20px;
 }
 
 .setup{
@@ -58,22 +57,22 @@ h2{
 }
 
 .field label{
-    font-size:13px;
     font-weight:bold;
+    font-size:13px;
     margin-bottom:5px;
 }
 
 .field input,
 .field select{
-    width:100%;
     height:42px;
-    border:1px solid #bbb;
+    border:1px solid #aaa;
     border-radius:7px;
     padding:8px;
     font-size:16px;
+    width:100%;
 }
 
-.totalField{
+.full{
     grid-column:1 / -1;
 }
 
@@ -84,41 +83,40 @@ h2{
 }
 
 button{
-    border:none;
-    border-radius:8px;
     height:44px;
+    border:0;
+    border-radius:8px;
     font-size:16px;
     font-weight:bold;
-    cursor:pointer;
 }
 
-.applyBtn{
+.apply{
     flex:1;
     background:#1976d2;
     color:white;
 }
 
-.nextBtn{
+.next{
     flex:1;
     background:#ff9800;
     color:white;
 }
 
-.saveBtn{
+.save{
     width:100%;
-    margin-top:10px;
     background:#2e7d32;
     color:white;
-}
-
-.gameInfo{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:7px;
-    margin-top:15px;
+    margin-top:12px;
 }
 
 .info{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:6px;
+    margin-top:15px;
+}
+
+.infoBox{
     background:#eee;
     border-radius:7px;
     padding:8px;
@@ -127,106 +125,103 @@ button{
     font-weight:bold;
 }
 
-.info span{
+.infoBox span{
     display:block;
-    margin-top:4px;
     font-size:14px;
+    margin-top:4px;
 }
-
-/* =========================
-   MAGIC GRID
-========================= */
 
 .gridTitle{
     text-align:center;
-    font-size:18px;
     font-weight:bold;
+    font-size:18px;
     margin:20px 0 8px;
 }
 
-.magicArea{
-    display:flex;
-    justify-content:center;
-    margin-top:5px;
-}
+/* ==============================
+   MAIN 25 BOXES
+============================== */
 
-.magicTable{
-    border-collapse:collapse;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:5px;
+    max-width:400px;
+    margin:auto;
 }
-
-.magicTable td{
-    padding:3px;
-}
-
-/* 25 MAIN NUMBER BOXES */
 
 .numberBox{
-    width:58px;
-    height:58px;
+    aspect-ratio:1/1;
     background:white;
     border:2px solid #222;
     border-radius:8px;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     font-size:20px;
     font-weight:bold;
+
     cursor:pointer;
     user-select:none;
+
+    touch-action:manipulation;
+}
+
+.numberBox:active{
+    transform:scale(.94);
 }
 
 .numberBox.selected{
     background:#2196f3;
     color:white;
     border-color:#0d47a1;
-    transform:scale(.95);
 }
 
-.totalBox{
-    width:42px;
-    height:42px;
-    background:#eeeeee;
-    border:1px solid #999;
-    border-radius:6px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:13px;
+.totals{
+    margin-top:12px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+}
+
+.total{
+    background:#eee;
+    padding:8px;
+    border-radius:7px;
+    text-align:center;
     font-weight:bold;
-}
-
-.corner{
-    width:42px;
-    height:42px;
+    font-size:13px;
 }
 
 .status{
     margin-top:12px;
-    text-align:center;
     padding:10px;
+    text-align:center;
     border-radius:8px;
     background:#e8f5e9;
     color:#1b5e20;
     font-weight:bold;
 }
 
-.status.error{
+.error{
     background:#ffebee;
     color:#b71c1c;
 }
 
 .selectedTitle{
-    margin-top:18px;
     text-align:center;
+    margin-top:18px;
     font-weight:bold;
 }
 
-.selectedNumbers{
+.selected{
     min-height:45px;
-    margin-top:8px;
-    padding:10px;
     background:#f5f5f5;
     border-radius:8px;
+    margin-top:7px;
+    padding:10px;
     text-align:center;
     font-size:18px;
     font-weight:bold;
@@ -234,44 +229,30 @@ button{
 
 .message{
     text-align:center;
-    margin-top:10px;
-    font-size:14px;
     font-weight:bold;
+    margin-top:10px;
+    min-height:20px;
 }
 
-@media(max-width:430px){
-
-    .container{
-        padding:8px;
-    }
+@media(max-width:400px){
 
     .numberBox{
-        width:51px;
-        height:51px;
-        font-size:18px;
+        font-size:17px;
     }
 
-    .totalBox{
-        width:35px;
-        height:35px;
-        font-size:11px;
+    .grid{
+        gap:4px;
     }
 
-    .corner{
-        width:35px;
-    }
-
-    .magicTable td{
-        padding:2px;
-    }
 }
+
 </style>
 </head>
 
 <body>
 
 <div class="header">
-    GAME-GENERATOR
+GAME-GENERATOR
 </div>
 
 <div class="container">
@@ -280,1281 +261,1011 @@ button{
 
 <h2>DIAMOND GAME SETUP</h2>
 
+
 <div class="setup">
 
-    <div class="field">
-        <label>RANGE FROM</label>
-        <input
-            type="number"
-            id="rangeFrom"
-            min="0"
-            max="200"
-            value="0">
-    </div>
+<div class="field">
+<label>RANGE FROM</label>
+<input
+type="number"
+id="rangeFrom"
+min="0"
+max="200"
+value="0">
+</div>
 
-    <div class="field">
-        <label>RANGE TO</label>
-        <input
-            type="number"
-            id="rangeTo"
-            min="0"
-            max="200"
-            value="24">
-    </div>
 
-    <div class="field totalField">
-        <label>MAGIC TOTAL</label>
-        <input
-            type="number"
-            id="magicTotal"
-            value="60">
-    </div>
+<div class="field">
+<label>RANGE TO</label>
+<input
+type="number"
+id="rangeTo"
+min="0"
+max="200"
+value="24">
+</div>
 
-    <div class="field totalField">
-        <label>GAME ID</label>
 
-        <select id="gameId">
-            <option value="MKND840001">MKND840001</option>
-            <option value="MKND840002">MKND840002</option>
-            <option value="MKND840003">MKND840003</option>
-            <option value="MKND840004">MKND840004</option>
-            <option value="MKND840005">MKND840005</option>
-        </select>
-    </div>
+<div class="field full">
+<label>MAGIC TOTAL</label>
+<input
+type="number"
+id="magicTotal"
+value="60">
+</div>
+
+
+<div class="field full">
+<label>GAME ID</label>
+
+<select id="gameId">
+
+<option>MKND840001</option>
+<option>MKND840002</option>
+<option>MKND840003</option>
+<option>MKND840004</option>
+<option>MKND840005</option>
+
+</select>
 
 </div>
+
+</div>
+
 
 <div class="buttons">
 
-    <button class="applyBtn" onclick="applySettings()">
-        APPLY
-    </button>
+<button
+class="apply"
+onclick="applyGame()">
+APPLY
+</button>
 
-    <button class="nextBtn" onclick="nextGame()">
-        NEXT
-    </button>
-
-</div>
-
-
-<div class="gameInfo">
-
-    <div class="info">
-        GAME ID
-        <span id="infoGameId">MKND840001</span>
-    </div>
-
-    <div class="info">
-        GRID
-        <span>5 × 5</span>
-    </div>
-
-    <div class="info">
-        TOTAL
-        <span id="infoTotal">60</span>
-    </div>
+<button
+class="next"
+onclick="nextGame()">
+NEXT
+</button>
 
 </div>
 
 
-<!-- =========================
-     5 × 5 NUMBER BOXES
-========================= -->
+<div class="info">
+
+<div class="infoBox">
+GAME ID
+<span id="showId">MKND840001</span>
+</div>
+
+<div class="infoBox">
+GRID
+<span>5 × 5</span>
+</div>
+
+<div class="infoBox">
+MAGIC TOTAL
+<span id="showTotal">60</span>
+</div>
+
+</div>
+
 
 <div class="gridTitle">
-    DIAMOND 5 × 5
+5 × 5 NUMBER BOXES
 </div>
 
-<div class="magicArea">
 
-<table class="magicTable">
+<!-- ==================================
+     THESE ARE THE 25 MAIN BOXES
+================================== -->
 
-<tr>
-    <td class="corner"></td>
+<div class="grid" id="numberGrid">
 
-    <td>
-        <div class="totalBox" id="col0">60</div>
-    </td>
+<div class="numberBox" id="box0" onclick="selectBox(0)">0</div>
+<div class="numberBox" id="box1" onclick="selectBox(1)">0</div>
+<div class="numberBox" id="box2" onclick="selectBox(2)">0</div>
+<div class="numberBox" id="box3" onclick="selectBox(3)">0</div>
+<div class="numberBox" id="box4" onclick="selectBox(4)</div>
 
-    <td>
-        <div class="totalBox" id="col1">60</div>
-    </td>
+<div class="numberBox" id="box5" onclick="selectBox(5)">0</div>
+<div class="numberBox" id="box6" onclick="selectBox(6)">0</div>
+<div class="numberBox" id="box7" onclick="selectBox(7)">0</div>
+<div class="numberBox" id="box8" onclick="selectBox(8)">0</div>
+<div class="numberBox" id="box9" onclick="selectBox(9)">0</div>
 
-    <td>
-        <div class="totalBox" id="col2">60</div>
-    </td>
+<div class="numberBox" id="box10" onclick="selectBox(10)">0</div>
+<div class="numberBox" id="box11" onclick="selectBox(11)">0</div>
+<div class="numberBox" id="box12" onclick="selectBox(12)">0</div>
+<div class="numberBox" id="box13" onclick="selectBox(13)">0</div>
+<div class="numberBox" id="box14" onclick="selectBox(14)">0</div>
 
-    <td>
-        <div class="totalBox" id="col3">60</div>
-    </td>
+<div class="numberBox" id="box15" onclick="selectBox(15)">0</div>
+<div class="numberBox" id="box16" onclick="selectBox(16)">0</div>
+<div class="numberBox" id="box17" onclick="selectBox(17)">0</div>
+<div class="numberBox" id="box18" onclick="selectBox(18)">0</div>
+<div class="numberBox" id="box19" onclick="selectBox(19)">0</div>
 
-    <td>
-        <div class="totalBox" id="col4">60</div>
-    </td>
-</tr>
+<div class="numberBox" id="box20" onclick="selectBox(20)">0</div>
+<div class="numberBox" id="box21" onclick="selectBox(21)">0</div>
+<div class="numberBox" id="box22" onclick="selectBox(22)">0</div>
+<div class="numberBox" id="box23" onclick="selectBox(23)">0</div>
+<div class="numberBox" id="box24" onclick="selectBox(24)">0</div>
 
-
-<!-- ROW 1 -->
-
-<tr>
-
-    <td>
-        <div class="totalBox" id="row0">60</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box0" onclick="selectBox(0)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box1" onclick="selectBox(1)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box2" onclick="selectBox(2)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box3" onclick="selectBox(3)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box4" onclick="selectBox(4)">0</div>
-    </td>
-
-</tr>
+</div>
 
 
-<!-- ROW 2 -->
+<div class="totals">
 
-<tr>
+<div class="total">
+ROW 1:
+<span id="r0">0</span>
+</div>
 
-    <td>
-        <div class="totalBox" id="row1">60</div>
-    </td>
+<div class="total">
+ROW 2:
+<span id="r1">0</span>
+</div>
 
-    <td>
-        <div class="numberBox" id="box5" onclick="selectBox(5)">0</div>
-    </td>
+<div class="total">
+ROW 3:
+<span id="r2">0</span>
+</div>
 
-    <td>
-        <div class="numberBox" id="box6" onclick="selectBox(6)">0</div>
-    </td>
+<div class="total">
+ROW 4:
+<span id="r3">0</span>
+</div>
 
-    <td>
-        <div class="numberBox" id="box7" onclick="selectBox(7)">0</div>
-    </td>
+<div class="total">
+ROW 5:
+<span id="r4">0</span>
+</div>
 
-    <td>
-        <div class="numberBox" id="box8" onclick="selectBox(8)">0</div>
-    </td>
+<div class="total">
+COLUMN 1:
+<span id="c0">0</span>
+</div>
 
-    <td>
-        <div class="numberBox" id="box9" onclick="selectBox(9)">0</div>
-    </td>
+<div class="total">
+COLUMN 2:
+<span id="c1">0</span>
+</div>
 
-</tr>
+<div class="total">
+COLUMN 3:
+<span id="c2">0</span>
+</div>
 
+<div class="total">
+COLUMN 4:
+<span id="c3">0</span>
+</div>
 
-<!-- ROW 3 -->
+<div class="total">
+COLUMN 5:
+<span id="c4">0</span>
+</div>
 
-<tr>
+<div class="total">
+DIAGONAL 1:
+<span id="d1">0</span>
+</div>
 
-    <td>
-        <div class="totalBox" id="row2">60</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box10" onclick="selectBox(10)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box11" onclick="selectBox(11)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box12" onclick="selectBox(12)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box13" onclick="selectBox(13)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box14" onclick="selectBox(14)">0</div>
-    </td>
-
-</tr>
-
-
-<!-- ROW 4 -->
-
-<tr>
-
-    <td>
-        <div class="totalBox" id="row3">60</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box15" onclick="selectBox(15)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box16" onclick="selectBox(16)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box17" onclick="selectBox(17)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box18" onclick="selectBox(18)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box19" onclick="selectBox(19)">0</div>
-    </td>
-
-</tr>
-
-
-<!-- ROW 5 -->
-
-<tr>
-
-    <td>
-        <div class="totalBox" id="row4">60</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box20" onclick="selectBox(20)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box21" onclick="selectBox(21)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box22" onclick="selectBox(22)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box23" onclick="selectBox(23)">0</div>
-    </td>
-
-    <td>
-        <div class="numberBox" id="box24" onclick="selectBox(24)">0</div>
-    </td>
-
-</tr>
-
-</table>
+<div class="total">
+DIAGONAL 2:
+<span id="d2">0</span>
+</div>
 
 </div>
 
 
 <div class="status" id="status">
-    VALID GAME ✓
+VALID GAME ✓
 </div>
 
 
 <div class="selectedTitle">
-    SELECTED NUMBERS
+SELECTED NUMBERS
 </div>
 
-<div class="selectedNumbers" id="selectedNumbers">
-    Select 3 numbers
+<div class="selected" id="selectedNumbers">
+Select 3 numbers
 </div>
 
 
-<button class="saveBtn" onclick="saveGame()">
-    SAVE GAME
+<button
+class="save"
+onclick="saveGame()">
+SAVE GAME
 </button>
+
 
 <div class="message" id="message"></div>
 
 </div>
-
 </div>
 
 
 <script>
 
-/* =========================================
-   ORIGINAL 5 × 5 MAGIC SQUARE
+/* ==================================
+   BASE 5×5 MAGIC SQUARE
    TOTAL = 60
-========================================= */
+================================== */
 
-const baseSquare = [
+const base = [
 
-    [16,23,0,7,14],
-
-    [22,4,6,13,15],
-
-    [3,5,12,19,21],
-
-    [9,11,18,20,2],
-
-    [10,17,24,1,8]
+16,23,0,7,14,
+22,4,6,13,15,
+3,5,12,19,21,
+9,11,18,20,2,
+10,17,24,1,8
 
 ];
 
 
-let currentSquare = [];
+let currentNumbers = [];
 
-let selectedCells = [];
+let selected = [];
 
-let currentFrom = 0;
+let rangeFrom = 0;
 
-let currentTo = 24;
+let rangeTo = 24;
 
-let currentMagicTotal = 60;
+let magicTotal = 60;
 
-let currentGameId = "MKND840001";
+let gameId = "MKND840001";
 
 
-/* =========================================
-   RANDOM NUMBER
-========================================= */
+/* ==================================
+   RANDOM
+================================== */
 
 function randomInt(min,max){
 
-    return Math.floor(
-        Math.random() * (max-min+1)
-    ) + min;
+return Math.floor(
+Math.random()*(max-min+1)
+)+min;
 
 }
 
 
-/* =========================================
+/* ==================================
    SHUFFLE
-========================================= */
+================================== */
 
-function shuffle(array){
+function shuffle(a){
 
-    let a = [...array];
+let x=[...a];
 
-    for(let i=a.length-1;i>0;i--){
+for(let i=x.length-1;i>0;i--){
 
-        let j = randomInt(0,i);
+let j=randomInt(0,i);
 
-        [a[i],a[j]] =
-        [a[j],a[i]];
+[x[i],x[j]]=[x[j],x[i]];
 
-    }
-
-    return a;
 }
 
-
-/* =========================================
-   ROTATE
-========================================= */
-
-function rotate90(square){
-
-    let n = square.length;
-
-    let result =
-        Array.from(
-            {length:n},
-            ()=>Array(n)
-        );
-
-    for(let r=0;r<n;r++){
-
-        for(let c=0;c<n;c++){
-
-            result[c][n-1-r] =
-                square[r][c];
-
-        }
-
-    }
-
-    return result;
-}
-
-
-/* =========================================
-   FLIP
-========================================= */
-
-function flipHorizontal(square){
-
-    return square.map(
-        row => [...row].reverse()
-    );
+return x;
 
 }
 
 
-function flipVertical(square){
+/* ==================================
+   GENERATE NUMBERS
+================================== */
 
-    return [...square]
-        .reverse()
-        .map(row=>[...row]);
+function generateNumbers(){
+
+let from=rangeFrom;
+
+let to=rangeTo;
+
+let target=magicTotal;
+
+
+/*
+   Need 25 different numbers.
+*/
+
+if(to-from+1<25){
+
+return null;
 
 }
 
 
-/* =========================================
-   TRANSFORMATION
-========================================= */
+/*
+   Try arithmetic spacing.
 
-function transformSquare(square){
+   Formula:
+   numbers = start + step × 0...24
 
-    let result =
-        square.map(row=>[...row]);
+   Their total = 25×start + 300×step
 
-    let type =
-        randomInt(0,7);
+   Magic total = total/5
+*/
 
-    if(type===1){
+let choices=[];
 
-        result =
-            rotate90(result);
 
-    }
+for(let step=1;step<=8;step++){
 
-    else if(type===2){
+for(
+let start=from;
+start+step*24<=to;
+start++
+){
 
-        result =
-            rotate90(
-                rotate90(result)
-            );
+let total=
+25*start+
+300*step;
 
-    }
+if(total===target*5){
 
-    else if(type===3){
+choices.push({
+start:start,
+step:step
+});
 
-        result =
-            rotate90(
-                rotate90(
-                    rotate90(result)
-                )
-            );
-
-    }
-
-    else if(type===4){
-
-        result =
-            flipHorizontal(result);
-
-    }
-
-    else if(type===5){
-
-        result =
-            flipVertical(result);
-
-    }
-
-    else if(type===6){
-
-        result =
-            flipHorizontal(
-                rotate90(result)
-            );
-
-    }
-
-    else if(type===7){
-
-        result =
-            flipVertical(
-                rotate90(result)
-            );
-
-    }
-
-    return result;
 }
 
-
-/* =========================================
-   CREATE MAGIC SQUARE
-========================================= */
-
-function createMagicSquare(){
-
-    let from = currentFrom;
-
-    let to = currentTo;
-
-    let target =
-        currentMagicTotal;
-
-
-    /*
-       Current range must contain at least
-       25 numbers.
-    */
-
-    let available = [];
-
-    for(let n=from;n<=to;n++){
-
-        available.push(n);
-
-    }
-
-
-    if(available.length < 25){
-
-        return null;
-
-    }
-
-
-    /*
-       We use a 25-number arithmetic set.
-
-       For a 5×5 magic square:
-       total of all 25 numbers
-       must equal MAGIC TOTAL × 5.
-    */
-
-    let neededSum =
-        target * 5;
-
-
-    /*
-       Try different arithmetic progressions
-       inside the selected range.
-    */
-
-    let possible = [];
-
-
-    for(let step=1;step<=Math.floor((to-from)/24);step++){
-
-        for(
-            let start=from;
-            start + step*24 <= to;
-            start++
-        ){
-
-            let sum =
-                25*start +
-                step*300;
-
-            if(sum===neededSum){
-
-                possible.push({
-                    start:start,
-                    step:step
-                });
-
-            }
-
-        }
-
-    }
-
-
-    if(possible.length===0){
-
-        return null;
-
-    }
-
-
-    let choice =
-        possible[
-            randomInt(
-                0,
-                possible.length-1
-            )
-        ];
-
-
-    let values=[];
-
-    for(let i=0;i<25;i++){
-
-        values.push(
-            choice.start +
-            choice.step*i
-        );
-
-    }
-
-
-    /*
-       Map 0-24 magic square
-       to the selected 25 numbers.
-    */
-
-    let square =
-        baseSquare.map(row=>
-            row.map(v=>
-                values[v]
-            )
-        );
-
-
-    /*
-       Randomly change formation.
-    */
-
-    square =
-        transformSquare(square);
-
-
-    return square;
+}
 
 }
 
 
-/* =========================================
-   DISPLAY GAME
-========================================= */
+if(choices.length===0){
 
-function displayGame(){
+/*
+   Try direct consecutive numbers.
+*/
 
-    for(let r=0;r<5;r++){
+for(
+let start=from;
+start+24<=to;
+start++
+){
 
-        for(let c=0;c<5;c++){
+let total=25*start+300;
 
-            let index =
-                r*5+c;
+if(total===target*5){
 
-            let box =
-                document.getElementById(
-                    "box"+index
-                );
+choices.push({
+start:start,
+step:1
+});
 
-            box.textContent =
-                currentSquare[r][c];
+}
 
-            box.classList.remove(
-                "selected"
-            );
-
-        }
-
-    }
-
-
-    updateTotals();
+}
 
 }
 
 
-/* =========================================
-   UPDATE ROW / COLUMN TOTALS
-========================================= */
+if(choices.length===0){
+
+return null;
+
+}
+
+
+let choice=
+choices[
+randomInt(
+0,
+choices.length-1
+)
+];
+
+
+let values=[];
+
+
+for(let i=0;i<25;i++){
+
+values.push(
+choice.start+
+choice.step*i
+);
+
+}
+
+
+/*
+   Change actual number positions
+*/
+
+values=shuffle(values);
+
+
+/*
+   The shuffled values must still
+   follow magic-square positions.
+
+   Sort them and map according to
+   the base magic-square numbers.
+*/
+
+values.sort((a,b)=>a-b);
+
+
+let result=[];
+
+
+for(let i=0;i<25;i++){
+
+result.push(
+values[base[i]]
+);
+
+}
+
+
+return result;
+
+}
+
+
+/* ==================================
+   DISPLAY
+================================== */
+
+function display(){
+
+for(let i=0;i<25;i++){
+
+let box=
+document.getElementById(
+"box"+i
+);
+
+box.textContent=
+currentNumbers[i];
+
+box.classList.remove(
+"selected"
+);
+
+}
+
+updateTotals();
+
+}
+
+
+/* ==================================
+   TOTALS
+================================== */
 
 function updateTotals(){
 
-    for(let r=0;r<5;r++){
+for(let r=0;r<5;r++){
 
-        let total=0;
+let sum=0;
 
-        for(let c=0;c<5;c++){
+for(let c=0;c<5;c++){
 
-            total +=
-                currentSquare[r][c];
-
-        }
-
-        document.getElementById(
-            "row"+r
-        ).textContent=total;
-
-    }
-
-
-    for(let c=0;c<5;c++){
-
-        let total=0;
-
-        for(let r=0;r<5;r++){
-
-            total +=
-                currentSquare[r][c];
-
-        }
-
-        document.getElementById(
-            "col"+c
-        ).textContent=total;
-
-    }
-
-
-    checkGame();
+sum+=
+currentNumbers[r*5+c];
 
 }
-
-
-/* =========================================
-   CHECK MAGIC GAME
-========================================= */
-
-function checkGame(){
-
-    let target =
-        currentMagicTotal;
-
-    let valid=true;
-
-
-    /* ROWS */
-
-    for(let r=0;r<5;r++){
-
-        let sum=0;
-
-        for(let c=0;c<5;c++){
-
-            sum +=
-                currentSquare[r][c];
-
-        }
-
-        if(sum!==target){
-
-            valid=false;
-
-        }
-
-    }
-
-
-    /* COLUMNS */
-
-    for(let c=0;c<5;c++){
-
-        let sum=0;
-
-        for(let r=0;r<5;r++){
-
-            sum +=
-                currentSquare[r][c];
-
-        }
-
-        if(sum!==target){
-
-            valid=false;
-
-        }
-
-    }
-
-
-    /* DIAGONAL 1 */
-
-    let d1=0;
-
-    for(let i=0;i<5;i++){
-
-        d1 +=
-            currentSquare[i][i];
-
-    }
-
-
-    /* DIAGONAL 2 */
-
-    let d2=0;
-
-    for(let i=0;i<5;i++){
-
-        d2 +=
-            currentSquare[i][4-i];
-
-    }
-
-
-    if(d1!==target || d2!==target){
-
-        valid=false;
-
-    }
-
-
-    let status =
-        document.getElementById(
-            "status"
-        );
-
-
-    if(valid){
-
-        status.textContent =
-            "VALID GAME ✓";
-
-        status.classList.remove(
-            "error"
-        );
-
-    }
-
-    else{
-
-        status.textContent =
-            "INVALID GAME";
-
-        status.classList.add(
-            "error"
-        );
-
-    }
-
-}
-
-
-/* =========================================
-   SELECT BOX
-========================================= */
-
-function selectBox(index){
-
-    if(!currentSquare.length){
-
-        return;
-
-    }
-
-
-    let box =
-        document.getElementById(
-            "box"+index
-        );
-
-
-    let existing =
-        selectedCells.indexOf(index);
-
-
-    /* UNSELECT */
-
-    if(existing!==-1){
-
-        selectedCells.splice(
-            existing,
-            1
-        );
-
-        box.classList.remove(
-            "selected"
-        );
-
-        updateSelectedDisplay();
-
-        return;
-
-    }
-
-
-    /* MAX 3 */
-
-    if(selectedCells.length>=3){
-
-        showMessage(
-            "Only 3 numbers can be selected."
-        );
-
-        return;
-
-    }
-
-
-    selectedCells.push(index);
-
-    box.classList.add(
-        "selected"
-    );
-
-    updateSelectedDisplay();
-
-}
-
-
-/* =========================================
-   SELECTED DISPLAY
-========================================= */
-
-function updateSelectedDisplay(){
-
-    let display =
-        document.getElementById(
-            "selectedNumbers"
-        );
-
-
-    if(selectedCells.length===0){
-
-        display.textContent =
-            "Select 3 numbers";
-
-        return;
-
-    }
-
-
-    let nums =
-        selectedCells.map(index=>{
-
-            let r =
-                Math.floor(index/5);
-
-            let c =
-                index%5;
-
-            return currentSquare[r][c];
-
-        });
-
-
-    display.textContent =
-        nums.join("   |   ");
-
-
-    if(selectedCells.length===3){
-
-        display.textContent +=
-            "   ✓";
-
-    }
-
-}
-
-
-/* =========================================
-   APPLY
-========================================= */
-
-function applySettings(){
-
-    let from =
-        parseInt(
-            document.getElementById(
-                "rangeFrom"
-            ).value
-        );
-
-    let to =
-        parseInt(
-            document.getElementById(
-                "rangeTo"
-            ).value
-        );
-
-    let total =
-        parseInt(
-            document.getElementById(
-                "magicTotal"
-            ).value
-        );
-
-
-    if(
-        isNaN(from) ||
-        isNaN(to) ||
-        isNaN(total)
-    ){
-
-        showMessage(
-            "Enter all values."
-        );
-
-        return;
-
-    }
-
-
-    if(from<0 || to>200){
-
-        showMessage(
-            "Range must be between 0 and 200."
-        );
-
-        return;
-
-    }
-
-
-    if(from>=to){
-
-        showMessage(
-            "RANGE FROM must be smaller than RANGE TO."
-        );
-
-        return;
-
-    }
-
-
-    currentFrom =
-        from;
-
-    currentTo =
-        to;
-
-    currentMagicTotal =
-        total;
-
-
-    let square =
-        createMagicSquare();
-
-
-    if(!square){
-
-        showMessage(
-            "No valid 5×5 magic formation found for this Range and Magic Total."
-        );
-
-        return;
-
-    }
-
-
-    currentSquare =
-        square;
-
-
-    selectedCells=[];
-
-
-    document.getElementById(
-        "infoTotal"
-    ).textContent =
-        total;
-
-
-    displayGame();
-
-    updateSelectedDisplay();
-
-    showMessage(
-        "Game applied successfully ✓"
-    );
-
-}
-
-
-/* =========================================
-   NEXT
-========================================= */
-
-function nextGame(){
-
-    if(
-        currentFrom===undefined ||
-        currentTo===undefined ||
-        currentMagicTotal===undefined
-    ){
-
-        showMessage(
-            "First press APPLY."
-        );
-
-        return;
-
-    }
-
-
-    let square =
-        createMagicSquare();
-
-
-    if(!square){
-
-        showMessage(
-            "No valid formation for current settings."
-        );
-
-        return;
-
-    }
-
-
-    currentSquare =
-        square;
-
-
-    /*
-       Reset selections
-    */
-
-    selectedCells=[];
-
-
-    displayGame();
-
-    updateSelectedDisplay();
-
-    showMessage(
-        "NEW RANDOM GAME ✓"
-    );
-
-}
-
-
-/* =========================================
-   GAME ID
-========================================= */
 
 document.getElementById(
-    "gameId"
-).addEventListener(
-    "change",
-    function(){
+"r"+r
+).textContent=sum;
 
-        currentGameId =
-            this.value;
+}
 
-        document.getElementById(
-            "infoGameId"
-        ).textContent =
-            currentGameId;
 
-        /*
-           Corresponding Diamond Game ID
-           is now active.
-        */
+for(let c=0;c<5;c++){
 
-        showMessage(
-            currentGameId +
-            " selected."
-        );
+let sum=0;
 
-    }
+for(let r=0;r<5;r++){
+
+sum+=
+currentNumbers[r*5+c];
+
+}
+
+document.getElementById(
+"c"+c
+).textContent=sum;
+
+}
+
+
+let d1=0;
+
+let d2=0;
+
+for(let i=0;i<5;i++){
+
+d1+=
+currentNumbers[i*5+i];
+
+d2+=
+currentNumbers[i*5+(4-i)];
+
+}
+
+
+document.getElementById("d1")
+.textContent=d1;
+
+document.getElementById("d2")
+.textContent=d2;
+
+
+let valid=true;
+
+
+for(let r=0;r<5;r++){
+
+let sum=0;
+
+for(let c=0;c<5;c++){
+
+sum+=
+currentNumbers[r*5+c];
+
+}
+
+if(sum!==magicTotal){
+
+valid=false;
+
+}
+
+}
+
+
+for(let c=0;c<5;c++){
+
+let sum=0;
+
+for(let r=0;r<5;r++){
+
+sum+=
+currentNumbers[r*5+c];
+
+}
+
+if(sum!==magicTotal){
+
+valid=false;
+
+}
+
+}
+
+
+if(d1!==magicTotal ||
+d2!==magicTotal){
+
+valid=false;
+
+}
+
+
+let status=
+document.getElementById(
+"status"
 );
 
 
-/* =========================================
-   SAVE GAME
-========================================= */
+if(valid){
+
+status.textContent=
+"VALID GAME ✓";
+
+status.classList.remove(
+"error"
+);
+
+}else{
+
+status.textContent=
+"INVALID GAME";
+
+status.classList.add(
+"error"
+);
+
+}
+
+}
+
+
+/* ==================================
+   SELECT BOX
+================================== */
+
+function selectBox(index){
+
+if(currentNumbers.length!==25){
+
+return;
+
+}
+
+
+let position=
+selected.indexOf(index);
+
+
+if(position!==-1){
+
+selected.splice(
+position,
+1
+);
+
+document.getElementById(
+"box"+index
+).classList.remove(
+"selected"
+);
+
+showSelected();
+
+return;
+
+}
+
+
+if(selected.length>=3){
+
+showMessage(
+"Only 3 numbers can be selected."
+);
+
+return;
+
+}
+
+
+selected.push(index);
+
+
+document.getElementById(
+"box"+index
+).classList.add(
+"selected"
+);
+
+
+showSelected();
+
+}
+
+
+/* ==================================
+   SHOW SELECTED
+================================== */
+
+function showSelected(){
+
+let el=
+document.getElementById(
+"selectedNumbers"
+);
+
+
+if(selected.length===0){
+
+el.textContent=
+"Select 3 numbers";
+
+return;
+
+}
+
+
+let nums=
+selected.map(
+i=>currentNumbers[i]
+);
+
+
+el.textContent=
+nums.join(" | ");
+
+}
+
+
+/* ==================================
+   APPLY
+================================== */
+
+function applyGame(){
+
+rangeFrom=
+parseInt(
+document.getElementById(
+"rangeFrom"
+).value
+);
+
+rangeTo=
+parseInt(
+document.getElementById(
+"rangeTo"
+).value
+);
+
+magicTotal=
+parseInt(
+document.getElementById(
+"magicTotal"
+).value
+);
+
+gameId=
+document.getElementById(
+"gameId"
+).value;
+
+
+if(
+isNaN(rangeFrom) ||
+isNaN(rangeTo) ||
+isNaN(magicTotal)
+){
+
+showMessage(
+"Enter all values."
+);
+
+return;
+
+}
+
+
+if(rangeFrom<0 ||
+rangeTo>200){
+
+showMessage(
+"Range must be 0 to 200."
+);
+
+return;
+
+}
+
+
+if(rangeFrom>=rangeTo){
+
+showMessage(
+"FROM must be smaller than TO."
+);
+
+return;
+
+}
+
+
+let numbers=
+generateNumbers();
+
+
+if(!numbers){
+
+showMessage(
+"No valid 5×5 formation for these settings."
+);
+
+return;
+
+}
+
+
+currentNumbers=
+numbers;
+
+selected=[];
+
+
+document.getElementById(
+"showId"
+).textContent=
+gameId;
+
+document.getElementById(
+"showTotal"
+).textContent=
+magicTotal;
+
+
+display();
+
+showSelected();
+
+showMessage(
+"GAME APPLIED ✓"
+);
+
+}
+
+
+/* ==================================
+   NEXT
+================================== */
+
+function nextGame(){
+
+if(currentNumbers.length!==25){
+
+showMessage(
+"Press APPLY first."
+);
+
+return;
+
+}
+
+
+let numbers=
+generateNumbers();
+
+
+if(!numbers){
+
+showMessage(
+"No valid formation."
+);
+
+return;
+
+}
+
+
+currentNumbers=
+numbers;
+
+selected=[];
+
+
+display();
+
+showSelected();
+
+showMessage(
+"NEW RANDOM NUMBERS ✓"
+);
+
+}
+
+
+/* ==================================
+   GAME ID
+================================== */
+
+document.getElementById(
+"gameId"
+).addEventListener(
+"change",
+function(){
+
+gameId=this.value;
+
+document.getElementById(
+"showId"
+).textContent=
+gameId;
+
+}
+);
+
+
+/* ==================================
+   SAVE
+================================== */
 
 function saveGame(){
 
-    if(!currentSquare.length){
+if(currentNumbers.length!==25){
 
-        showMessage(
-            "First generate a game."
-        );
+showMessage(
+"Press APPLY first."
+);
 
-        return;
-
-    }
-
-
-    if(selectedCells.length!==3){
-
-        showMessage(
-            "Please select exactly 3 numbers."
-        );
-
-        return;
-
-    }
-
-
-    let selectedNumbers =
-        selectedCells.map(index=>{
-
-            let r =
-                Math.floor(index/5);
-
-            let c =
-                index%5;
-
-            return currentSquare[r][c];
-
-        });
-
-
-    let gameData={
-
-        gameId:
-            currentGameId,
-
-        gameType:
-            "DIAMOND",
-
-        gridSize:
-            5,
-
-        rangeFrom:
-            currentFrom,
-
-        rangeTo:
-            currentTo,
-
-        magicTotal:
-            currentMagicTotal,
-
-        numbers:
-            currentSquare,
-
-        selectedNumbers:
-            selectedNumbers,
-
-        selectedPositions:
-            selectedCells,
-
-        createdAt:
-            new Date().toISOString()
-
-    };
-
-
-    localStorage.setItem(
-
-        "DIAMOND_" +
-        currentGameId,
-
-        JSON.stringify(
-            gameData
-        )
-
-    );
-
-
-    showMessage(
-        "GAME SAVED ✓"
-    );
+return;
 
 }
 
 
-/* =========================================
+if(selected.length!==3){
+
+showMessage(
+"Select exactly 3 numbers."
+);
+
+return;
+
+}
+
+
+let selectedNumbers=
+selected.map(
+i=>currentNumbers[i]
+);
+
+
+let data={
+
+gameId:gameId,
+
+gameType:"DIAMOND",
+
+gridSize:5,
+
+rangeFrom:rangeFrom,
+
+rangeTo:rangeTo,
+
+magicTotal:magicTotal,
+
+numbers:currentNumbers,
+
+selectedNumbers:selectedNumbers,
+
+selectedPositions:selected,
+
+createdAt:
+new Date().toISOString()
+
+};
+
+
+localStorage.setItem(
+"DIAMOND_"+gameId,
+JSON.stringify(data)
+);
+
+
+showMessage(
+"GAME SAVED ✓"
+);
+
+}
+
+
+/* ==================================
    MESSAGE
-========================================= */
+================================== */
 
 function showMessage(text){
 
-    let el =
-        document.getElementById(
-            "message"
-        );
+let el=
+document.getElementById(
+"message"
+);
 
-    el.textContent=text;
+el.textContent=text;
 
-    setTimeout(()=>{
+setTimeout(
+()=>{
+el.textContent="";
+},
+3000
+);
 
-        el.textContent="";
 
-    },3000);
+/* ==================================
+   INITIAL
+================================== */
 
-}
+currentNumbers=[
+16,23,0,7,14,
+22,4,6,13,15,
+3,5,12,19,21,
+9,11,18,20,2,
+10,17,24,1,8
+];
 
-
-/* =========================================
-   INITIAL GAME
-========================================= */
-
-currentSquare =
-    baseSquare.map(row=>[...row]);
-
-displayGame();
+display();
 
 </script>
 

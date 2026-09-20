@@ -7,6 +7,7 @@
 <title>GAME-GENERATOR</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -28,12 +29,13 @@ h1{
     text-align:center;
     color:#f5c542;
     font-size:25px;
+    margin:5px 0 20px;
 }
 
 h2{
     text-align:center;
     font-size:19px;
-    margin:20px 0;
+    margin:18px 0;
 }
 
 .info{
@@ -60,6 +62,48 @@ h2{
     font-weight:bold;
 }
 
+/* =========================
+   GAME ID AREA
+========================= */
+
+.game-loader{
+    background:#1c2638;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.game-loader label{
+    display:block;
+    font-size:14px;
+    margin-bottom:8px;
+    color:#ddd;
+}
+
+.game-id-input{
+    width:100%;
+    padding:13px;
+    border:2px solid #435574;
+    border-radius:8px;
+    background:#101522;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    text-align:center;
+    outline:none;
+}
+
+.game-id-input:focus{
+    border-color:#f5c542;
+}
+
+.load-button{
+    width:100%;
+    margin-top:10px;
+    background:#45f0a5;
+    color:#101522;
+}
+
 .magic-table{
     display:grid;
     grid-template-columns:repeat(5,1fr);
@@ -72,9 +116,11 @@ h2{
     border:2px solid #435574;
     border-radius:7px;
     aspect-ratio:1/1;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     font-size:clamp(17px,5vw,25px);
     font-weight:bold;
 }
@@ -86,27 +132,38 @@ h2{
     box-shadow:0 0 10px #f5c542;
 }
 
-.diagonals{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin:15px 0;
+/* =========================
+   ROW / COLUMN TOTALS
+========================= */
+
+.totals-title{
+    text-align:center;
+    color:#f5c542;
+    font-weight:bold;
+    margin-top:18px;
+    margin-bottom:8px;
 }
 
-.diagonal{
+.totals-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.total-box{
     background:#1c2638;
-    padding:12px 5px;
-    text-align:center;
     border-radius:8px;
+    padding:10px;
+    text-align:center;
     font-size:13px;
 }
 
-.diagonal span{
-    display:inline-block;
-    color:#f5c542;
-    font-size:22px;
+.total-box span{
+    display:block;
+    color:#45f0a5;
+    font-size:20px;
     font-weight:bold;
-    margin-top:5px;
+    margin-top:4px;
 }
 
 .status{
@@ -156,7 +213,8 @@ button{
     color:#101522;
 }
 
-.generate:disabled{
+.generate:disabled,
+.load-button:disabled{
     opacity:.5;
     cursor:not-allowed;
 }
@@ -174,6 +232,7 @@ button{
     font-size:13px;
     margin:10px 0;
     line-height:1.6;
+    word-break:break-word;
 }
 
 .progress-box{
@@ -216,21 +275,20 @@ button{
 .saved-count{
     color:#45f0a5;
     font-weight:bold;
-    margin-bottom:10px;
-}
-
-.saved-item{
-    border-bottom:1px solid #39445a;
-    padding:8px 0;
-}
-
-.saved-item:last-child{
-    border-bottom:none;
 }
 
 .error{
     color:#ff7777;
 }
+
+.success{
+    color:#45f0a5;
+}
+
+.hidden{
+    display:none;
+}
+
 </style>
 </head>
 
@@ -241,6 +299,11 @@ button{
 <h1>GAME-GENERATOR</h1>
 
 <h2>💎 DIAMOND GAME SETUP</h2>
+
+
+<!-- =========================
+     SETTINGS
+========================= -->
 
 <div class="info">
 
@@ -276,58 +339,176 @@ button{
 
 </div>
 
-<!-- CURRENT GAME -->
+
+<!-- =========================
+     GAME ID LOADER
+========================= -->
+
+<div class="game-loader">
+
+    <label>
+        ENTER GAME ID
+    </label>
+
+    <input
+        type="text"
+        id="gameIdInput"
+        class="game-id-input"
+        value="MKND842500"
+        placeholder="MKND840001"
+        autocomplete="off"
+    >
+
+    <button
+        class="load-button"
+        id="loadButton"
+        onclick="loadSingleGame()">
+
+        LOAD GAME
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     CURRENT GAME
+========================= -->
 
 <div class="info">
 
     <div class="info-row">
         <span>CURRENT GAME</span>
-        <span id="gameId">MKND840001</span>
+
+        <span id="gameId">
+            MKND842500
+        </span>
     </div>
 
 </div>
 
-<!-- MAGIC GRID -->
 
-<div class="magic-table" id="magicTable"></div>
+<!-- =========================
+     MAGIC GRID
+========================= -->
 
-<!-- DIAGONALS -->
+<div
+    class="magic-table"
+    id="magicTable">
+</div>
 
-<div class="diagonals">
 
-    <div class="diagonal">
-        ↘ DIAGONAL 1
-        <br>
-        <span id="diagonal1">60</span>
+<!-- =========================
+     ROW TOTALS
+========================= -->
+
+<div class="totals-title">
+    ROW TOTALS
+</div>
+
+<div class="totals-grid">
+
+    <div class="total-box">
+        ROW 1
+        <span id="row1">60</span>
     </div>
 
-    <div class="diagonal">
-        ↙ DIAGONAL 2
-        <br>
-        <span id="diagonal2">60</span>
+    <div class="total-box">
+        ROW 2
+        <span id="row2">60</span>
+    </div>
+
+    <div class="total-box">
+        ROW 3
+        <span id="row3">60</span>
+    </div>
+
+    <div class="total-box">
+        ROW 4
+        <span id="row4">60</span>
+    </div>
+
+    <div class="total-box">
+        ROW 5
+        <span id="row5">60</span>
     </div>
 
 </div>
 
-<!-- STATUS -->
 
-<div class="status" id="gameStatus">
+<!-- =========================
+     COLUMN TOTALS
+========================= -->
+
+<div class="totals-title">
+    COLUMN TOTALS
+</div>
+
+<div class="totals-grid">
+
+    <div class="total-box">
+        COLUMN 1
+        <span id="col1">60</span>
+    </div>
+
+    <div class="total-box">
+        COLUMN 2
+        <span id="col2">60</span>
+    </div>
+
+    <div class="total-box">
+        COLUMN 3
+        <span id="col3">60</span>
+    </div>
+
+    <div class="total-box">
+        COLUMN 4
+        <span id="col4">60</span>
+    </div>
+
+    <div class="total-box">
+        COLUMN 5
+        <span id="col5">60</span>
+    </div>
+
+</div>
+
+
+<!-- =========================
+     STATUS
+========================= -->
+
+<div
+    class="status"
+    id="gameStatus">
+
     VALID GAME ✓
+
 </div>
 
-<!-- SELECTED NUMBERS -->
+
+<!-- =========================
+     SELECTED NUMBERS
+========================= -->
 
 <div class="selected-box">
 
     SELECTED NUMBERS
 
-    <div id="selectedNumbers" class="selected-numbers">
+    <div
+        id="selectedNumbers"
+        class="selected-numbers">
+
         None
+
     </div>
 
 </div>
 
-<!-- GENERATE BUTTON -->
+
+<!-- =========================
+     GENERATE
+========================= -->
 
 <div class="buttons">
 
@@ -342,9 +523,14 @@ button{
 
 </div>
 
-<!-- PROGRESS -->
 
-<div class="progress-box" id="progressBox">
+<!-- =========================
+     PROGRESS
+========================= -->
+
+<div
+    class="progress-box"
+    id="progressBox">
 
     <div id="progressText">
         Preparing...
@@ -361,28 +547,41 @@ button{
 
 </div>
 
+
+<!-- =========================
+     MESSAGE
+========================= -->
+
 <div
     class="message"
     id="message">
 </div>
 
-<!-- SAVED GAMES -->
+
+<!-- =========================
+     FIREBASE COUNT
+========================= -->
 
 <div class="saved-list">
 
-    <h3>🔥 FIREBASE SAVED GAMES</h3>
+    <h3>
+        🔥 FIREBASE SAVED GAMES
+    </h3>
 
     <div
         class="saved-count"
         id="savedCount">
-        Loading...
-    </div>
 
-    <div id="savedGames">
-        Loading games...
+        Checking Firebase...
+
     </div>
 
 </div>
+
+
+<!-- =========================
+     BACK
+========================= -->
 
 <button
     class="back"
@@ -395,23 +594,30 @@ button{
 </div>
 
 
+
 <script type="module">
 
+
 // =====================================================
-// FIREBASE
+// FIREBASE IMPORTS
 // =====================================================
 
 import {
     initializeApp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 
 import {
     getFirestore,
     collection,
     getDocs,
+    getDoc,
     doc,
     writeBatch
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
 
 
 // =====================================================
@@ -421,7 +627,7 @@ import {
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+        "AIzaSyCX8mVCrI-qm4_7uAD_Y41hpvg1OrLlVI",
 
     authDomain:
         "magiknumbers-d42c0.firebaseapp.com",
@@ -441,13 +647,20 @@ const firebaseConfig = {
 };
 
 
+
 // =====================================================
 // FIREBASE INITIALIZE
 // =====================================================
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(
+        firebaseConfig
+    );
 
-const db = getFirestore(app);
+
+const db =
+    getFirestore(app);
+
 
 
 // =====================================================
@@ -455,110 +668,161 @@ const db = getFirestore(app);
 // =====================================================
 
 const FIRST_GAME = 840001;
+
 const LAST_GAME = 842500;
+
 const MAGIC_TOTAL = 60;
 
+const TOTAL_GAMES =
+    LAST_GAME - FIRST_GAME + 1;
+
+
 let currentGrid = [];
+
 let selectedNumbers = [];
 
 
+
 // =====================================================
-// RANDOM SHUFFLE
+// SHUFFLE
 // =====================================================
 
 function shuffle(array){
 
-    let arr = [...array];
+    const arr =
+        [...array];
 
-    for(let i = arr.length - 1; i > 0; i--){
 
-        let j = Math.floor(Math.random() * (i + 1));
+    for(
+        let i = arr.length - 1;
+        i > 0;
+        i--
+    ){
 
-        [arr[i], arr[j]] =
-        [arr[j], arr[i]];
+        const j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
+
+
+        [
+            arr[i],
+            arr[j]
+        ] =
+        [
+            arr[j],
+            arr[i]
+        ];
+
     }
 
+
     return arr;
+
 }
 
 
+
 // =====================================================
-// CREATE UNIQUE 5×5 MAGIC SQUARE
-//
-// This construction guarantees:
+// CREATE MAGIC SQUARE
 //
 // 0–24 exactly once
 // Every row = 60
 // Every column = 60
-// Both diagonals = 60
 //
-// Random permutations create many possible
-// different valid magic squares.
+// NO DIAGONAL CHECK
 // =====================================================
 
 function createMagicSquare(){
 
     while(true){
 
-        // Random permutations of 0..4
-
-        const pA = shuffle([0,1,2,3,4]);
-        const pB = shuffle([0,1,2,3,4]);
-
-        const qA = shuffle([0,1,2,3,4]);
-        const qB = shuffle([0,1,2,3,4]);
+        const pA =
+            shuffle([
+                0,1,2,3,4
+            ]);
 
 
-        // Constants
+        const pB =
+            shuffle([
+                0,1,2,3,4
+            ]);
+
+
+        const qA =
+            shuffle([
+                0,1,2,3,4
+            ]);
+
+
+        const qB =
+            shuffle([
+                0,1,2,3,4
+            ]);
+
 
         const cA =
-            Math.floor(Math.random() * 5);
-
-        const cB =
-            Math.floor(Math.random() * 5);
-
-
-        let grid =
-            Array.from(
-                {length:5},
-                () => Array(5).fill(0)
+            Math.floor(
+                Math.random() * 5
             );
 
 
-        for(let r=0;r<5;r++){
+        const cB =
+            Math.floor(
+                Math.random() * 5
+            );
 
-            for(let c=0;c<5;c++){
 
-                /*
-                 * Two orthogonal Latin squares
-                 *
-                 * A = r + 2c
-                 * B = 2r + c
-                 *
-                 * Mod 5
-                 */
+        const grid =
+            Array.from(
+                {
+                    length:5
+                },
+                () =>
+                    Array(5).fill(0)
+            );
+
+
+        for(
+            let r = 0;
+            r < 5;
+            r++
+        ){
+
+            for(
+                let c = 0;
+                c < 5;
+                c++
+            ){
 
                 let A =
-                    (r + 2*c + cA) % 5;
+                    (
+                        r +
+                        2 * c +
+                        cA
+                    ) % 5;
+
 
                 let B =
-                    (2*r + c + cB) % 5;
+                    (
+                        2 * r +
+                        c +
+                        cB
+                    ) % 5;
 
 
-                // Randomly rename residues
-
-                A = pA[A];
-
-                B = pB[B];
+                A =
+                    pA[A];
 
 
-                /*
-                 * Additional permutation
-                 * keeps every line balanced.
-                 */
+                B =
+                    pB[B];
+
 
                 A =
                     qA[A];
+
 
                 B =
                     qB[B];
@@ -566,107 +830,174 @@ function createMagicSquare(){
 
                 grid[r][c] =
                     A * 5 + B;
+
             }
+
         }
 
 
-        if(validateGrid(grid)){
+        if(
+            validateGrid(grid)
+        ){
 
             return grid;
+
         }
+
     }
+
 }
+
 
 
 // =====================================================
 // VALIDATE GRID
+//
+// ONLY:
+// 1. Unique 0–24
+// 2. Row total = 60
+// 3. Column total = 60
+//
+// NO DIAGONALS
 // =====================================================
 
 function validateGrid(grid){
 
-    // Check numbers 0–24
+    if(
+        !Array.isArray(grid) ||
+        grid.length !== 5
+    ){
 
-    const numbers = grid.flat();
+        return false;
+
+    }
+
+
+    const numbers =
+        grid.flat();
+
+
+    if(
+        numbers.length !== 25
+    ){
+
+        return false;
+
+    }
+
 
     const unique =
         new Set(numbers);
 
-    if(unique.size !== 25){
+
+    if(
+        unique.size !== 25
+    ){
 
         return false;
+
     }
 
 
-    for(let n=0;n<25;n++){
+    for(
+        let n = 0;
+        n < 25;
+        n++
+    ){
 
-        if(!unique.has(n)){
+        if(
+            !unique.has(n)
+        ){
 
             return false;
+
         }
+
     }
 
 
-    // Rows
 
-    for(let r=0;r<5;r++){
+    // ================================================
+    // ROWS
+    // ================================================
+
+    for(
+        let r = 0;
+        r < 5;
+        r++
+    ){
 
         let total = 0;
 
-        for(let c=0;c<5;c++){
 
-            total += grid[r][c];
+        for(
+            let c = 0;
+            c < 5;
+            c++
+        ){
+
+            total +=
+                Number(
+                    grid[r][c]
+                );
+
         }
 
-        if(total !== MAGIC_TOTAL){
+
+        if(
+            total !== MAGIC_TOTAL
+        ){
 
             return false;
+
         }
+
     }
 
 
-    // Columns
 
-    for(let c=0;c<5;c++){
+    // ================================================
+    // COLUMNS
+    // ================================================
+
+    for(
+        let c = 0;
+        c < 5;
+        c++
+    ){
 
         let total = 0;
 
-        for(let r=0;r<5;r++){
 
-            total += grid[r][c];
+        for(
+            let r = 0;
+            r < 5;
+            r++
+        ){
+
+            total +=
+                Number(
+                    grid[r][c]
+                );
+
         }
 
-        if(total !== MAGIC_TOTAL){
+
+        if(
+            total !== MAGIC_TOTAL
+        ){
 
             return false;
+
         }
+
     }
 
 
-    // Diagonal 1
+    return true;
 
-    let d1 = 0;
-
-    for(let i=0;i<5;i++){
-
-        d1 += grid[i][i];
-    }
-
-
-    // Diagonal 2
-
-    let d2 = 0;
-
-    for(let i=0;i<5;i++){
-
-        d2 += grid[i][4-i];
-    }
-
-
-    return (
-        d1 === MAGIC_TOTAL &&
-        d2 === MAGIC_TOTAL
-    );
 }
+
 
 
 // =====================================================
@@ -678,18 +1009,26 @@ function gridSignature(grid){
     return grid
         .flat()
         .join(",");
+
 }
 
 
+
 // =====================================================
-// RANDOM 3 SELECTED NUMBERS
+// RANDOM THREE
 // =====================================================
 
 function getRandomThree(grid){
 
-    return shuffle(grid.flat())
-        .slice(0,3);
+    return shuffle(
+        grid.flat()
+    ).slice(
+        0,
+        3
+    );
+
 }
+
 
 
 // =====================================================
@@ -699,63 +1038,145 @@ function getRandomThree(grid){
 function displayGrid(){
 
     const table =
-        document.getElementById("magicTable");
-
-    table.innerHTML = "";
-
-
-    currentGrid.flat().forEach(num => {
-
-        const box =
-            document.createElement("div");
-
-        box.className = "box";
-
-        box.textContent = num;
+        document.getElementById(
+            "magicTable"
+        );
 
 
-        if(selectedNumbers.includes(num)){
+    table.innerHTML =
+        "";
 
-            box.classList.add("selected");
+
+    currentGrid
+        .flat()
+        .forEach(
+            num => {
+
+                const box =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                box.className =
+                    "box";
+
+
+                box.textContent =
+                    num;
+
+
+                if(
+                    selectedNumbers.includes(
+                        num
+                    )
+                ){
+
+                    box.classList.add(
+                        "selected"
+                    );
+
+                }
+
+
+                table.appendChild(
+                    box
+                );
+
+            }
+        );
+
+
+
+    // ================================================
+    // ROW TOTALS
+    // ================================================
+
+    for(
+        let r = 0;
+        r < 5;
+        r++
+    ){
+
+        let total = 0;
+
+
+        for(
+            let c = 0;
+            c < 5;
+            c++
+        ){
+
+            total +=
+                Number(
+                    currentGrid[r][c]
+                );
+
         }
 
 
-        table.appendChild(box);
+        document.getElementById(
+            "row" + (r + 1)
+        ).textContent =
+            total;
 
-    });
-
-
-    let d1 = 0;
-    let d2 = 0;
-
-
-    for(let i=0;i<5;i++){
-
-        d1 += currentGrid[i][i];
-
-        d2 += currentGrid[i][4-i];
     }
 
 
-    document.getElementById(
-        "diagonal1"
-    ).textContent = d1;
+
+    // ================================================
+    // COLUMN TOTALS
+    // ================================================
+
+    for(
+        let c = 0;
+        c < 5;
+        c++
+    ){
+
+        let total = 0;
 
 
-    document.getElementById(
-        "diagonal2"
-    ).textContent = d2;
+        for(
+            let r = 0;
+            r < 5;
+            r++
+        ){
 
+            total +=
+                Number(
+                    currentGrid[r][c]
+                );
+
+        }
+
+
+        document.getElementById(
+            "col" + (c + 1)
+        ).textContent =
+            total;
+
+    }
+
+
+
+    // ================================================
+    // SELECTED NUMBERS
+    // ================================================
 
     document.getElementById(
         "selectedNumbers"
     ).textContent =
-        selectedNumbers.join(" | ");
+        selectedNumbers.join(
+            " | "
+        );
+
 }
 
 
+
 // =====================================================
-// CREATE NEXT PREVIEW GAME
+// CREATE PREVIEW
 // =====================================================
 
 function createPreview(){
@@ -763,170 +1184,362 @@ function createPreview(){
     currentGrid =
         createMagicSquare();
 
+
     selectedNumbers =
-        getRandomThree(currentGrid);
+        getRandomThree(
+            currentGrid
+        );
+
 
     displayGrid();
+
 }
 
 
+
 // =====================================================
-// GENERATE GAME DATA
+// CREATE GAME DATA
 // =====================================================
 
-function createGameData(gameNumber, grid){
+function createGameData(
+    gameNumber,
+    grid
+){
 
     const gameId =
-        "MKND" + gameNumber;
+        "MKND" +
+        gameNumber;
 
 
     return {
 
-        gameId: gameId,
+        gameId:
+            gameId,
 
-        gameNumber: gameNumber,
+        gameNumber:
+            gameNumber,
 
-        grid: grid,
+        grid:
+            grid,
 
         selectedNumbers:
-            getRandomThree(grid),
+            getRandomThree(
+                grid
+            ),
 
         magicTotal:
             MAGIC_TOTAL,
 
         gridSignature:
-            gridSignature(grid),
+            gridSignature(
+                grid
+            ),
 
         createdAt:
             new Date().toISOString()
 
     };
+
 }
 
 
+
 // =====================================================
-// LOAD EXISTING FIREBASE GAMES
+// LOAD ONE GAME FROM FIREBASE
 // =====================================================
 
-async function loadSavedGames(){
+window.loadSingleGame =
+async function(){
 
-    const savedGames =
-        document.getElementById("savedGames");
+    const input =
+        document.getElementById(
+            "gameIdInput"
+        );
+
+
+    const loadButton =
+        document.getElementById(
+            "loadButton"
+        );
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    let gameId =
+        input.value
+            .trim()
+            .toUpperCase();
+
+
+    // ================================================
+    // EMPTY
+    // ================================================
+
+    if(!gameId){
+
+        message.innerHTML =
+            '<span class="error">' +
+            'Please enter Game ID.' +
+            '</span>';
+
+        return;
+
+    }
+
+
+
+    // ================================================
+    // FORMAT
+    // ================================================
+
+    const match =
+        gameId.match(
+            /^MKND(\d+)$/
+        );
+
+
+    if(!match){
+
+        message.innerHTML =
+            '<span class="error">' +
+            'Invalid Game ID format.' +
+            '<br>Example: MKND840125' +
+            '</span>';
+
+        return;
+
+    }
+
+
+    const number =
+        Number(
+            match[1]
+        );
+
+
+    if(
+        number < FIRST_GAME ||
+        number > LAST_GAME
+    ){
+
+        message.innerHTML =
+            '<span class="error">' +
+            'Game ID must be between ' +
+            'MKND840001 and MKND842500.' +
+            '</span>';
+
+        return;
+
+    }
+
+
+
+    loadButton.disabled =
+        true;
+
+
+    message.textContent =
+        "Loading game from Firebase...";
+
+
+
+    try{
+
+        const ref =
+            doc(
+                db,
+                "diamondGames",
+                gameId
+            );
+
+
+        const snapshot =
+            await getDoc(
+                ref
+            );
+
+
+        if(
+            !snapshot.exists()
+        ){
+
+            message.innerHTML =
+                '<span class="error">' +
+                gameId +
+                ' not found in Firebase.' +
+                '</span>';
+
+            return;
+
+        }
+
+
+        const data =
+            snapshot.data();
+
+
+        if(
+            !Array.isArray(
+                data.grid
+            )
+        ){
+
+            throw new Error(
+                "Grid data is invalid."
+            );
+
+        }
+
+
+        currentGrid =
+            data.grid;
+
+
+        selectedNumbers =
+            Array.isArray(
+                data.selectedNumbers
+            )
+            ?
+            data.selectedNumbers
+            :
+            getRandomThree(
+                currentGrid
+            );
+
+
+        document.getElementById(
+            "gameId"
+        ).textContent =
+            gameId;
+
+
+        displayGrid();
+
+
+        document.getElementById(
+            "gameStatus"
+        ).textContent =
+            "GAME LOADED ✓";
+
+
+        message.innerHTML =
+            '<span class="success">' +
+            gameId +
+            ' loaded successfully ✓' +
+            '</span>';
+
+    }
+    catch(error){
+
+        console.error(
+            "Load Game Error:",
+            error
+        );
+
+
+        message.innerHTML =
+            '<span class="error">' +
+            "ERROR: " +
+            escapeHtml(
+                error.message
+            ) +
+            '</span>';
+
+    }
+    finally{
+
+        loadButton.disabled =
+            false;
+
+    }
+
+};
+
+
+
+// =====================================================
+// LOAD SAVED GAME COUNT
+// =====================================================
+
+async function loadSavedCount(){
 
     const savedCount =
-        document.getElementById("savedCount");
+        document.getElementById(
+            "savedCount"
+        );
 
 
     try{
 
         const snapshot =
             await getDocs(
-                collection(db,"diamondGames")
+                collection(
+                    db,
+                    "diamondGames"
+                )
             );
 
 
-        let games = [];
+        let count = 0;
 
 
-        snapshot.forEach(item => {
+        snapshot.forEach(
+            item => {
 
-            const data = item.data();
-
-            const number =
-                Number(data.gameNumber);
+                const data =
+                    item.data();
 
 
-            if(
-                number >= FIRST_GAME &&
-                number <= LAST_GAME
-            ){
+                const number =
+                    Number(
+                        data.gameNumber
+                    );
 
-                games.push(data);
+
+                if(
+                    number >= FIRST_GAME &&
+                    number <= LAST_GAME
+                ){
+
+                    count++;
+
+                }
+
             }
-
-        });
-
-
-        games.sort(
-            (a,b) =>
-            Number(a.gameNumber) -
-            Number(b.gameNumber)
         );
 
 
         savedCount.textContent =
-            games.length +
-            " / 2500 GAMES SAVED";
-
-
-        if(games.length === 0){
-
-            savedGames.textContent =
-                "No games saved yet.";
-
-            return;
-        }
-
-
-        savedGames.innerHTML = "";
-
-
-        // Show first 100 in the list
-        // to keep the page fast.
-
-        games.slice(0,100)
-        .forEach(game => {
-
-            const item =
-                document.createElement("div");
-
-            item.className =
-                "saved-item";
-
-
-            item.textContent =
-                game.gameId +
-                " ✓";
-
-
-            savedGames.appendChild(item);
-
-        });
-
-
-        if(games.length > 100){
-
-            const more =
-                document.createElement("div");
-
-            more.className =
-                "saved-item";
-
-
-            more.textContent =
-                "... and " +
-                (games.length - 100) +
-                " more games";
-
-
-            savedGames.appendChild(more);
-        }
+            count +
+            " / " +
+            TOTAL_GAMES +
+            " GAMES SAVED";
 
     }
     catch(error){
 
-        console.error(error);
+        console.error(
+            "Count Error:",
+            error
+        );
 
-        savedCount.textContent =
-            "Firebase error";
 
-
-        savedGames.innerHTML =
+        savedCount.innerHTML =
             '<span class="error">' +
-            error.message +
+            "Firebase error: " +
+            escapeHtml(
+                error.message
+            ) +
             '</span>';
+
     }
+
 }
+
 
 
 // =====================================================
@@ -966,25 +1579,38 @@ async function(){
         );
 
 
-    button.disabled = true;
+    button.disabled =
+        true;
+
 
     progressBox.style.display =
         "block";
 
 
-    message.textContent =
+    progressFill.style.width =
+        "0%";
+
+
+    progressText.textContent =
         "Checking Firebase...";
+
+
+    message.textContent =
+        "Checking existing games...";
 
 
     try{
 
-        // ==========================================
-        // READ EXISTING GAMES
-        // ==========================================
+        // ==============================================
+        // GET EXISTING GAMES
+        // ==============================================
 
         const snapshot =
             await getDocs(
-                collection(db,"diamondGames")
+                collection(
+                    db,
+                    "diamondGames"
+                )
             );
 
 
@@ -996,78 +1622,101 @@ async function(){
             new Set();
 
 
-        snapshot.forEach(item => {
+        snapshot.forEach(
+            item => {
 
-            const data =
-                item.data();
-
-
-            const gameNumber =
-                Number(data.gameNumber);
+                const data =
+                    item.data();
 
 
-            if(
-                gameNumber >= FIRST_GAME &&
-                gameNumber <= LAST_GAME
-            ){
-
-                existingIds.add(
-                    data.gameId
-                );
-
-
-                if(data.gridSignature){
-
-                    existingSignatures.add(
-                        data.gridSignature
+                const number =
+                    Number(
+                        data.gameNumber
                     );
+
+
+                if(
+                    number >= FIRST_GAME &&
+                    number <= LAST_GAME
+                ){
+
+                    if(
+                        data.gameId
+                    ){
+
+                        existingIds.add(
+                            data.gameId
+                        );
+
+                    }
+
+
+                    if(
+                        data.gridSignature
+                    ){
+
+                        existingSignatures.add(
+                            data.gridSignature
+                        );
+
+                    }
 
                 }
 
             }
+        );
 
-        });
 
 
-        // ==========================================
-        // CHECK IF ALL 2500 ALREADY EXIST
-        // ==========================================
+        // ==============================================
+        // ALL ALREADY SAVED
+        // ==============================================
 
-        if(existingIds.size === 2500){
+        if(
+            existingIds.size === TOTAL_GAMES
+        ){
 
-            message.textContent =
-                "ALL 2500 GAMES ARE ALREADY SAVED ✓";
+            message.innerHTML =
+                '<span class="success">' +
+                'ALL 2500 GAMES ARE ALREADY SAVED ✓' +
+                '</span>';
 
 
             progressText.textContent =
-                "2500 / 2500 completed";
+                "2500 / 2500 COMPLETED";
 
 
             progressFill.style.width =
                 "100%";
 
 
-            button.disabled = false;
+            await loadSavedCount();
 
-            await loadSavedGames();
+
+            button.disabled =
+                false;
+
 
             return;
+
         }
 
 
-        // ==========================================
-        // GENERATE MISSING GAMES
-        // ==========================================
 
-        let gamesToSave = [];
+        // ==============================================
+        // GENERATE MISSING
+        // ==============================================
 
-
-        let totalNeeded =
-            2500 - existingIds.size;
+        const gamesToSave =
+            [];
 
 
-        let created =
-            0;
+        const totalNeeded =
+            TOTAL_GAMES -
+            existingIds.size;
+
+
+        let created = 0;
 
 
         message.textContent =
@@ -1081,15 +1730,22 @@ async function(){
         ){
 
             const gameId =
-                "MKND" + gameNumber;
+                "MKND" +
+                gameNumber;
 
 
-            // Already in Firebase
+            // Skip already saved
 
-            if(existingIds.has(gameId)){
+            if(
+                existingIds.has(
+                    gameId
+                )
+            ){
 
                 continue;
+
             }
+
 
 
             let grid;
@@ -1106,29 +1762,29 @@ async function(){
 
 
                 signature =
-                    gridSignature(grid);
+                    gridSignature(
+                        grid
+                    );
 
 
                 attempts++;
 
 
-                /*
-                 * Safety limit.
-                 * With the construction used here,
-                 * unique squares are abundant.
-                 */
-
-                if(attempts > 10000){
+                if(
+                    attempts > 10000
+                ){
 
                     throw new Error(
                         "Unable to create a unique game."
                     );
-                }
 
+                }
 
             }
             while(
-                existingSignatures.has(signature)
+                existingSignatures.has(
+                    signature
+                )
             );
 
 
@@ -1144,7 +1800,9 @@ async function(){
                 );
 
 
-            gamesToSave.push(game);
+            gamesToSave.push(
+                game
+            );
 
 
             created++;
@@ -1162,32 +1820,34 @@ async function(){
                     created /
                     totalNeeded *
                     100
-                ) + "%";
+                ) +
+                "%";
 
 
-            /*
-             * Allow browser UI to update
-             * during large generation.
-             */
-
-            if(created % 100 === 0){
+            if(
+                created % 50 === 0
+            ){
 
                 await new Promise(
                     resolve =>
-                    setTimeout(resolve,0)
+                        setTimeout(
+                            resolve,
+                            0
+                        )
                 );
+
             }
 
         }
 
 
-        // ==========================================
-        // FIRESTORE BATCH SAVE
-        //
-        // Firestore max batch = 500 writes
-        // ==========================================
 
-        let savedCount = 0;
+        // ==============================================
+        // SAVE IN BATCHES
+        // FIRESTORE MAX = 500
+        // ==============================================
+
+        let saved = 0;
 
 
         for(
@@ -1207,60 +1867,75 @@ async function(){
                 );
 
 
-            chunk.forEach(game => {
+            chunk.forEach(
+                game => {
 
-                const ref =
-                    doc(
-                        db,
-                        "diamondGames",
-                        game.gameId
+                    const ref =
+                        doc(
+                            db,
+                            "diamondGames",
+                            game.gameId
+                        );
+
+
+                    batch.set(
+                        ref,
+                        game
                     );
 
-
-                batch.set(
-                    ref,
-                    game
-                );
-
-            });
+                }
+            );
 
 
             message.textContent =
-                "Saving to Firebase...";
+                "Saving games to Firebase...";
 
 
             await batch.commit();
 
 
-            savedCount +=
+            saved +=
                 chunk.length;
 
 
             progressText.textContent =
                 "Firebase saved: " +
-                savedCount +
+                saved +
                 " / " +
                 gamesToSave.length;
 
 
             progressFill.style.width =
                 (
-                    savedCount /
+                    saved /
                     gamesToSave.length *
                     100
-                ) + "%";
+                ) +
+                "%";
+
+
+            await new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        50
+                    )
+            );
 
         }
 
 
-        // ==========================================
-        // FINISHED
-        // ==========================================
 
-        message.textContent =
+        // ==============================================
+        // COMPLETE
+        // ==============================================
+
+        message.innerHTML =
+            '<span class="success">' +
             "✓ " +
-            savedCount +
-            " NEW GAMES SAVED TO FIREBASE";
+            saved +
+            " NEW GAMES SAVED TO FIREBASE" +
+            '</span>';
 
 
         progressText.textContent =
@@ -1271,18 +1946,14 @@ async function(){
             "100%";
 
 
-        button.disabled = false;
+        await loadSavedCount();
 
-
-        // Show saved games
-
-        await loadSavedGames();
 
     }
     catch(error){
 
         console.error(
-            "Firebase Error:",
+            "Generate Error:",
             error
         );
 
@@ -1290,15 +1961,58 @@ async function(){
         message.innerHTML =
             '<span class="error">' +
             "ERROR: " +
-            error.message +
-            "</span>";
+            escapeHtml(
+                error.message
+            ) +
+            '</span>';
 
 
-        button.disabled = false;
+        progressText.textContent =
+            "STOPPED";
+
+
+    }
+    finally{
+
+        button.disabled =
+            false;
 
     }
 
 };
+
+
+
+// =====================================================
+// ESCAPE HTML
+// =====================================================
+
+function escapeHtml(text){
+
+    return String(text)
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
 
 
 // =====================================================
@@ -1308,11 +2022,53 @@ async function(){
 createPreview();
 
 
+
 // =====================================================
-// LOAD SAVED GAMES WHEN PAGE OPENS
+// DEFAULT GAME ID
+// LOAD LAST GAME AUTOMATICALLY
 // =====================================================
 
-loadSavedGames();
+window.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        loadSingleGame();
+
+    }
+);
+
+
+
+// =====================================================
+// LOAD SAVED COUNT
+// =====================================================
+
+loadSavedCount();
+
+
+
+// =====================================================
+// ENTER KEY = LOAD GAME
+// =====================================================
+
+document
+    .getElementById(
+        "gameIdInput"
+    )
+    .addEventListener(
+        "keydown",
+        event => {
+
+            if(
+                event.key === "Enter"
+            ){
+
+                loadSingleGame();
+
+            }
+
+        }
+    );
 
 </script>
 

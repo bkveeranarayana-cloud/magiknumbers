@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>GAME-GENERATOR</title>
+
 
 <style>
 
@@ -38,6 +45,11 @@ h2{
     margin:18px 0;
 }
 
+
+/* =========================
+   INFO
+========================= */
+
 .info{
     background:#1c2638;
     padding:14px;
@@ -62,8 +74,9 @@ h2{
     font-weight:bold;
 }
 
+
 /* =========================
-   GAME ID AREA
+   GAME LOADER
 ========================= */
 
 .game-loader{
@@ -97,12 +110,47 @@ h2{
     border-color:#f5c542;
 }
 
-.load-button{
+
+/* =========================
+   BUTTONS
+========================= */
+
+button{
     width:100%;
+    border:none;
+    border-radius:8px;
+    padding:15px 8px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.load-button{
     margin-top:10px;
     background:#45f0a5;
     color:#101522;
 }
+
+.generate{
+    background:#f5c542;
+    color:#101522;
+}
+
+.back{
+    background:#39445a;
+    color:white;
+    margin-top:8px;
+}
+
+
+/* =========================
+   MAGIC GRID
+========================= */
 
 .magic-table{
     display:grid;
@@ -132,8 +180,9 @@ h2{
     box-shadow:0 0 10px #f5c542;
 }
 
+
 /* =========================
-   ROW / COLUMN TOTALS
+   TOTALS
 ========================= */
 
 .totals-title{
@@ -166,6 +215,11 @@ h2{
     margin-top:4px;
 }
 
+
+/* =========================
+   STATUS
+========================= */
+
 .status{
     text-align:center;
     background:#123b2b;
@@ -175,6 +229,11 @@ h2{
     font-weight:bold;
     margin:12px 0;
 }
+
+
+/* =========================
+   SELECTED NUMBERS
+========================= */
 
 .selected-box{
     background:#1c2638;
@@ -192,6 +251,11 @@ h2{
     min-height:30px;
 }
 
+
+/* =========================
+   BUTTON AREA
+========================= */
+
 .buttons{
     display:grid;
     grid-template-columns:1fr;
@@ -199,41 +263,10 @@ h2{
     margin:15px 0;
 }
 
-button{
-    border:none;
-    border-radius:8px;
-    padding:15px 8px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-}
 
-.generate{
-    background:#f5c542;
-    color:#101522;
-}
-
-.generate:disabled,
-.load-button:disabled{
-    opacity:.5;
-    cursor:not-allowed;
-}
-
-.back{
-    width:100%;
-    background:#39445a;
-    color:white;
-    margin-top:8px;
-}
-
-.message{
-    text-align:center;
-    color:#45f0a5;
-    font-size:13px;
-    margin:10px 0;
-    line-height:1.6;
-    word-break:break-word;
-}
+/* =========================
+   PROGRESS
+========================= */
 
 .progress-box{
     background:#1c2638;
@@ -259,6 +292,25 @@ button{
     transition:.2s;
 }
 
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message{
+    text-align:center;
+    color:#45f0a5;
+    font-size:13px;
+    margin:10px 0;
+    line-height:1.6;
+    word-break:break-word;
+}
+
+
+/* =========================
+   SAVED COUNT
+========================= */
+
 .saved-list{
     margin-top:20px;
     background:#1c2638;
@@ -277,6 +329,11 @@ button{
     font-weight:bold;
 }
 
+
+/* =========================
+   COLORS
+========================= */
+
 .error{
     color:#ff7777;
 }
@@ -285,20 +342,29 @@ button{
     color:#45f0a5;
 }
 
-.hidden{
-    display:none;
+.warning{
+    color:#f5c542;
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
-<h1>GAME-GENERATOR</h1>
 
-<h2>💎 DIAMOND GAME SETUP</h2>
+<h1>
+    GAME-GENERATOR
+</h1>
+
+
+<h2>
+    💎 DIAMOND GAME SETUP
+</h2>
 
 
 <!-- =========================
@@ -362,10 +428,9 @@ button{
     <button
         class="load-button"
         id="loadButton"
-        onclick="loadSingleGame()">
-
+        disabled
+    >
         LOAD GAME
-
     </button>
 
 </div>
@@ -378,11 +443,15 @@ button{
 <div class="info">
 
     <div class="info-row">
-        <span>CURRENT GAME</span>
+
+        <span>
+            CURRENT GAME
+        </span>
 
         <span id="gameId">
             MKND842500
         </span>
+
     </div>
 
 </div>
@@ -406,31 +475,32 @@ button{
     ROW TOTALS
 </div>
 
+
 <div class="totals-grid">
 
     <div class="total-box">
         ROW 1
-        <span id="row1">60</span>
+        <span id="row1">-</span>
     </div>
 
     <div class="total-box">
         ROW 2
-        <span id="row2">60</span>
+        <span id="row2">-</span>
     </div>
 
     <div class="total-box">
         ROW 3
-        <span id="row3">60</span>
+        <span id="row3">-</span>
     </div>
 
     <div class="total-box">
         ROW 4
-        <span id="row4">60</span>
+        <span id="row4">-</span>
     </div>
 
     <div class="total-box">
         ROW 5
-        <span id="row5">60</span>
+        <span id="row5">-</span>
     </div>
 
 </div>
@@ -444,31 +514,32 @@ button{
     COLUMN TOTALS
 </div>
 
+
 <div class="totals-grid">
 
     <div class="total-box">
         COLUMN 1
-        <span id="col1">60</span>
+        <span id="col1">-</span>
     </div>
 
     <div class="total-box">
         COLUMN 2
-        <span id="col2">60</span>
+        <span id="col2">-</span>
     </div>
 
     <div class="total-box">
         COLUMN 3
-        <span id="col3">60</span>
+        <span id="col3">-</span>
     </div>
 
     <div class="total-box">
         COLUMN 4
-        <span id="col4">60</span>
+        <span id="col4">-</span>
     </div>
 
     <div class="total-box">
         COLUMN 5
-        <span id="col5">60</span>
+        <span id="col5">-</span>
     </div>
 
 </div>
@@ -482,7 +553,7 @@ button{
     class="status"
     id="gameStatus">
 
-    VALID GAME ✓
+    WAITING FOR FIREBASE LOGIN
 
 </div>
 
@@ -515,7 +586,8 @@ button{
     <button
         class="generate"
         id="generateButton"
-        onclick="generateAllGames()">
+        disabled
+    >
 
         GENERATE 2500 GAMES
 
@@ -555,11 +627,14 @@ button{
 <div
     class="message"
     id="message">
+
+    Checking Firebase login...
+
 </div>
 
 
 <!-- =========================
-     FIREBASE COUNT
+     SAVED COUNT
 ========================= -->
 
 <div class="saved-list">
@@ -585,11 +660,12 @@ button{
 
 <button
     class="back"
-    onclick="history.back()">
+    id="backButton">
 
     BACK TO ADMIN
 
 </button>
+
 
 </div>
 
@@ -599,14 +675,31 @@ button{
 
 
 // =====================================================
-// FIREBASE IMPORTS
+// FIREBASE APP IMPORT
 // =====================================================
 
 import {
     initializeApp
 }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
+
+// =====================================================
+// FIREBASE AUTH IMPORT
+// =====================================================
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+// =====================================================
+// FIRESTORE IMPORT
+// =====================================================
 
 import {
     getFirestore,
@@ -616,8 +709,8 @@ import {
     doc,
     writeBatch
 }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
 // =====================================================
@@ -647,9 +740,8 @@ const firebaseConfig = {
 };
 
 
-
 // =====================================================
-// FIREBASE INITIALIZE
+// INITIALIZE FIREBASE
 // =====================================================
 
 const app =
@@ -658,29 +750,84 @@ const app =
     );
 
 
-const db =
-    getFirestore(app);
+// =====================================================
+// FIREBASE AUTH
+// =====================================================
 
+const auth =
+    getAuth(
+        app
+    );
+
+
+// =====================================================
+// FIRESTORE
+// =====================================================
+
+const db =
+    getFirestore(
+        app
+    );
 
 
 // =====================================================
 // SETTINGS
 // =====================================================
 
-const FIRST_GAME = 840001;
+const FIRST_GAME =
+    840001;
 
-const LAST_GAME = 842500;
+const LAST_GAME =
+    842500;
 
-const MAGIC_TOTAL = 60;
+const MAGIC_TOTAL =
+    60;
 
 const TOTAL_GAMES =
-    LAST_GAME - FIRST_GAME + 1;
+    LAST_GAME -
+    FIRST_GAME +
+    1;
 
+
+// =====================================================
+// VARIABLES
+// =====================================================
 
 let currentGrid = [];
 
 let selectedNumbers = [];
 
+let firebaseUser = null;
+
+
+// =====================================================
+// DOM
+// =====================================================
+
+const loadButton =
+    document.getElementById(
+        "loadButton"
+    );
+
+const generateButton =
+    document.getElementById(
+        "generateButton"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+const savedCount =
+    document.getElementById(
+        "savedCount"
+    );
+
+const gameStatus =
+    document.getElementById(
+        "gameStatus"
+    );
 
 
 // =====================================================
@@ -723,7 +870,6 @@ function shuffle(array){
 }
 
 
-
 // =====================================================
 // CREATE MAGIC SQUARE
 //
@@ -731,7 +877,7 @@ function shuffle(array){
 // Every row = 60
 // Every column = 60
 //
-// NO DIAGONAL CHECK
+// NO DIAGONALS
 // =====================================================
 
 function createMagicSquare(){
@@ -739,34 +885,31 @@ function createMagicSquare(){
     while(true){
 
         const pA =
-            shuffle([
-                0,1,2,3,4
-            ]);
-
+            shuffle(
+                [0,1,2,3,4]
+            );
 
         const pB =
-            shuffle([
-                0,1,2,3,4
-            ]);
+            shuffle(
+                [0,1,2,3,4]
+            );
 
 
         const qA =
-            shuffle([
-                0,1,2,3,4
-            ]);
-
+            shuffle(
+                [0,1,2,3,4]
+            );
 
         const qB =
-            shuffle([
-                0,1,2,3,4
-            ]);
+            shuffle(
+                [0,1,2,3,4]
+            );
 
 
         const cA =
             Math.floor(
                 Math.random() * 5
             );
-
 
         const cB =
             Math.floor(
@@ -815,14 +958,12 @@ function createMagicSquare(){
                 A =
                     pA[A];
 
-
                 B =
                     pB[B];
 
 
                 A =
                     qA[A];
-
 
                 B =
                     qB[B];
@@ -837,7 +978,9 @@ function createMagicSquare(){
 
 
         if(
-            validateGrid(grid)
+            validateGrid(
+                grid
+            )
         ){
 
             return grid;
@@ -849,16 +992,8 @@ function createMagicSquare(){
 }
 
 
-
 // =====================================================
 // VALIDATE GRID
-//
-// ONLY:
-// 1. Unique 0–24
-// 2. Row total = 60
-// 3. Column total = 60
-//
-// NO DIAGONALS
 // =====================================================
 
 function validateGrid(grid){
@@ -887,7 +1022,9 @@ function validateGrid(grid){
 
 
     const unique =
-        new Set(numbers);
+        new Set(
+            numbers
+        );
 
 
     if(
@@ -916,10 +1053,7 @@ function validateGrid(grid){
     }
 
 
-
-    // ================================================
     // ROWS
-    // ================================================
 
     for(
         let r = 0;
@@ -955,10 +1089,7 @@ function validateGrid(grid){
     }
 
 
-
-    // ================================================
     // COLUMNS
-    // ================================================
 
     for(
         let c = 0;
@@ -999,7 +1130,6 @@ function validateGrid(grid){
 }
 
 
-
 // =====================================================
 // GRID SIGNATURE
 // =====================================================
@@ -1011,7 +1141,6 @@ function gridSignature(grid){
         .join(",");
 
 }
-
 
 
 // =====================================================
@@ -1028,7 +1157,6 @@ function getRandomThree(grid){
     );
 
 }
-
 
 
 // =====================================================
@@ -1087,10 +1215,7 @@ function displayGrid(){
         );
 
 
-
-    // ================================================
     // ROW TOTALS
-    // ================================================
 
     for(
         let r = 0;
@@ -1123,10 +1248,7 @@ function displayGrid(){
     }
 
 
-
-    // ================================================
     // COLUMN TOTALS
-    // ================================================
 
     for(
         let c = 0;
@@ -1159,20 +1281,20 @@ function displayGrid(){
     }
 
 
-
-    // ================================================
     // SELECTED NUMBERS
-    // ================================================
 
     document.getElementById(
         "selectedNumbers"
     ).textContent =
+        selectedNumbers.length
+        ?
         selectedNumbers.join(
             " | "
-        );
+        )
+        :
+        "None";
 
 }
-
 
 
 // =====================================================
@@ -1194,7 +1316,6 @@ function createPreview(){
     displayGrid();
 
 }
-
 
 
 // =====================================================
@@ -1243,29 +1364,29 @@ function createGameData(
 }
 
 
-
 // =====================================================
-// LOAD ONE GAME FROM FIREBASE
+// LOAD SINGLE GAME
 // =====================================================
 
-window.loadSingleGame =
-async function(){
+async function loadSingleGame(){
+
+    if(
+        !firebaseUser
+    ){
+
+        message.innerHTML =
+            '<span class="error">' +
+            'Firebase login not available.' +
+            '</span>';
+
+        return;
+
+    }
+
 
     const input =
         document.getElementById(
             "gameIdInput"
-        );
-
-
-    const loadButton =
-        document.getElementById(
-            "loadButton"
-        );
-
-
-    const message =
-        document.getElementById(
-            "message"
         );
 
 
@@ -1274,10 +1395,6 @@ async function(){
             .trim()
             .toUpperCase();
 
-
-    // ================================================
-    // EMPTY
-    // ================================================
 
     if(!gameId){
 
@@ -1290,11 +1407,6 @@ async function(){
 
     }
 
-
-
-    // ================================================
-    // FORMAT
-    // ================================================
 
     const match =
         gameId.match(
@@ -1337,14 +1449,12 @@ async function(){
     }
 
 
-
     loadButton.disabled =
         true;
 
 
     message.textContent =
         "Loading game from Firebase...";
-
 
 
     try{
@@ -1373,6 +1483,9 @@ async function(){
                 ' not found in Firebase.' +
                 '</span>';
 
+            gameStatus.textContent =
+                "GAME NOT FOUND";
+
             return;
 
         }
@@ -1385,7 +1498,8 @@ async function(){
         if(
             !Array.isArray(
                 data.grid
-            )
+            ) ||
+            data.grid.length !== 5
         ){
 
             throw new Error(
@@ -1420,9 +1534,7 @@ async function(){
         displayGrid();
 
 
-        document.getElementById(
-            "gameStatus"
-        ).textContent =
+        gameStatus.textContent =
             "GAME LOADED ✓";
 
 
@@ -1457,20 +1569,27 @@ async function(){
 
     }
 
-};
-
+}
 
 
 // =====================================================
-// LOAD SAVED GAME COUNT
+// LOAD SAVED COUNT
 // =====================================================
 
 async function loadSavedCount(){
 
-    const savedCount =
-        document.getElementById(
-            "savedCount"
-        );
+    if(
+        !firebaseUser
+    ){
+
+        savedCount.innerHTML =
+            '<span class="error">' +
+            'Not logged in.' +
+            '</span>';
+
+        return;
+
+    }
 
 
     try{
@@ -1541,24 +1660,32 @@ async function loadSavedCount(){
 }
 
 
-
 // =====================================================
 // GENERATE ALL 2500 GAMES
 // =====================================================
 
-window.generateAllGames =
-async function(){
+async function generateAllGames(){
 
-    const button =
-        document.getElementById(
-            "generateButton"
-        );
+    if(
+        !firebaseUser
+    ){
+
+        message.innerHTML =
+            '<span class="error">' +
+            'Firebase login required.' +
+            '</span>';
+
+        return;
+
+    }
 
 
-    const message =
-        document.getElementById(
-            "message"
-        );
+    generateButton.disabled =
+        true;
+
+
+    loadButton.disabled =
+        true;
 
 
     const progressBox =
@@ -1577,10 +1704,6 @@ async function(){
         document.getElementById(
             "progressFill"
         );
-
-
-    button.disabled =
-        true;
 
 
     progressBox.style.display =
@@ -1667,13 +1790,13 @@ async function(){
         );
 
 
-
         // ==============================================
-        // ALL ALREADY SAVED
+        // ALL SAVED
         // ==============================================
 
         if(
-            existingIds.size === TOTAL_GAMES
+            existingIds.size ===
+            TOTAL_GAMES
         ){
 
             message.innerHTML =
@@ -1693,14 +1816,9 @@ async function(){
             await loadSavedCount();
 
 
-            button.disabled =
-                false;
-
-
             return;
 
         }
-
 
 
         // ==============================================
@@ -1724,8 +1842,12 @@ async function(){
 
 
         for(
-            let gameNumber = FIRST_GAME;
-            gameNumber <= LAST_GAME;
+            let gameNumber =
+                FIRST_GAME;
+
+            gameNumber <=
+                LAST_GAME;
+
             gameNumber++
         ){
 
@@ -1734,7 +1856,7 @@ async function(){
                 gameNumber;
 
 
-            // Skip already saved
+            // Already saved
 
             if(
                 existingIds.has(
@@ -1745,7 +1867,6 @@ async function(){
                 continue;
 
             }
-
 
 
             let grid;
@@ -1841,10 +1962,9 @@ async function(){
         }
 
 
-
         // ==============================================
-        // SAVE IN BATCHES
-        // FIRESTORE MAX = 500
+        // SAVE BATCHES
+        // FIRESTORE LIMIT = 500
         // ==============================================
 
         let saved = 0;
@@ -1852,12 +1972,17 @@ async function(){
 
         for(
             let start = 0;
-            start < gamesToSave.length;
+
+            start <
+                gamesToSave.length;
+
             start += 500
         ){
 
             const batch =
-                writeBatch(db);
+                writeBatch(
+                    db
+                );
 
 
             const chunk =
@@ -1925,7 +2050,6 @@ async function(){
         }
 
 
-
         // ==============================================
         // COMPLETE
         // ==============================================
@@ -1948,7 +2072,6 @@ async function(){
 
         await loadSavedCount();
 
-
     }
     catch(error){
 
@@ -1970,17 +2093,18 @@ async function(){
         progressText.textContent =
             "STOPPED";
 
-
     }
     finally{
 
-        button.disabled =
+        generateButton.disabled =
+            false;
+
+        loadButton.disabled =
             false;
 
     }
 
-};
-
+}
 
 
 // =====================================================
@@ -1990,22 +2114,27 @@ async function(){
 function escapeHtml(text){
 
     return String(text)
+
         .replaceAll(
             "&",
             "&amp;"
         )
+
         .replaceAll(
             "<",
             "&lt;"
         )
+
         .replaceAll(
             ">",
             "&gt;"
         )
+
         .replaceAll(
             '"',
             "&quot;"
         )
+
         .replaceAll(
             "'",
             "&#039;"
@@ -2014,41 +2143,24 @@ function escapeHtml(text){
 }
 
 
-
 // =====================================================
-// INITIAL PREVIEW
-// =====================================================
-
-createPreview();
-
-
-
-// =====================================================
-// DEFAULT GAME ID
-// LOAD LAST GAME AUTOMATICALLY
+// BUTTON EVENTS
 // =====================================================
 
-window.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        loadSingleGame();
-
-    }
+loadButton.addEventListener(
+    "click",
+    loadSingleGame
 );
 
 
-
-// =====================================================
-// LOAD SAVED COUNT
-// =====================================================
-
-loadSavedCount();
-
+generateButton.addEventListener(
+    "click",
+    generateAllGames
+);
 
 
 // =====================================================
-// ENTER KEY = LOAD GAME
+// ENTER KEY
 // =====================================================
 
 document
@@ -2070,7 +2182,141 @@ document
         }
     );
 
+
+// =====================================================
+// BACK BUTTON
+// =====================================================
+
+document
+    .getElementById(
+        "backButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            history.back();
+
+        }
+    );
+
+
+// =====================================================
+// FIREBASE AUTH STATE
+// =====================================================
+
+onAuthStateChanged(
+    auth,
+    async user => {
+
+        console.log(
+            "Firebase Auth State:",
+            user
+        );
+
+
+        if(!user){
+
+            firebaseUser =
+                null;
+
+
+            loadButton.disabled =
+                true;
+
+
+            generateButton.disabled =
+                true;
+
+
+            gameStatus.textContent =
+                "LOGIN REQUIRED";
+
+
+            message.innerHTML =
+                '<span class="error">' +
+                'Please login first.' +
+                '<br>' +
+                'Firebase user is not authenticated.' +
+                '</span>';
+
+
+            savedCount.innerHTML =
+                '<span class="error">' +
+                'Not logged in.' +
+                '</span>';
+
+
+            return;
+
+        }
+
+
+        // ==============================================
+        // USER LOGGED IN
+        // ==============================================
+
+        firebaseUser =
+            user;
+
+
+        console.log(
+            "Firebase UID:",
+            user.uid
+        );
+
+
+        console.log(
+            "Firebase Email:",
+            user.email
+        );
+
+
+        loadButton.disabled =
+            false;
+
+
+        generateButton.disabled =
+            false;
+
+
+        gameStatus.textContent =
+            "FIREBASE LOGIN ✓";
+
+
+        message.innerHTML =
+            '<span class="success">' +
+            'Firebase login successful ✓' +
+            '</span>';
+
+
+        // ==============================================
+        // CREATE PREVIEW
+        // ==============================================
+
+        createPreview();
+
+
+        // ==============================================
+        // LOAD SAVED COUNT
+        // ==============================================
+
+        await loadSavedCount();
+
+
+        // ==============================================
+        // LOAD DEFAULT GAME
+        // ==============================================
+
+        await loadSingleGame();
+
+    }
+
+);
+
 </script>
 
+
 </body>
+
 </html>

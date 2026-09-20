@@ -542,30 +542,35 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 /* =====================================================
    FIREBASE CONFIG
+   CORRECT CURRENT CONFIG
 ===================================================== */
 
 const firebaseConfig = {
 
   apiKey:
-  "AIzaSyCX8mVCr-i4m_7uADo_Y41hpvg1OrLlVI",
+    "AIzaSyCX8mVCrI-qm4_7uAD_o_Y41hpvg1OrLlVI",
 
   authDomain:
-  "magiknumbers-d42c0.firebaseapp.com",
+    "magiknumbers-d42c0.firebaseapp.com",
 
   projectId:
-  "magiknumbers-d42c0",
+    "magiknumbers-d42c0",
 
   storageBucket:
-  "magiknumbers-d42c0.firebasestorage.app",
+    "magiknumbers-d42c0.firebasestorage.app",
 
   messagingSenderId:
-  "977553928698",
+    "977553928698",
 
   appId:
-  "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+    "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
 
 };
 
+
+/* =====================================================
+   FIREBASE INITIALIZE
+===================================================== */
 
 const app =
   initializeApp(firebaseConfig);
@@ -581,32 +586,12 @@ const db =
 
 /* =====================================================
    LOGIN SESSION
-   SAVE UNTIL LOGOUT
 ===================================================== */
 
 await setPersistence(
   auth,
   browserLocalPersistence
 );
-
-
-/*
-   IMPORTANT:
-
-   Password is NOT saved.
-
-   Only Firebase Authentication session
-   is kept in the browser.
-
-   Browser close:
-   session remains.
-
-   Website open again:
-   admin can continue.
-
-   LOGOUT:
-   session is removed.
-*/
 
 
 /* =====================================================
@@ -720,10 +705,6 @@ document
       }
 
 
-      /*
-       * Password field is cleared.
-       */
-
       document
       .getElementById("password")
       .value = "";
@@ -734,7 +715,11 @@ document
     }
     catch(error){
 
-      console.error(error);
+      console.error(
+        "Login error:",
+        error
+      );
+
 
       message.textContent =
         "Login failed: " +
@@ -1460,11 +1445,6 @@ document
 
       await signOut(auth);
 
-      /*
-       * Firebase session is now cleared.
-       * Next time login is required.
-       */
-
       location.reload();
 
     }
@@ -1488,7 +1468,6 @@ document
 onAuthStateChanged(
   auth,
   async function(user){
-
 
     if(!user){
 

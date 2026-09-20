@@ -1,7 +1,17 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MAGIKNUMBER</title><style>
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>MAGIKNUMBER</title>
+
+<style>
+
 *{
   box-sizing:border-box;
 }
@@ -333,6 +343,12 @@ h1,h2,h3{
   padding:5px 0;
 }
 
+.countryNote{
+  font-size:12px;
+  color:#64748b;
+  margin-top:4px;
+}
+
 .hidden{
   display:none !important;
 }
@@ -351,210 +367,427 @@ h1,h2,h3{
   .rowTotal{
     width:50px;
   }
+
 }
-</style></head><body><!-- USER BAR --><div id="userBar">
-  <div id="userLogo" onclick="openLogoPopup()">⚡</div>
-  <div id="userIdText">ID: --</div>
-</div><!-- AUTH PAGE --><div id="authPage" class="page active">  <div class="card"><h1>MAGIKNUMBER</h1>
 
-<h2>LOGIN</h2>
+</style>
 
-<input id="loginEmail"
-       type="email"
-       placeholder="Email">
+</head>
 
-<input id="loginPassword"
-       type="password"
-       placeholder="Password">
+<body>
 
-<label>
-  <input type="checkbox"
-         style="width:auto"
-         onclick="togglePassword('loginPassword')">
-  Show Password
-</label>
 
-<br>
+<!-- USER BAR -->
 
-<button class="green"
-        style="width:100%"
-        onclick="loginUser()">
-  LOGIN
-</button>
+<div id="userBar">
 
-<button style="width:100%"
-        onclick="googleLogin()">
-  Continue with Google
-</button>
+  <div id="userLogo"
+       onclick="openLogoPopup()">
+    ⚡
+  </div>
 
-  </div>  <!-- REGISTER -->  <div class="card"><h2>REGISTER</h2>
+  <div id="userIdText">
+    ID: --
+  </div>
 
-<input id="regName"
-       type="text"
-       placeholder="Name">
-
-<select id="regCountry">
-</select>
-
-<input id="regEmail"
-       type="email"
-       placeholder="Email">
-
-<input id="regPassword"
-       type="password"
-       placeholder="Password">
-
-<label>
-  <input type="checkbox"
-         style="width:auto"
-         onclick="togglePassword('regPassword')">
-  Show Password
-</label>
-
-<br>
-
-<button class="blue"
-        style="width:100%"
-        onclick="registerUser()">
-  REGISTER
-</button>
-
-  </div>  <div class="card"><h3>RULES</h3>
-
-<p>
-  Enter numbers according to the game instructions.
-  Duplicate numbers are not allowed.
-</p>
-
-<p>
-  Only numbers from 0 to 25 are allowed.
-</p>
-
-  </div></div><!-- MENU --><div id="menuPage" class="page">  <div class="card"><h1>MAGIKNUMBER</h1>
-
-<button class="purple menuBtn"
-        onclick="showScoreboard()">
-  SCOREBOARD
-</button>
-
-<button class="purple menuBtn"
-        onclick="startGame('DIAMOND')">
-  DIAMOND – 5 MINUTES
-</button>
-
-<button class="orange menuBtn"
-        onclick="startGame('GOLD')">
-  GOLD – 1 MINUTE
-</button>
-
-<button class="silverBtn menuBtn"
-        onclick="startGame('SILVER')">
-  SILVER – 1 MINUTE
-</button>
-
-<button class="red menuBtn"
-        onclick="logoutUser()">
-  LOGOUT
-</button>
-
-  </div></div><!-- SCOREBOARD --><div id="scorePage" class="page">  <div class="card"><h2>SCOREBOARD</h2>
-
-<div class="scoreItem">
-  <span class="scoreLabel">MAGIKNUMBER ID</span>
-  <div id="profileId">--</div>
 </div>
 
-<div class="scoreItem">
-  <span class="scoreLabel">Date of Joining</span>
-  <div id="profileDate">--</div>
+
+<!-- AUTH PAGE -->
+
+<div id="authPage"
+     class="page active">
+
+  <div class="card">
+
+    <h1>MAGIKNUMBER</h1>
+
+    <h2>LOGIN</h2>
+
+    <input id="loginEmail"
+           type="email"
+           placeholder="Email">
+
+    <input id="loginPassword"
+           type="password"
+           placeholder="Password">
+
+    <label>
+
+      <input type="checkbox"
+             style="width:auto"
+             onclick="togglePassword('loginPassword')">
+
+      Show Password
+
+    </label>
+
+    <br>
+
+    <button class="green"
+            style="width:100%"
+            onclick="loginUser()">
+
+      LOGIN
+
+    </button>
+
+    <button style="width:100%"
+            onclick="googleLogin()">
+
+      Continue with Google
+
+    </button>
+
+  </div>
+
+
+  <!-- REGISTER -->
+
+  <div class="card">
+
+    <h2>REGISTER</h2>
+
+    <input id="regName"
+           type="text"
+           placeholder="Name">
+
+    <select id="regCountry">
+    </select>
+
+    <div class="countryNote">
+      Country is verified from IP first. Your selected country is used as fallback.
+    </div>
+
+    <input id="regEmail"
+           type="email"
+           placeholder="Email">
+
+    <input id="regPassword"
+           type="password"
+           placeholder="Password">
+
+    <label>
+
+      <input type="checkbox"
+             style="width:auto"
+             onclick="togglePassword('regPassword')">
+
+      Show Password
+
+    </label>
+
+    <br>
+
+    <button class="blue"
+            style="width:100%"
+            onclick="registerUser()">
+
+      REGISTER
+
+    </button>
+
+  </div>
+
+
+  <!-- RULES -->
+
+  <div class="card">
+
+    <h3>RULES</h3>
+
+    <p>
+      Enter numbers according to the game instructions.
+      Duplicate numbers are not allowed.
+    </p>
+
+    <p>
+      Only numbers from 0 to 25 are allowed.
+    </p>
+
+  </div>
+
 </div>
 
-<div class="scoreItem">
-  <span class="scoreLabel">Name</span>
-  <div id="profileName">--</div>
+
+<!-- MENU -->
+
+<div id="menuPage"
+     class="page">
+
+  <div class="card">
+
+    <h1>MAGIKNUMBER</h1>
+
+    <button class="purple menuBtn"
+            onclick="showScoreboard()">
+
+      SCOREBOARD
+
+    </button>
+
+    <button class="purple menuBtn"
+            onclick="startGame('DIAMOND')">
+
+      DIAMOND – 5 MINUTES
+
+    </button>
+
+    <button class="orange menuBtn"
+            onclick="startGame('GOLD')">
+
+      GOLD – 1 MINUTE
+
+    </button>
+
+    <button class="silverBtn menuBtn"
+            onclick="startGame('SILVER')">
+
+      SILVER – 1 MINUTE
+
+    </button>
+
+    <button class="red menuBtn"
+            onclick="logoutUser()">
+
+      LOGOUT
+
+    </button>
+
+  </div>
+
 </div>
 
-<div class="scoreItem">
-  <span class="scoreLabel">Country</span>
-  <div id="profileCountry">--</div>
+
+<!-- SCOREBOARD -->
+
+<div id="scorePage"
+     class="page">
+
+  <div class="card">
+
+    <h2>SCOREBOARD</h2>
+
+    <div class="scoreItem">
+
+      <span class="scoreLabel">
+        MAGIKNUMBER ID
+      </span>
+
+      <div id="profileId">
+        --
+      </div>
+
+    </div>
+
+
+    <div class="scoreItem">
+
+      <span class="scoreLabel">
+        Date of Joining
+      </span>
+
+      <div id="profileDate">
+        --
+      </div>
+
+    </div>
+
+
+    <div class="scoreItem">
+
+      <span class="scoreLabel">
+        Name
+      </span>
+
+      <div id="profileName">
+        --
+      </div>
+
+    </div>
+
+
+    <div class="scoreItem">
+
+      <span class="scoreLabel">
+        Country
+      </span>
+
+      <div id="profileCountry">
+        --
+      </div>
+
+    </div>
+
+
+    <div class="scoreItem">
+
+      <span class="scoreLabel">
+        Email
+      </span>
+
+      <div id="profileEmail">
+        --
+      </div>
+
+    </div>
+
+
+    <div class="scoreItem">
+
+      <span class="scoreLabel">
+        Total Games Played
+      </span>
+
+      <div id="profileGames">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="scoreItem">
+
+      <span class="scoreLabel">
+        Earned Points
+      </span>
+
+      <div id="profilePoints">
+        0
+      </div>
+
+    </div>
+
+
+    <button class="purple"
+            style="width:100%"
+            onclick="redeemPoints()">
+
+      REDEEM POINTS
+
+    </button>
+
+
+    <button class="blue"
+            style="width:100%"
+            onclick="redemptionHistory()">
+
+      REDEMPTION HISTORY
+
+    </button>
+
+
+    <button class="red"
+            style="width:100%"
+            onclick="closeAccount()">
+
+      CLOSE ACCOUNT
+
+    </button>
+
+
+    <button class="gray"
+            style="width:100%"
+            onclick="showMenu()">
+
+      BACK
+
+    </button>
+
+  </div>
+
 </div>
 
-<div class="scoreItem">
-  <span class="scoreLabel">Email</span>
-  <div id="profileEmail">--</div>
+
+<!-- GAME PAGE -->
+
+<div id="gamePage"
+     class="page">
+
+  <div id="gameContainer"></div>
+
 </div>
 
-<div class="scoreItem">
-  <span class="scoreLabel">Total Games Played</span>
-  <div id="profileGames">0</div>
+
+<!-- RESULT PAGE -->
+
+<div id="resultPage"
+     class="page">
+
+  <div class="card">
+
+    <h2 id="resultTitle">
+      RESULT
+    </h2>
+
+    <h3>
+      YOUR ANSWER
+    </h3>
+
+    <div id="yourAnswer"></div>
+
+
+    <h3>
+      OUR ANSWER
+    </h3>
+
+    <div id="ourAnswer"></div>
+
+
+    <div class="pointsList"
+         id="pointsBreakdown">
+    </div>
+
+
+    <div class="resultMessage"
+         id="resultMessage">
+    </div>
+
+
+    <button class="blue"
+            style="width:100%"
+            onclick="showMenu()">
+
+      BACK TO MENU
+
+    </button>
+
+  </div>
+
 </div>
 
-<div class="scoreItem">
-  <span class="scoreLabel">Earned Points</span>
-  <div id="profilePoints">0</div>
+
+<!-- POPUP -->
+
+<div id="popupOverlay">
+
+  <div class="popup">
+
+    <h3 id="popupTitle">
+      MAGIKNUMBER
+    </h3>
+
+    <div id="popupMessage"></div>
+
+    <div id="popupButtons"
+         style="margin-top:15px">
+    </div>
+
+  </div>
+
 </div>
 
-<button class="purple"
-        style="width:100%"
-        onclick="redeemPoints()">
-  REDEEM POINTS
-</button>
 
-<button class="blue"
-        style="width:100%"
-        onclick="redemptionHistory()">
-  REDEMPTION HISTORY
-</button>
+<script type="module">
 
-<button class="red"
-        style="width:100%"
-        onclick="closeAccount()">
-  CLOSE ACCOUNT
-</button>
 
-<button class="gray"
-        style="width:100%"
-        onclick="showMenu()">
-  BACK
-</button>
-
-  </div></div><!-- GAME PAGE --><div id="gamePage" class="page">  <div id="gameContainer"></div></div><!-- RESULT PAGE --><div id="resultPage" class="page">  <div class="card"><h2 id="resultTitle">RESULT</h2>
-
-<h3>YOUR ANSWER</h3>
-
-<div id="yourAnswer"></div>
-
-<h3>OUR ANSWER</h3>
-
-<div id="ourAnswer"></div>
-
-<div class="pointsList"
-     id="pointsBreakdown">
-</div>
-
-<div class="resultMessage"
-     id="resultMessage">
-</div>
-
-<button class="blue"
-        style="width:100%"
-        onclick="showMenu()">
-  BACK TO MENU
-</button>
-
-  </div></div><!-- POPUP --><div id="popupOverlay">  <div class="popup"><h3 id="popupTitle">MAGIKNUMBER</h3>
-
-<div id="popupMessage"></div>
-
-<div id="popupButtons"
-     style="margin-top:15px">
-</div>
-
-  </div></div><script type="module">
+/* FIREBASE */
 
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 
 import {
   getAuth,
@@ -564,7 +797,9 @@ import {
   signInWithPopup,
   onAuthStateChanged,
   sendEmailVerification
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
 
 import {
   getFirestore,
@@ -574,25 +809,42 @@ import {
   updateDoc,
   runTransaction,
   increment
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-/* FIREBASE */
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCX8mVCr-i4m_7uADo_Y41hpvg1OrLlVI",
-  authDomain: "magiknumbers-d42c0.firebaseapp.com",
-  projectId: "magiknumbers-d42c0",
-  storageBucket: "magiknumbers-d42c0.firebasestorage.app",
-  messagingSenderId: "977553928698",
-  appId: "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
+  apiKey:
+    "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+
+  authDomain:
+    "magiknumbers-d42c0.firebaseapp.com",
+
+  projectId:
+    "magiknumbers-d42c0",
+
+  storageBucket:
+    "magiknumbers-d42c0.firebasestorage.app",
+
+  messagingSenderId:
+    "977553928698",
+
+  appId:
+    "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
 };
+
 
 const app =
   initializeApp(firebaseConfig);
 
+
 const auth =
   getAuth(app);
+
 
 const db =
   getFirestore(app);
@@ -601,6 +853,7 @@ const db =
 /* COUNTRIES */
 
 const countries = [
+
   ["India","+91"],
   ["USA","+1"],
   ["Canada","+1"],
@@ -627,6 +880,7 @@ const countries = [
   ["Russia","+7"],
   ["Brazil","+55"],
   ["South Africa","+27"]
+
 ];
 
 
@@ -634,7 +888,7 @@ const countrySelect =
   document.getElementById("regCountry");
 
 
-countries.forEach(country=>{
+countries.forEach(country => {
 
   const option =
     document.createElement("option");
@@ -650,62 +904,68 @@ countries.forEach(country=>{
 });
 
 
-/*
-  DEFAULT COUNTRY
-*/
-
-countrySelect.value = "India";
+countrySelect.value =
+  "India";
 
 
 /* POPUP */
 
-window.showPopup = function(
-  message,
-  title="MAGIKNUMBER"
-){
+window.showPopup =
+function(message,title="MAGIKNUMBER"){
 
   document.getElementById("popupTitle")
-    .innerText = title;
+    .innerText =
+    title;
 
   document.getElementById("popupMessage")
-    .innerText = message;
+    .innerText =
+    message;
 
   document.getElementById("popupButtons")
     .innerHTML =
     `
-    <button class="blue"
-            onclick="closePopup()">
-      OK
-    </button>
+      <button class="blue"
+              onclick="closePopup()">
+        OK
+      </button>
     `;
 
   document.getElementById("popupOverlay")
-    .style.display = "flex";
+    .style.display =
+    "flex";
 
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow =
+    "hidden";
+
 };
 
 
-window.closePopup = function(){
+window.closePopup =
+function(){
 
   document.getElementById("popupOverlay")
-    .style.display = "none";
+    .style.display =
+    "none";
 
-  document.body.style.overflow = "";
+  document.body.style.overflow =
+    "";
+
 };
 
 
 /* PASSWORD */
 
-window.togglePassword = function(id){
+window.togglePassword =
+function(id){
 
   const input =
     document.getElementById(id);
 
   input.type =
     input.type === "password"
-    ? "text"
-    : "password";
+      ? "text"
+      : "password";
+
 };
 
 
@@ -714,13 +974,17 @@ window.togglePassword = function(id){
 function hideAll(){
 
   document.querySelectorAll(".page")
-    .forEach(page=>{
+    .forEach(page => {
+
       page.classList.remove("active");
+
     });
+
 }
 
 
-window.showMenu = function(){
+window.showMenu =
+function(){
 
   hideAll();
 
@@ -728,6 +992,7 @@ window.showMenu = function(){
     .classList.add("active");
 
   window.scrollTo(0,0);
+
 };
 
 
@@ -739,11 +1004,13 @@ function showAuth(){
     .classList.add("active");
 
   document.getElementById("userBar")
-    .style.display = "none";
+    .style.display =
+    "none";
+
 }
 
 
-/* IP COUNTRY DETECTION */
+/* IP DETECTION */
 
 async function getIPCountry(){
 
@@ -758,12 +1025,15 @@ async function getIPCountry(){
         }
       );
 
+
     if(!response.ok){
 
       throw new Error(
         "IP service unavailable"
       );
+
     }
+
 
     const data =
       await response.json();
@@ -774,31 +1044,39 @@ async function getIPCountry(){
       country:
         data.country_name || null,
 
+      countryCode:
+        data.country_code || null,
+
       ip:
         data.ip || null
 
     };
 
+
   }catch(error){
 
     console.log(
-      "IP country detection failed:",
+      "IP detection failed:",
       error
     );
+
 
     return {
 
       country:null,
+
+      countryCode:null,
 
       ip:null
 
     };
 
   }
+
 }
 
 
-/* FIND COUNTRY */
+/* COUNTRY FINDER */
 
 function normalizeCountry(country){
 
@@ -809,51 +1087,71 @@ function normalizeCountry(country){
   return String(country)
     .trim()
     .toLowerCase();
+
 }
 
-
-/*
-  Only accept a country returned by
-  IP service if it matches our country
-  list.
-
-  Otherwise selected country becomes
-  fallback.
-*/
 
 function findListedCountry(ipCountry){
 
   const normalized =
     normalizeCountry(ipCountry);
 
+
   const found =
-    countries.find(
-      country =>
-        normalizeCountry(country[0])
+    countries.find(country =>
+
+      normalizeCountry(country[0])
         === normalized
+
     );
+
 
   return found
     ? found[0]
     : null;
+
+}
+
+
+/* GET COUNTRY DATA */
+
+function getSelectedCountry(){
+
+  const selected =
+    countrySelect.value;
+
+
+  return {
+
+    country:
+      selected || "Unknown"
+
+  };
+
 }
 
 
 /* REGISTER */
 
-window.registerUser = async function(){
+window.registerUser =
+async function(){
 
   const name =
     document.getElementById("regName")
-      .value.trim();
+      .value
+      .trim();
+
 
   const email =
     document.getElementById("regEmail")
-      .value.trim();
+      .value
+      .trim();
+
 
   const password =
     document.getElementById("regPassword")
       .value;
+
 
   const selectedCountry =
     document.getElementById("regCountry")
@@ -872,6 +1170,7 @@ window.registerUser = async function(){
     );
 
     return;
+
   }
 
 
@@ -882,39 +1181,39 @@ window.registerUser = async function(){
     );
 
     return;
+
   }
 
 
   try{
 
     /*
-      FIRST:
-      Detect IP country.
+      GET IP FIRST
     */
 
     const ipData =
       await getIPCountry();
 
 
-    const ipCountry =
+    /*
+      IP COUNTRY HAS FIRST PRIORITY
+    */
+
+    const ipListedCountry =
       findListedCountry(
         ipData.country
       );
 
-
-    /*
-      IP HAS FIRST PRIORITY
-    */
 
     let finalCountry;
 
     let countrySource;
 
 
-    if(ipCountry){
+    if(ipListedCountry){
 
       finalCountry =
-        ipCountry;
+        ipListedCountry;
 
       countrySource =
         "IP";
@@ -931,7 +1230,7 @@ window.registerUser = async function(){
 
 
     /*
-      CREATE FIREBASE AUTH USER
+      CREATE AUTH USER
     */
 
     const credential =
@@ -947,7 +1246,7 @@ window.registerUser = async function(){
 
 
     /*
-      SEND EMAIL VERIFICATION
+      EMAIL VERIFICATION
     */
 
     await sendEmailVerification(user);
@@ -958,25 +1257,34 @@ window.registerUser = async function(){
     */
 
     const counterRef =
-      doc(db,"system","counter");
+      doc(
+        db,
+        "system",
+        "counter"
+      );
 
 
     const magikId =
       await runTransaction(
         db,
-        async transaction=>{
+        async transaction => {
 
           const snapshot =
-            await transaction.get(counterRef);
+            await transaction.get(
+              counterRef
+            );
 
-          let nextNumber = 100001;
+
+          let nextNumber =
+            100001;
 
 
           if(snapshot.exists()){
 
             nextNumber =
               Number(
-                snapshot.data().nextNumber
+                snapshot.data()
+                  .nextNumber
                 || 100001
               );
 
@@ -1006,7 +1314,11 @@ window.registerUser = async function(){
     */
 
     await setDoc(
-      doc(db,"users",user.uid),
+      doc(
+        db,
+        "users",
+        user.uid
+      ),
       {
 
         magikNumberId:
@@ -1024,8 +1336,17 @@ window.registerUser = async function(){
         countrySource:
           countrySource,
 
+        selectedCountry:
+          selectedCountry,
+
         registrationIp:
           ipData.ip || "",
+
+        registrationIpCountry:
+          ipData.country || "",
+
+        registrationIpCountryCode:
+          ipData.countryCode || "",
 
         points:
           0,
@@ -1047,8 +1368,7 @@ window.registerUser = async function(){
 
 
     /*
-      SIGN OUT UNTIL EMAIL
-      IS VERIFIED
+      SIGN OUT
     */
 
     await auth.signOut();
@@ -1057,7 +1377,9 @@ window.registerUser = async function(){
     showPopup(
       `Registration successful.
 
-We detected your country as ${finalCountry}.
+Your MAGIKNUMBER ID is ${magikId}.
+
+Country used: ${finalCountry}.
 
 A verification email has been sent to ${email}.
 
@@ -1067,26 +1389,65 @@ Please verify your email and then login.`,
 
 
     /*
-      CLEAR REGISTER FORM
+      CLEAR FORM
     */
 
     document.getElementById("regName")
-      .value = "";
+      .value =
+      "";
 
     document.getElementById("regEmail")
-      .value = "";
+      .value =
+      "";
 
     document.getElementById("regPassword")
-      .value = "";
+      .value =
+      "";
 
 
   }catch(error){
 
     console.error(error);
 
-    showPopup(
-      error.message
-    );
+
+    let message =
+      error.message;
+
+
+    if(
+      error.code ===
+      "auth/email-already-in-use"
+    ){
+
+      message =
+        "This email is already registered.";
+
+    }
+
+
+    if(
+      error.code ===
+      "auth/invalid-email"
+    ){
+
+      message =
+        "Invalid email address.";
+
+    }
+
+
+    if(
+      error.code ===
+      "auth/weak-password"
+    ){
+
+      message =
+        "Password is too weak.";
+
+    }
+
+
+    showPopup(message);
 
   }
 
@@ -1095,11 +1456,14 @@ Please verify your email and then login.`,
 
 /* LOGIN */
 
-window.loginUser = async function(){
+window.loginUser =
+async function(){
 
   const email =
     document.getElementById("loginEmail")
-      .value.trim();
+      .value
+      .trim();
+
 
   const password =
     document.getElementById("loginPassword")
@@ -1113,6 +1477,7 @@ window.loginUser = async function(){
     );
 
     return;
+
   }
 
 
@@ -1131,49 +1496,96 @@ window.loginUser = async function(){
 
 
     /*
-      EMAIL VERIFICATION CHECK
+      EMAIL VERIFICATION
     */
 
     if(!user.emailVerified){
+
+      try{
+
+        await sendEmailVerification(
+          user
+        );
+
+      }catch(e){
+
+        console.log(e);
+
+      }
+
 
       await auth.signOut();
 
 
       showPopup(
-        "Please verify your email before login. Check your email inbox and spam folder.",
+        "Please verify your email before login. A new verification email has been sent.",
         "EMAIL NOT VERIFIED"
       );
 
+
       return;
+
     }
 
 
   }catch(error){
 
-    showPopup(
-      error.message
-    );
+    console.error(error);
+
+
+    let message =
+      error.message;
+
+
+    if(
+      error.code ===
+      "auth/invalid-credential"
+    ){
+
+      message =
+        "Invalid email or password.";
+
+    }
+
+
+    if(
+      error.code ===
+      "auth/user-not-found"
+    ){
+
+      message =
+        "User not found.";
+
+    }
+
+
+    showPopup(message);
 
   }
 
 };
 
 
-/* GOOGLE */
+/* GOOGLE LOGIN */
 
-window.googleLogin = async function(){
+window.googleLogin =
+async function(){
 
   try{
 
     const provider =
       new GoogleAuthProvider();
 
+
     await signInWithPopup(
       auth,
       provider
     );
 
+
   }catch(error){
+
+    console.error(error);
 
     showPopup(
       error.message
@@ -1189,81 +1601,93 @@ window.googleLogin = async function(){
 async function createGoogleProfile(user){
 
   const ref =
-    doc(db,"users",user.uid);
+    doc(
+      db,
+      "users",
+      user.uid
+    );
+
 
   const snap =
     await getDoc(ref);
 
 
   /*
-    Existing Google user:
-    DO NOT overwrite profile.
+    EXISTING USER
   */
 
   if(snap.exists()){
+
     return;
+
   }
 
 
   /*
-    Detect IP country
+    IP DATA
   */
 
   const ipData =
     await getIPCountry();
 
 
-  const ipCountry =
+  const ipListedCountry =
     findListedCountry(
       ipData.country
     );
 
 
-  /*
-    Google registration:
-    IP country is first priority.
-
-    If IP cannot be detected,
-    use currently selected country.
-  */
-
   const selectedCountry =
-    document.getElementById("regCountry")
-      .value;
+    document.getElementById(
+      "regCountry"
+    ).value;
 
 
   const finalCountry =
-    ipCountry ||
+    ipListedCountry ||
     selectedCountry ||
     "Unknown";
 
 
   const countrySource =
-    ipCountry
-    ? "IP"
-    : "Selected";
+    ipListedCountry
+      ? "IP"
+      : "Selected";
 
+
+  /*
+    MAGIK ID
+  */
 
   const counterRef =
-    doc(db,"system","counter");
+    doc(
+      db,
+      "system",
+      "counter"
+    );
 
 
   const magikId =
     await runTransaction(
       db,
-      async transaction=>{
+      async transaction => {
 
         const snapshot =
-          await transaction.get(counterRef);
+          await transaction.get(
+            counterRef
+          );
 
-        let nextNumber = 100001;
+
+        let nextNumber =
+          100001;
 
 
         if(snapshot.exists()){
 
           nextNumber =
             Number(
-              snapshot.data().nextNumber
+              snapshot.data()
+                .nextNumber
               || 100001
             );
 
@@ -1288,6 +1712,10 @@ async function createGoogleProfile(user){
     );
 
 
+  /*
+    SAVE GOOGLE USER
+  */
+
   await setDoc(
     ref,
     {
@@ -1307,8 +1735,17 @@ async function createGoogleProfile(user){
       countrySource:
         countrySource,
 
+      selectedCountry:
+        selectedCountry || "",
+
       registrationIp:
         ipData.ip || "",
+
+      registrationIpCountry:
+        ipData.country || "",
+
+      registrationIpCountryCode:
+        ipData.countryCode || "",
 
       points:
         0,
@@ -1326,6 +1763,7 @@ async function createGoogleProfile(user){
         null
 
     }
+
   );
 
 }
@@ -1335,7 +1773,7 @@ async function createGoogleProfile(user){
 
 onAuthStateChanged(
   auth,
-  async user=>{
+  async user => {
 
     if(user){
 
@@ -1344,16 +1782,20 @@ onAuthStateChanged(
 
 
       /*
-        Email/password users must
-        have verified email.
+        PASSWORD USER
+        MUST VERIFY EMAIL
       */
 
-      if(
+      const isPasswordUser =
         user.providerData.some(
           provider =>
             provider.providerId ===
             "password"
-        ) &&
+        );
+
+
+      if(
+        isPasswordUser &&
         !user.emailVerified
       ){
 
@@ -1361,21 +1803,50 @@ onAuthStateChanged(
 
         showAuth();
 
-        showPopup(
-          "Please verify your email before login.",
-          "EMAIL NOT VERIFIED"
+        return;
+
+      }
+
+
+      /*
+        GOOGLE PROFILE
+      */
+
+      try{
+
+        await createGoogleProfile(
+          user
         );
+
+      }catch(error){
+
+        console.error(
+          "Profile creation error:",
+          error
+        );
+
+        showPopup(
+          "Unable to create user profile: "+
+          error.message
+        );
+
+        await auth.signOut();
 
         return;
 
       }
 
 
-      await createGoogleProfile(user);
-
+      /*
+        GET USER PROFILE
+      */
 
       const ref =
-        doc(db,"users",user.uid);
+        doc(
+          db,
+          "users",
+          user.uid
+        );
 
 
       const snap =
@@ -1388,23 +1859,35 @@ onAuthStateChanged(
           snap.data();
 
 
-        document.getElementById("userIdText")
-          .innerText =
+        document.getElementById(
+          "userIdText"
+        ).innerText =
           "ID: "+
-          (data.magikNumberId || "--");
+          (
+            data.magikNumberId
+            || "--"
+          );
 
 
-        document.getElementById("userLogo")
-          .innerText =
-          data.logo || "⚡";
+        document.getElementById(
+          "userLogo"
+        ).innerText =
+          data.logo
+          || "⚡";
 
+
+        /*
+          CLEAR CLOSE REQUEST
+          WHEN USER LOGS IN
+        */
 
         if(data.closeRequestedAt){
 
           await updateDoc(
             ref,
             {
-              closeRequestedAt:null
+              closeRequestedAt:
+                null
             }
           );
 
@@ -1413,8 +1896,10 @@ onAuthStateChanged(
       }
 
 
-      document.getElementById("userBar")
-        .style.display = "flex";
+      document.getElementById(
+        "userBar"
+      ).style.display =
+        "flex";
 
 
       showMenu();
@@ -1435,7 +1920,8 @@ onAuthStateChanged(
 
 /* LOGOUT */
 
-window.logoutUser = async function(){
+window.logoutUser =
+async function(){
 
   try{
 
@@ -1452,35 +1938,50 @@ window.logoutUser = async function(){
 };
 
 
-/* LOGO */
+/* LOGO POPUP */
 
-window.openLogoPopup = function(){
+window.openLogoPopup =
+function(){
 
-  document.getElementById("popupTitle")
-    .innerText =
+  document.getElementById(
+    "popupTitle"
+  ).innerText =
     "SELECT LOGO";
 
 
-  document.getElementById("popupMessage")
-    .innerText = "";
+  document.getElementById(
+    "popupMessage"
+  ).innerText =
+    "";
 
 
   const logos =
-    ["⚡","🎯","🚀","🔥","👑","💎","🌀","🌟"];
+    [
+      "⚡",
+      "🎯",
+      "🚀",
+      "🔥",
+      "👑",
+      "💎",
+      "🌀",
+      "🌟"
+    ];
 
 
   let html =
     `<div class="logoChoices">`;
 
 
-  logos.forEach(logo=>{
+  logos.forEach(logo => {
 
     html +=
       `
-      <button class="logoChoice"
-              onclick="selectLogo('${logo}')">
-        ${logo}
-      </button>
+        <button class="logoChoice"
+                onclick="selectLogo('${logo}')">
+
+          ${logo}
+
+        </button>
       `;
 
   });
@@ -1490,12 +1991,16 @@ window.openLogoPopup = function(){
     `</div>`;
 
 
-  document.getElementById("popupButtons")
-    .innerHTML = html;
+  document.getElementById(
+    "popupButtons"
+  ).innerHTML =
+    html;
 
 
-  document.getElementById("popupOverlay")
-    .style.display = "flex";
+  document.getElementById(
+    "popupOverlay"
+  ).style.display =
+    "flex";
 
 
   document.body.style.overflow =
@@ -1504,26 +2009,38 @@ window.openLogoPopup = function(){
 };
 
 
-window.selectLogo = async function(logo){
+/* SELECT LOGO */
+
+window.selectLogo =
+async function(logo){
 
   if(!currentUser){
+
     return;
+
   }
 
 
-  document.getElementById("userLogo")
-    .innerText =
+  document.getElementById(
+    "userLogo"
+  ).innerText =
     logo;
 
 
   try{
 
     await updateDoc(
-      doc(db,"users",currentUser.uid),
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      ),
       {
-        logo:logo
+        logo:
+          logo
       }
     );
+
 
   }catch(error){
 
@@ -1543,10 +2060,13 @@ window.selectLogo = async function(logo){
 
 /* SCOREBOARD */
 
-window.showScoreboard = async function(){
+window.showScoreboard =
+async function(){
 
   if(!currentUser){
+
     return;
+
   }
 
 
@@ -1554,7 +2074,11 @@ window.showScoreboard = async function(){
 
     const snap =
       await getDoc(
-        doc(db,"users",currentUser.uid)
+        doc(
+          db,
+          "users",
+          currentUser.uid
+        )
       );
 
 
@@ -1573,50 +2097,66 @@ window.showScoreboard = async function(){
       snap.data();
 
 
-    document.getElementById("profileId")
-      .innerText =
-      data.magikNumberId || "--";
+    document.getElementById(
+      "profileId"
+    ).innerText =
+      data.magikNumberId
+      || "--";
 
 
-    document.getElementById("profileDate")
-      .innerText =
+    document.getElementById(
+      "profileDate"
+    ).innerText =
       data.dateOfJoining
-      ? new Date(
-          data.dateOfJoining
-        ).toLocaleDateString()
-      : "--";
+        ? new Date(
+            data.dateOfJoining
+          ).toLocaleDateString()
+        : "--";
 
 
-    document.getElementById("profileName")
-      .innerText =
-      data.name || "--";
+    document.getElementById(
+      "profileName"
+    ).innerText =
+      data.name
+      || "--";
 
 
-    document.getElementById("profileCountry")
-      .innerText =
-      data.country || "--";
+    document.getElementById(
+      "profileCountry"
+    ).innerText =
+      data.country
+      || "--";
 
 
-    document.getElementById("profileEmail")
-      .innerText =
-      data.email || "--";
+    document.getElementById(
+      "profileEmail"
+    ).innerText =
+      data.email
+      || "--";
 
 
-    document.getElementById("profileGames")
-      .innerText =
-      data.gamesPlayed || 0;
+    document.getElementById(
+      "profileGames"
+    ).innerText =
+      data.gamesPlayed
+      || 0;
 
 
-    document.getElementById("profilePoints")
-      .innerText =
-      data.points || 0;
+    document.getElementById(
+      "profilePoints"
+    ).innerText =
+      data.points
+      || 0;
 
 
     hideAll();
 
 
-    document.getElementById("scorePage")
-      .classList.add("active");
+    document.getElementById(
+      "scorePage"
+    ).classList.add(
+      "active"
+    );
 
 
     window.scrollTo(0,0);
@@ -1635,7 +2175,8 @@ window.showScoreboard = async function(){
 
 /* REDEEM */
 
-window.redeemPoints = function(){
+window.redeemPoints =
+function(){
 
   showPopup(
     "Points redemption options such as PhonePe, Paytm, Google Pay, Amazon and Flipkart can be added later."
@@ -1644,7 +2185,10 @@ window.redeemPoints = function(){
 };
 
 
-window.redemptionHistory = function(){
+/* REDEMPTION HISTORY */
+
+window.redemptionHistory =
+function(){
 
   showPopup(
     "Redemption history will appear here."
@@ -1655,35 +2199,44 @@ window.redemptionHistory = function(){
 
 /* CLOSE ACCOUNT */
 
-window.closeAccount = function(){
+window.closeAccount =
+function(){
 
-  document.getElementById("popupTitle")
-    .innerText =
+  document.getElementById(
+    "popupTitle"
+  ).innerText =
     "CLOSE ACCOUNT";
 
 
-  document.getElementById("popupMessage")
-    .innerText =
+  document.getElementById(
+    "popupMessage"
+  ).innerText =
     "Do you really want to close account permanently?";
 
 
-  document.getElementById("popupButtons")
-    .innerHTML =
+  document.getElementById(
+    "popupButtons"
+  ).innerHTML =
     `
-    <button class="red"
-            onclick="confirmCloseAccount()">
-      YES
-    </button>
+      <button class="red"
+              onclick="confirmCloseAccount()">
 
-    <button class="gray"
-            onclick="closePopup()">
-      NO
-    </button>
+        YES
+
+      </button>
+
+      <button class="gray"
+              onclick="closePopup()">
+
+        NO
+
+      </button>
     `;
 
 
-  document.getElementById("popupOverlay")
-    .style.display =
+  document.getElementById(
+    "popupOverlay"
+  ).style.display =
     "flex";
 
 
@@ -1693,37 +2246,58 @@ window.closeAccount = function(){
 };
 
 
-window.confirmCloseAccount = async function(){
+/* CONFIRM CLOSE ACCOUNT */
+
+window.confirmCloseAccount =
+async function(){
+
+  if(!currentUser){
+
+    return;
+
+  }
+
 
   try{
 
     await updateDoc(
-      doc(db,"users",currentUser.uid),
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      ),
       {
+
         closeRequestedAt:
           new Date().toISOString()
+
       }
     );
 
 
-    document.getElementById("popupTitle")
-      .innerText =
+    document.getElementById(
+      "popupTitle"
+    ).innerText =
       "ACCOUNT CLOSURE";
 
 
-    document.getElementById("popupMessage")
-      .innerText =
+    document.getElementById(
+      "popupMessage"
+    ).innerText =
       "If you will not relogin before 30 days from today, your account will be deleted permanently.";
 
 
-    document.getElementById("popupButtons")
-      .innerHTML =
-      `
+    document.getElementById(
+      "popupButtons"
+    ).innerHTML =
+    `
       <button class="blue"
               onclick="closePopup()">
+
         OK
+
       </button>
-      `;
+    `;
 
 
   }catch(error){
@@ -1739,14 +2313,19 @@ window.confirmCloseAccount = async function(){
 
 /* START GAME */
 
-window.startGame = function(gameName){
+window.startGame =
+function(gameName){
 
   const config =
-    GAME_CONFIG[gameName];
+    GAME_CONFIG[
+      gameName
+    ];
 
 
   if(!config){
+
     return;
+
   }
 
 
@@ -1770,8 +2349,11 @@ window.startGame = function(gameName){
   hideAll();
 
 
-  document.getElementById("gamePage")
-    .classList.add("active");
+  document.getElementById(
+    "gamePage"
+  ).classList.add(
+    "active"
+  );
 
 
   const container =
@@ -1780,26 +2362,31 @@ window.startGame = function(gameName){
     );
 
 
-  container.innerHTML = "";
+  container.innerHTML =
+    "";
 
 
   const gameClass =
     gameName === "DIAMOND"
-    ? "gameDiamond"
-    : gameName === "GOLD"
-    ? "gameGold"
-    : "gameSilver";
+      ? "gameDiamond"
+      : gameName === "GOLD"
+      ? "gameGold"
+      : "gameSilver";
 
 
   const gameCard =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
   gameCard.className =
-    "gameCard "+gameClass;
+    "gameCard "+
+    gameClass;
 
 
-  let hintText = "";
+  let hintText =
+    "";
 
 
   if(gameName === "SILVER"){
@@ -1817,47 +2404,59 @@ window.startGame = function(gameName){
 
   gameCard.innerHTML =
     `
-    <h2>${config.name}</h2>
+      <h2>
+        ${config.name}
+      </h2>
 
-    <div class="hint">
-      ${hintText}
-    </div>
-
-    <div class="timer"
-         id="gameTimer">
-      ${formatTime(timeLeft)}
-    </div>
-
-    <div class="boardWrapper">
-
-      <div id="gameBoard"
-           class="gameBoard">
+      <div class="hint">
+        ${hintText}
       </div>
 
-    </div>
+      <div class="timer"
+           id="gameTimer">
 
-    <div class="enteredTotal"
-         id="enteredTotal">
-      Your Entered Total: 0
-    </div>
+        ${formatTime(timeLeft)}
 
-    <div style="text-align:center">
+      </div>
 
-      <button class="green"
-              onclick="answerGame()">
-        ANSWER
-      </button>
+      <div class="boardWrapper">
 
-      <button class="gray"
-              onclick="backFromGame()">
-        BACK
-      </button>
+        <div id="gameBoard"
+             class="gameBoard">
+        </div>
 
-    </div>
+      </div>
+
+      <div class="enteredTotal"
+           id="enteredTotal">
+
+        Your Entered Total: 0
+
+      </div>
+
+      <div style="text-align:center">
+
+        <button class="green"
+                onclick="answerGame()">
+
+          ANSWER
+
+        </button>
+
+        <button class="gray"
+                onclick="backFromGame()">
+
+          BACK
+
+        </button>
+
+      </div>
     `;
 
 
-  container.appendChild(gameCard);
+  container.appendChild(
+    gameCard
+  );
 
 
   createBoard();
@@ -1876,18 +2475,26 @@ window.startGame = function(gameName){
 function formatTime(seconds){
 
   const min =
-    Math.floor(seconds/60)
-      .toString()
-      .padStart(2,"0");
+    Math.floor(
+      seconds / 60
+    )
+    .toString()
+    .padStart(2,"0");
 
 
   const sec =
-    (seconds%60)
-      .toString()
-      .padStart(2,"0");
+    (
+      seconds % 60
+    )
+    .toString()
+    .padStart(2,"0");
 
 
-  return `${min}:${sec}`;
+  return (
+    min +
+    ":" +
+    sec
+  );
 
 }
 
@@ -1897,7 +2504,9 @@ function formatTime(seconds){
 function createBoard(){
 
   const config =
-    GAME_CONFIG[currentGame];
+    GAME_CONFIG[
+      currentGame
+    ];
 
 
   const board =
@@ -1906,7 +2515,8 @@ function createBoard(){
     );
 
 
-  board.innerHTML = "";
+  board.innerHTML =
+    "";
 
 
   if(currentGame === "SILVER"){
@@ -1928,9 +2538,15 @@ function createBoard(){
       ){
 
         const input =
-          createNumberInput(r,c);
+          createNumberInput(
+            r,
+            c
+          );
 
-        board.appendChild(input);
+
+        board.appendChild(
+          input
+        );
 
       }
 
@@ -1945,6 +2561,10 @@ function createBoard(){
     `repeat(${config.cols},52px) 58px`;
 
 
+  /*
+    COLUMN TOTAL HEADERS
+  */
+
   for(
     let c=0;
     c<config.cols;
@@ -1952,7 +2572,9 @@ function createBoard(){
   ){
 
     const total =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
 
     total.className =
@@ -1960,20 +2582,25 @@ function createBoard(){
 
 
     total.id =
-      "columnTotal"+c;
+      "columnTotal"+
+      c;
 
 
     total.innerText =
       "0";
 
 
-    board.appendChild(total);
+    board.appendChild(
+      total
+    );
 
   }
 
 
   const empty =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
   empty.className =
@@ -1984,8 +2611,14 @@ function createBoard(){
     "";
 
 
-  board.appendChild(empty);
+  board.appendChild(
+    empty
+  );
 
+
+  /*
+    ROWS
+  */
 
   for(
     let r=0;
@@ -2000,16 +2633,23 @@ function createBoard(){
     ){
 
       const input =
-        createNumberInput(r,c);
+        createNumberInput(
+          r,
+          c
+        );
 
 
-      board.appendChild(input);
+      board.appendChild(
+        input
+      );
 
     }
 
 
     const rowTotal =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
 
     rowTotal.className =
@@ -2017,14 +2657,17 @@ function createBoard(){
 
 
     rowTotal.id =
-      "rowTotal"+r;
+      "rowTotal"+
+      r;
 
 
     rowTotal.innerText =
       "0";
 
 
-    board.appendChild(rowTotal);
+    board.appendChild(
+      rowTotal
+    );
 
   }
 
@@ -2036,7 +2679,9 @@ function createBoard(){
 function createNumberInput(r,c){
 
   const input =
-    document.createElement("input");
+    document.createElement(
+      "input"
+    );
 
 
   input.type =
@@ -2068,7 +2713,9 @@ function createNumberInput(r,c){
     function(){
 
       if(gameEnded){
+
         return;
+
       }
 
 
@@ -2094,7 +2741,9 @@ function createNumberInput(r,c){
 function numberChanged(event){
 
   if(gameEnded){
+
     return;
+
   }
 
 
@@ -2130,11 +2779,11 @@ function numberChanged(event){
     );
 
 
-    input.value = "";
+    input.value =
+      "";
 
 
     updateEnteredTotal();
-
 
     return;
 
@@ -2151,20 +2800,22 @@ function numberChanged(event){
     false;
 
 
-  inputs.forEach(other=>{
+  inputs.forEach(
+    other => {
 
-    if(
-      other !== input &&
-      other.value.trim() !== "" &&
-      Number(other.value) === number
-    ){
+      if(
+        other !== input &&
+        other.value.trim() !== "" &&
+        Number(other.value) === number
+      ){
 
-      duplicate =
-        true;
+        duplicate =
+          true;
+
+      }
 
     }
-
-  });
+  );
 
 
   if(duplicate){
@@ -2174,11 +2825,11 @@ function numberChanged(event){
     );
 
 
-    input.value = "";
+    input.value =
+      "";
 
 
     updateEnteredTotal();
-
 
     return;
 
@@ -2195,7 +2846,9 @@ function numberChanged(event){
 function updateEnteredTotal(){
 
   const config =
-    GAME_CONFIG[currentGame];
+    GAME_CONFIG[
+      currentGame
+    ];
 
 
   let total =
@@ -2208,16 +2861,20 @@ function updateEnteredTotal(){
     );
 
 
-  inputs.forEach(input=>{
+  inputs.forEach(
+    input => {
 
-    if(input.value !== ""){
+      if(input.value !== ""){
 
-      total +=
-        Number(input.value);
+        total +=
+          Number(
+            input.value
+          );
+
+      }
 
     }
-
-  });
+  );
 
 
   const element =
@@ -2229,15 +2886,22 @@ function updateEnteredTotal(){
   if(element){
 
     element.innerText =
-      "Your Entered Total: "+total;
+      "Your Entered Total: "+
+      total;
 
   }
 
 
   if(currentGame === "SILVER"){
+
     return;
+
   }
 
+
+  /*
+    ROW TOTALS
+  */
 
   for(
     let r=0;
@@ -2267,7 +2931,9 @@ function updateEnteredTotal(){
       ){
 
         rowSum +=
-          Number(input.value);
+          Number(
+            input.value
+          );
 
       }
 
@@ -2276,7 +2942,8 @@ function updateEnteredTotal(){
 
     const rowElement =
       document.getElementById(
-        "rowTotal"+r
+        "rowTotal"+
+        r
       );
 
 
@@ -2289,6 +2956,10 @@ function updateEnteredTotal(){
 
   }
 
+
+  /*
+    COLUMN TOTALS
+  */
 
   for(
     let c=0;
@@ -2318,7 +2989,9 @@ function updateEnteredTotal(){
       ){
 
         columnSum +=
-          Number(input.value);
+          Number(
+            input.value
+          );
 
       }
 
@@ -2327,7 +3000,8 @@ function updateEnteredTotal(){
 
     const columnElement =
       document.getElementById(
-        "columnTotal"+c
+        "columnTotal"+
+        c
       );
 
 
@@ -2356,34 +3030,36 @@ function startTimer(){
 
 
   timerInterval =
-    setInterval(()=>{
+    setInterval(
+      () => {
 
-      timeLeft--;
-
-
-      if(timeLeft <= 0){
-
-        timeLeft =
-          0;
+        timeLeft--;
 
 
-        clearInterval(
-          timerInterval
-        );
+        if(timeLeft <= 0){
+
+          timeLeft =
+            0;
 
 
-        endGame();
+          clearInterval(
+            timerInterval
+          );
 
 
-        return;
-
-      }
+          endGame();
 
 
-      updateTimer();
+          return;
+
+        }
 
 
-    },1000);
+        updateTimer();
+
+      },
+      1000
+    );
 
 }
 
@@ -2400,7 +3076,10 @@ function updateTimer(){
 
     timer.innerText =
       formatTime(
-        Math.max(0,timeLeft)
+        Math.max(
+          0,
+          timeLeft
+        )
       );
 
   }
@@ -2413,7 +3092,9 @@ function updateTimer(){
 function endGame(){
 
   if(gameEnded){
+
     return;
+
   }
 
 
@@ -2434,31 +3115,34 @@ function endGame(){
 
 
   document
-    .querySelectorAll(".numberBox")
-    .forEach(input=>{
+    .querySelectorAll(
+      ".numberBox"
+    )
+    .forEach(
+      input => {
 
-      input.disabled =
-        true;
+        input.disabled =
+          true;
 
+        input.readOnly =
+          true;
 
-      input.readOnly =
-        true;
-
-    });
+      }
+    );
 
 }
 
 
 /* ANSWER */
 
-window.answerGame = function(){
+window.answerGame =
+function(){
 
   if(!gameEnded){
 
     showPopup(
       "Game is still running"
     );
-
 
     return;
 
@@ -2470,9 +3154,10 @@ window.answerGame = function(){
 };
 
 
-/* BACK */
+/* BACK FROM GAME */
 
-window.backFromGame = function(){
+window.backFromGame =
+function(){
 
   if(gameEnded){
 
@@ -2483,39 +3168,46 @@ window.backFromGame = function(){
 
     showMenu();
 
-
     return;
 
   }
 
 
-  document.getElementById("popupTitle")
-    .innerText =
+  document.getElementById(
+    "popupTitle"
+  ).innerText =
     "QUIT GAME";
 
 
-  document.getElementById("popupMessage")
-    .innerText =
+  document.getElementById(
+    "popupMessage"
+  ).innerText =
     "Are you sure do you want quit game?";
 
 
-  document.getElementById("popupButtons")
-    .innerHTML =
+  document.getElementById(
+    "popupButtons"
+  ).innerHTML =
     `
-    <button class="red"
-            onclick="confirmQuitGame()">
-      YES
-    </button>
+      <button class="red"
+              onclick="confirmQuitGame()">
 
-    <button class="gray"
-            onclick="closePopup()">
-      NO
-    </button>
+        YES
+
+      </button>
+
+      <button class="gray"
+              onclick="closePopup()">
+
+        NO
+
+      </button>
     `;
 
 
-  document.getElementById("popupOverlay")
-    .style.display =
+  document.getElementById(
+    "popupOverlay"
+  ).style.display =
     "flex";
 
 
@@ -2525,7 +3217,10 @@ window.backFromGame = function(){
 };
 
 
-window.confirmQuitGame = function(){
+/* CONFIRM QUIT */
+
+window.confirmQuitGame =
+function(){
 
   clearInterval(
     timerInterval
@@ -2545,7 +3240,9 @@ window.confirmQuitGame = function(){
 function getUserGrid(){
 
   const config =
-    GAME_CONFIG[currentGame];
+    GAME_CONFIG[
+      currentGame
+    ];
 
 
   const grid =
@@ -2584,8 +3281,8 @@ function getUserGrid(){
 
       row.push(
         value === ""
-        ? null
-        : Number(value)
+          ? null
+          : Number(value)
       );
 
 
@@ -2594,7 +3291,9 @@ function getUserGrid(){
     }
 
 
-    grid.push(row);
+    grid.push(
+      row
+    );
 
   }
 
@@ -2604,7 +3303,7 @@ function getUserGrid(){
 }
 
 
-/* CONDITION CHECK */
+/* CHECK ROW */
 
 function checkRow(
   grid,
@@ -2614,7 +3313,8 @@ function checkRow(
 
   if(
     grid[row].some(
-      value=>value === null
+      value =>
+        value === null
     )
   ){
 
@@ -2625,15 +3325,20 @@ function checkRow(
 
   const sum =
     grid[row].reduce(
-      (a,b)=>a+b,
+      (a,b) =>
+        a+b,
       0
     );
 
 
-  return sum === target;
+  return (
+    sum === target
+  );
 
 }
 
+
+/* CHECK COLUMN */
 
 function checkColumn(
   grid,
@@ -2647,7 +3352,9 @@ function checkColumn(
     r++
   ){
 
-    if(grid[r][col] === null){
+    if(
+      grid[r][col] === null
+    ){
 
       return false;
 
@@ -2672,10 +3379,14 @@ function checkColumn(
   }
 
 
-  return sum === target;
+  return (
+    sum === target
+  );
 
 }
 
+
+/* DIAGONAL 1 */
 
 function checkDiagonal1(
   grid,
@@ -2688,7 +3399,9 @@ function checkDiagonal1(
     i++
   ){
 
-    if(grid[i][i] === null){
+    if(
+      grid[i][i] === null
+    ){
 
       return false;
 
@@ -2713,10 +3426,14 @@ function checkDiagonal1(
   }
 
 
-  return sum === target;
+  return (
+    sum === target
+  );
 
 }
 
+
+/* DIAGONAL 2 */
 
 function checkDiagonal2(
   grid,
@@ -2760,10 +3477,14 @@ function checkDiagonal2(
   }
 
 
-  return sum === target;
+  return (
+    sum === target
+  );
 
 }
 
+
+/* CHECK TABLE */
 
 function checkTable(
   grid,
@@ -2786,7 +3507,9 @@ function checkTable(
       c++
     ){
 
-      if(grid[r][c] === null){
+      if(
+        grid[r][c] === null
+      ){
 
         return false;
 
@@ -2801,7 +3524,9 @@ function checkTable(
   }
 
 
-  return total === target;
+  return (
+    total === target
+  );
 
 }
 
@@ -2811,7 +3536,9 @@ function checkTable(
 async function showResult(){
 
   const config =
-    GAME_CONFIG[currentGame];
+    GAME_CONFIG[
+      currentGame
+    ];
 
 
   const userGrid =
@@ -2825,6 +3552,10 @@ async function showResult(){
   const breakdown =
     [];
 
+
+  /*
+    ROW POINTS
+  */
 
   for(
     let r=0;
@@ -2841,7 +3572,9 @@ async function showResult(){
       );
 
 
-    if(config.points.row > 0){
+    if(
+      config.points.row > 0
+    ){
 
       breakdown.push({
 
@@ -2850,8 +3583,8 @@ async function showResult(){
 
         points:
           correct
-          ? config.points.row
-          : 0
+            ? config.points.row
+            : 0
 
       });
 
@@ -2868,6 +3601,10 @@ async function showResult(){
   }
 
 
+  /*
+    COLUMN POINTS
+  */
+
   for(
     let c=0;
     c<config.cols;
@@ -2883,7 +3620,9 @@ async function showResult(){
       );
 
 
-    if(config.points.column > 0){
+    if(
+      config.points.column > 0
+    ){
 
       breakdown.push({
 
@@ -2892,8 +3631,8 @@ async function showResult(){
 
         points:
           correct
-          ? config.points.column
-          : 0
+            ? config.points.column
+            : 0
 
       });
 
@@ -2910,7 +3649,13 @@ async function showResult(){
   }
 
 
-  if(config.points.diagonal1 > 0){
+  /*
+    DIAGONAL 1
+  */
+
+  if(
+    config.points.diagonal1 > 0
+  ){
 
     const correct =
       checkDiagonal1(
@@ -2926,8 +3671,8 @@ async function showResult(){
 
       points:
         correct
-        ? config.points.diagonal1
-        : 0
+          ? config.points.diagonal1
+          : 0
 
     });
 
@@ -2942,7 +3687,13 @@ async function showResult(){
   }
 
 
-  if(config.points.diagonal2 > 0){
+  /*
+    DIAGONAL 2
+  */
+
+  if(
+    config.points.diagonal2 > 0
+  ){
 
     const correct =
       checkDiagonal2(
@@ -2958,8 +3709,8 @@ async function showResult(){
 
       points:
         correct
-        ? config.points.diagonal2
-        : 0
+          ? config.points.diagonal2
+          : 0
 
     });
 
@@ -2974,10 +3725,14 @@ async function showResult(){
   }
 
 
+  /*
+    TABLE
+  */
+
   const tableTarget =
     currentGame === "SILVER"
-    ? config.tableTarget
-    : config.totalTarget;
+      ? config.tableTarget
+      : config.totalTarget;
 
 
   const tableCorrect =
@@ -2995,8 +3750,8 @@ async function showResult(){
 
     points:
       tableCorrect
-      ? config.points.table
-      : 0
+        ? config.points.table
+        : 0
 
   });
 
@@ -3009,6 +3764,10 @@ async function showResult(){
   }
 
 
+  /*
+    YOUR ANSWER
+  */
+
   createResultGrid(
     "yourAnswer",
     userGrid,
@@ -3016,6 +3775,10 @@ async function showResult(){
     config.cols
   );
 
+
+  /*
+    OUR ANSWER
+  */
 
   createResultGrid(
     "ourAnswer",
@@ -3025,58 +3788,71 @@ async function showResult(){
   );
 
 
+  /*
+    POINTS HTML
+  */
+
   let html =
     "";
 
 
-  breakdown.forEach(item=>{
+  breakdown.forEach(
+    item => {
 
-    html +=
-      `
-      <div class="pointsLine">
+      html +=
+        `
+          <div class="pointsLine">
 
-        <span>
-          ${item.label}
-        </span>
+            <span>
+              ${item.label}
+            </span>
 
-        <strong>
-          ${item.points}
-        </strong>
+            <strong>
+              ${item.points}
+            </strong>
 
-      </div>
-      `;
+          </div>
+        `;
 
-  });
+    }
+  );
 
 
   html +=
     `
-    <hr>
+      <hr>
 
-    <div class="pointsLine">
+      <div class="pointsLine">
 
-      <strong>
-        Earned Points
-      </strong>
+        <strong>
+          Earned Points
+        </strong>
 
-      <strong>
-        ${earned}
-      </strong>
+        <strong>
+          ${earned}
+        </strong>
 
-    </div>
+      </div>
     `;
 
 
-  document.getElementById("pointsBreakdown")
-    .innerHTML =
+  document.getElementById(
+    "pointsBreakdown"
+  ).innerHTML =
     html;
 
 
+  /*
+    COMPLETE CHECK
+  */
+
   const complete =
-    userGrid.every(row=>
-      row.every(
-        value=>value !== null
-      )
+    userGrid.every(
+      row =>
+        row.every(
+          value =>
+            value !== null
+        )
     );
 
 
@@ -3105,43 +3881,64 @@ async function showResult(){
   }
 
 
-  document.getElementById("resultMessage")
-    .innerText =
+  document.getElementById(
+    "resultMessage"
+  ).innerText =
     message;
 
 
-  document.getElementById("resultTitle")
-    .innerText =
-    currentGame+" RESULT";
+  document.getElementById(
+    "resultTitle"
+  ).innerText =
+    currentGame+
+    " RESULT";
 
 
   hideAll();
 
 
-  document.getElementById("resultPage")
-    .classList.add("active");
+  document.getElementById(
+    "resultPage"
+  ).classList.add(
+    "active"
+  );
 
 
   window.scrollTo(0,0);
 
 
+  /*
+    SAVE SCORE
+  */
+
   try{
 
     await updateDoc(
-      doc(db,"users",currentUser.uid),
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      ),
       {
+
         points:
-          increment(earned),
+          increment(
+            earned
+          ),
 
         gamesPlayed:
-          increment(1)
+          increment(
+            1
+          )
+
       }
     );
+
 
   }catch(error){
 
     console.log(
-      "Score save blocked by Firestore rules:",
+      "Score save blocked:",
       error
     );
 
@@ -3170,7 +3967,9 @@ function createResultGrid(
 
 
   const board =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
   board.className =
@@ -3194,7 +3993,9 @@ function createResultGrid(
     ){
 
       const box =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
 
       box.className =
@@ -3226,14 +4027,18 @@ function createResultGrid(
       }
 
 
-      board.appendChild(box);
+      board.appendChild(
+        box
+      );
 
     }
 
   }
 
 
-  element.appendChild(board);
+  element.appendChild(
+    board
+  );
 
 }
 
@@ -3244,32 +4049,55 @@ const GAME_CONFIG = {
 
   DIAMOND:{
 
-    name:"DIAMOND",
+    name:
+      "DIAMOND",
 
-    rows:5,
+    rows:
+      5,
 
-    cols:5,
+    cols:
+      5,
 
-    duration:300,
+    duration:
+      300,
 
-    rowTarget:60,
+    rowTarget:
+      60,
 
-    totalTarget:300,
+    totalTarget:
+      300,
 
     answer:[
+
       [16,23,0,7,14],
+
       [22,4,6,13,15],
+
       [3,5,12,19,21],
+
       [9,11,18,20,2],
+
       [10,17,24,1,8]
+
     ],
 
     points:{
-      row:10,
-      column:10,
-      diagonal1:10,
-      diagonal2:10,
-      table:50
+
+      row:
+        10,
+
+      column:
+        10,
+
+      diagonal1:
+        10,
+
+      diagonal2:
+        10,
+
+      table:
+        50
+
     }
 
   },
@@ -3277,30 +4105,51 @@ const GAME_CONFIG = {
 
   GOLD:{
 
-    name:"GOLD",
+    name:
+      "GOLD",
 
-    rows:3,
+    rows:
+      3,
 
-    cols:3,
+    cols:
+      3,
 
-    duration:60,
+    duration:
+      60,
 
-    rowTarget:15,
+    rowTarget:
+      15,
 
-    totalTarget:45,
+    totalTarget:
+      45,
 
     answer:[
+
       [8,1,6],
+
       [3,5,7],
+
       [4,9,2]
+
     ],
 
     points:{
-      row:5,
-      column:5,
-      diagonal1:5,
-      diagonal2:5,
-      table:25
+
+      row:
+        5,
+
+      column:
+        5,
+
+      diagonal1:
+        5,
+
+      diagonal2:
+        5,
+
+      table:
+        25
+
     }
 
   },
@@ -3308,30 +4157,51 @@ const GAME_CONFIG = {
 
   SILVER:{
 
-    name:"SILVER",
+    name:
+      "SILVER",
 
-    rows:3,
+    rows:
+      3,
 
-    cols:3,
+    cols:
+      3,
 
-    duration:60,
+    duration:
+      60,
 
-    hintTotal:150,
+    hintTotal:
+      150,
 
-    tableTarget:45,
+    tableTarget:
+      45,
 
     answer:[
+
       [6,1,8],
+
       [7,5,3],
+
       [2,9,4]
+
     ],
 
     points:{
-      row:0,
-      column:0,
-      diagonal1:0,
-      diagonal2:0,
-      table:25
+
+      row:
+        0,
+
+      column:
+        0,
+
+      diagonal1:
+        0,
+
+      diagonal2:
+        0,
+
+      table:
+        25
+
     }
 
   }
@@ -3360,5 +4230,9 @@ let gameEnded =
 let currentUser =
   null;
 
-</script></body>
+
+</script>
+
+</body>
+
 </html>

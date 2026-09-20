@@ -7,6 +7,7 @@
 <title>GAME GENERATOR</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -14,80 +15,234 @@
 body{
     margin:0;
     font-family:Arial,sans-serif;
-    background:#f2f4f7;
-    color:#222;
+    background:#f1f5f9;
+    color:#111827;
 }
 
 .header{
     background:#111827;
     color:white;
     text-align:center;
-    padding:18px 10px;
-    font-size:24px;
+    padding:17px 10px;
+    font-size:23px;
     font-weight:bold;
 }
 
 .container{
-    max-width:500px;
-    margin:20px auto;
-    padding:15px;
+    max-width:520px;
+    margin:15px auto;
+    padding:10px;
 }
 
 .card{
     background:white;
     border-radius:15px;
-    padding:20px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.12);
+    padding:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
 }
 
 h2{
     text-align:center;
-    margin-top:0;
+    margin:5px 0 15px;
+    font-size:21px;
 }
 
 .game-info{
     background:#eef2ff;
-    padding:12px;
     border-radius:10px;
-    margin-bottom:18px;
+    padding:11px;
+    margin-bottom:15px;
 }
 
 .info-row{
     display:flex;
     justify-content:space-between;
-    margin:7px 0;
+    margin:6px 0;
     font-weight:bold;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:7px;
-    max-width:400px;
-    margin:20px auto;
+.info-row span:last-child{
+    color:#2563eb;
 }
 
-.box{
-    aspect-ratio:1/1;
+
+/* ================================
+   MAGIC TABLE
+================================ */
+
+.magic-area{
+    width:100%;
+    overflow-x:auto;
+    padding:5px 0;
+}
+
+.magic-table{
+    display:grid;
+
+    /*
+       6 columns:
+       first column = row total
+       next 5 = game boxes
+    */
+
+    grid-template-columns:
+        48px
+        repeat(5,1fr);
+
+    grid-template-rows:
+        42px
+        repeat(5,1fr);
+
+    gap:5px;
+
+    width:100%;
+    max-width:450px;
+
+    margin:auto;
+}
+
+
+/* Empty top-left corner */
+
+.corner{
+    background:transparent;
+}
+
+
+/* Column totals */
+
+.column-total{
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#ffffff;
-    border:2px solid #2563eb;
-    border-radius:9px;
-    font-size:22px;
+
+    background:#dbeafe;
+    color:#1d4ed8;
+
+    border-radius:8px;
+
+    font-size:15px;
     font-weight:bold;
 }
 
-.status{
+
+/* Row totals */
+
+.row-total{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#dcfce7;
+    color:#15803d;
+
+    border-radius:8px;
+
+    font-size:15px;
+    font-weight:bold;
+}
+
+
+/* Game boxes */
+
+.box{
+    aspect-ratio:1/1;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:white;
+
+    border:2px solid #2563eb;
+
+    border-radius:8px;
+
+    font-size:20px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    transition:.15s;
+}
+
+
+/* Selected box */
+
+.box.selected{
+    background:#facc15;
+    border-color:#ca8a04;
+    color:#111827;
+
+    transform:scale(.94);
+}
+
+
+/* Diagonal information */
+
+.diagonal-area{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.diagonal{
+    flex:1;
+    background:#f3e8ff;
+    color:#7e22ce;
+    border-radius:9px;
+    padding:10px 5px;
     text-align:center;
-    padding:12px;
-    border-radius:10px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+
+/* Status */
+
+.status{
+    margin-top:12px;
+    padding:11px;
+
+    border-radius:9px;
+
+    text-align:center;
+
     background:#ecfdf5;
     color:#166534;
+
     font-weight:bold;
-    margin:15px 0;
 }
+
+
+/* Selected information */
+
+.selected-info{
+    margin-top:12px;
+
+    background:#fff7ed;
+
+    border:1px solid #fed7aa;
+
+    border-radius:9px;
+
+    padding:11px;
+
+    text-align:center;
+
+    font-weight:bold;
+}
+
+.selected-numbers{
+    margin-top:6px;
+    font-size:18px;
+    color:#ea580c;
+}
+
+
+/* Buttons */
 
 .buttons{
     display:flex;
@@ -97,11 +252,17 @@ h2{
 
 button{
     flex:1;
+
     border:0;
+
     padding:14px 8px;
+
     border-radius:10px;
+
     font-size:16px;
+
     font-weight:bold;
+
     cursor:pointer;
 }
 
@@ -118,40 +279,66 @@ button{
 .back{
     width:100%;
     margin-top:10px;
+
     background:#6b7280;
     color:white;
 }
 
+
+/* Saved message */
+
 .saved{
     text-align:center;
-    margin-top:15px;
+
+    margin-top:13px;
+
     font-weight:bold;
-    color:#166534;
+
+    color:#15803d;
 }
 
-@media(max-width:400px){
-    .grid{
-        gap:5px;
+
+/* Mobile */
+
+@media(max-width:380px){
+
+    .magic-table{
+        grid-template-columns:
+            42px
+            repeat(5,1fr);
+
+        gap:4px;
     }
 
     .box{
-        font-size:18px;
+        font-size:17px;
     }
+
+    .column-total,
+    .row-total{
+        font-size:13px;
+    }
+
 }
+
 </style>
 </head>
 
+
 <body>
+
 
 <div class="header">
     GAME-GENERATOR
 </div>
+
 
 <div class="container">
 
 <div class="card">
 
 <h2>DIAMOND GAME SETUP</h2>
+
 
 <div class="game-info">
 
@@ -171,53 +358,107 @@ button{
     </div>
 
     <div class="info-row">
-        <span>TOTAL</span>
+        <span>MAGIC TOTAL</span>
         <span>60</span>
     </div>
 
 </div>
 
-<div id="grid" class="grid"></div>
+
+<div class="magic-area">
+
+    <div class="magic-table" id="magicTable">
+
+        <!-- Created by JavaScript -->
+
+    </div>
+
+</div>
+
+
+<div class="diagonal-area">
+
+    <div class="diagonal">
+        ↘ DIAGONAL 1
+        <br>
+        <span id="diagonal1">60</span>
+    </div>
+
+    <div class="diagonal">
+        ↙ DIAGONAL 2
+        <br>
+        <span id="diagonal2">60</span>
+    </div>
+
+</div>
+
 
 <div id="status" class="status">
-    VALID GAME
+    VALID GAME ✓
 </div>
+
+
+<div class="selected-info">
+
+    SELECTED NUMBERS
+    <div
+        id="selectedNumbers"
+        class="selected-numbers">
+        None
+    </div>
+
+</div>
+
 
 <div class="buttons">
 
-    <button class="next" onclick="nextGame()">
+    <button
+        class="next"
+        onclick="nextGame()">
         NEXT
     </button>
 
-    <button class="save" onclick="saveGame()">
+    <button
+        class="save"
+        onclick="saveGame()">
         SAVE GAME
     </button>
 
 </div>
 
-<button class="back" onclick="goBack()">
+
+<button
+    class="back"
+    onclick="goBack()">
     BACK TO ADMIN
 </button>
 
-<div id="savedMessage" class="saved"></div>
+
+<div
+    id="savedMessage"
+    class="saved">
+</div>
+
 
 </div>
 
 </div>
+
 
 
 <script>
 
-/* =====================================================
-   DIAMOND MAGIC SQUARE
-   Numbers 0 - 24
+
+/* ==========================================
+   BASE 5 × 5 MAGIC SQUARE
+
+   Numbers: 0 - 24
+
    Every row = 60
    Every column = 60
    Both diagonals = 60
-   ===================================================== */
+========================================== */
 
-
-/* Base valid 5x5 magic square */
 
 const baseSquare = [
 
@@ -234,30 +475,36 @@ const baseSquare = [
 ];
 
 
-/* Current game number */
+
+/* ==========================================
+   CURRENT GAME
+========================================== */
 
 let currentNumber = 1;
 
-
-/* Current square */
-
 let currentSquare = [];
 
+let selectedCells = [];
 
-/* =====================================================
-   COPY ARRAY
-   ===================================================== */
+
+
+/* ==========================================
+   COPY
+========================================== */
 
 function copySquare(square){
 
-    return square.map(row => [...row]);
+    return square.map(
+        row => [...row]
+    );
 
 }
 
 
-/* =====================================================
-   ROTATE 90 DEGREE
-   ===================================================== */
+
+/* ==========================================
+   ROTATE 90
+========================================== */
 
 function rotate90(square){
 
@@ -269,11 +516,13 @@ function rotate90(square){
             () => Array(n).fill(0)
         );
 
+
     for(let r=0;r<n;r++){
 
         for(let c=0;c<n;c++){
 
-            result[c][n-1-r] = square[r][c];
+            result[c][n-1-r] =
+                square[r][c];
 
         }
 
@@ -284,38 +533,51 @@ function rotate90(square){
 }
 
 
-/* =====================================================
+
+/* ==========================================
    FLIP HORIZONTAL
-   ===================================================== */
+========================================== */
 
 function flipHorizontal(square){
 
-    return square.map(row => [...row].reverse());
+    return square.map(
+        row => [...row].reverse()
+    );
 
 }
 
 
-/* =====================================================
+
+/* ==========================================
    FLIP VERTICAL
-   ===================================================== */
+========================================== */
 
 function flipVertical(square){
 
-    return [...square].reverse()
-        .map(row => [...row]);
+    return [
+        ...square
+    ].reverse()
+    .map(
+        row => [...row]
+    );
 
 }
 
 
-/* =====================================================
-   RANDOM TRANSFORMATION
-   ===================================================== */
+
+/* ==========================================
+   GENERATE FORMATION
+========================================== */
 
 function generateSquare(){
 
-    let square = copySquare(baseSquare);
+    let square =
+        copySquare(baseSquare);
 
-    const random = Math.floor(Math.random()*8);
+
+    const random =
+        Math.floor(Math.random()*8);
+
 
     switch(random){
 
@@ -323,251 +585,433 @@ function generateSquare(){
             break;
 
         case 1:
-            square = rotate90(square);
+            square =
+                rotate90(square);
             break;
 
         case 2:
-            square = rotate90(rotate90(square));
+            square =
+                rotate90(
+                    rotate90(square)
+                );
             break;
 
         case 3:
-            square = rotate90(
+            square =
                 rotate90(
-                    rotate90(square)
-                )
-            );
+                    rotate90(
+                        rotate90(square)
+                    )
+                );
             break;
 
         case 4:
-            square = flipHorizontal(square);
+            square =
+                flipHorizontal(square);
             break;
 
         case 5:
-            square = flipVertical(square);
+            square =
+                flipVertical(square);
             break;
 
         case 6:
-            square = flipHorizontal(
-                rotate90(square)
-            );
+            square =
+                flipHorizontal(
+                    rotate90(square)
+                );
             break;
 
         case 7:
-            square = flipVertical(
-                rotate90(square)
-            );
+            square =
+                flipVertical(
+                    rotate90(square)
+                );
             break;
 
     }
+
 
     return square;
 
 }
 
 
-/* =====================================================
-   CHECK VALID GAME
-   ===================================================== */
 
-function validateSquare(square){
+/* ==========================================
+   CALCULATE ROW TOTAL
+========================================== */
 
-    const numbers = [];
+function getRowTotal(row){
 
-    for(let r=0;r<5;r++){
-
-        for(let c=0;c<5;c++){
-
-            numbers.push(square[r][c]);
-
-        }
-
-    }
-
-
-    /* Check numbers 0 - 24 */
-
-    const unique =
-        new Set(numbers);
-
-    if(unique.size !== 25){
-
-        return false;
-
-    }
-
-
-    for(let n=0;n<=24;n++){
-
-        if(!unique.has(n)){
-
-            return false;
-
-        }
-
-    }
-
-
-    /* Check rows */
-
-    for(let r=0;r<5;r++){
-
-        let total = 0;
-
-        for(let c=0;c<5;c++){
-
-            total += square[r][c];
-
-        }
-
-        if(total !== 60){
-
-            return false;
-
-        }
-
-    }
-
-
-    /* Check columns */
-
-    for(let c=0;c<5;c++){
-
-        let total = 0;
-
-        for(let r=0;r<5;r++){
-
-            total += square[r][c];
-
-        }
-
-        if(total !== 60){
-
-            return false;
-
-        }
-
-    }
-
-
-    /* Main diagonal */
-
-    let diagonal1 = 0;
-
-    for(let i=0;i<5;i++){
-
-        diagonal1 += square[i][i];
-
-    }
-
-    if(diagonal1 !== 60){
-
-        return false;
-
-    }
-
-
-    /* Other diagonal */
-
-    let diagonal2 = 0;
-
-    for(let i=0;i<5;i++){
-
-        diagonal2 += square[i][4-i];
-
-    }
-
-    if(diagonal2 !== 60){
-
-        return false;
-
-    }
-
-
-    return true;
+    return row.reduce(
+        (sum,n) => sum+n,
+        0
+    );
 
 }
 
 
-/* =====================================================
-   DISPLAY GAME
-   ===================================================== */
 
-function displayGame(){
+/* ==========================================
+   CALCULATE COLUMN TOTAL
+========================================== */
 
-    const grid =
-        document.getElementById("grid");
+function getColumnTotal(column){
 
-    grid.innerHTML = "";
+    let total = 0;
 
 
     for(let r=0;r<5;r++){
+
+        total +=
+            currentSquare[r][column];
+
+    }
+
+
+    return total;
+
+}
+
+
+
+/* ==========================================
+   DIAGONAL TOTALS
+========================================== */
+
+function getDiagonal1(){
+
+    let total = 0;
+
+
+    for(let i=0;i<5;i++){
+
+        total +=
+            currentSquare[i][i];
+
+    }
+
+
+    return total;
+
+}
+
+
+
+function getDiagonal2(){
+
+    let total = 0;
+
+
+    for(let i=0;i<5;i++){
+
+        total +=
+            currentSquare[i][4-i];
+
+    }
+
+
+    return total;
+
+}
+
+
+
+/* ==========================================
+   DISPLAY TABLE
+========================================== */
+
+function displayGame(){
+
+    const table =
+        document.getElementById(
+            "magicTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    /*
+       TOP LEFT EMPTY CORNER
+    */
+
+    const corner =
+        document.createElement("div");
+
+    corner.className =
+        "corner";
+
+    table.appendChild(corner);
+
+
+
+    /*
+       COLUMN TOTALS
+    */
+
+    for(let c=0;c<5;c++){
+
+        const total =
+            document.createElement("div");
+
+        total.className =
+            "column-total";
+
+        total.textContent =
+            getColumnTotal(c);
+
+        table.appendChild(total);
+
+    }
+
+
+
+    /*
+       ROWS
+    */
+
+    for(let r=0;r<5;r++){
+
+        /*
+           ROW TOTAL ON LEFT
+        */
+
+        const rowTotal =
+            document.createElement("div");
+
+        rowTotal.className =
+            "row-total";
+
+        rowTotal.textContent =
+            getRowTotal(
+                currentSquare[r]
+            );
+
+        table.appendChild(rowTotal);
+
+
+
+        /*
+           5 GAME BOXES
+        */
 
         for(let c=0;c<5;c++){
 
             const box =
                 document.createElement("div");
 
-            box.className = "box";
+            box.className =
+                "box";
 
             box.textContent =
                 currentSquare[r][c];
 
-            grid.appendChild(box);
+
+            /*
+               Check if selected
+            */
+
+            const alreadySelected =
+                selectedCells.some(
+                    item =>
+                        item.row === r &&
+                        item.col === c
+                );
+
+
+            if(alreadySelected){
+
+                box.classList.add(
+                    "selected"
+                );
+
+            }
+
+
+            /*
+               CLICK BOX
+            */
+
+            box.onclick =
+                function(){
+
+                    selectCell(
+                        r,
+                        c,
+                        box
+                    );
+
+                };
+
+
+            table.appendChild(box);
 
         }
 
     }
 
 
-    document.getElementById("gameId")
-        .textContent =
+
+    /*
+       GAME ID
+    */
+
+    document.getElementById(
+        "gameId"
+    ).textContent =
         "MKND84" +
         String(currentNumber)
             .padStart(4,"0");
 
 
-    const valid =
-        validateSquare(currentSquare);
+
+    /*
+       DIAGONALS
+    */
+
+    document.getElementById(
+        "diagonal1"
+    ).textContent =
+        getDiagonal1();
 
 
-    const status =
-        document.getElementById("status");
+    document.getElementById(
+        "diagonal2"
+    ).textContent =
+        getDiagonal2();
 
 
-    if(valid){
 
-        status.textContent =
-            "VALID GAME ✓";
-
-        status.style.background =
-            "#ecfdf5";
-
-        status.style.color =
-            "#166534";
-
-    }else{
-
-        status.textContent =
-            "INVALID GAME ✕";
-
-        status.style.background =
-            "#fef2f2";
-
-        status.style.color =
-            "#991b1b";
-
-    }
+    updateSelectedDisplay();
 
 }
 
 
-/* =====================================================
+
+/* ==========================================
+   SELECT ONLY 3 BOXES
+========================================== */
+
+function selectCell(row,col,box){
+
+    const index =
+        selectedCells.findIndex(
+            item =>
+                item.row === row &&
+                item.col === col
+        );
+
+
+    /*
+       If already selected,
+       remove it.
+    */
+
+    if(index !== -1){
+
+        selectedCells.splice(
+            index,
+            1
+        );
+
+        box.classList.remove(
+            "selected"
+        );
+
+        updateSelectedDisplay();
+
+        return;
+
+    }
+
+
+    /*
+       Maximum 3
+    */
+
+    if(selectedCells.length >= 3){
+
+        alert(
+            "You can select only 3 numbers."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Add selected cell
+    */
+
+    selectedCells.push({
+
+        row:row,
+
+        col:col,
+
+        number:
+            currentSquare[row][col]
+
+    });
+
+
+    box.classList.add(
+        "selected"
+    );
+
+
+    updateSelectedDisplay();
+
+}
+
+
+
+/* ==========================================
+   DISPLAY SELECTED NUMBERS
+========================================== */
+
+function updateSelectedDisplay(){
+
+    const element =
+        document.getElementById(
+            "selectedNumbers"
+        );
+
+
+    if(selectedCells.length === 0){
+
+        element.textContent =
+            "None";
+
+        return;
+
+    }
+
+
+    const numbers =
+        selectedCells.map(
+            item => item.number
+        );
+
+
+    element.textContent =
+        numbers.join("   •   ");
+
+}
+
+
+
+/* ==========================================
    NEXT GAME
-   ===================================================== */
+========================================== */
 
 function nextGame(){
 
     currentNumber++;
+
 
     if(currentNumber > 250){
 
@@ -580,24 +1024,200 @@ function nextGame(){
         generateSquare();
 
 
+    /*
+       New game means
+       new selections.
+    */
+
+    selectedCells = [];
+
+
     displayGame();
 
 
-    document.getElementById("savedMessage")
-        .textContent = "";
+    document.getElementById(
+        "savedMessage"
+    ).textContent = "";
 
 }
 
 
-/* =====================================================
+
+/* ==========================================
+   VALIDATE GAME
+========================================== */
+
+function validateSquare(square){
+
+    const numbers = [];
+
+
+    for(let r=0;r<5;r++){
+
+        for(let c=0;c<5;c++){
+
+            numbers.push(
+                square[r][c]
+            );
+
+        }
+
+    }
+
+
+    /*
+       25 unique numbers
+    */
+
+    if(
+        new Set(numbers).size !== 25
+    ){
+
+        return false;
+
+    }
+
+
+    /*
+       Must contain 0 - 24
+    */
+
+    for(let n=0;n<=24;n++){
+
+        if(!numbers.includes(n)){
+
+            return false;
+
+        }
+
+    }
+
+
+    /*
+       Rows
+    */
+
+    for(let r=0;r<5;r++){
+
+        if(
+            getRowTotal(square[r]) !== 60
+        ){
+
+            return false;
+
+        }
+
+    }
+
+
+    /*
+       Columns
+    */
+
+    for(let c=0;c<5;c++){
+
+        let total = 0;
+
+
+        for(let r=0;r<5;r++){
+
+            total +=
+                square[r][c];
+
+        }
+
+
+        if(total !== 60){
+
+            return false;
+
+        }
+
+    }
+
+
+    /*
+       Diagonal 1
+    */
+
+    let d1 = 0;
+
+
+    for(let i=0;i<5;i++){
+
+        d1 +=
+            square[i][i];
+
+    }
+
+
+    if(d1 !== 60){
+
+        return false;
+
+    }
+
+
+    /*
+       Diagonal 2
+    */
+
+    let d2 = 0;
+
+
+    for(let i=0;i<5;i++){
+
+        d2 +=
+            square[i][4-i];
+
+    }
+
+
+    if(d2 !== 60){
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* ==========================================
    SAVE GAME
-   ===================================================== */
+========================================== */
 
 function saveGame(){
 
-    if(!validateSquare(currentSquare)){
+    /*
+       Must select exactly 3
+    */
 
-        alert("Game is invalid.");
+    if(selectedCells.length !== 3){
+
+        alert(
+            "Please select exactly 3 numbers before saving."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Validate magic square
+    */
+
+    if(
+        !validateSquare(currentSquare)
+    ){
+
+        alert(
+            "Game is invalid."
+        );
 
         return;
 
@@ -610,17 +1230,58 @@ function saveGame(){
             .padStart(4,"0");
 
 
+
+    /*
+       Selected numbers
+    */
+
+    const selectedNumbers =
+        selectedCells.map(
+            item => item.number
+        );
+
+
+
+    /*
+       Selected positions
+    */
+
+    const selectedPositions =
+        selectedCells.map(
+            item => ({
+
+                row:item.row,
+
+                column:item.col,
+
+                number:item.number
+
+            })
+        );
+
+
+
+    /*
+       Game data
+    */
+
     const gameData = {
 
-        gameId: gameId,
+        gameId:gameId,
 
-        gameType: "DIAMOND",
+        gameType:"DIAMOND",
 
-        gridSize: 5,
+        gridSize:5,
 
-        numbers: currentSquare,
+        numbers:currentSquare,
 
-        magicTotal: 60,
+        magicTotal:60,
+
+        selectedNumbers:
+            selectedNumbers,
+
+        selectedPositions:
+            selectedPositions,
 
         createdAt:
             new Date().toISOString()
@@ -628,11 +1289,9 @@ function saveGame(){
     };
 
 
-    /*
-       Temporary local storage.
 
-       Later this can be replaced
-       with Firebase Firestore.
+    /*
+       Temporary localStorage
     */
 
     localStorage.setItem(
@@ -644,17 +1303,20 @@ function saveGame(){
     );
 
 
-    document.getElementById("savedMessage")
-        .textContent =
-        gameId + " SAVED ✓";
 
+    document.getElementById(
+        "savedMessage"
+    ).textContent =
+        gameId +
+        " SAVED ✓";
 
 }
 
 
-/* =====================================================
-   BACK
-   ===================================================== */
+
+/* ==========================================
+   BACK TO ADMIN
+========================================== */
 
 function goBack(){
 
@@ -664,12 +1326,14 @@ function goBack(){
 }
 
 
-/* =====================================================
-   FIRST GAME
-   ===================================================== */
+
+/* ==========================================
+   START
+========================================== */
 
 currentSquare =
     generateSquare();
+
 
 displayGame();
 

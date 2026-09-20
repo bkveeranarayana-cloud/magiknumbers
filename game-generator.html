@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GAME GENERATOR</title>
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GAME GENERATOR</title><style>
 
 *{
     box-sizing:border-box;
@@ -47,11 +42,13 @@ h2{
     font-size:21px;
 }
 
-/* INPUT AREA */
+
+/* =====================================
+   SETUP
+===================================== */
 
 .setup{
     background:#f8fafc;
-    border:1px solid #e2e8f0;
     border-radius:10px;
     padding:12px;
     margin-bottom:15px;
@@ -71,10 +68,10 @@ label:first-child{
 input,
 select{
     width:100%;
-    padding:11px;
+    padding:12px;
+    font-size:16px;
     border:1px solid #94a3b8;
     border-radius:8px;
-    font-size:16px;
     background:white;
 }
 
@@ -87,7 +84,10 @@ select{
     width:50%;
 }
 
-/* GAME INFO */
+
+/* =====================================
+   GAME INFO
+===================================== */
 
 .game-info{
     background:#eef2ff;
@@ -107,7 +107,10 @@ select{
     color:#2563eb;
 }
 
-/* MAGIC TABLE */
+
+/* =====================================
+   MAGIC TABLE
+===================================== */
 
 .magic-area{
     width:100%;
@@ -196,7 +199,10 @@ select{
     transform:scale(.94);
 }
 
-/* DIAGONALS */
+
+/* =====================================
+   DIAGONALS
+===================================== */
 
 .diagonal-area{
     display:flex;
@@ -220,7 +226,10 @@ select{
     font-size:14px;
 }
 
-/* STATUS */
+
+/* =====================================
+   STATUS
+===================================== */
 
 .status{
     margin-top:12px;
@@ -236,12 +245,16 @@ select{
     font-weight:bold;
 }
 
-/* SELECTED */
+
+/* =====================================
+   SELECTED NUMBERS
+===================================== */
 
 .selected-info{
     margin-top:12px;
 
     background:#fff7ed;
+
     border:1px solid #fed7aa;
 
     border-radius:9px;
@@ -255,11 +268,16 @@ select{
 
 .selected-numbers{
     margin-top:6px;
+
     font-size:18px;
+
     color:#ea580c;
 }
 
-/* BUTTONS */
+
+/* =====================================
+   BUTTONS
+===================================== */
 
 .buttons{
     display:flex;
@@ -277,9 +295,15 @@ button{
     border-radius:10px;
 
     font-size:16px;
+
     font-weight:bold;
 
     cursor:pointer;
+}
+
+.apply{
+    background:#7c3aed;
+    color:white;
 }
 
 .next{
@@ -302,11 +326,18 @@ button{
 
 .saved{
     text-align:center;
+
     margin-top:13px;
 
     font-weight:bold;
+
     color:#15803d;
 }
+
+
+/* =====================================
+   MOBILE
+===================================== */
 
 @media(max-width:380px){
 
@@ -329,380 +360,149 @@ button{
 
 }
 
-</style>
-</head>
-
-<body>
-
-<div class="header">
+</style></head><body><div class="header">
     GAME-GENERATOR
-</div>
+</div><div class="container"><div class="card"><h2>
+    DIAMOND GAME SETUP
+</h2><!-- =====================================
+     SETTINGS
+===================================== --><div class="setup"><label>
+    RANGE
+</label><div class="range"><input
+type="number"
+id="rangeFrom"
+min="0"
+max="200"
+value="0"
+placeholder="FROM"
 
-<div class="container">
-
-<div class="card">
-
-<h2>DIAMOND GAME SETUP</h2>
-
-
-<!-- ==============================
-     SETUP
-================================ -->
-
-<div class="setup">
-
-<label>IMPORT</label>
-
-<input
-    type="text"
-    id="importText"
-    placeholder="Enter import text"
->
-
-
-<label>RANGE</label>
-
-<div class="range">
+«»
 
 <input
-    type="number"
-    id="rangeFrom"
-    min="0"
-    max="200"
-    value="0"
-    placeholder="From"
->
+type="number"
+id="rangeTo"
+min="0"
+max="200"
+value="24"
+placeholder="TO"
 
-<input
-    type="number"
-    id="rangeTo"
-    min="0"
-    max="200"
-    value="24"
-    placeholder="To"
->
+«»
 
-</div>
+</div><label>
+    MAGIC TOTAL
+</label><input
+type="number"
+id="magicTotal"
+min="0"
+value="60"
+placeholder="MAGIC TOTAL"
 
+«»
 
-<label>MAGIC TOTAL</label>
+<label>
+    GAME ID
+</label><select
+id="gameSelect"
 
-<input
-    type="number"
-    id="magicTotal"
-    min="0"
-    placeholder="Enter magic total"
-    value="60"
->
-
-
-<label>GAME ID</label>
-
-<select id="gameSelect" onchange="selectGame()">
+«»
 
 <option value="MKND840001">
 MKND840001
-</option>
-
-<option value="MKND840002">
+</option><option value="MKND840002">
 MKND840002
-</option>
-
-<option value="MKND840003">
+</option><option value="MKND840003">
 MKND840003
-</option>
-
-<option value="MKND840004">
+</option><option value="MKND840004">
 MKND840004
-</option>
-
-<option value="MKND840005">
+</option><option value="MKND840005">
 MKND840005
-</option>
-
-</select>
-
-</div>
-
-
-<!-- ==============================
+</option></select></div><!-- =====================================
      GAME INFO
-================================ -->
-
-<div class="game-info">
-
-<div class="info-row">
-    <span>GAME ID</span>
-    <span id="gameId">
-        MKND840001
-    </span>
-</div>
-
-<div class="info-row">
-    <span>GRID</span>
-    <span>5 × 5</span>
-</div>
-
-<div class="info-row">
-    <span>NUMBERS</span>
-    <span id="numbersInfo">
-        0 – 24
-    </span>
-</div>
-
-<div class="info-row">
-    <span>MAGIC TOTAL</span>
-    <span id="totalInfo">
-        60
-    </span>
-</div>
-
-</div>
-
-
-<!-- ==============================
-     MAGIC TABLE
-================================ -->
-
-<div class="magic-area">
-
-<div
+===================================== --><div class="game-info"><div class="info-row"><span>
+GAME ID
+</span><span id="gameId">
+MKND840001
+</span></div><div class="info-row"><span>
+GRID
+</span><span>
+5 × 5
+</span></div><div class="info-row"><span>
+NUMBERS
+</span><span id="numbersInfo">
+0 – 24
+</span></div><div class="info-row"><span>
+MAGIC TOTAL
+</span><span id="totalInfo">
+60
+</span></div></div><!-- =====================================
+     GRID
+===================================== --><div class="magic-area"><div
     class="magic-table"
-    id="magicTable">
-
-</div>
-
-</div>
-
-
-<!-- ==============================
+    id="magicTable"></div></div><!-- =====================================
      DIAGONALS
-================================ -->
+===================================== --><div class="diagonal-area"><div class="diagonal">↘ DIAGONAL 1
 
-<div class="diagonal-area">
-
-<div class="diagonal">
-
-↘ DIAGONAL 1
-
-<br>
-
-<span id="diagonal1">
+<br><span id="diagonal1">
 60
-</span>
+</span></div><div class="diagonal">↙ DIAGONAL 2
 
-</div>
-
-
-<div class="diagonal">
-
-↙ DIAGONAL 2
-
-<br>
-
-<span id="diagonal2">
+<br><span id="diagonal2">
 60
-</span>
+</span></div></div><!-- =====================================
+     STATUS
+===================================== --><div
+    id="status"
+    class="status">VALID GAME ✓
 
-</div>
-
-</div>
-
-
-<!-- STATUS -->
-
-<div id="status" class="status">
-    VALID GAME ✓
-</div>
-
-
-<!-- SELECTED -->
-
-<div class="selected-info">
-
-SELECTED NUMBERS
+</div><!-- =====================================
+     SELECTED
+===================================== --><div class="selected-info">SELECTED NUMBERS
 
 <div
     id="selectedNumbers"
-    class="selected-numbers">
+    class="selected-numbers">None
 
-None
+</div></div><!-- =====================================
+     BUTTONS
+===================================== --><div class="buttons"><button
+class="apply"
+type="button"
+onclick="applySettings()">
 
-</div>
+APPLY
 
-</div>
-
-
-<!-- BUTTONS -->
-
-<div class="buttons">
-
-<button
-    class="next"
-    onclick="nextGame()">
+</button><button
+class="next"
+type="button"
+onclick="nextGame()">
 
 NEXT
 
-</button>
-
-
-<button
-    class="save"
-    onclick="saveGame()">
+</button><button
+class="save"
+type="button"
+onclick="saveGame()">
 
 SAVE GAME
 
-</button>
-
-</div>
-
-
-<button
-    class="back"
-    onclick="goBack()">
+</button></div><button
+class="back"
+type="button"
+onclick="goBack()">
 
 BACK TO ADMIN
 
-</button>
-
-
-<div
+</button><div
     id="savedMessage"
-    class="saved">
-
-</div>
+    class="saved"></div></div></div><script>
 
 
-</div>
-</div>
+/* ==========================================
+   BASE 5 × 5 MAGIC SQUARE
 
-
-<script>
-
-/* =====================================================
-   SETTINGS
-===================================================== */
-
-let currentNumber = 1;
-
-let currentSquare = [];
-
-let selectedCells = [];
-
-
-/* =====================================================
-   GET SETTINGS
-===================================================== */
-
-function getSettings(){
-
-    let from =
-        Number(
-            document.getElementById("rangeFrom").value
-        );
-
-    let to =
-        Number(
-            document.getElementById("rangeTo").value
-        );
-
-    let total =
-        Number(
-            document.getElementById("magicTotal").value
-        );
-
-
-    if(from < 0) from = 0;
-
-    if(to > 200) to = 200;
-
-
-    return {
-        from:from,
-        to:to,
-        total:total
-    };
-
-}
-
-
-/* =====================================================
-   COPY
-===================================================== */
-
-function copySquare(square){
-
-    return square.map(
-        row => [...row]
-    );
-
-}
-
-
-/* =====================================================
-   ROTATE 90
-===================================================== */
-
-function rotate90(square){
-
-    const n = square.length;
-
-    const result =
-        Array.from(
-            {length:n},
-            () => Array(n).fill(0)
-        );
-
-
-    for(let r=0;r<n;r++){
-
-        for(let c=0;c<n;c++){
-
-            result[c][n-1-r] =
-                square[r][c];
-
-        }
-
-    }
-
-    return result;
-
-}
-
-
-/* =====================================================
-   FLIP HORIZONTAL
-===================================================== */
-
-function flipHorizontal(square){
-
-    return square.map(
-        row => [...row].reverse()
-    );
-
-}
-
-
-/* =====================================================
-   FLIP VERTICAL
-===================================================== */
-
-function flipVertical(square){
-
-    return [
-        ...square
-    ].reverse().map(
-        row => [...row]
-    );
-
-}
-
-
-/* =====================================================
-   BASE 5x5 MAGIC SQUARE
    0 - 24
-   TOTAL 60
-===================================================== */
+   TOTAL = 60
+========================================== */
 
 const baseSquare = [
 
@@ -719,286 +519,185 @@ const baseSquare = [
 ];
 
 
-/* =====================================================
-   CHECK CURRENT SETTINGS
-===================================================== */
+let currentSquare = [];
 
-function canUseBaseSquare(){
-
-    const settings =
-        getSettings();
-
-    return (
-        settings.from === 0 &&
-        settings.to === 24 &&
-        settings.total === 60
-    );
-
-}
+let selectedCells = [];
 
 
-/* =====================================================
-   GENERATE RANDOM MAGIC SQUARE
-=====================================================
+/* ==========================================
+   GET SETTINGS
+========================================== */
 
-   Important:
+function getSettings(){
 
-   The standard 0-24 5x5 magic square
-   works for TOTAL 60.
+    const from =
+        Number(
+            document.getElementById(
+                "rangeFrom"
+            ).value
+        );
 
-   For other ranges/totals, this function
-   attempts to create a valid square using
-   random permutations.
+    const to =
+        Number(
+            document.getElementById(
+                "rangeTo"
+            ).value
+        );
 
-===================================================== */
-
-function generateSquare(){
-
-    const settings =
-        getSettings();
-
-
-    /* Standard 0-24 / 60 */
-
-    if(canUseBaseSquare()){
-
-        let square =
-            copySquare(baseSquare);
-
-
-        const random =
-            Math.floor(
-                Math.random()*8
-            );
-
-
-        switch(random){
-
-            case 0:
-                break;
-
-            case 1:
-                square =
-                    rotate90(square);
-                break;
-
-            case 2:
-                square =
-                    rotate90(
-                        rotate90(square)
-                    );
-                break;
-
-            case 3:
-                square =
-                    rotate90(
-                        rotate90(
-                            rotate90(square)
-                        )
-                    );
-                break;
-
-            case 4:
-                square =
-                    flipHorizontal(square);
-                break;
-
-            case 5:
-                square =
-                    flipVertical(square);
-                break;
-
-            case 6:
-                square =
-                    flipHorizontal(
-                        rotate90(square)
-                    );
-                break;
-
-            case 7:
-                square =
-                    flipVertical(
-                        rotate90(square)
-                    );
-                break;
-
-        }
-
-        return square;
-
-    }
-
-
-    /*
-       For custom range / total,
-       search for a valid 5x5 arrangement.
-    */
-
-    return generateCustomSquare(
-        settings.from,
-        settings.to,
-        settings.total
-    );
-
-}
-
-
-/* =====================================================
-   CUSTOM MAGIC SQUARE GENERATOR
-===================================================== */
-
-function generateCustomSquare(from,to,total){
-
-    const count =
-        to - from + 1;
-
-
-    /*
-       25 unique numbers are required
-    */
-
-    if(count !== 25){
-
-        return null;
-
-    }
-
-
-    /*
-       Required average:
-
-       total / 5
-    */
-
-    const average =
-        total / 5;
-
-
-    /*
-       Sum of all 25 numbers must equal
-       5 × magic total.
-    */
-
-    let allNumbers = [];
-
-    for(let n=from;n<=to;n++){
-
-        allNumbers.push(n);
-
-    }
-
-
-    const overall =
-        allNumbers.reduce(
-            (a,b)=>a+b,
-            0
+    const total =
+        Number(
+            document.getElementById(
+                "magicTotal"
+            ).value
         );
 
 
-    if(overall !== total * 5){
+    return {
+        from,
+        to,
+        total
+    };
 
-        return null;
+}
+
+
+/* ==========================================
+   COPY
+========================================== */
+
+function copySquare(square){
+
+    return square.map(
+        row => [...row]
+    );
+
+}
+
+
+/* ==========================================
+   ROTATE
+========================================== */
+
+function rotate90(square){
+
+    const n =
+        square.length;
+
+    const result =
+        Array.from(
+            {length:n},
+            () => Array(n).fill(0)
+        );
+
+
+    for(
+        let r=0;
+        r<n;
+        r++
+    ){
+
+        for(
+            let c=0;
+            c<n;
+            c++
+        ){
+
+            result[c][n-1-r] =
+                square[r][c];
+
+        }
 
     }
 
 
-    /*
-       For an arithmetic sequence of 25
-       consecutive numbers, the standard
-       normal magic-square construction
-       can be transformed.
+    return result;
 
-       Create a standard 0-24 square and
-       add "from" to every cell.
-    */
+}
+
+
+/* ==========================================
+   FLIP HORIZONTAL
+========================================== */
+
+function flipHorizontal(square){
+
+    return square.map(
+        row => [...row].reverse()
+    );
+
+}
+
+
+/* ==========================================
+   FLIP VERTICAL
+========================================== */
+
+function flipVertical(square){
+
+    return [
+        ...square
+    ]
+    .reverse()
+    .map(
+        row => [...row]
+    );
+
+}
+
+
+/* ==========================================
+   RANDOM TRANSFORMATION
+
+   NEXT changes positions.
+========================================== */
+
+function randomFormation(){
 
     let square =
         copySquare(baseSquare);
 
 
-    for(let r=0;r<5;r++){
-
-        for(let c=0;c<5;c++){
-
-            square[r][c] += from;
-
-        }
-
-    }
+    const operations = [];
 
 
-    /*
-       Verify requested total.
-    */
-
-    if(
-        getSquareMagicTotal(square) !== total
-    ){
-
-        return null;
-
-    }
-
-
-    /*
-       Random rotation / reflection
-    */
-
-    const random =
+    const rotations =
         Math.floor(
-            Math.random()*8
+            Math.random()*4
         );
 
 
-    switch(random){
+    for(
+        let i=0;
+        i<rotations;
+        i++
+    ){
 
-        case 0:
-            break;
+        square =
+            rotate90(square);
 
-        case 1:
-            square =
-                rotate90(square);
-            break;
+    }
 
-        case 2:
-            square =
-                rotate90(
-                    rotate90(square)
-                );
-            break;
 
-        case 3:
-            square =
-                rotate90(
-                    rotate90(
-                        rotate90(square)
-                    )
-                );
-            break;
+    if(
+        Math.random() < 0.5
+    ){
 
-        case 4:
-            square =
-                flipHorizontal(square);
-            break;
+        square =
+            flipHorizontal(
+                square
+            );
 
-        case 5:
-            square =
-                flipVertical(square);
-            break;
+    }
 
-        case 6:
-            square =
-                flipHorizontal(
-                    rotate90(square)
-                );
-            break;
 
-        case 7:
-            square =
-                flipVertical(
-                    rotate90(square)
-                );
-            break;
+    if(
+        Math.random() < 0.5
+    ){
+
+        square =
+            flipVertical(
+                square
+            );
 
     }
 
@@ -1008,66 +707,184 @@ function generateCustomSquare(from,to,total){
 }
 
 
-/* =====================================================
-   GET MAGIC TOTAL
-===================================================== */
+/* ==========================================
+   CUSTOM RANGE
 
-function getSquareMagicTotal(square){
+   For consecutive 25 numbers.
 
-    if(!square){
+   Example:
+   0-24
+   10-34
+   50-74
+========================================== */
+
+function createCustomSquare(){
+
+    const settings =
+        getSettings();
+
+
+    const from =
+        settings.from;
+
+    const to =
+        settings.to;
+
+    const total =
+        settings.total;
+
+
+    /*
+       Exactly 25 numbers
+    */
+
+    if(
+        to - from + 1 !== 25
+    ){
 
         return null;
 
     }
 
 
-    let total = 0;
+    /*
+       Sum of all numbers must equal
+       5 × Magic Total.
+    */
+
+    let sum = 0;
 
 
-    for(let c=0;c<5;c++){
+    for(
+        let n=from;
+        n<=to;
+        n++
+    ){
 
-        total +=
-            square[0][c];
+        sum += n;
 
     }
 
 
-    return total;
+    if(
+        sum !== total * 5
+    ){
+
+        return null;
+
+    }
+
+
+    /*
+       Add range start to
+       standard magic square.
+    */
+
+    let square =
+        copySquare(baseSquare);
+
+
+    for(
+        let r=0;
+        r<5;
+        r++
+    ){
+
+        for(
+            let c=0;
+            c<5;
+            c++
+        ){
+
+            square[r][c] += from;
+
+        }
+
+    }
+
+
+    /*
+       Random transformation.
+    */
+
+    const rotations =
+        Math.floor(
+            Math.random()*4
+        );
+
+
+    for(
+        let i=0;
+        i<rotations;
+        i++
+    ){
+
+        square =
+            rotate90(square);
+
+    }
+
+
+    if(
+        Math.random() < 0.5
+    ){
+
+        square =
+            flipHorizontal(
+                square
+            );
+
+    }
+
+
+    return square;
 
 }
 
 
-/* =====================================================
+/* ==========================================
+   GENERATE
+========================================== */
+
+function generateSquare(){
+
+    /*
+       Always use current range.
+    */
+
+    return createCustomSquare();
+
+}
+
+
+/* ==========================================
    ROW TOTAL
-===================================================== */
+========================================== */
 
 function getRowTotal(row){
 
     return row.reduce(
-        (sum,n)=>sum+n,
+        (sum,n) => sum+n,
         0
     );
 
 }
 
 
-/* =====================================================
+/* ==========================================
    COLUMN TOTAL
-===================================================== */
+========================================== */
 
 function getColumnTotal(column){
-
-    if(!currentSquare){
-
-        return 0;
-
-    }
-
 
     let total = 0;
 
 
-    for(let r=0;r<5;r++){
+    for(
+        let r=0;
+        r<5;
+        r++
+    ){
 
         total +=
             currentSquare[r][column];
@@ -1080,23 +897,20 @@ function getColumnTotal(column){
 }
 
 
-/* =====================================================
+/* ==========================================
    DIAGONAL 1
-===================================================== */
+========================================== */
 
 function getDiagonal1(){
-
-    if(!currentSquare){
-
-        return 0;
-
-    }
-
 
     let total = 0;
 
 
-    for(let i=0;i<5;i++){
+    for(
+        let i=0;
+        i<5;
+        i++
+    ){
 
         total +=
             currentSquare[i][i];
@@ -1109,23 +923,20 @@ function getDiagonal1(){
 }
 
 
-/* =====================================================
+/* ==========================================
    DIAGONAL 2
-===================================================== */
+========================================== */
 
 function getDiagonal2(){
-
-    if(!currentSquare){
-
-        return 0;
-
-    }
-
 
     let total = 0;
 
 
-    for(let i=0;i<5;i++){
+    for(
+        let i=0;
+        i<5;
+        i++
+    ){
 
         total +=
             currentSquare[i][4-i];
@@ -1138,9 +949,9 @@ function getDiagonal2(){
 }
 
 
-/* =====================================================
-   DISPLAY GAME
-===================================================== */
+/* ==========================================
+   DISPLAY
+========================================== */
 
 function displayGame(){
 
@@ -1155,20 +966,9 @@ function displayGame(){
 
     if(!currentSquare){
 
-        document.getElementById(
-            "status"
-        ).textContent =
-            "INVALID SETTINGS";
-
-        document.getElementById(
-            "status"
-        ).style.background =
-            "#fee2e2";
-
-        document.getElementById(
-            "status"
-        ).style.color =
-            "#991b1b";
+        showInvalid(
+            "INVALID RANGE / MAGIC TOTAL"
+        );
 
         return;
 
@@ -1180,22 +980,32 @@ function displayGame(){
     */
 
     const corner =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     corner.className =
         "corner";
 
-    table.appendChild(corner);
+    table.appendChild(
+        corner
+    );
 
 
     /*
        COLUMN TOTALS
     */
 
-    for(let c=0;c<5;c++){
+    for(
+        let c=0;
+        c<5;
+        c++
+    ){
 
         const total =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         total.className =
             "column-total";
@@ -1203,7 +1013,9 @@ function displayGame(){
         total.textContent =
             getColumnTotal(c);
 
-        table.appendChild(total);
+        table.appendChild(
+            total
+        );
 
     }
 
@@ -1212,10 +1024,16 @@ function displayGame(){
        ROWS
     */
 
-    for(let r=0;r<5;r++){
+    for(
+        let r=0;
+        r<5;
+        r++
+    ){
 
         const rowTotal =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         rowTotal.className =
             "row-total";
@@ -1225,17 +1043,25 @@ function displayGame(){
                 currentSquare[r]
             );
 
-        table.appendChild(rowTotal);
+        table.appendChild(
+            rowTotal
+        );
 
 
         /*
            BOXES
         */
 
-        for(let c=0;c<5;c++){
+        for(
+            let c=0;
+            c<5;
+            c++
+        ){
 
             const box =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
             box.className =
                 "box";
@@ -1244,7 +1070,7 @@ function displayGame(){
                 currentSquare[r][c];
 
 
-            const alreadySelected =
+            const selected =
                 selectedCells.some(
                     item =>
                         item.row === r &&
@@ -1252,7 +1078,7 @@ function displayGame(){
                 );
 
 
-            if(alreadySelected){
+            if(selected){
 
                 box.classList.add(
                     "selected"
@@ -1273,27 +1099,13 @@ function displayGame(){
                 };
 
 
-            table.appendChild(box);
+            table.appendChild(
+                box
+            );
 
         }
 
     }
-
-
-    /*
-       GAME ID
-    */
-
-    const selectedGame =
-        document.getElementById(
-            "gameSelect"
-        ).value;
-
-
-    document.getElementById(
-        "gameId"
-    ).textContent =
-        selectedGame;
 
 
     /*
@@ -1302,6 +1114,14 @@ function displayGame(){
 
     const settings =
         getSettings();
+
+
+    document.getElementById(
+        "gameId"
+    ).textContent =
+        document.getElementById(
+            "gameSelect"
+        ).value;
 
 
     document.getElementById(
@@ -1338,39 +1158,19 @@ function displayGame(){
        VALIDATE
     */
 
-    const valid =
+    if(
         validateSquare(
             currentSquare
-        );
+        )
+    ){
 
-
-    const status =
-        document.getElementById(
-            "status"
-        );
-
-
-    if(valid){
-
-        status.textContent =
-            "VALID GAME ✓";
-
-        status.style.background =
-            "#ecfdf5";
-
-        status.style.color =
-            "#166534";
+        showValid();
 
     }else{
 
-        status.textContent =
-            "INVALID GAME ✕";
-
-        status.style.background =
-            "#fee2e2";
-
-        status.style.color =
-            "#991b1b";
+        showInvalid(
+            "INVALID GAME ✕"
+        );
 
     }
 
@@ -1380,11 +1180,17 @@ function displayGame(){
 }
 
 
-/* =====================================================
-   SELECT BOX
-===================================================== */
+/* ==========================================
+   SELECT CELL
 
-function selectCell(row,col,box){
+   ONLY 3 NUMBERS
+========================================== */
+
+function selectCell(
+    row,
+    col,
+    box
+){
 
     const index =
         selectedCells.findIndex(
@@ -1417,7 +1223,7 @@ function selectCell(row,col,box){
 
 
     /*
-       ONLY 3
+       MAX 3
     */
 
     if(
@@ -1459,9 +1265,9 @@ function selectCell(row,col,box){
 }
 
 
-/* =====================================================
+/* ==========================================
    SELECTED DISPLAY
-===================================================== */
+========================================== */
 
 function updateSelectedDisplay(){
 
@@ -1483,23 +1289,21 @@ function updateSelectedDisplay(){
     }
 
 
-    const numbers =
-        selectedCells.map(
-            item => item.number
-        );
-
-
     element.textContent =
-        numbers.join(
-            "   •   "
+        selectedCells
+        .map(
+            item => item.number
+        )
+        .join(
+            " • "
         );
 
 }
 
 
-/* =====================================================
-   VALIDATE SQUARE
-===================================================== */
+/* ==========================================
+   VALIDATE
+========================================== */
 
 function validateSquare(square){
 
@@ -1525,12 +1329,11 @@ function validateSquare(square){
 
 
     /*
-       Range must contain exactly
        25 numbers
     */
 
     if(
-        to - from + 1 !== 25
+        to-from+1 !== 25
     ){
 
         return false;
@@ -1545,9 +1348,17 @@ function validateSquare(square){
     const numbers = [];
 
 
-    for(let r=0;r<5;r++){
+    for(
+        let r=0;
+        r<5;
+        r++
+    ){
 
-        for(let c=0;c<5;c++){
+        for(
+            let c=0;
+            c<5;
+            c++
+        ){
 
             numbers.push(
                 square[r][c]
@@ -1559,7 +1370,7 @@ function validateSquare(square){
 
 
     /*
-       25 unique
+       UNIQUE
     */
 
     if(
@@ -1572,10 +1383,14 @@ function validateSquare(square){
 
 
     /*
-       Range
+       RANGE
     */
 
-    for(let n=from;n<=to;n++){
+    for(
+        let n=from;
+        n<=to;
+        n++
+    ){
 
         if(
             !numbers.includes(n)
@@ -1592,7 +1407,11 @@ function validateSquare(square){
        ROWS
     */
 
-    for(let r=0;r<5;r++){
+    for(
+        let r=0;
+        r<5;
+        r++
+    ){
 
         if(
             getRowTotal(
@@ -1611,12 +1430,20 @@ function validateSquare(square){
        COLUMNS
     */
 
-    for(let c=0;c<5;c++){
+    for(
+        let c=0;
+        c<5;
+        c++
+    ){
 
         let total = 0;
 
 
-        for(let r=0;r<5;r++){
+        for(
+            let r=0;
+            r<5;
+            r++
+        ){
 
             total +=
                 square[r][c];
@@ -1642,7 +1469,11 @@ function validateSquare(square){
     let d1 = 0;
 
 
-    for(let i=0;i<5;i++){
+    for(
+        let i=0;
+        i<5;
+        i++
+    ){
 
         d1 +=
             square[i][i];
@@ -1666,7 +1497,11 @@ function validateSquare(square){
     let d2 = 0;
 
 
-    for(let i=0;i<5;i++){
+    for(
+        let i=0;
+        i<5;
+        i++
+    ){
 
         d2 +=
             square[i][4-i];
@@ -1688,17 +1523,83 @@ function validateSquare(square){
 }
 
 
-/* =====================================================
-   NEXT GAME
-===================================================== */
+/* ==========================================
+   APPLY
+========================================== */
 
-function nextGame(){
+function applySettings(){
 
-    currentNumber++;
+    const settings =
+        getSettings();
+
+
+    if(
+        settings.from < 0 ||
+        settings.to > 200 ||
+        settings.from > settings.to
+    ){
+
+        alert(
+            "Range must be between 0 and 200."
+        );
+
+        return;
+
+    }
 
 
     /*
-       Selected Game ID remains selected.
+       5 × 5 = exactly 25 numbers.
+    */
+
+    if(
+        settings.to -
+        settings.from +
+        1 !== 25
+    ){
+
+        alert(
+            "For 5 × 5 grid, RANGE must contain exactly 25 numbers."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Total check
+    */
+
+    let sum = 0;
+
+
+    for(
+        let n=settings.from;
+        n<=settings.to;
+        n++
+    ){
+
+        sum += n;
+
+    }
+
+
+    if(
+        sum !== settings.total * 5
+    ){
+
+        alert(
+            "This Range cannot produce the given Magic Total."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Generate
     */
 
     currentSquare =
@@ -1706,110 +1607,51 @@ function nextGame(){
 
 
     selectedCells = [];
-
-
-    displayGame();
 
 
     document.getElementById(
         "savedMessage"
     ).textContent = "";
 
-}
-
-
-/* =====================================================
-   GAME ID SELECT
-===================================================== */
-
-function selectGame(){
-
-    const gameId =
-        document.getElementById(
-            "gameSelect"
-        ).value;
-
-
-    document.getElementById(
-        "gameId"
-    ).textContent =
-        gameId;
-
-
-    /*
-       Load selected Game HTML automatically
-       if corresponding file exists.
-    */
-
-    loadGameHTML(gameId);
-
-
-    /*
-       Generate game for selected ID.
-    */
-
-    currentNumber = 1;
-
-    selectedCells = [];
-
-    currentSquare =
-        generateSquare();
 
     displayGame();
 
 }
 
 
-/* =====================================================
-   AUTO LOAD DIAMOND HTML
-=====================================================
+/* ==========================================
+   NEXT
 
-   Example:
+   RANDOM NUMBERS / POSITIONS
+========================================== */
 
-   MKND840001
-        ↓
-   diamond-MKND840001.html
-
-===================================================== */
-
-function loadGameHTML(gameId){
+function nextGame(){
 
     /*
-       IMPORTANT:
-
-       Change this filename pattern if
-       your actual HTML file names are different.
+       Generate another formation
+       using SAME range and SAME total.
     */
 
-    const fileName =
-        "diamond-" +
-        gameId +
-        ".html";
+    currentSquare =
+        generateSquare();
 
 
-    console.log(
-        "Selected Game:",
-        gameId
-    );
-
-    console.log(
-        "Game HTML:",
-        fileName
-    );
+    selectedCells = [];
 
 
-    /*
-       Send settings to the selected
-       Diamond HTML if it is running
-       inside the page.
-    */
+    document.getElementById(
+        "savedMessage"
+    ).textContent = "";
+
+
+    displayGame();
 
 }
 
 
-/* =====================================================
-   SAVE GAME
-===================================================== */
+/* ==========================================
+   SAVE
+========================================== */
 
 function saveGame(){
 
@@ -1822,7 +1664,7 @@ function saveGame(){
     ){
 
         alert(
-            "Please select exactly 3 numbers before saving."
+            "Please select exactly 3 numbers."
         );
 
         return;
@@ -1831,7 +1673,7 @@ function saveGame(){
 
 
     /*
-       VALIDATE
+       VALID GAME
     */
 
     if(
@@ -1841,7 +1683,7 @@ function saveGame(){
     ){
 
         alert(
-            "Game is invalid. Please check Range and Magic Total."
+            "Game is invalid."
         );
 
         return;
@@ -1859,30 +1701,6 @@ function saveGame(){
         getSettings();
 
 
-    const selectedNumbers =
-        selectedCells.map(
-            item => item.number
-        );
-
-
-    const selectedPositions =
-        selectedCells.map(
-            item => ({
-
-                row:item.row,
-
-                column:item.col,
-
-                number:item.number
-
-            })
-        );
-
-
-    /*
-       GAME DATA
-    */
-
     const gameData = {
 
         gameId:gameId,
@@ -1897,22 +1715,29 @@ function saveGame(){
         rangeTo:
             settings.to,
 
-        numbers:
-            currentSquare,
-
         magicTotal:
             settings.total,
 
-        importText:
-            document.getElementById(
-                "importText"
-            ).value,
+        numbers:
+            currentSquare,
 
         selectedNumbers:
-            selectedNumbers,
+            selectedCells.map(
+                item => item.number
+            ),
 
         selectedPositions:
-            selectedPositions,
+            selectedCells.map(
+                item => ({
+
+                    row:item.row,
+
+                    column:item.col,
+
+                    number:item.number
+
+                })
+            ),
 
         createdAt:
             new Date().toISOString()
@@ -1921,7 +1746,7 @@ function saveGame(){
 
 
     /*
-       LOCAL STORAGE
+       Temporary local storage
     */
 
     localStorage.setItem(
@@ -1941,13 +1766,129 @@ function saveGame(){
         gameId +
         " SAVED ✓";
 
+}
+
+
+/* ==========================================
+   GAME ID
+========================================== */
+
+document.getElementById(
+    "gameSelect"
+).addEventListener(
+    "change",
+    function(){
+
+        const gameId =
+            this.value;
+
+
+        document.getElementById(
+            "gameId"
+        ).textContent =
+            gameId;
+
+
+        /*
+           Selected Game ID can be used
+           to load its Diamond HTML.
+        */
+
+        loadDiamondHTML(
+            gameId
+        );
+
+    }
+);
+
+
+/* ==========================================
+   LOAD DIAMOND HTML
+
+   Example:
+
+   MKND840001
+       ↓
+   diamond-MKND840001.html
+
+========================================== */
+
+function loadDiamondHTML(gameId){
+
+    const htmlFile =
+        "diamond-" +
+        gameId +
+        ".html";
+
+
+    /*
+       Game ID based file path.
+       This is prepared for your
+       actual Diamond HTML files.
+
+       Example:
+       diamond-MKND840001.html
+    */
+
+    console.log(
+        "Loading:",
+        htmlFile
+    );
 
 }
 
 
-/* =====================================================
+/* ==========================================
+   STATUS
+========================================== */
+
+function showValid(){
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.textContent =
+        "VALID GAME ✓";
+
+
+    status.style.background =
+        "#ecfdf5";
+
+
+    status.style.color =
+        "#166534";
+
+}
+
+
+function showInvalid(message){
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.textContent =
+        message;
+
+
+    status.style.background =
+        "#fee2e2";
+
+
+    status.style.color =
+        "#991b1b";
+
+}
+
+
+/* ==========================================
    BACK
-===================================================== */
+========================================== */
 
 function goBack(){
 
@@ -1957,112 +1898,9 @@ function goBack(){
 }
 
 
-/* =====================================================
-   INPUT CHANGE
-===================================================== */
-
-document.getElementById(
-    "rangeFrom"
-).addEventListener(
-    "change",
-    regenerate
-);
-
-
-document.getElementById(
-    "rangeTo"
-).addEventListener(
-    "change",
-    regenerate
-);
-
-
-document.getElementById(
-    "magicTotal"
-).addEventListener(
-    "change",
-    regenerate
-);
-
-
-/* =====================================================
-   REGENERATE
-===================================================== */
-
-function regenerate(){
-
-    const settings =
-        getSettings();
-
-
-    /*
-       Check range
-    */
-
-    if(
-        settings.from < 0 ||
-        settings.to > 200 ||
-        settings.from >= settings.to
-    ){
-
-        alert(
-            "Please enter a valid range from 0 to 200."
-        );
-
-        return;
-
-    }
-
-
-    /*
-       5x5 needs exactly 25 numbers
-    */
-
-    if(
-        settings.to -
-        settings.from +
-        1 !== 25
-    ){
-
-        document.getElementById(
-            "status"
-        ).textContent =
-            "RANGE MUST CONTAIN EXACTLY 25 NUMBERS";
-
-        document.getElementById(
-            "status"
-        ).style.background =
-            "#fee2e2";
-
-        document.getElementById(
-            "status"
-        ).style.color =
-            "#991b1b";
-
-        return;
-
-    }
-
-
-    /*
-       Generate
-    */
-
-    currentSquare =
-        generateSquare();
-
-
-    selectedCells = [];
-
-
-    displayGame();
-
-}
-
-
-/* =====================================================
+/* ==========================================
    START
-===================================================== */
+========================================== */
 
 currentSquare =
     generateSquare();
@@ -2070,7 +1908,6 @@ currentSquare =
 
 displayGame();
 
-</script>
-
-</body>
+</script></body>
 </html>
+```ఒక ముఖ్యమైన విషయం: ఈ versionలో "NEXT" నొక్కినప్పుడు అదే Range + అదే Magic Totalతో కొత్త formation వస్తుంది; gridలోని 25 boxesలో నువ్వు 3 numbers select చేయవచ్చు. "APPLY" settings మార్చిన తర్వాత కొత్త grid ఇస్తుంది.

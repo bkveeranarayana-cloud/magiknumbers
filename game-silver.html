@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GAME-SILVER</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+  background:#f3f4f6;
+  color:#111;
+}
+
+.header{
+  width:100%;
+  background:#111827;
+  color:white;
+  text-align:center;
+  padding:18px 10px;
+  font-size:24px;
+  font-weight:bold;
+}
+
+.container{
+  width:94%;
+  max-width:600px;
+  margin:20px auto;
+}
+
+.game-card{
+  background:white;
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:20px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.10);
+}
+
+.game-id{
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:14px;
+}
+
+.game-grid{
+  width:100%;
+  max-width:300px;
+  margin:0 auto;
+
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+}
+
+.box{
+  width:100%;
+  aspect-ratio:1 / 1;
+  background:white;
+  border:2px solid #222;
+  border-radius:5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  GAME-SILVER
+</div>
+
+<div
+  class="container"
+  id="gamesContainer"
+></div>
+
+<script>
+
+const container =
+  document.getElementById("gamesContainer");
+
+const totalGames = 250;
+
+
+/* CREATE 250 SILVER GAMES */
+
+for(
+  let i = 1;
+  i <= totalGames;
+  i++
+){
+
+  /*
+    1   → 0001
+    25  → 0025
+    250 → 0250
+  */
+
+  const number =
+    String(i).padStart(4,"0");
+
+
+  const gameId =
+    "MKNS16" + number;
+
+
+  /* GAME CARD */
+
+  const gameCard =
+    document.createElement("div");
+
+  gameCard.className =
+    "game-card";
+
+
+  /* GAME ID */
+
+  const gameIdElement =
+    document.createElement("div");
+
+  gameIdElement.className =
+    "game-id";
+
+  gameIdElement.textContent =
+    "Game ID: " + gameId;
+
+
+  /* 3 × 3 GRID */
+
+  const grid =
+    document.createElement("div");
+
+  grid.className =
+    "game-grid";
+
+
+  /* 9 EMPTY BOXES */
+
+  for(
+    let boxNumber = 1;
+    boxNumber <= 9;
+    boxNumber++
+  ){
+
+    const box =
+      document.createElement("div");
+
+    box.className =
+      "box";
+
+
+    /*
+      Future number loading
+    */
+
+    box.dataset.gameId =
+      gameId;
+
+    box.dataset.boxNumber =
+      boxNumber;
+
+
+    grid.appendChild(box);
+
+  }
+
+
+  gameCard.appendChild(
+    gameIdElement
+  );
+
+  gameCard.appendChild(
+    grid
+  );
+
+  container.appendChild(
+    gameCard
+  );
+
+}
+
+</script>
+
+</body>
+</html>

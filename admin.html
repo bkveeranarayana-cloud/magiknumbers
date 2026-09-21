@@ -8,6 +8,7 @@
 <title>MAGIKNUMBER Admin</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -16,7 +17,7 @@ body{
   margin:0;
   font-family:Arial,sans-serif;
   background:#f1f5f9;
-  color:#111827;
+  min-height:100vh;
 }
 
 /* LOGIN */
@@ -27,21 +28,24 @@ body{
   background:white;
   padding:30px 22px;
   border-radius:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,.15);
+
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
+
   text-align:center;
-  box-shadow:0 8px 30px rgba(0,0,0,.15);
 }
 
 .loginCard h1{
   margin:0 0 8px;
+  color:#111827;
 }
 
 .subtitle{
   color:#64748b;
-  margin-bottom:22px;
+  margin-bottom:25px;
   font-weight:bold;
 }
 
@@ -54,192 +58,146 @@ input{
   font-size:16px;
 }
 
-.loginBtn{
+button{
   width:100%;
   padding:14px;
   margin-top:12px;
   border:0;
   border-radius:10px;
-  background:#2563eb;
   color:white;
   font-size:16px;
   font-weight:bold;
   cursor:pointer;
 }
 
-.loginBtn:disabled{
-  opacity:.6;
-  cursor:not-allowed;
+button:active{
+  transform:scale(.98);
 }
 
-#loginMessage{
-  margin-top:14px;
-  color:#dc2626;
-  font-size:14px;
-  overflow-wrap:anywhere;
-}
-
-/* ADMIN */
-
-.adminPanel{
-  display:none;
-  min-height:100vh;
-}
-
-.header{
-  background:#111827;
-  color:white;
-  padding:18px;
-  text-align:center;
-}
-
-.header h2{
-  margin:0;
-  font-size:21px;
-}
-
-.dashboard{
-  width:94%;
-  max-width:900px;
-  margin:auto;
-  padding:20px 0 40px;
-}
-
-/* FRAMES */
-
-.frames{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.frame{
-  background:white;
-  border-radius:16px;
-  padding:18px;
-  box-shadow:0 4px 14px rgba(0,0,0,.08);
-}
-
-.registration{
-  border:2px solid #2563eb;
-}
-
-.deletion{
-  border:2px solid #dc2626;
-}
-
-.frameTitle{
-  text-align:center;
-  font-size:18px;
-  font-weight:bold;
-  padding-bottom:12px;
-  margin-bottom:8px;
-  border-bottom:2px solid #e5e7eb;
-}
-
-.registration .frameTitle{
-  color:#2563eb;
-}
-
-.deletion .frameTitle{
-  color:#dc2626;
-}
-
-/* STAT */
-
-.statRow{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 4px;
-  border-bottom:1px solid #e5e7eb;
-  gap:10px;
-}
-
-.statRow:last-child{
-  border-bottom:0;
-}
-
-.statName{
-  font-size:14px;
-  font-weight:bold;
-  color:#475569;
-}
-
-.statRight{
-  text-align:right;
-}
-
-.statValue{
-  font-size:22px;
-  font-weight:bold;
-}
-
-.change{
-  display:block;
-  margin-top:3px;
-  font-size:12px;
-  font-weight:bold;
-}
-
-.up{
-  color:#16a34a;
-}
-
-.down{
-  color:#dc2626;
-}
-
-.noChange{
-  color:#64748b;
-}
-
-/* BUTTONS */
-
-.logoutBtn,
-.refreshBtn{
-  width:100%;
-  padding:14px;
-  margin-top:20px;
-  border:0;
-  border-radius:10px;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.refreshBtn{
+.loginBtn{
   background:#2563eb;
+}
+
+.usersBtn{
+  background:#2563eb;
+}
+
+.gamesBtn{
+  background:#7c3aed;
 }
 
 .logoutBtn{
   background:#dc2626;
 }
 
-/* LOADING */
+.backBtn{
+  background:#64748b;
+}
 
-.loading{
+#message{
+  margin-top:15px;
+  color:#dc2626;
+  font-size:14px;
+  min-height:20px;
+}
+
+/* ADMIN PANEL */
+
+.adminPanel{
+  display:none;
+  min-height:100vh;
+  background:#f8fafc;
+}
+
+.adminHeader{
+  background:#111827;
+  color:white;
+  padding:18px;
   text-align:center;
-  padding:30px;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.adminHeader h2{
+  margin:0;
+  font-size:21px;
+}
+
+.dashboard{
+  width:94%;
+  max-width:700px;
+  margin:auto;
+  padding:22px 0 40px;
+}
+
+/* STAT BOX */
+
+.statBox{
+  background:white;
+  padding:20px;
+  margin:12px 0;
+  border-radius:14px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.statTitle{
+  font-size:13px;
   color:#64748b;
-  overflow-wrap:anywhere;
+  font-weight:bold;
 }
 
-/* MOBILE */
-
-@media(max-width:650px){
-  .frames{
-    grid-template-columns:1fr;
-  }
+.statNumber{
+  font-size:32px;
+  font-weight:bold;
+  margin-top:8px;
+  color:#111827;
 }
+
+/* USER CARD */
+
+.userCard{
+  background:white;
+  padding:16px;
+  margin:10px 0;
+  border-radius:12px;
+  border-left:5px solid #2563eb;
+  line-height:1.8;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.userId{
+  font-size:18px;
+  font-weight:bold;
+  color:#2563eb;
+}
+
+.sectionTitle{
+  margin-top:28px;
+  margin-bottom:12px;
+  color:#111827;
+}
+
+/* DASHBOARD MENU */
+
+.menuCard{
+  background:white;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
 </style>
 
 </head>
 
 <body>
 
-<!-- ADMIN LOGIN -->
+
+<!-- =========================
+     ADMIN LOGIN
+========================= -->
 
 <div class="loginCard" id="loginCard">
 
@@ -263,140 +221,38 @@ input{
     autocomplete="current-password"
   >
 
-  <button
-    class="loginBtn"
-    id="loginButton">
+  <button class="loginBtn" onclick="adminLogin()">
     LOGIN
   </button>
 
-  <div id="loginMessage"></div>
+  <div id="message"></div>
 
 </div>
 
 
-<!-- ADMIN PANEL -->
+<!-- =========================
+     ADMIN PANEL
+========================= -->
 
 <div class="adminPanel" id="adminPanel">
 
-  <div class="header">
+  <div class="adminHeader">
     <h2>MAGIKNUMBER ADMIN</h2>
   </div>
 
   <div class="dashboard">
 
-    <div id="loading" class="loading">
-      Loading dashboard...
-    </div>
+    <div class="menuCard">
 
-    <div id="dashboardContent" style="display:none;">
-
-      <div class="frames">
-
-        <!-- REGISTRATION -->
-
-        <div class="frame registration">
-
-          <div class="frameTitle">
-            REGISTRATION
-          </div>
-
-          <div class="statRow">
-            <div class="statName">
-              TOTAL REGISTERED
-            </div>
-
-            <div
-              class="statRight statValue"
-              id="totalRegistered">
-              0
-            </div>
-          </div>
-
-          <div class="statRow">
-            <div class="statName">
-              TODAY REGISTERED
-            </div>
-
-            <div class="statRight">
-              <div class="statValue" id="todayRegistered">0</div>
-              <span class="change" id="todayChange"></span>
-            </div>
-          </div>
-
-          <div class="statRow">
-            <div class="statName">
-              LAST 7 DAYS
-            </div>
-
-            <div class="statRight">
-              <div class="statValue" id="sevenDaysRegistered">0</div>
-              <span class="change" id="sevenDaysChange"></span>
-            </div>
-          </div>
-
-          <div class="statRow">
-            <div class="statName">
-              LAST 30 DAYS
-            </div>
-
-            <div class="statRight">
-              <div class="statValue" id="thirtyDaysRegistered">0</div>
-              <span class="change" id="thirtyDaysChange"></span>
-            </div>
-          </div>
-
-        </div>
-
-
-        <!-- ACCOUNT DELETION -->
-
-        <div class="frame deletion">
-
-          <div class="frameTitle">
-            ACCOUNT DELETION
-          </div>
-
-          <div class="statRow">
-            <div class="statName">
-              TOTAL DELETED
-            </div>
-
-            <div class="statValue" id="totalDeleted">0</div>
-          </div>
-
-          <div class="statRow">
-            <div class="statName">
-              TODAY DELETED
-            </div>
-
-            <div class="statValue" id="todayDeleted">0</div>
-          </div>
-
-          <div class="statRow">
-            <div class="statName">
-              LAST 7 DAYS
-            </div>
-
-            <div class="statValue" id="sevenDaysDeleted">0</div>
-          </div>
-
-          <div class="statRow">
-            <div class="statName">
-              LAST 30 DAYS
-            </div>
-
-            <div class="statValue" id="thirtyDaysDeleted">0</div>
-          </div>
-
-        </div>
-
-      </div>
-
-      <button class="refreshBtn" id="refreshButton">
-        REFRESH DATA
+      <button class="usersBtn" onclick="openUsers()">
+        USERS
       </button>
 
-      <button class="logoutBtn" id="logoutButton">
+      <button class="gamesBtn" onclick="openGames()">
+        GAMES
+      </button>
+
+      <button class="logoutBtn" onclick="adminLogout()">
         LOGOUT
       </button>
 
@@ -409,557 +265,685 @@ input{
 
 <script type="module">
 
-/* FIREBASE IMPORTS */
+
+/* =========================
+   FIREBASE IMPORTS
+========================= */
 
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 
 import {
   getAuth,
-  setPersistence,
-  browserLocalPersistence,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
 
 import {
   getFirestore,
-  collection,
-  getDocs,
   doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+  getDoc,
+  collection,
+  getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-/* FIREBASE CONFIG - FROM YOUR FIREBASE CONSOLE */
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCX8mVCrI-qm4_7uAD_o_Y41hpvg1OrLlVI",
-  authDomain: "magiknumbers-d42c0.firebaseapp.com",
-  projectId: "magiknumbers-d42c0",
-  storageBucket: "magiknumbers-d42c0.firebasestorage.app",
-  messagingSenderId: "977553928698",
-  appId: "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
+  apiKey:
+  "AIzaSyCX8mVCrI-qm4_7uADo_Y41hpvg1OrLlVI",
+
+  authDomain:
+  "magiknumbers-d42c0.firebaseapp.com",
+
+  projectId:
+  "magiknumbers-d42c0",
+
+  storageBucket:
+  "magiknumbers-d42c0.firebasestorage.app",
+
+  messagingSenderId:
+  "977553928698",
+
+  appId:
+  "1:977553928698:web:0c9c5c59fe5b6a9ef5b443"
+
 };
 
 
-/* INITIALIZE FIREBASE */
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+  getAuth(app);
 
-const db = getFirestore(app);
-
-
-/* AUTH PERSISTENCE */
-
-await setPersistence(
-  auth,
-  browserLocalPersistence
-);
+const db =
+  getFirestore(app);
 
 
-/* ELEMENTS */
-
-const loginCard = document.getElementById("loginCard");
-const adminPanel = document.getElementById("adminPanel");
-const loginButton = document.getElementById("loginButton");
-const loginMessage = document.getElementById("loginMessage");
-
-
-/* ADMIN CHECK */
+/* =========================
+   CHECK ADMIN
+========================= */
 
 async function checkAdmin(user){
 
-  if(!user) return false;
+  if(!user){
+    return false;
+  }
 
   try{
 
-    const adminDoc = await getDoc(
-      doc(db, "admins", user.uid)
-    );
+    const adminDoc =
+      await getDoc(
+        doc(db,"admins",user.uid)
+      );
 
-    return (
+    if(
       adminDoc.exists() &&
       adminDoc.data().role === "admin"
-    );
+    ){
 
-  }catch(error){
+      return true;
 
-    console.error("Admin check error:", error);
+    }
 
-    throw error;
+    return false;
+
   }
+  catch(error){
+
+    console.error(error);
+
+    return false;
+
+  }
+
 }
 
 
-/* LOGIN */
+/* =========================
+   ADMIN LOGIN
+========================= */
 
-loginButton.addEventListener("click", async function(){
+window.adminLogin = async function(){
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  const email =
+    document
+    .getElementById("email")
+    .value
+    .trim();
 
-  loginMessage.textContent = "";
+  const password =
+    document
+    .getElementById("password")
+    .value;
+
+  const message =
+    document
+    .getElementById("message");
+
+  message.textContent = "";
+
 
   if(!email || !password){
-    loginMessage.textContent = "Please enter email and password.";
+
+    message.textContent =
+      "Please enter email and password.";
+
     return;
+
   }
 
-  loginButton.disabled = true;
-  loginButton.textContent = "PLEASE WAIT...";
 
   try{
 
-    const result = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    const result =
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-    const isAdmin = await checkAdmin(result.user);
+
+    const user =
+      result.user;
+
+
+    const isAdmin =
+      await checkAdmin(user);
+
 
     if(!isAdmin){
 
       await signOut(auth);
 
-      loginMessage.textContent =
-        "Access denied. Admin account required.";
+      message.textContent =
+        "Access denied. You are not an admin.";
 
       return;
+
     }
 
-    document.getElementById("password").value = "";
 
-    showDashboard();
+    showAdminPanel();
 
-  }catch(error){
+  }
+  catch(error){
 
-    console.error("Login error:", error);
+    console.error(error);
 
-    loginMessage.textContent =
+    message.textContent =
       "Login failed: " + error.message;
 
-  }finally{
-
-    loginButton.disabled = false;
-    loginButton.textContent = "LOGIN";
   }
 
-});
+};
 
 
-/* SHOW DASHBOARD */
+/* =========================
+   SHOW ADMIN PANEL
+========================= */
 
-let dashboardLoading = false;
+function showAdminPanel(){
 
-function showDashboard(){
+  document
+    .getElementById("loginCard")
+    .style.display = "none";
 
-  loginCard.style.display = "none";
-  adminPanel.style.display = "block";
+  document
+    .getElementById("adminPanel")
+    .style.display = "block";
 
-  loadDashboard();
 }
 
 
-/* DATE HELPERS */
+/* =========================
+   AUTH STATE
+========================= */
 
-function getDate(value){
+onAuthStateChanged(
+  auth,
+  async (user)=>{
 
-  if(!value) return null;
+    if(!user){
 
-  try{
+      document
+        .getElementById("loginCard")
+        .style.display = "block";
 
-    if(typeof value.toDate === "function"){
-      return value.toDate();
-    }
+      document
+        .getElementById("adminPanel")
+        .style.display = "none";
 
-    const date = new Date(value);
+      return;
 
-    if(isNaN(date.getTime())){
-      return null;
-    }
-
-    return date;
-
-  }catch(error){
-
-    return null;
-  }
-}
-
-
-function startOfDay(date){
-
-  const result = new Date(date);
-
-  result.setHours(0, 0, 0, 0);
-
-  return result;
-}
-
-
-/* COUNT REGISTRATIONS */
-
-function countBetween(records, start, end){
-
-  let count = 0;
-
-  records.forEach(record => {
-
-    const date = getDate(record.dateOfJoining);
-
-    if(!date) return;
-
-    if(date >= start && date < end){
-      count++;
-    }
-
-  });
-
-  return count;
-}
-
-
-/* COUNT DELETIONS */
-
-function countDeletedBetween(records, start, end){
-
-  let count = 0;
-
-  records.forEach(record => {
-
-    const date = getDate(record.deletedAt);
-
-    if(!date) return;
-
-    if(date >= start && date < end){
-      count++;
-    }
-
-  });
-
-  return count;
-}
-
-
-/* PERCENTAGE CHANGE */
-
-function percentageChange(current, previous){
-
-  if(previous === 0){
-
-    if(current === 0) return 0;
-
-    return null;
-  }
-
-  return Math.round(
-    ((current - previous) / previous) * 100
-  );
-}
-
-
-/* SHOW CHANGE */
-
-function showChange(elementId, current, previous){
-
-  const element = document.getElementById(elementId);
-
-  const change = percentageChange(current, previous);
-
-  if(change === null){
-
-    element.textContent = current > 0 ? "NEW" : "0%";
-    element.className = "change noChange";
-
-    return;
-  }
-
-  if(change > 0){
-
-    element.textContent = "▲ " + change + "%";
-    element.className = "change up";
-
-  }else if(change < 0){
-
-    element.textContent = "▼ " + Math.abs(change) + "%";
-    element.className = "change down";
-
-  }else{
-
-    element.textContent = "0%";
-    element.className = "change noChange";
-  }
-}
-
-
-/* LOAD DASHBOARD */
-
-async function loadDashboard(){
-
-  if(dashboardLoading) return;
-
-  dashboardLoading = true;
-
-  const loading = document.getElementById("loading");
-  const content = document.getElementById("dashboardContent");
-
-  loading.textContent = "Loading dashboard...";
-  loading.style.display = "block";
-  content.style.display = "none";
-
-  try{
-
-    /* LOAD USERS */
-
-    const usersSnapshot = await getDocs(
-      collection(db, "users")
-    );
-
-    const users = [];
-
-    usersSnapshot.forEach(item => {
-      users.push(item.data());
-    });
-
-
-    /* DATE RANGES */
-
-    const now = new Date();
-
-    const todayStart = startOfDay(now);
-
-    const tomorrowStart = new Date(todayStart);
-    tomorrowStart.setDate(tomorrowStart.getDate() + 1);
-
-    const yesterdayStart = new Date(todayStart);
-    yesterdayStart.setDate(yesterdayStart.getDate() - 1);
-
-    const sevenStart = new Date(todayStart);
-    sevenStart.setDate(sevenStart.getDate() - 6);
-
-    const previousSevenStart = new Date(todayStart);
-    previousSevenStart.setDate(previousSevenStart.getDate() - 13);
-
-    const thirtyStart = new Date(todayStart);
-    thirtyStart.setDate(thirtyStart.getDate() - 29);
-
-    const previousThirtyStart = new Date(todayStart);
-    previousThirtyStart.setDate(previousThirtyStart.getDate() - 59);
-
-
-    /* REGISTRATION COUNTS */
-
-    const totalRegistered = users.length;
-
-    const todayRegistered = countBetween(
-      users, todayStart, tomorrowStart
-    );
-
-    const yesterdayRegistered = countBetween(
-      users, yesterdayStart, todayStart
-    );
-
-    const sevenDaysRegistered = countBetween(
-      users, sevenStart, tomorrowStart
-    );
-
-    const previousSevenRegistered = countBetween(
-      users, previousSevenStart, sevenStart
-    );
-
-    const thirtyDaysRegistered = countBetween(
-      users, thirtyStart, tomorrowStart
-    );
-
-    const previousThirtyRegistered = countBetween(
-      users, previousThirtyStart, thirtyStart
-    );
-
-
-    /* DISPLAY REGISTRATION */
-
-    document.getElementById("totalRegistered").textContent =
-      totalRegistered;
-
-    document.getElementById("todayRegistered").textContent =
-      todayRegistered;
-
-    document.getElementById("sevenDaysRegistered").textContent =
-      sevenDaysRegistered;
-
-    document.getElementById("thirtyDaysRegistered").textContent =
-      thirtyDaysRegistered;
-
-
-    /* REGISTRATION PERCENTAGES */
-
-    showChange(
-      "todayChange",
-      todayRegistered,
-      yesterdayRegistered
-    );
-
-    showChange(
-      "sevenDaysChange",
-      sevenDaysRegistered,
-      previousSevenRegistered
-    );
-
-    showChange(
-      "thirtyDaysChange",
-      thirtyDaysRegistered,
-      previousThirtyRegistered
-    );
-
-
-    /* ACCOUNT DELETIONS */
-
-    let deleted = [];
-
-    try{
-
-      const deletionSnapshot = await getDocs(
-        collection(db, "accountDeletions")
-      );
-
-      deletionSnapshot.forEach(item => {
-        deleted.push(item.data());
-      });
-
-    }catch(error){
-
-      console.log("Deletion collection unavailable:", error.message);
     }
 
 
-    /* DELETION COUNTS */
+    const isAdmin =
+      await checkAdmin(user);
 
-    const totalDeleted = deleted.length;
-
-    const todayDeleted = countDeletedBetween(
-      deleted, todayStart, tomorrowStart
-    );
-
-    const sevenDaysDeleted = countDeletedBetween(
-      deleted, sevenStart, tomorrowStart
-    );
-
-    const thirtyDaysDeleted = countDeletedBetween(
-      deleted, thirtyStart, tomorrowStart
-    );
-
-
-    /* DISPLAY DELETIONS */
-
-    document.getElementById("totalDeleted").textContent =
-      totalDeleted;
-
-    document.getElementById("todayDeleted").textContent =
-      todayDeleted;
-
-    document.getElementById("sevenDaysDeleted").textContent =
-      sevenDaysDeleted;
-
-    document.getElementById("thirtyDaysDeleted").textContent =
-      thirtyDaysDeleted;
-
-
-    /* SHOW CONTENT */
-
-    loading.style.display = "none";
-    content.style.display = "block";
-
-  }catch(error){
-
-    console.error("Dashboard error:", error);
-
-    loading.textContent =
-      "Unable to load dashboard: " + error.message;
-
-  }finally{
-
-    dashboardLoading = false;
-  }
-}
-
-
-/* REFRESH */
-
-document.getElementById("refreshButton").addEventListener(
-  "click",
-  loadDashboard
-);
-
-
-/* LOGOUT */
-
-document.getElementById("logoutButton").addEventListener(
-  "click",
-  async function(){
-
-    try{
-
-      await signOut(auth);
-
-      location.reload();
-
-    }catch(error){
-
-      console.error("Logout error:", error);
-    }
-  }
-);
-
-
-/* AUTH STATE */
-
-onAuthStateChanged(auth, async function(user){
-
-  if(!user){
-
-    loginCard.style.display = "block";
-    adminPanel.style.display = "none";
-
-    return;
-  }
-
-  try{
-
-    const isAdmin = await checkAdmin(user);
 
     if(isAdmin){
 
-      showDashboard();
+      showAdminPanel();
 
-    }else{
+    }
+    else{
 
       await signOut(auth);
 
-      loginCard.style.display = "block";
-      adminPanel.style.display = "none";
-
-      loginMessage.textContent =
-        "Access denied. Admin account required.";
     }
 
-  }catch(error){
+  }
+);
 
-    console.error("Auth state error:", error);
 
-    loginCard.style.display = "block";
-    adminPanel.style.display = "none";
+/* =========================
+   USERS DASHBOARD
+========================= */
 
-    loginMessage.textContent =
-      "Admin verification failed: " + error.message;
+window.openUsers = async function(){
+
+  const adminPanel =
+    document.getElementById("adminPanel");
+
+
+  adminPanel.innerHTML = `
+
+    <div class="adminHeader">
+      <h2>MAGIKNUMBER USERS</h2>
+    </div>
+
+    <div class="dashboard">
+
+      <div class="statBox">
+
+        <div class="statTitle">
+          TOTAL REGISTERED USERS
+        </div>
+
+        <div
+          class="statNumber"
+          id="totalUsers">
+          ...
+        </div>
+
+      </div>
+
+
+      <div class="statBox">
+
+        <div class="statTitle">
+          TODAY'S NEW USERS
+        </div>
+
+        <div
+          class="statNumber"
+          id="todayUsers">
+          ...
+        </div>
+
+      </div>
+
+
+      <div class="statBox">
+
+        <div class="statTitle">
+          TOTAL GAMES PLAYED
+        </div>
+
+        <div
+          class="statNumber"
+          id="totalGames">
+          ...
+        </div>
+
+      </div>
+
+
+      <div class="statBox">
+
+        <div class="statTitle">
+          TOTAL POINTS
+        </div>
+
+        <div
+          class="statNumber"
+          id="totalPoints">
+          ...
+        </div>
+
+      </div>
+
+
+      <h3 class="sectionTitle">
+        USER LIST
+      </h3>
+
+      <div id="userList">
+        Loading users...
+      </div>
+
+
+      <button
+        class="backBtn"
+        onclick="showAdminMenu()">
+
+        BACK TO ADMIN
+
+      </button>
+
+    </div>
+
+  `;
+
+
+  try{
+
+    const usersSnapshot =
+      await getDocs(
+        collection(db,"users")
+      );
+
+
+    /* TOTAL USERS */
+
+    document
+      .getElementById("totalUsers")
+      .textContent =
+      usersSnapshot.size;
+
+
+    let todayUsers = 0;
+
+    let totalGames = 0;
+
+    let totalPoints = 0;
+
+    let html = "";
+
+
+    /* TODAY DATE */
+
+    const today =
+      new Date();
+
+    today.setHours(
+      0,0,0,0
+    );
+
+
+    usersSnapshot.forEach(
+      (userDoc)=>{
+
+        const user =
+          userDoc.data();
+
+
+        /* TOTAL GAMES */
+
+        totalGames +=
+          Number(user.gamesPlayed || 0);
+
+
+        /* TOTAL POINTS */
+
+        totalPoints +=
+          Number(user.points || 0);
+
+
+        /* TODAY'S REGISTRATION */
+
+        let joinedDate = null;
+
+
+        if(user.dateOfJoining){
+
+          if(
+            user.dateOfJoining.toDate
+          ){
+
+            joinedDate =
+              user.dateOfJoining.toDate();
+
+          }
+          else{
+
+            joinedDate =
+              new Date(
+                user.dateOfJoining
+              );
+
+          }
+
+        }
+
+
+        if(
+          joinedDate &&
+          !isNaN(joinedDate)
+        ){
+
+          joinedDate.setHours(
+            0,0,0,0
+          );
+
+
+          if(
+            joinedDate.getTime() ===
+            today.getTime()
+          ){
+
+            todayUsers++;
+
+          }
+
+        }
+
+
+        /* USER CARD */
+
+        html += `
+
+          <div class="userCard">
+
+            <div class="userId">
+              ${user.magikNumberId || "—"}
+            </div>
+
+            <div>
+              <b>Name:</b>
+              ${user.name || "—"}
+            </div>
+
+            <div>
+              <b>Email:</b>
+              ${user.email || "—"}
+            </div>
+
+            <div>
+              <b>Mobile:</b>
+              ${user.mobile || "—"}
+            </div>
+
+            <div>
+              <b>Country:</b>
+              ${user.country || "—"}
+            </div>
+
+            <div>
+              <b>Joined:</b>
+              ${formatDate(user.dateOfJoining)}
+            </div>
+
+            <div>
+              <b>Games:</b>
+              ${user.gamesPlayed || 0}
+            </div>
+
+            <div>
+              <b>Points:</b>
+              ${user.points || 0}
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+    document
+      .getElementById("todayUsers")
+      .textContent =
+      todayUsers;
+
+
+    document
+      .getElementById("totalGames")
+      .textContent =
+      totalGames;
+
+
+    document
+      .getElementById("totalPoints")
+      .textContent =
+      totalPoints;
+
+
+    document
+      .getElementById("userList")
+      .innerHTML =
+      html ||
+      "No users found.";
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    document
+      .getElementById("userList")
+      .innerHTML =
+      "Unable to load users: " +
+      error.message;
+
   }
 
-});
+};
+
+
+/* =========================
+   FORMAT DATE
+========================= */
+
+function formatDate(value){
+
+  if(!value){
+    return "—";
+  }
+
+
+  try{
+
+    let date;
+
+
+    if(value.toDate){
+
+      date =
+        value.toDate();
+
+    }
+    else{
+
+      date =
+        new Date(value);
+
+    }
+
+
+    if(isNaN(date)){
+      return "—";
+    }
+
+
+    return date.toLocaleDateString(
+      "en-IN",
+      {
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+      }
+    );
+
+  }
+  catch(error){
+
+    return "—";
+
+  }
+
+}
+
+
+/* =========================
+   BACK TO ADMIN MENU
+========================= */
+
+window.showAdminMenu = function(){
+
+  const adminPanel =
+    document.getElementById("adminPanel");
+
+
+  adminPanel.innerHTML = `
+
+    <div class="adminHeader">
+      <h2>MAGIKNUMBER ADMIN</h2>
+    </div>
+
+    <div class="dashboard">
+
+      <div class="menuCard">
+
+        <button
+          class="usersBtn"
+          onclick="openUsers()">
+
+          USERS
+
+        </button>
+
+
+        <button
+          class="gamesBtn"
+          onclick="openGames()">
+
+          GAMES
+
+        </button>
+
+
+        <button
+          class="logoutBtn"
+          onclick="adminLogout()">
+
+          LOGOUT
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+};
+
+
+/* =========================
+   GAMES
+========================= */
+
+window.openGames = function(){
+
+  alert(
+    "GAMES Dashboard will be added next."
+  );
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.adminLogout = async function(){
+
+  await signOut(auth);
+
+  location.reload();
+
+};
+
 
 </script>
 
